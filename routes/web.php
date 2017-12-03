@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/company','companycontroller@Index');
+Route::get('/food','foodcontroller@Index');
+Route::get('/register','registercontroller@store');
