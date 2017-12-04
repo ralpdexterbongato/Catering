@@ -3,7 +3,7 @@
   Register | Join us
 @endsection
 @section('content')
-<div class="registerpage-container" id="app">
+<div class="registerpage-container">
 <register></register>
 </div>
 @endsection

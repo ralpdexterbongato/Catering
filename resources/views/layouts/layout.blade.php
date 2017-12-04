@@ -10,14 +10,18 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="/css/mystyle.css">
     <link rel="stylesheet" href="/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Kaushan+Script" rel="stylesheet">
   </head>
   <body>
     <header>
       <div class="header-container">
         <div class="left-header">
-          <div class="logo">
+          <div class="head-modal-burger">
+            @if (Auth::check())
+              <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+            @endif
+          </div>
+          <div class="logo" id="modal-opener">
             PIXAR
           </div>
         </div>
@@ -29,9 +33,18 @@
             <li class="nav-parent">
               <a href="#"><i class="material-icons">account_circle</i></a>
               <ul class="nav-drop">
-                <a href="#"><li><i class="material-icons">person</i> Login</li></a>
-                <a href="/register"><li><i class="material-icons">person_add</i> Register</li></a>
-                <a href="#"><li><i class="material-icons">local_dining</i> Favorites</li></a>
+                @if (Auth::check())
+                  <a href="/register"><li><i class="material-icons">restaurant</i> Reservations</li></a>
+                  <a href="#"><li><i class="material-icons">star</i> Favorites</li></a>
+                  <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><li><i class="material-icons">exit_to_app</i> Logout</li></a>
+                  <form action="/user" id="logout-form" method="post">
+                    {{ csrf_field() }}
+                  </form>
+                @else
+                  <a href="#" id="login-opener"><li><i class="material-icons">person</i> Login</li></a>
+                  <a href="/register"><li><i class="material-icons">person_add</i> Register</li></a>
+                  <a href="#"><li><i class="material-icons">local_dining</i> Favorites</li></a>
+                @endif
               </ul>
             </li>
             </div>
@@ -40,9 +53,85 @@
       </div>
     </header>
     <section>
-      <div class="content-container">
+      <div class="content-container" id="app">
+        <nav>
+          <div class="nav-wrapper">
+             <div class="col s12">
+               <a href="#!" class="breadcrumb">First</a>
+               <a href="#!" class="breadcrumb">Second</a>
+               <a href="#!" class="breadcrumb">Third</a>
+             </div>
+          </div>
+        </nav>
+@if (Auth::check())
+  <ul id="slide-out" class="side-nav">
+    <li>
+      <div class="user-view">
+      <div class="background">
+        <img src="/DesignPic/teal.png">
+      </div>
+      <a href="#!user"><img class="circle" src="/DesignPic/profile2.png"></a>
+      <a href="#!name"><span class="white-text name">{{Auth::user()->name}}</span></a>
+      <a href="#!email"><span class="white-text email">{{Auth::user()->email}}</span></a>
+      </div>
+  </li>
+    <li><a href="#!"><i class="material-icons">account_circle</i>First Link With Icon</a></li>
+    <li><div class="divider"></div></li>
+    <li class="no-padding">
+      <ul class="collapsible collapsible-accordion">
+        <li>
+          <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
+          <div class="collapsible-body">
+            <ul>
+              <li><a href="#!">First</a></li>
+              <li><a href="#!">Second</a></li>
+              <li><a href="#!">Third</a></li>
+              <li><a href="#!">Fourth</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li class="no-padding">
+      <ul class="collapsible collapsible-accordion">
+        <li>
+          <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
+          <div class="collapsible-body">
+            <ul>
+              <li><a href="#!">First</a></li>
+              <li><a href="#!">Second</a></li>
+              <li><a href="#!">Third</a></li>
+              <li><a href="#!">Fourth</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li class="no-padding">
+      <ul class="collapsible collapsible-accordion">
+        <li>
+          <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
+          <div class="collapsible-body">
+            <ul>
+              <li><a href="#!">First</a></li>
+              <li><a href="#!">Second</a></li>
+              <li><a href="#!">Third</a></li>
+              <li><a href="#!">Fourth</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li><div class="divider"></div></li>
+    <li><a class="subheader">Subheader</a></li>
+    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+  </ul>
+@endif
         @section('content')
         @show
+        <div id="login-modal">
+          <login></login>
+        </div>
       </div>
     </section>
     <footer>
@@ -65,12 +154,33 @@
     <script type="text/javascript">
     $(document).ready(function(){
       $('.parallax').parallax();
+
+      $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+      $('#login-opener').on('click',function(event)
+      {
+        event.preventDefault();
+        $('#login-modal').addClass('active');
+      });
+      $('#login-modal').on('click',function(event)
+      {
+        event.preventDefault();
+        $('#login-modal').removeClass('active');
+      }).children().on('click',function(event)
+      {
+        event.preventDefault();
+        return false;
+      });
+      // Initialize collapse button
+      $(".button-collapse").sideNav();
+  // Initialize collapsible (uncomment the line below if you use the dropdown variation)
+    $('.collapsible').collapsible();
+    $('.carousel.carousel-slider').carousel({fullWidth: true});
     });
-    $.ajaxSetup({
-      headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
+
     </script>
   </body>
 </html>

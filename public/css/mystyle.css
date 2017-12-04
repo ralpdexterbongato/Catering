@@ -52,36 +52,90 @@ a
 }
 html
 {
-  background: #e7e7e7;
+  background: #f5f5f5;
 }
 *{
 	box-sizing: border-box;
 }
+.withfont
+{
+	font-family: 'Kaushan Script', cursive;
+	color: #03A9F4;
+}
 .highlight
 {
-  color:#29b6f6;
+  color:#fff;
   font-weight:600;
   letter-spacing: 2px;
+}
+.head-modal-burger
+{
+	margin:25px;
+}
+.head-modal-burger i
+{
+	color: #fff;
+}
+.breadcrumb
+{
+	font-size: 15px!important;
+	color: #21252B!important;
+}
+.nav a
+{
+	color: #21252B!important
+}
+.head-modal-burger i
+{
+	font-size: 35px;
+}
+#login-modal
+{
+	position:fixed;
+	top: -1000px;
+	right: 0;
+	background: rgba(0, 0, 0, 0.7);
+	left: 0;
+	height: 100vh;
+	width: 100%;
+	transition:top .5s;
+	z-index: 15;
+}
+#login-modal.active
+{
+	top:0;
 }
 .header-container
 {
   display: flex;
-  padding:0px 80px;
+  padding:0px 100px;
   justify-content: space-between;
   top:0;
   left: 0;
   right: 0;
-  background:#192125;
+  background:#03a9f4;
 }
 .content-container
 {
 	min-height: 100vh;
+}
+nav
+{
+	padding:0 120px;
 }
 @media (max-width:648px)
 {
 	.header-container
 	{
 		flex-direction: column;
+	}
+	.head-modal-burger
+	{
+		margin: 0 auto;
+	}
+	nav
+	{
+		padding:0 20px;
 	}
 }
 @media (max-width:505px)
@@ -94,6 +148,7 @@ html
 .left-header
 {
   font-weight: 600;
+	display: flex;
 }
 .left-header .logo
 {
@@ -119,16 +174,14 @@ html
 	{
 		justify-content: center;
 	}
+	.left-header
+	{
+		flex-direction: column;
+	}
 }
-.right-header li.active::after
+.right-header li.active
 {
-  display: block;
-  height: 1px;
-  width: 20px;
-  background:#797777;
-  content:' ';
-  margin:0 auto;
-  margin-top:4px;
+	color: #b3e5fc!important;
 }
 .right-header ul li
 {
@@ -138,7 +191,7 @@ html
 }
 .nav-parent:hover .nav-drop
 {
-	top:80px;
+	top:74px;
 }
 .nav-parent
 {
@@ -155,7 +208,7 @@ html
 	z-index: 5;
 	border-radius: 4px;
 	padding:5px;
-	background: rgba(0, 0, 0, 0.8);
+	background: rgba(0, 0, 0, 0.5);
 }
 .nav-drop li
 {
@@ -269,14 +322,14 @@ html
 /*footer*/
 .footer-container-top
 {
-  background: #263238;
+  background: #03A9F4;
   color: #f3f3f3;
   padding:100px 110px;
 }
 .footer-container-bot
 {
   padding: 30px 110px;
-  background:#192125;
+  background:#e5e5e5;
 }
 .left-footer h6
 {
@@ -307,12 +360,9 @@ html
 }
 .company-box
 {
-	background:#009688;
-	height: 200px;
-	width: 300px;
+	max-width: 400px;
 	margin:25px;
 	text-align: center;
-	display: flex;
 }
 .company-box h5
 {
@@ -445,3 +495,5 @@ transform: scale(1.0);
 	display: inline-block;
 	font-size: 13px;
 }
+
+/*modal css*/

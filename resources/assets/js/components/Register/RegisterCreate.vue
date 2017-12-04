@@ -1,16 +1,17 @@
 <template lang="html">
 <div class="register-vue-container">
-  <div class="register-form">
-
+  <div class="register-form" id="app">
+    <registercustomer></registercustomer>
   </div>
   <div class="register-logo">
     <h1><embed src="/DesignPic/mylogo.svg"></h1>
     <h5>Give your business a website</h5>
-    <h4>It's for free! <a href="#">join</a> now.</h4>
+    <h4>It's for free! <a href="#" class="withfont">Join</a> now.</h4>
   </div>
 </div>
 </template>
 <script>
+  Vue.component('registercustomer', require('./RegisterCustomer.vue'));
   export default({
     data () {
       return {
@@ -31,6 +32,7 @@
 {
   flex:1;
   border-radius: 4px;
+  background: #fff;
 }
 .register-logo
 {
@@ -51,7 +53,7 @@
 }
 .register-logo h1
 {
-  margin: auto;
+  margin:0 auto;
   max-width:300px;
 }
 .register-logo h1 embed

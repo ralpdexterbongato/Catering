@@ -18,6 +18,7 @@ import company from './components/Register/RegisterCompany';
 
 Vue.component('example', require('./components/Example.vue'));
 Vue.component('register', require('./components/Register/RegisterCreate.vue'));
+Vue.component('login', require('./components/Login/UserLogin.vue'));
 const app = new Vue({
     el: '#app'
 });
