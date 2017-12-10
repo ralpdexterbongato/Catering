@@ -16,7 +16,7 @@ class usercontroller extends Controller
     $credentials =['username'=>$request->username,'password'=>$request->password];
     if (Auth::attempt($credentials))
     {
-      return ['redirect'=>'/'];
+      return;
     }else
     {
       return ['error'=>'Incorrect username or password'];
@@ -26,5 +26,9 @@ class usercontroller extends Controller
   {
     Auth::logout();
     return redirect('/');
+  }
+  public function accountConfirmation()
+  {
+    
   }
 }

@@ -4,6 +4,29 @@
 @endsection
 @section('content')
   <div class="welcomepage-content-container">
+    <div class="landing-hero-two">
+      <div class="carousel carousel-slider center" data-indicators="true">
+     <div class="carousel-fixed-item center">
+       <a class="btn waves-effect orange darken-text-2" href="/food">Show more</a>
+     </div>
+     <div class="carousel-item red white-text" style="background: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.5)), url('/DesignPic/food1.jpg')" href="#one!">
+       <h2>JJ's</h2>
+       <p class="white-text">We have what all you want</p>
+     </div>
+     <div class="carousel-item amber white-text" style="background: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.5)), url('/DesignPic/food6.jpg')" href="#two!" >
+       <h2>Monina's</h2>
+       <p class="white-text">Our services are the best and better</p>
+     </div>
+     <div class="carousel-item green white-text" style="background: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.5)), url('/DesignPic/food8.jpg')" href="#three!">
+       <h2>Third Panel</h2>
+       <p class="white-text">This is your third panel</p>
+     </div>
+     <div class="carousel-item blue white-text" style="background: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.5)), url('/DesignPic/food11.jpg')" href="#four!">
+       <h2>Fourth Panel</h2>
+       <p class="white-text">This is your fourth panel</p>
+     </div>
+   </div>
+    </div>
     <div class="short-about-container">
       <div class="about-left">
         <h1>OUR STORY</h1>
@@ -15,29 +38,6 @@
           <img src="/DesignPic/food1.jpg" alt="about">
         </div>
       </div>
-    </div>
-    <div class="landing-hero-two">
-      <div class="carousel carousel-slider center" data-indicators="true">
-     <div class="carousel-fixed-item center">
-       <a class="btn waves-effect white grey-text darken-text-2">button</a>
-     </div>
-     <div class="carousel-item red white-text" href="#one!">
-       <h2>First Panel</h2>
-       <p class="white-text">This is your first panel</p>
-     </div>
-     <div class="carousel-item amber white-text" href="#two!">
-       <h2>Second Panel</h2>
-       <p class="white-text">This is your second panel</p>
-     </div>
-     <div class="carousel-item green white-text" href="#three!">
-       <h2>Third Panel</h2>
-       <p class="white-text">This is your third panel</p>
-     </div>
-     <div class="carousel-item blue white-text" href="#four!">
-       <h2>Fourth Panel</h2>
-       <p class="white-text">This is your fourth panel</p>
-     </div>
-   </div>
     </div>
     <div class="most-ordered-dish-container">
       <div class="most-ordered-left">

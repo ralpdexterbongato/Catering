@@ -1,21 +1,24 @@
 <template lang="html">
-  <div class="login-container" style="color#fff;">
+  <div class="login-container">
     <div class="login-title-head">
       <h5>Login</h5>
+      <div class="progress" v-if="loadingActive">
+        <div class="indeterminate"></div>
+      </div>
     </div>
     <div class="input-field col s6">
       <i class="material-icons prefix">account_circle</i>
-      <input id="icon_prefix" type="text" v-model="username" class="validate">
+      <input id="icon_prefix" type="text" v-model="username" v-on:keyup.enter="sendLogin()" class="validate">
       <label for="icon_prefix">Username</label>
     </div>
     <div class="input-field col s6">
       <i class="material-icons prefix">vpn_key</i>
-      <input id="icon_telephone" v-model="password" type="password" class="validate">
+      <input id="icon_telephone" v-on:keyup.enter="sendLogin()" v-model="password" type="password" class="validate">
       <label for="icon_telephone">Password</label>
     </div>
     <div class="login-btn-container">
       <a href="#"><p>Forgot password?</p></a>
-      <button class="btn waves-effect waves-light" v-on:click="sendLogin()" type="submit" name="action">Submit
+      <button class="btn waves-effect waves-light" v-on:click="sendLogin(),loadingActive=true" type="submit" name="action">Submit
         <i class="material-icons right">send</i>
       </button>
     </div>
@@ -29,11 +32,16 @@ import axios from 'axios';
       return {
         username:'',
         password:'',
+        loadingActive:false,
       }
     },
     props: [],
     methods:
     {
+      sweetalert(msg)
+      {
+        this.$swal(msg);
+      },
       sendLogin()
       {
         var vm=this;
@@ -43,13 +51,18 @@ import axios from 'axios';
         }).then(function(response)
         {
           console.log(response);
-          if (response.data.redirect!=null)
+          if (response.data.error!=null)
           {
-            window.location=response.data.redirect;
+            vm.sweetalert(response.data.error);
+          }else
+          {
+            window.location.href=window.location.href;
           }
+          vm.loadingActive=false;
         }).catch(function(error)
         {
           console.log(error.response.data);
+          vm.loadingActive=false;
         });
       }
     },

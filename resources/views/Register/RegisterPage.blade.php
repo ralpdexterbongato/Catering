@@ -4,6 +4,12 @@
 @endsection
 @section('content')
 <div class="registerpage-container">
-<register></register>
+@if (Auth::check())
+  <register :user="{{Auth::user()}}"></register>
+@else
+  <register></register>
+@endif
+
+
 </div>
 @endsection

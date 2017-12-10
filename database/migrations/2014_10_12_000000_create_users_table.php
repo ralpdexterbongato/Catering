@@ -20,8 +20,10 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->char('role')->default('0');
-            $table->char('verified')->nullable();
             $table->char('frozen')->nullable();
+            $table->string('avatar')->nullable();
+            $table->char('verified')->default('1');
+            $table->string('confirmation_code')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

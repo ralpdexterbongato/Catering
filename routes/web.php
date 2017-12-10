@@ -14,9 +14,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/company','companycontroller@Index');
+Route::get('/company','companycontroller@index');
 Route::get('/food','foodcontroller@Index');
 Route::get('/register','registercontroller@create');
-Route::post('/register','registercontroller@store');
+Route::post('/register-store','registercontroller@store');
 Route::post('/user','usercontroller@logout');
 Route::post('/user-login','usercontroller@loginSubmit');
+// Route::get('/display','registercontroller@emailview');
+
+Route::get('/verify/{email}/{verificationCode}','registercontroller@verfiyDone')->name('sendEmailDone');
+
+Route::post('/company-store','companycontroller@store');
+Route::get('/company-show/{id}','companycontroller@show');
+Route::get('/company-show-own','companycontroller@showOwnCompany');
