@@ -18,7 +18,7 @@
     </div>
     <div class="login-btn-container">
       <a href="#"><p>Forgot password?</p></a>
-      <button class="btn waves-effect waves-light" v-on:click="sendLogin(),loadingActive=true" type="submit" name="action">Submit
+      <button class="btn waves-effect waves-light" v-on:click="sendLogin()" type="submit" name="action">Submit
         <i class="material-icons right">send</i>
       </button>
     </div>
@@ -44,6 +44,7 @@ import axios from 'axios';
       },
       sendLogin()
       {
+        this.loadingActive=true
         var vm=this;
         axios.post(`/user-login`,{
           username:this.username,
@@ -76,7 +77,7 @@ import axios from 'axios';
   width:600px;
   padding:30px 100px;
   margin: 0 auto;
-  background: #fff;
+  background: #f3f3f3;
 }
 .login-btn-container
 {

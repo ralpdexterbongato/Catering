@@ -66,11 +66,19 @@ a
   text-decoration: none;
 	color: #03A9F4;
 }
+.bold
+{
+	font-weight: 600;
+}
 .carousel-item
 {
 	background-position: center!important;
 	background-repeat: no-repeat!important;
 	background-size: cover!important;
+}
+.vicp-operate a
+{
+	color: #2196F3!important;
 }
 html
 {
@@ -82,7 +90,6 @@ html
 .withfont
 {
 	font-family: 'Kaushan Script', cursive;
-	color: #4caf50;
 }
 .highlight
 {
@@ -555,32 +562,74 @@ transform: scale(1.0);
 }
 
 /*company profile*/
+.company-cover-hero:hover >.company-cover-edit
+{
+	display: flex;
+}
 .company-cover-hero
 {
+	position: relative;
 	margin-bottom: 100px;
 	height: 400px;
 	width: 100%;
 	background: #f7f7f7;
 	border:5px solid #fff;
 	position: relative;
-	-ms-filter: drop-shadow(-1px 6px 4px #a5a5a5);
-	-webkit-filter: drop-shadow(-1px 6px 4px #a5a5a5);
-	-moz-filter: drop-shadow(-1px 6px 4px #a5a5a5);
-	-o-filter: drop-shadow(-1px 6px 4px #a5a5a5);
-	filter: drop-shadow(-1px 6px 4px #a5a5a5);
-display: flex;
+	-webkit-box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
+	display: flex;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+.company-cover-edit
+{
+	top: 0;
+	bottom: 0;
+	width: 100%;
+	position: absolute;
+	background:rgba(0, 0, 0, 0.5);
+	display: none;
+}
+.company-cover-edit i
+{
+	margin: auto;
+	color: #ccc;
+	font-size: 50px;
 }
 
-.company-logo img
+#company-logo img
 {
 	height: 200px;
 	width: 200px;
 	border-radius:50%;
-	border:4px solid #fff;
 }
-.company-logo
+#company-logo:hover .edit-profile-btn
 {
-	background: #fff;
+	display: flex;
+}
+.edit-profile-btn
+{
+	height: 200px;
+	width: 200px;
+	border-radius:50%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display:none;
+	cursor: pointer;
+	background: rgba(0, 0, 0, 0.5);
+}
+.edit-profile-btn i
+{
+	margin:auto;
+	font-size: 50px;
+	color: #ccc;
+}
+#company-logo
+{
+	z-index: 10;
+	background: #E8E8E6;
 	height: 200px;
 	width: 200px;
 	border-radius:50%;
@@ -625,9 +674,43 @@ display: flex;
 	width:300px;
 	margin:20px;
 }
-
+.card-content a.btn
+{
+	margin-top: 20px;
+}
+.menu-options
+{
+	display: flex;
+	justify-content: space-between;
+}
+.fav-btn
+{
+	font-size: 40px!important;
+	color:#9E9E9E;
+	cursor: pointer;
+}
+.fav-btn:hover
+{
+	color: #F44336;
+}
 /*food menu adding form*/
 .food-form-container
 {
 	margin-top: 20px;
+}
+
+
+/*aboutcompany*/
+.about-company-data
+{
+	padding:40px;
+}
+.about-company-data table
+{
+	width: 100%;
+}
+.about-company-data td p
+{
+	text-indent:50px;
+	text-align: justify;
 }

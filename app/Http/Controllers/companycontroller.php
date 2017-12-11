@@ -35,12 +35,17 @@ class companycontroller extends Controller
       }
       $companyTbl->save();
       User::where('id',Auth::user()->id)->update(['role'=>'1']);
-      return $companyTbl;
+      return ['redirect'=>'/company-show/'.$companyTbl->id];
     }
     public function show($id)
     {
-      $companyData=company::where('id', $id)->get();
-      return view('Company.CompanyProfile',compact('companyData'));
+      $CompanyData = ['id'=>$id];
+      $CompanyData = json_encode($CompanyData);
+      return view('Company.CompanyProfile',compact('CompanyData'));
+    }
+    public function showData($id)
+    {
+      return company::find($id);
     }
     public function showOwnCompany()
     {

@@ -26,4 +26,9 @@ Route::get('/verify/{email}/{verificationCode}','registercontroller@verfiyDone')
 
 Route::post('/company-store','companycontroller@store');
 Route::get('/company-show/{id}','companycontroller@show');
+Route::get('/company-show-data/{id}','companycontroller@showData');
 Route::get('/company-show-own','companycontroller@showOwnCompany');
+Route::put('/company-profile-image/{companyid}','companyProfileController@update');
+Route::put('/company-cover-image/{companyid}','companyCoverController@update');
+
+Route::post('/store-food','foodcontroller@store');

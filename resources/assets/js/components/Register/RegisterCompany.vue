@@ -42,7 +42,7 @@ export default {
     loading:false,
     name:'',
     description:'',
-    show: true,
+    show: false,
           params: {
               token: '123456798',
               name: 'avatar'
@@ -61,6 +61,7 @@ export default {
     {
       var vm=this;
       this.loading=true;
+
       axios.post('/company-store',{
         name:this.name,
         description:this.description,
@@ -69,7 +70,7 @@ export default {
       {
         console.log(response);
         vm.loading=false;
-        window.location.href = window.location.href;
+        window.location =response.data.redirect;
       });
     },
     toggleShow() {
@@ -85,28 +86,7 @@ export default {
               console.log('-------- crop success --------');
               this.imgDataUrl = imgDataUrl;
           },
-          /**
-           * upload success
-           *
-           * [param] jsonData  server api return data, already json encode
-           * [param] field
-           */
-          cropUploadSuccess(jsonData, field){
-              console.log('-------- upload success --------');
-              console.log(jsonData);
-              console.log('field: ' + field);
-          },
-          /**
-           * upload fail
-           *
-           * [param] status    server api return error status, like 500
-           * [param] field
-           */
-          cropUploadFail(status, field){
-              console.log('-------- upload fail --------');
-              console.log(status);
-              console.log('field: ' + field);
-          }
+
   },
 }
 </script>

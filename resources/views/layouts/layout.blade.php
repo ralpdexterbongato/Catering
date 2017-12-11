@@ -5,7 +5,7 @@
     <title>@yield('title')</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    {{-- <link rel="shortcut icon" href="logo.png"> --}}
+    <link rel="shortcut icon" href="/logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="/css/mystyle.css">
@@ -76,73 +76,73 @@
         </nav>
         @if(Auth::check() && Auth::user()->verified=='1')
         <div class="verification-input">
-          <p><i class="material-icons">mail_outline</i> Please verify your email <span class="blue-text">{{Auth::user()->email}}</span> , Thank you.</p>
+          <p><i class="material-icons">mail_outline</i> Please verify your email <span class="bold">{{Auth::user()->email}}</span> , Thank you.</p>
         </div>
         @endif
-@if (Auth::check())
-<ul id="slide-out" class="side-nav">
-  <li>
-    <div class="user-view">
-    <div class="background">
-      <img src="/DesignPic/teal.png">
-    </div>
-    <a href="#!user"><img class="circle" src="/storage/images/{{Auth::user()->avatar}}"></a>
-    <a href="#!name"><span class="white-text name">{{Auth::user()->name}}</span></a>
-    <a href="#!email"><span class="white-text email">{{Auth::user()->email}}</span></a>
-    </div>
-  </li>
-    <li><a href="#!"><i class="material-icons">account_circle</i>First Link With Icon</a></li>
-    <li><div class="divider"></div></li>
-    <li class="no-padding">
-      <ul class="collapsible collapsible-accordion">
-        <li>
-          <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
-          <div class="collapsible-body">
-            <ul>
-              <li><a href="#!">First</a></li>
-              <li><a href="#!">Second</a></li>
-              <li><a href="#!">Third</a></li>
-              <li><a href="#!">Fourth</a></li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-    </li>
-    <li class="no-padding">
-      <ul class="collapsible collapsible-accordion">
-        <li>
-          <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
-          <div class="collapsible-body">
-            <ul>
-              <li><a href="#!">First</a></li>
-              <li><a href="#!">Second</a></li>
-              <li><a href="#!">Third</a></li>
-              <li><a href="#!">Fourth</a></li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-    </li>
-    <li class="no-padding">
-      <ul class="collapsible collapsible-accordion">
-        <li>
-          <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
-          <div class="collapsible-body">
-            <ul>
-              <li><a href="#!">First</a></li>
-              <li><a href="#!">Second</a></li>
-              <li><a href="#!">Third</a></li>
-              <li><a href="#!">Fourth</a></li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-    </li>
-    <li><div class="divider"></div></li>
-    <li><a class="subheader">Subheader</a></li>
-    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
-  </ul>
-    @endif
+        @if (Auth::check())
+        <ul id="slide-out" class="side-nav">
+          <li>
+            <div class="user-view">
+            <div class="background">
+              <img src="/DesignPic/teal.png">
+            </div>
+            <a href="#!user"><img class="circle" src="/storage/images/{{Auth::user()->avatar}}"></a>
+            <a href="#!name"><span class="white-text name">{{Auth::user()->name}}</span></a>
+            <a href="#!email"><span class="white-text email">{{Auth::user()->email}}</span></a>
+            </div>
+          </li>
+            <li><a href="#!"><i class="material-icons">account_circle</i>First Link With Icon</a></li>
+            <li><div class="divider"></div></li>
+            <li class="no-padding">
+              <ul class="collapsible collapsible-accordion">
+                <li>
+                  <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
+                  <div class="collapsible-body">
+                    <ul>
+                      <li><a href="#!">First</a></li>
+                      <li><a href="#!">Second</a></li>
+                      <li><a href="#!">Third</a></li>
+                      <li><a href="#!">Fourth</a></li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </li>
+            <li class="no-padding">
+              <ul class="collapsible collapsible-accordion">
+                <li>
+                  <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
+                  <div class="collapsible-body">
+                    <ul>
+                      <li><a href="#!">First</a></li>
+                      <li><a href="#!">Second</a></li>
+                      <li><a href="#!">Third</a></li>
+                      <li><a href="#!">Fourth</a></li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </li>
+            <li class="no-padding">
+              <ul class="collapsible collapsible-accordion">
+                <li>
+                  <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
+                  <div class="collapsible-body">
+                    <ul>
+                      <li><a href="#!">First</a></li>
+                      <li><a href="#!">Second</a></li>
+                      <li><a href="#!">Third</a></li>
+                      <li><a href="#!">Fourth</a></li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </li>
+            <li><div class="divider"></div></li>
+            <li><a class="subheader">Subheader</a></li>
+            <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+          </ul>
+            @endif
     <div class="main-content-container">
       @section('content')
       @show

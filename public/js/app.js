@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,8 +70,8 @@
 "use strict";
 
 
-var bind = __webpack_require__(7);
-var isBuffer = __webpack_require__(23);
+var bind = __webpack_require__(8);
+var isBuffer = __webpack_require__(24);
 
 /*global toString:true*/
 
@@ -584,7 +584,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(46)
+var listToStyles = __webpack_require__(47)
 
 /*
 type StyleObject = {
@@ -787,6 +787,12 @@ function applyToTag (styleElement, obj) {
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(23);
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports) {
 
 var g;
@@ -813,12 +819,6 @@ module.exports = g;
 
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(22);
-
-/***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -826,7 +826,7 @@ module.exports = __webpack_require__(22);
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(25);
+var normalizeHeaderName = __webpack_require__(26);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -842,10 +842,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(9);
+    adapter = __webpack_require__(10);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(9);
+    adapter = __webpack_require__(10);
   }
   return adapter;
 }
@@ -916,10 +916,62 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ }),
 /* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(49)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(51)
+/* template */
+var __vue_template__ = __webpack_require__(56)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "node_modules\\vue-image-crop-upload\\upload-2.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-264afbb1", Component.options)
+  } else {
+    hotAPI.reload("data-v-264afbb1", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -937,7 +989,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -1127,19 +1179,19 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var settle = __webpack_require__(26);
-var buildURL = __webpack_require__(28);
-var parseHeaders = __webpack_require__(29);
-var isURLSameOrigin = __webpack_require__(30);
-var createError = __webpack_require__(10);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(31);
+var settle = __webpack_require__(27);
+var buildURL = __webpack_require__(29);
+var parseHeaders = __webpack_require__(30);
+var isURLSameOrigin = __webpack_require__(31);
+var createError = __webpack_require__(11);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(32);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -1236,7 +1288,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(32);
+      var cookies = __webpack_require__(33);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -1314,13 +1366,13 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var enhanceError = __webpack_require__(27);
+var enhanceError = __webpack_require__(28);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -1339,7 +1391,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1351,7 +1403,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1377,19 +1429,19 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(44)
+  __webpack_require__(45)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(47)
+var __vue_script__ = __webpack_require__(48)
 /* template */
-var __vue_template__ = __webpack_require__(48)
+var __vue_template__ = __webpack_require__(57)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -1429,7 +1481,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -1481,23 +1533,23 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(16);
-module.exports = __webpack_require__(81);
+__webpack_require__(17);
+module.exports = __webpack_require__(86);
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Register_RegisterCompany__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Register_RegisterCompany__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Register_RegisterCompany___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Register_RegisterCompany__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_sweetalert2__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_sweetalert2__ = __webpack_require__(58);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -1505,9 +1557,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__(17);
+__webpack_require__(18);
 
-window.Vue = __webpack_require__(40);
+window.Vue = __webpack_require__(41);
 
 
 
@@ -1519,20 +1571,20 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_2_vue_sweetalert2__["a" /* default */]);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', __webpack_require__(55));
-Vue.component('register', __webpack_require__(58));
-Vue.component('login', __webpack_require__(14));
-Vue.component('companyprofile', __webpack_require__(88));
+Vue.component('example', __webpack_require__(64));
+Vue.component('register', __webpack_require__(67));
+Vue.component('login', __webpack_require__(15));
+Vue.component('companyprofile', __webpack_require__(81));
 var app = new Vue({
   el: '#app'
 });
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(18);
+window._ = __webpack_require__(19);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -1541,9 +1593,9 @@ window._ = __webpack_require__(18);
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(20);
+  window.$ = window.jQuery = __webpack_require__(21);
 
-  __webpack_require__(21);
+  __webpack_require__(22);
 } catch (e) {}
 
 /**
@@ -1552,7 +1604,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(5);
+window.axios = __webpack_require__(4);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -1586,7 +1638,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -18675,10 +18727,10 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(19)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(20)(module)))
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -18706,7 +18758,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -28966,7 +29018,7 @@ return jQuery;
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports) {
 
 /*!
@@ -31349,15 +31401,15 @@ if (typeof jQuery === 'undefined') {
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(7);
-var Axios = __webpack_require__(24);
+var bind = __webpack_require__(8);
+var Axios = __webpack_require__(25);
 var defaults = __webpack_require__(6);
 
 /**
@@ -31391,15 +31443,15 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(12);
-axios.CancelToken = __webpack_require__(38);
-axios.isCancel = __webpack_require__(11);
+axios.Cancel = __webpack_require__(13);
+axios.CancelToken = __webpack_require__(39);
+axios.isCancel = __webpack_require__(12);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(39);
+axios.spread = __webpack_require__(40);
 
 module.exports = axios;
 
@@ -31408,7 +31460,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 /*!
@@ -31435,7 +31487,7 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31443,10 +31495,10 @@ function isSlowBuffer (obj) {
 
 var defaults = __webpack_require__(6);
 var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(33);
-var dispatchRequest = __webpack_require__(34);
-var isAbsoluteURL = __webpack_require__(36);
-var combineURLs = __webpack_require__(37);
+var InterceptorManager = __webpack_require__(34);
+var dispatchRequest = __webpack_require__(35);
+var isAbsoluteURL = __webpack_require__(37);
+var combineURLs = __webpack_require__(38);
 
 /**
  * Create a new instance of Axios
@@ -31528,7 +31580,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31547,13 +31599,13 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var createError = __webpack_require__(10);
+var createError = __webpack_require__(11);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -31580,7 +31632,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31608,7 +31660,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31683,7 +31735,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31727,7 +31779,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31802,7 +31854,7 @@ module.exports = (
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31845,7 +31897,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31905,7 +31957,7 @@ module.exports = (
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31964,15 +32016,15 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(35);
-var isCancel = __webpack_require__(11);
+var transformData = __webpack_require__(36);
+var isCancel = __webpack_require__(12);
 var defaults = __webpack_require__(6);
 
 /**
@@ -32050,7 +32102,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32077,7 +32129,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32098,7 +32150,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32119,13 +32171,13 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Cancel = __webpack_require__(12);
+var Cancel = __webpack_require__(13);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -32183,7 +32235,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32217,7 +32269,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42941,10 +42993,10 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(41).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(42).setImmediate))
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var apply = Function.prototype.apply;
@@ -42997,13 +43049,13 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(42);
+__webpack_require__(43);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -43193,10 +43245,10 @@ exports.clearImmediate = clearImmediate;
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(9)))
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45826,13 +45878,13 @@ if (inBrowser && window.Vue) {
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(45);
+var content = __webpack_require__(46);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -45852,7 +45904,7 @@ if(false) {
 }
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -45866,7 +45918,7 @@ exports.push([module.i, "\n.register-company-container\r\n{\r\n  min-height: 100
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports) {
 
 /**
@@ -45899,14 +45951,14 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_image_crop_upload__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_image_crop_upload__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_image_crop_upload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_image_crop_upload__);
 //
 //
@@ -45948,83 +46000,1726 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            loading: false,
-            name: '',
-            description: '',
-            show: true,
-            params: {
-                token: '123456798',
-                name: 'avatar'
-            },
-            headers: {
-                smail: '*_~'
-            },
-            imgDataUrl: ''
-        };
+  data: function data() {
+    return {
+      loading: false,
+      name: '',
+      description: '',
+      show: false,
+      params: {
+        token: '123456798',
+        name: 'avatar'
+      },
+      headers: {
+        smail: '*_~'
+      },
+      imgDataUrl: ''
+    };
+  },
+
+  components: {
+    'my-upload': __WEBPACK_IMPORTED_MODULE_1_vue_image_crop_upload___default.a
+  },
+  methods: {
+    SaveCompany: function SaveCompany() {
+      var vm = this;
+      this.loading = true;
+
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/company-store', {
+        name: this.name,
+        description: this.description,
+        logo: this.imgDataUrl
+      }).then(function (response) {
+        console.log(response);
+        vm.loading = false;
+        window.location = response.data.redirect;
+      });
+    },
+    toggleShow: function toggleShow() {
+      this.show = !this.show;
     },
 
-    components: {
-        'my-upload': __WEBPACK_IMPORTED_MODULE_1_vue_image_crop_upload___default.a
-    },
-    methods: {
-        SaveCompany: function SaveCompany() {
-            var vm = this;
-            this.loading = true;
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/company-store', {
-                name: this.name,
-                description: this.description,
-                logo: this.imgDataUrl
-            }).then(function (response) {
-                console.log(response);
-                vm.loading = false;
-                window.location.href = window.location.href;
-            });
-        },
-        toggleShow: function toggleShow() {
-            this.show = !this.show;
-        },
-
-        /**
-         * crop success
-         *
-         * [param] imgDataUrl
-         * [param] field
-         */
-        cropSuccess: function cropSuccess(imgDataUrl, field) {
-            console.log('-------- crop success --------');
-            this.imgDataUrl = imgDataUrl;
-        },
-
-        /**
-         * upload success
-         *
-         * [param] jsonData  server api return data, already json encode
-         * [param] field
-         */
-        cropUploadSuccess: function cropUploadSuccess(jsonData, field) {
-            console.log('-------- upload success --------');
-            console.log(jsonData);
-            console.log('field: ' + field);
-        },
-
-        /**
-         * upload fail
-         *
-         * [param] status    server api return error status, like 500
-         * [param] field
-         */
-        cropUploadFail: function cropUploadFail(status, field) {
-            console.log('-------- upload fail --------');
-            console.log(status);
-            console.log('field: ' + field);
-        }
+    /**
+     * crop success
+     *
+     * [param] imgDataUrl
+     * [param] field
+     */
+    cropSuccess: function cropSuccess(imgDataUrl, field) {
+      console.log('-------- crop success --------');
+      this.imgDataUrl = imgDataUrl;
     }
+  }
 });
 
 /***/ }),
-/* 48 */
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(50);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("7e9f6990", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../css-loader/index.js!../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-264afbb1\",\"scoped\":false,\"hasInlineConfig\":true}!../vue-loader/lib/selector.js?type=styles&index=0&bustCache!./upload-2.vue", function() {
+     var newContent = require("!!../css-loader/index.js!../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-264afbb1\",\"scoped\":false,\"hasInlineConfig\":true}!../vue-loader/lib/selector.js?type=styles&index=0&bustCache!./upload-2.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n@charset \"UTF-8\";\n@-webkit-keyframes vicp_progress {\n0% {\r\n    background-position-y: 0;\n}\n100% {\r\n    background-position-y: 40px;\n}\n}\n@keyframes vicp_progress {\n0% {\r\n    background-position-y: 0;\n}\n100% {\r\n    background-position-y: 40px;\n}\n}\n@-webkit-keyframes vicp {\n0% {\r\n    opacity: 0;\r\n    -webkit-transform: scale(0) translatey(-60px);\r\n            transform: scale(0) translatey(-60px);\n}\n100% {\r\n    opacity: 1;\r\n    -webkit-transform: scale(1) translatey(0);\r\n            transform: scale(1) translatey(0);\n}\n}\n@keyframes vicp {\n0% {\r\n    opacity: 0;\r\n    -webkit-transform: scale(0) translatey(-60px);\r\n            transform: scale(0) translatey(-60px);\n}\n100% {\r\n    opacity: 1;\r\n    -webkit-transform: scale(1) translatey(0);\r\n            transform: scale(1) translatey(0);\n}\n}\n.vue-image-crop-upload {\r\n  position: fixed;\r\n  display: block;\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  z-index: 10000;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: rgba(0, 0, 0, 0.65);\r\n  -webkit-tap-highlight-color: transparent;\r\n  -moz-tap-highlight-color: transparent;\n}\n.vue-image-crop-upload .vicp-wrap {\r\n    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);\r\n            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);\r\n    position: fixed;\r\n    display: block;\r\n    -webkit-box-sizing: border-box;\r\n            box-sizing: border-box;\r\n    z-index: 10000;\r\n    top: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n    margin: auto;\r\n    width: 600px;\r\n    height: 330px;\r\n    padding: 25px;\r\n    background-color: #fff;\r\n    border-radius: 2px;\r\n    -webkit-animation: vicp 0.12s ease-in;\r\n            animation: vicp 0.12s ease-in;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-close {\r\n      position: absolute;\r\n      right: -30px;\r\n      top: -30px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4 {\r\n        position: relative;\r\n        display: block;\r\n        width: 30px;\r\n        height: 30px;\r\n        cursor: pointer;\r\n        -webkit-transition: -webkit-transform 0.18s;\r\n        transition: -webkit-transform 0.18s;\r\n        transition: transform 0.18s;\r\n        transition: transform 0.18s, -webkit-transform 0.18s;\r\n        -webkit-transform: rotate(0);\r\n                transform: rotate(0);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4::after, .vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4::before {\r\n          -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);\r\n                  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);\r\n          content: '';\r\n          position: absolute;\r\n          top: 12px;\r\n          left: 4px;\r\n          width: 20px;\r\n          height: 3px;\r\n          -webkit-transform: rotate(45deg);\r\n                  transform: rotate(45deg);\r\n          background-color: #fff;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4::after {\r\n          -webkit-transform: rotate(-45deg);\r\n                  transform: rotate(-45deg);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4:hover {\r\n          -webkit-transform: rotate(90deg);\r\n                  transform: rotate(90deg);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area {\r\n      position: relative;\r\n      -webkit-box-sizing: border-box;\r\n              box-sizing: border-box;\r\n      padding: 35px;\r\n      height: 170px;\r\n      background-color: rgba(0, 0, 0, 0.03);\r\n      text-align: center;\r\n      border: 1px dashed rgba(0, 0, 0, 0.08);\r\n      overflow: hidden;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-icon1 {\r\n        display: block;\r\n        margin: 0 auto 6px;\r\n        width: 42px;\r\n        height: 42px;\r\n        overflow: hidden;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-icon1 .vicp-icon1-arrow {\r\n          display: block;\r\n          margin: 0 auto;\r\n          width: 0;\r\n          height: 0;\r\n          border-bottom: 14.7px solid rgba(0, 0, 0, 0.3);\r\n          border-left: 14.7px solid transparent;\r\n          border-right: 14.7px solid transparent;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-icon1 .vicp-icon1-body {\r\n          display: block;\r\n          width: 12.6px;\r\n          height: 14.7px;\r\n          margin: 0 auto;\r\n          background-color: rgba(0, 0, 0, 0.3);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-icon1 .vicp-icon1-bottom {\r\n          -webkit-box-sizing: border-box;\r\n                  box-sizing: border-box;\r\n          display: block;\r\n          height: 12.6px;\r\n          border: 6px solid rgba(0, 0, 0, 0.3);\r\n          border-top: none;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-hint {\r\n        display: block;\r\n        padding: 15px;\r\n        font-size: 14px;\r\n        color: #666;\r\n        line-height: 30px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-no-supported-hint {\r\n        display: block;\r\n        position: absolute;\r\n        top: 0;\r\n        left: 0;\r\n        padding: 30px;\r\n        width: 100%;\r\n        height: 60px;\r\n        line-height: 30px;\r\n        background-color: #eee;\r\n        text-align: center;\r\n        color: #666;\r\n        font-size: 14px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area:hover {\r\n        cursor: pointer;\r\n        border-color: rgba(0, 0, 0, 0.1);\r\n        background-color: rgba(0, 0, 0, 0.05);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop {\r\n      overflow: hidden;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left {\r\n        float: left;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container {\r\n          position: relative;\r\n          display: block;\r\n          width: 240px;\r\n          height: 180px;\r\n          background-color: #e5e5e0;\r\n          overflow: hidden;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container .vicp-img {\r\n            position: absolute;\r\n            display: block;\r\n            cursor: move;\r\n            -webkit-user-select: none;\r\n               -moz-user-select: none;\r\n                -ms-user-select: none;\r\n                    user-select: none;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container .vicp-img-shade {\r\n            -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);\r\n                    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);\r\n            position: absolute;\r\n            background-color: rgba(241, 242, 243, 0.8);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container .vicp-img-shade.vicp-img-shade-1 {\r\n              top: 0;\r\n              left: 0;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container .vicp-img-shade.vicp-img-shade-2 {\r\n              bottom: 0;\r\n              right: 0;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate {\r\n          position: relative;\r\n          width: 240px;\r\n          height: 18px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate i {\r\n            display: block;\r\n            width: 18px;\r\n            height: 18px;\r\n            border-radius: 100%;\r\n            line-height: 18px;\r\n            text-align: center;\r\n            font-size: 12px;\r\n            font-weight: bold;\r\n            background-color: rgba(0, 0, 0, 0.08);\r\n            color: #fff;\r\n            overflow: hidden;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate i:hover {\r\n              -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);\r\n                      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);\r\n              cursor: pointer;\r\n              background-color: rgba(0, 0, 0, 0.14);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate i:first-child {\r\n              float: left;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate i:last-child {\r\n              float: right;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range {\r\n          position: relative;\r\n          margin: 30px 0 10px 0;\r\n          width: 240px;\r\n          height: 18px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon5,\r\n          .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6 {\r\n            position: absolute;\r\n            top: 0;\r\n            width: 18px;\r\n            height: 18px;\r\n            border-radius: 100%;\r\n            background-color: rgba(0, 0, 0, 0.08);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon5:hover,\r\n            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6:hover {\r\n              -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);\r\n                      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);\r\n              cursor: pointer;\r\n              background-color: rgba(0, 0, 0, 0.14);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon5 {\r\n            left: 0;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon5::before {\r\n              position: absolute;\r\n              content: '';\r\n              display: block;\r\n              left: 3px;\r\n              top: 8px;\r\n              width: 12px;\r\n              height: 2px;\r\n              background-color: #fff;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6 {\r\n            right: 0;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6::before {\r\n              position: absolute;\r\n              content: '';\r\n              display: block;\r\n              left: 3px;\r\n              top: 8px;\r\n              width: 12px;\r\n              height: 2px;\r\n              background-color: #fff;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6::after {\r\n              position: absolute;\r\n              content: '';\r\n              display: block;\r\n              top: 3px;\r\n              left: 8px;\r\n              width: 2px;\r\n              height: 12px;\r\n              background-color: #fff;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range] {\r\n            display: block;\r\n            padding-top: 5px;\r\n            margin: 0 auto;\r\n            width: 180px;\r\n            height: 8px;\r\n            vertical-align: top;\r\n            background: transparent;\r\n            -webkit-appearance: none;\r\n               -moz-appearance: none;\r\n                    appearance: none;\r\n            cursor: pointer;\r\n            /* 滑块\r\n\t\t\t\t\t\t\t ---------------------------------------------------------------*/\r\n            /* 轨道\r\n\t\t\t\t\t\t\t ---------------------------------------------------------------*/\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:focus {\r\n              outline: none;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-webkit-slider-thumb {\r\n              -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);\r\n                      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);\r\n              -webkit-appearance: none;\r\n                      appearance: none;\r\n              margin-top: -3px;\r\n              width: 12px;\r\n              height: 12px;\r\n              background-color: #61c091;\r\n              border-radius: 100%;\r\n              border: none;\r\n              -webkit-transition: 0.2s;\r\n              transition: 0.2s;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-moz-range-thumb {\r\n              box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);\r\n              -moz-appearance: none;\r\n                   appearance: none;\r\n              width: 12px;\r\n              height: 12px;\r\n              background-color: #61c091;\r\n              border-radius: 100%;\r\n              border: none;\r\n              -webkit-transition: 0.2s;\r\n              transition: 0.2s;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-ms-thumb {\r\n              box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);\r\n              appearance: none;\r\n              width: 12px;\r\n              height: 12px;\r\n              background-color: #61c091;\r\n              border: none;\r\n              border-radius: 100%;\r\n              -webkit-transition: 0.2s;\r\n              transition: 0.2s;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:active::-moz-range-thumb {\r\n              box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);\r\n              width: 14px;\r\n              height: 14px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:active::-ms-thumb {\r\n              box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);\r\n              width: 14px;\r\n              height: 14px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:active::-webkit-slider-thumb {\r\n              -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);\r\n                      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);\r\n              margin-top: -4px;\r\n              width: 14px;\r\n              height: 14px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-webkit-slider-runnable-track {\r\n              -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);\r\n                      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);\r\n              width: 100%;\r\n              height: 6px;\r\n              cursor: pointer;\r\n              border-radius: 2px;\r\n              border: none;\r\n              background-color: rgba(68, 170, 119, 0.3);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-moz-range-track {\r\n              box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);\r\n              width: 100%;\r\n              height: 6px;\r\n              cursor: pointer;\r\n              border-radius: 2px;\r\n              border: none;\r\n              background-color: rgba(68, 170, 119, 0.3);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-ms-track {\r\n              box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);\r\n              width: 100%;\r\n              cursor: pointer;\r\n              background: transparent;\r\n              border-color: transparent;\r\n              color: transparent;\r\n              height: 6px;\r\n              border-radius: 2px;\r\n              border: none;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-ms-fill-lower {\r\n              background-color: rgba(68, 170, 119, 0.3);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-ms-fill-upper {\r\n              background-color: rgba(68, 170, 119, 0.15);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:focus::-webkit-slider-runnable-track {\r\n              background-color: rgba(68, 170, 119, 0.5);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:focus::-moz-range-track {\r\n              background-color: rgba(68, 170, 119, 0.5);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:focus::-ms-fill-lower {\r\n              background-color: rgba(68, 170, 119, 0.45);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:focus::-ms-fill-upper {\r\n              background-color: rgba(68, 170, 119, 0.25);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right {\r\n        float: right;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview {\r\n          height: 150px;\r\n          overflow: hidden;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item {\r\n            position: relative;\r\n            padding: 5px;\r\n            width: 100px;\r\n            height: 100px;\r\n            float: left;\r\n            margin-right: 16px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item span {\r\n              position: absolute;\r\n              bottom: -30px;\r\n              width: 100%;\r\n              font-size: 14px;\r\n              color: #bbb;\r\n              display: block;\r\n              text-align: center;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item img {\r\n              position: absolute;\r\n              display: block;\r\n              top: 0;\r\n              bottom: 0;\r\n              left: 0;\r\n              right: 0;\r\n              margin: auto;\r\n              padding: 3px;\r\n              background-color: #fff;\r\n              border: 1px solid rgba(0, 0, 0, 0.15);\r\n              overflow: hidden;\r\n              -webkit-user-select: none;\r\n                 -moz-user-select: none;\r\n                  -ms-user-select: none;\r\n                      user-select: none;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item.vicp-preview-item-circle {\r\n              margin-right: 0;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item.vicp-preview-item-circle img {\r\n                border-radius: 100%;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload {\r\n      position: relative;\r\n      -webkit-box-sizing: border-box;\r\n              box-sizing: border-box;\r\n      padding: 35px;\r\n      height: 170px;\r\n      background-color: rgba(0, 0, 0, 0.03);\r\n      text-align: center;\r\n      border: 1px dashed #ddd;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-loading {\r\n        display: block;\r\n        padding: 15px;\r\n        font-size: 16px;\r\n        color: #999;\r\n        line-height: 30px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-progress-wrap {\r\n        margin-top: 12px;\r\n        background-color: rgba(0, 0, 0, 0.08);\r\n        border-radius: 3px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-progress-wrap .vicp-progress {\r\n          position: relative;\r\n          display: block;\r\n          height: 5px;\r\n          border-radius: 3px;\r\n          background-color: #4a7;\r\n          -webkit-box-shadow: 0 2px 6px 0 rgba(68, 170, 119, 0.3);\r\n                  box-shadow: 0 2px 6px 0 rgba(68, 170, 119, 0.3);\r\n          -webkit-transition: width 0.15s linear;\r\n          transition: width 0.15s linear;\r\n          background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);\r\n          background-size: 40px 40px;\r\n          -webkit-animation: vicp_progress 0.5s linear infinite;\r\n                  animation: vicp_progress 0.5s linear infinite;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-progress-wrap .vicp-progress::after {\r\n            content: '';\r\n            position: absolute;\r\n            display: block;\r\n            top: -3px;\r\n            right: -3px;\r\n            width: 9px;\r\n            height: 9px;\r\n            border: 1px solid rgba(245, 246, 247, 0.7);\r\n            -webkit-box-shadow: 0 1px 4px 0 rgba(68, 170, 119, 0.7);\r\n                    box-shadow: 0 1px 4px 0 rgba(68, 170, 119, 0.7);\r\n            border-radius: 100%;\r\n            background-color: #4a7;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-error,\r\n      .vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-success {\r\n        height: 100px;\r\n        line-height: 100px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-operate {\r\n      position: absolute;\r\n      right: 20px;\r\n      bottom: 20px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-operate a {\r\n        position: relative;\r\n        float: left;\r\n        display: block;\r\n        margin-left: 10px;\r\n        width: 100px;\r\n        height: 36px;\r\n        line-height: 36px;\r\n        text-align: center;\r\n        cursor: pointer;\r\n        font-size: 14px;\r\n        color: #4a7;\r\n        border-radius: 2px;\r\n        overflow: hidden;\r\n        -webkit-user-select: none;\r\n           -moz-user-select: none;\r\n            -ms-user-select: none;\r\n                user-select: none;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-operate a:hover {\r\n          background-color: rgba(0, 0, 0, 0.03);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-error,\r\n    .vue-image-crop-upload .vicp-wrap .vicp-success {\r\n      display: block;\r\n      font-size: 14px;\r\n      line-height: 24px;\r\n      height: 24px;\r\n      color: #d10;\r\n      text-align: center;\r\n      vertical-align: top;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-success {\r\n      color: #4a7;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-icon3 {\r\n      position: relative;\r\n      display: inline-block;\r\n      width: 20px;\r\n      height: 20px;\r\n      top: 4px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-icon3::after {\r\n        position: absolute;\r\n        top: 3px;\r\n        left: 6px;\r\n        width: 6px;\r\n        height: 10px;\r\n        border-width: 0 2px 2px 0;\r\n        border-color: #4a7;\r\n        border-style: solid;\r\n        -webkit-transform: rotate(45deg);\r\n                transform: rotate(45deg);\r\n        content: '';\n}\n.vue-image-crop-upload .vicp-wrap .vicp-icon2 {\r\n      position: relative;\r\n      display: inline-block;\r\n      width: 20px;\r\n      height: 20px;\r\n      top: 4px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-icon2::after, .vue-image-crop-upload .vicp-wrap .vicp-icon2::before {\r\n        content: '';\r\n        position: absolute;\r\n        top: 9px;\r\n        left: 4px;\r\n        width: 13px;\r\n        height: 2px;\r\n        background-color: #d10;\r\n        -webkit-transform: rotate(45deg);\r\n                transform: rotate(45deg);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-icon2::after {\r\n        -webkit-transform: rotate(-45deg);\r\n                transform: rotate(-45deg);\n}\n.e-ripple {\r\n  position: absolute;\r\n  border-radius: 100%;\r\n  background-color: rgba(0, 0, 0, 0.15);\r\n  background-clip: padding-box;\r\n  pointer-events: none;\r\n  -webkit-user-select: none;\r\n     -moz-user-select: none;\r\n      -ms-user-select: none;\r\n          user-select: none;\r\n  -webkit-transform: scale(0);\r\n          transform: scale(0);\r\n  opacity: 1;\n}\n.e-ripple.z-active {\r\n    opacity: 0;\r\n    -webkit-transform: scale(2);\r\n            transform: scale(2);\r\n    -webkit-transition: opacity 1.2s ease-out, -webkit-transform 0.6s ease-out;\r\n    transition: opacity 1.2s ease-out, -webkit-transform 0.6s ease-out;\r\n    transition: opacity 1.2s ease-out, transform 0.6s ease-out;\r\n    transition: opacity 1.2s ease-out, transform 0.6s ease-out, -webkit-transform 0.6s ease-out;\n}\r\n\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 51 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_language_js__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_mimes_js__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_data2blob_js__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_effectRipple_js__ = __webpack_require__(55);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: {
+		// 域，上传文件name，触发事件会带上（如果一个页面多个图片上传控件，可以做区分
+		field: {
+			type: String,
+			'default': 'avatar'
+		},
+		// 原名key，类似于id，触发事件会带上（如果一个页面多个图片上传控件，可以做区分
+		ki: {
+			'default': 0
+		},
+		// 显示该控件与否
+		value: {
+			'default': true
+		},
+		// 上传地址
+		url: {
+			type: String,
+			'default': ''
+		},
+		// 其他要上传文件附带的数据，对象格式
+		params: {
+			type: Object,
+			'default': null
+		},
+		//Add custom headers
+		headers: {
+			type: Object,
+			'default': null
+		},
+		// 剪裁图片的宽
+		width: {
+			type: Number,
+			default: 200
+		},
+		// 剪裁图片的高
+		height: {
+			type: Number,
+			default: 200
+		},
+		// 不显示旋转功能
+		noRotate: {
+			type: Boolean,
+			default: true
+		},
+		// 不预览圆形图片
+		noCircle: {
+			type: Boolean,
+			default: false
+		},
+		// 不预览方形图片
+		noSquare: {
+			type: Boolean,
+			default: false
+		},
+		// 单文件大小限制
+		maxSize: {
+			type: Number,
+			'default': 10240
+		},
+		// 语言类型
+		langType: {
+			type: String,
+			'default': 'zh'
+		},
+		// 语言包
+		langExt: {
+			type: Object,
+			'default': null
+		},
+		// 图片上传格式
+		imgFormat: {
+			type: String,
+			'default': 'png'
+		}
+	},
+	data: function data() {
+		var that = this,
+		    imgFormat = that.imgFormat,
+		    langType = that.langType,
+		    langExt = that.langExt,
+		    width = that.width,
+		    height = that.height,
+		    isSupported = true,
+		    allowImgFormat = ['jpg', 'png'],
+		    tempImgFormat = allowImgFormat.indexOf(imgFormat) === -1 ? 'jpg' : imgFormat,
+		    lang = __WEBPACK_IMPORTED_MODULE_0__utils_language_js__["a" /* default */][langType] ? __WEBPACK_IMPORTED_MODULE_0__utils_language_js__["a" /* default */][langType] : __WEBPACK_IMPORTED_MODULE_0__utils_language_js__["a" /* default */]['en'],
+		    mime = __WEBPACK_IMPORTED_MODULE_1__utils_mimes_js__["a" /* default */][tempImgFormat];
+		// 规范图片格式
+		that.imgFormat = tempImgFormat;
+
+		if (langExt) {
+			Object.assign(lang, langExt);
+		}
+		if (typeof FormData != 'function') {
+			isSupported = false;
+		}
+		return {
+			// 图片的mime
+			mime: mime,
+
+			// 语言包
+			lang: lang,
+
+			// 浏览器是否支持该控件
+			isSupported: isSupported,
+			// 浏览器是否支持触屏事件
+			isSupportTouch: document.hasOwnProperty("ontouchstart"),
+
+			// 步骤
+			step: 1, //1选择文件 2剪裁 3上传
+
+			// 上传状态及进度
+			loading: 0, //0未开始 1正在 2成功 3错误
+			progress: 0,
+
+			// 是否有错误及错误信息
+			hasError: false,
+			errorMsg: '',
+
+			// 需求图宽高比
+			ratio: width / height,
+
+			// 原图地址、生成图片地址
+			sourceImg: null,
+			sourceImgUrl: '',
+			createImgUrl: '',
+
+			// 原图片拖动事件初始值
+			sourceImgMouseDown: {
+				on: false,
+				mX: 0, //鼠标按下的坐标
+				mY: 0,
+				x: 0, //scale原图坐标
+				y: 0
+			},
+
+			// 生成图片预览的容器大小
+			previewContainer: {
+				width: 100,
+				height: 100
+			},
+
+			// 原图容器宽高
+			sourceImgContainer: { // sic
+				width: 240,
+				height: 184 // 如果生成图比例与此一致会出现bug，先改成特殊的格式吧，哈哈哈
+			},
+
+			// 原图展示属性
+			scale: {
+				zoomAddOn: false, //按钮缩放事件开启
+				zoomSubOn: false, //按钮缩放事件开启
+				range: 1, //最大100
+
+				rotateLeft: false, //按钮向左旋转事件开启
+				rotateRight: false, //按钮向右旋转事件开启
+				degree: 0, // 旋转度数
+
+				x: 0,
+				y: 0,
+				width: 0,
+				height: 0,
+				maxWidth: 0,
+				maxHeight: 0,
+				minWidth: 0, //最宽
+				minHeight: 0,
+				naturalWidth: 0, //原宽
+				naturalHeight: 0
+			}
+		};
+	},
+
+	computed: {
+		// 进度条样式
+		progressStyle: function progressStyle() {
+			var progress = this.progress;
+
+			return {
+				width: progress + '%'
+			};
+		},
+
+		// 原图样式
+		sourceImgStyle: function sourceImgStyle() {
+			var scale = this.scale,
+			    sourceImgMasking = this.sourceImgMasking,
+			    top = scale.y + sourceImgMasking.y + 'px',
+			    left = scale.x + sourceImgMasking.x + 'px';
+
+			return {
+				top: top,
+				left: left,
+				width: scale.width + 'px',
+				height: scale.height + 'px',
+				transform: 'rotate(' + scale.degree + 'deg)', // 旋转时 左侧原始图旋转样式
+				'-ms-transform': 'rotate(' + scale.degree + 'deg)', // 兼容IE9
+				'-moz-transform': 'rotate(' + scale.degree + 'deg)', // 兼容FireFox
+				'-webkit-transform': 'rotate(' + scale.degree + 'deg)', // 兼容Safari 和 chrome
+				'-o-transform': 'rotate(' + scale.degree + 'deg)' // 兼容 Opera
+			};
+		},
+
+		// 原图蒙版属性
+		sourceImgMasking: function sourceImgMasking() {
+			var width = this.width,
+			    height = this.height,
+			    ratio = this.ratio,
+			    sourceImgContainer = this.sourceImgContainer,
+			    sic = sourceImgContainer,
+			    sicRatio = sic.width / sic.height,
+			    x = 0,
+			    y = 0,
+			    w = sic.width,
+			    h = sic.height,
+			    scale = 1;
+
+			if (ratio < sicRatio) {
+				scale = sic.height / height;
+				w = sic.height * ratio;
+				x = (sic.width - w) / 2;
+			}
+			if (ratio > sicRatio) {
+				scale = sic.width / width;
+				h = sic.width / ratio;
+				y = (sic.height - h) / 2;
+			}
+			return {
+				scale: scale, // 蒙版相对需求宽高的缩放
+				x: x,
+				y: y,
+				width: w,
+				height: h
+			};
+		},
+
+		// 原图遮罩样式
+		sourceImgShadeStyle: function sourceImgShadeStyle() {
+			var sourceImgMasking = this.sourceImgMasking,
+			    sourceImgContainer = this.sourceImgContainer,
+			    sic = sourceImgContainer,
+			    sim = sourceImgMasking,
+			    w = sim.width == sic.width ? sim.width : (sic.width - sim.width) / 2,
+			    h = sim.height == sic.height ? sim.height : (sic.height - sim.height) / 2;
+
+			return {
+				width: w + 'px',
+				height: h + 'px'
+			};
+		},
+		previewStyle: function previewStyle() {
+			var width = this.width,
+			    height = this.height,
+			    ratio = this.ratio,
+			    previewContainer = this.previewContainer,
+			    pc = previewContainer,
+			    w = pc.width,
+			    h = pc.height,
+			    pcRatio = w / h;
+
+			if (ratio < pcRatio) {
+				w = pc.height * ratio;
+			}
+			if (ratio > pcRatio) {
+				h = pc.width / ratio;
+			}
+			return {
+				width: w + 'px',
+				height: h + 'px'
+			};
+		}
+	},
+	watch: {
+		value: function value(newValue) {
+			if (newValue && this.loading != 1) {
+				this.reset();
+			}
+		}
+	},
+	methods: {
+		// 点击波纹效果
+		ripple: function ripple(e) {
+			Object(__WEBPACK_IMPORTED_MODULE_3__utils_effectRipple_js__["a" /* default */])(e);
+		},
+
+		// 关闭控件
+		off: function off() {
+			var _this = this;
+
+			setTimeout(function () {
+				_this.$emit('input', false);
+				if (_this.step == 3 && _this.loading == 2) {
+					_this.setStep(1);
+				}
+			}, 200);
+		},
+
+		// 设置步骤
+		setStep: function setStep(no) {
+			var _this2 = this;
+
+			// 延时是为了显示动画效果呢，哈哈哈
+			setTimeout(function () {
+				_this2.step = no;
+			}, 200);
+		},
+
+
+		/* 图片选择区域函数绑定
+   ---------------------------------------------------------------*/
+		preventDefault: function preventDefault(e) {
+			e.preventDefault();
+			return false;
+		},
+		handleClick: function handleClick(e) {
+			if (this.loading !== 1) {
+				if (e.target !== this.$refs.fileinput) {
+					e.preventDefault();
+					if (document.activeElement !== this.$refs) {
+						this.$refs.fileinput.click();
+					}
+				}
+			}
+		},
+		handleChange: function handleChange(e) {
+			e.preventDefault();
+			if (this.loading !== 1) {
+				var files = e.target.files || e.dataTransfer.files;
+				this.reset();
+				if (this.checkFile(files[0])) {
+					this.setSourceImg(files[0]);
+				}
+			}
+		},
+
+		/* ---------------------------------------------------------------*/
+
+		// 检测选择的文件是否合适
+		checkFile: function checkFile(file) {
+			var that = this,
+			    lang = that.lang,
+			    maxSize = that.maxSize;
+			// 仅限图片
+			if (file.type.indexOf('image') === -1) {
+				that.hasError = true;
+				that.errorMsg = lang.error.onlyImg;
+				return false;
+			}
+
+			// 超出大小
+			if (file.size / 1024 > maxSize) {
+				that.hasError = true;
+				that.errorMsg = lang.error.outOfSize + maxSize + 'kb';
+				return false;
+			}
+			return true;
+		},
+
+		// 重置控件
+		reset: function reset() {
+			var that = this;
+			that.loading = 0;
+			that.hasError = false;
+			that.errorMsg = '';
+			that.progress = 0;
+		},
+
+		// 设置图片源
+		setSourceImg: function setSourceImg(file) {
+			var that = this,
+			    fr = new FileReader();
+			fr.onload = function (e) {
+				that.sourceImgUrl = fr.result;
+				that.startCrop();
+			};
+			fr.readAsDataURL(file);
+		},
+
+		// 剪裁前准备工作
+		startCrop: function startCrop() {
+			var that = this,
+			    width = that.width,
+			    height = that.height,
+			    ratio = that.ratio,
+			    scale = that.scale,
+			    sourceImgUrl = that.sourceImgUrl,
+			    sourceImgMasking = that.sourceImgMasking,
+			    lang = that.lang,
+			    sim = sourceImgMasking,
+			    img = new Image();
+
+			img.src = sourceImgUrl;
+			img.onload = function () {
+				var nWidth = img.naturalWidth,
+				    nHeight = img.naturalHeight,
+				    nRatio = nWidth / nHeight,
+				    w = sim.width,
+				    h = sim.height,
+				    x = 0,
+				    y = 0;
+				// 图片像素不达标
+				if (nWidth < width || nHeight < height) {
+					that.hasError = true;
+					that.errorMsg = lang.error.lowestPx + width + '*' + height;
+					return false;
+				}
+				if (ratio > nRatio) {
+					h = w / nRatio;
+					y = (sim.height - h) / 2;
+				}
+				if (ratio < nRatio) {
+					w = h * nRatio;
+					x = (sim.width - w) / 2;
+				}
+				scale.range = 0;
+				scale.x = x;
+				scale.y = y;
+				scale.width = w;
+				scale.height = h;
+				scale.degree = 0;
+				scale.minWidth = w;
+				scale.minHeight = h;
+				scale.maxWidth = nWidth * sim.scale;
+				scale.maxHeight = nHeight * sim.scale;
+				scale.naturalWidth = nWidth;
+				scale.naturalHeight = nHeight;
+				that.sourceImg = img;
+				that.createImg();
+				that.setStep(2);
+			};
+		},
+
+		// 鼠标按下图片准备移动
+		imgStartMove: function imgStartMove(e) {
+			e.preventDefault();
+			// 支持触摸事件，则鼠标事件无效
+			if (this.isSupportTouch && !e.targetTouches) {
+				return false;
+			}
+			var et = e.targetTouches ? e.targetTouches[0] : e,
+			    sourceImgMouseDown = this.sourceImgMouseDown,
+			    scale = this.scale,
+			    simd = sourceImgMouseDown;
+
+			simd.mX = et.screenX;
+			simd.mY = et.screenY;
+			simd.x = scale.x;
+			simd.y = scale.y;
+			simd.on = true;
+		},
+
+		// 鼠标按下状态下移动，图片移动
+		imgMove: function imgMove(e) {
+			e.preventDefault();
+			// 支持触摸事件，则鼠标事件无效
+			if (this.isSupportTouch && !e.targetTouches) {
+				return false;
+			}
+			var et = e.targetTouches ? e.targetTouches[0] : e,
+			    _sourceImgMouseDown = this.sourceImgMouseDown,
+			    on = _sourceImgMouseDown.on,
+			    mX = _sourceImgMouseDown.mX,
+			    mY = _sourceImgMouseDown.mY,
+			    x = _sourceImgMouseDown.x,
+			    y = _sourceImgMouseDown.y,
+			    scale = this.scale,
+			    sourceImgMasking = this.sourceImgMasking,
+			    sim = sourceImgMasking,
+			    nX = et.screenX,
+			    nY = et.screenY,
+			    dX = nX - mX,
+			    dY = nY - mY,
+			    rX = x + dX,
+			    rY = y + dY;
+
+			if (!on) return;
+			if (rX > 0) {
+				rX = 0;
+			}
+			if (rY > 0) {
+				rY = 0;
+			}
+			if (rX < sim.width - scale.width) {
+				rX = sim.width - scale.width;
+			}
+			if (rY < sim.height - scale.height) {
+				rY = sim.height - scale.height;
+			}
+			scale.x = rX;
+			scale.y = rY;
+		},
+
+		// 按钮按下开始向右旋转
+		startRotateRight: function startRotateRight(e) {
+			var that = this,
+			    scale = that.scale;
+
+			scale.rotateRight = true;
+			function rotate() {
+				if (scale.rotateRight) {
+					var degree = ++scale.degree;
+					that.createImg(degree);
+					setTimeout(function () {
+						rotate();
+					}, 60);
+				}
+			}
+			rotate();
+		},
+
+		// 按钮按下开始向右旋转
+		startRotateLeft: function startRotateLeft(e) {
+			var that = this,
+			    scale = that.scale;
+
+			scale.rotateLeft = true;
+			function rotate() {
+				if (scale.rotateLeft) {
+					var degree = --scale.degree;
+					that.createImg(degree);
+					setTimeout(function () {
+						rotate();
+					}, 60);
+				}
+			}
+			rotate();
+		},
+
+		// 停止旋转
+		endRotate: function endRotate() {
+			var scale = this.scale;
+
+			scale.rotateLeft = false;
+			scale.rotateRight = false;
+		},
+
+		// 按钮按下开始放大
+		startZoomAdd: function startZoomAdd(e) {
+			var that = this,
+			    scale = that.scale;
+
+			scale.zoomAddOn = true;
+
+			function zoom() {
+				if (scale.zoomAddOn) {
+					var range = scale.range >= 100 ? 100 : ++scale.range;
+					that.zoomImg(range);
+					setTimeout(function () {
+						zoom();
+					}, 60);
+				}
+			}
+			zoom();
+		},
+
+		// 按钮松开或移开取消放大
+		endZoomAdd: function endZoomAdd(e) {
+			this.scale.zoomAddOn = false;
+		},
+
+		// 按钮按下开始缩小
+		startZoomSub: function startZoomSub(e) {
+			var that = this,
+			    scale = that.scale;
+
+			scale.zoomSubOn = true;
+
+			function zoom() {
+				if (scale.zoomSubOn) {
+					var range = scale.range <= 0 ? 0 : --scale.range;
+					that.zoomImg(range);
+					setTimeout(function () {
+						zoom();
+					}, 60);
+				}
+			}
+			zoom();
+		},
+
+		// 按钮松开或移开取消缩小
+		endZoomSub: function endZoomSub(e) {
+			var scale = this.scale;
+
+			scale.zoomSubOn = false;
+		},
+		zoomChange: function zoomChange(e) {
+			this.zoomImg(e.target.value);
+		},
+
+		// 缩放原图
+		zoomImg: function zoomImg(newRange) {
+			var that = this,
+			    sourceImgMasking = this.sourceImgMasking,
+			    sourceImgMouseDown = this.sourceImgMouseDown,
+			    scale = this.scale,
+			    maxWidth = scale.maxWidth,
+			    maxHeight = scale.maxHeight,
+			    minWidth = scale.minWidth,
+			    minHeight = scale.minHeight,
+			    width = scale.width,
+			    height = scale.height,
+			    x = scale.x,
+			    y = scale.y,
+			    range = scale.range,
+			    sim = sourceImgMasking,
+			    sWidth = sim.width,
+			    sHeight = sim.height,
+			    nWidth = minWidth + (maxWidth - minWidth) * newRange / 100,
+			    nHeight = minHeight + (maxHeight - minHeight) * newRange / 100,
+			    nX = sWidth / 2 - nWidth / width * (sWidth / 2 - x),
+			    nY = sHeight / 2 - nHeight / height * (sHeight / 2 - y);
+
+			// 判断新坐标是否超过蒙版限制
+			if (nX > 0) {
+				nX = 0;
+			}
+			if (nY > 0) {
+				nY = 0;
+			}
+			if (nX < sWidth - nWidth) {
+				nX = sWidth - nWidth;
+			}
+			if (nY < sHeight - nHeight) {
+				nY = sHeight - nHeight;
+			}
+
+			// 赋值处理
+			scale.x = nX;
+			scale.y = nY;
+			scale.width = nWidth;
+			scale.height = nHeight;
+			scale.range = newRange;
+			setTimeout(function () {
+				if (scale.range == newRange) {
+					that.createImg();
+				}
+			}, 300);
+		},
+
+		// 生成需求图片
+		createImg: function createImg(e) {
+			var that = this,
+			    mime = that.mime,
+			    sourceImg = that.sourceImg,
+			    _that$scale = that.scale,
+			    x = _that$scale.x,
+			    y = _that$scale.y,
+			    width = _that$scale.width,
+			    height = _that$scale.height,
+			    degree = _that$scale.degree,
+			    scale = that.sourceImgMasking.scale,
+			    canvas = that.$refs.canvas,
+			    ctx = canvas.getContext('2d');
+
+			if (e) {
+				// 取消鼠标按下移动状态
+				that.sourceImgMouseDown.on = false;
+			}
+			canvas.width = that.width;
+			canvas.height = that.height;
+			ctx.clearRect(0, 0, that.width, that.height);
+
+			// 将透明区域设置为白色底边
+			ctx.fillStyle = "#fff";
+			ctx.fillRect(0, 0, that.width, that.height);
+
+			ctx.translate(that.width * 0.5, that.height * 0.5);
+			ctx.rotate(Math.PI * degree / 180);
+			ctx.translate(-that.width * 0.5, -that.height * 0.5);
+
+			ctx.drawImage(sourceImg, x / scale, y / scale, width / scale, height / scale);
+			that.createImgUrl = canvas.toDataURL(mime);
+		},
+		prepareUpload: function prepareUpload() {
+			var url = this.url,
+			    createImgUrl = this.createImgUrl,
+			    field = this.field,
+			    ki = this.ki;
+
+			this.$emit('crop-success', createImgUrl, field, ki);
+			if (typeof url == 'string' && url) {
+				this.upload();
+			} else {
+				this.off();
+			}
+		},
+
+		// 上传图片
+		upload: function upload() {
+			var that = this,
+			    lang = this.lang,
+			    imgFormat = this.imgFormat,
+			    mime = this.mime,
+			    url = this.url,
+			    params = this.params,
+			    headers = this.headers,
+			    field = this.field,
+			    ki = this.ki,
+			    createImgUrl = this.createImgUrl,
+			    fmData = new FormData();
+
+			fmData.append(field, Object(__WEBPACK_IMPORTED_MODULE_2__utils_data2blob_js__["a" /* default */])(createImgUrl, mime), field + '.' + imgFormat);
+
+			// 添加其他参数
+			if ((typeof params === 'undefined' ? 'undefined' : _typeof(params)) == 'object' && params) {
+				Object.keys(params).forEach(function (k) {
+					fmData.append(k, params[k]);
+				});
+			}
+
+			// 监听进度回调
+			var uploadProgress = function uploadProgress(event) {
+				if (event.lengthComputable) {
+					that.progress = 100 * Math.round(event.loaded) / event.total;
+				}
+			};
+
+			// 上传文件
+			that.reset();
+			that.loading = 1;
+			that.setStep(3);
+			new Promise(function (resolve, reject) {
+				var client = new XMLHttpRequest();
+				client.open('POST', url, true);
+				client.onreadystatechange = function () {
+					if (this.readyState !== 4) {
+						return;
+					}
+					if (this.status === 200 || this.status === 201) {
+						resolve(JSON.parse(this.responseText));
+					} else {
+						reject(this.status);
+					}
+				};
+				client.upload.addEventListener("progress", uploadProgress, false); //监听进度
+				// 设置header
+				if ((typeof headers === 'undefined' ? 'undefined' : _typeof(headers)) == 'object' && headers) {
+					Object.keys(headers).forEach(function (k) {
+						client.setRequestHeader(k, headers[k]);
+					});
+				}
+				client.send(fmData);
+			}).then(
+			// 上传成功
+			function (resData) {
+				if (that.value) {
+					that.loading = 2;
+					that.$emit('crop-upload-success', resData, field, ki);
+				}
+			},
+			// 上传失败
+			function (sts) {
+				if (that.value) {
+					that.loading = 3;
+					that.hasError = true;
+					that.errorMsg = lang.fail;
+					that.$emit('crop-upload-fail', sts, field, ki);
+				}
+			});
+		}
+	},
+	created: function created() {
+		var _this3 = this;
+
+		// 绑定按键esc隐藏此插件事件
+		document.addEventListener('keyup', function (e) {
+			if (_this3.value && (e.key == 'Escape' || e.keyCode == 27)) {
+				_this3.off();
+			}
+		});
+	}
+});
+
+/***/ }),
+/* 52 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+	zh: {
+		hint: '点击，或拖动图片至此处',
+		loading: '正在上传……',
+		noSupported: '浏览器不支持该功能，请使用IE10以上或其他现在浏览器！',
+		success: '上传成功',
+		fail: '图片上传失败',
+		preview: '头像预览',
+		btn: {
+			off: '取消',
+			close: '关闭',
+			back: '上一步',
+			save: '保存'
+		},
+		error: {
+			onlyImg: '仅限图片格式',
+			outOfSize: '单文件大小不能超过 ',
+			lowestPx: '图片最低像素为（宽*高）：'
+		}
+	},
+	en: {
+		hint: 'Click or drag the file here to upload',
+		loading: 'Uploading…',
+		noSupported: 'Browser is not supported, please use IE10+ or other browsers',
+		success: 'Upload success',
+		fail: 'Upload failed',
+		preview: 'Preview',
+		btn: {
+			off: 'Cancel',
+			close: 'Close',
+			back: 'Back',
+			save: 'Save'
+		},
+		error: {
+			onlyImg: 'Image only',
+			outOfSize: 'Image exceeds size limit: ',
+			lowestPx: 'Image\'s size is too low. Expected at least: '
+		}
+	},
+	ro: {
+		hint: 'Atinge sau trage fișierul aici',
+		loading: 'Se încarcă',
+		noSupported: 'Browser-ul tău nu suportă acest feature. Te rugăm încearcă cu alt browser.',
+		success: 'S-a încărcat cu succes',
+		fail: 'A apărut o problemă la încărcare',
+		preview: 'Previzualizează',
+
+		btn: {
+			off: 'Anulează',
+			close: 'Închide',
+			back: 'Înapoi',
+			save: 'Salvează'
+		},
+
+		error: {
+			onlyImg: 'Doar imagini',
+			outOfSize: 'Imaginea depășește limita de: ',
+			loewstPx: 'Imaginea este prea mică; Minim: '
+		}
+	},
+	ru: {
+		hint: 'Нажмите, или перетащите файл в это окно',
+		loading: 'Загружаю……',
+		noSupported: 'Ваш браузер не поддерживается, пожалуйста, используйте IE10 + или другие браузеры',
+		success: 'Загрузка выполнена успешно',
+		fail: 'Ошибка загрузки',
+		preview: 'Предпросмотр',
+		btn: {
+			off: 'Отменить',
+			close: 'Закрыть',
+			back: 'Назад',
+			save: 'Сохранить'
+		},
+		error: {
+			onlyImg: 'Только изображения',
+			outOfSize: 'Изображение превышает предельный размер: ',
+			lowestPx: 'Минимальный размер изображения: '
+		}
+	},
+	'pt-br': {
+		hint: 'Clique ou arraste o arquivo aqui para carregar',
+		loading: 'Carregando…',
+		noSupported: 'Browser não suportado, use o IE10+ ou outro browser',
+		success: 'Sucesso ao carregar imagem',
+		fail: 'Falha ao carregar imagem',
+		preview: 'Pré-visualizar',
+		btn: {
+			off: 'Cancelar',
+			close: 'Fechar',
+			back: 'Voltar',
+			save: 'Salvar'
+		},
+		error: {
+			onlyImg: 'Apenas imagens',
+			outOfSize: 'A imagem excede o limite de tamanho: ',
+			lowestPx: 'O tamanho da imagem é muito pequeno. Tamanho mínimo: '
+		}
+	},
+	fr: {
+		hint: 'Cliquez ou glissez le fichier ici.',
+		loading: 'Téléchargement…',
+		noSupported: 'Votre navigateur n\'est pas supporté. Utilisez IE10 + ou un autre navigateur s\'il vous plaît.',
+		success: 'Téléchargement réussit',
+		fail: 'Téléchargement echoué',
+		preview: 'Aperçu',
+		btn: {
+			off: 'Annuler',
+			close: 'Fermer',
+			back: 'Retour',
+			save: 'Enregistrer'
+		},
+		error: {
+			onlyImg: 'Image uniquement',
+			outOfSize: 'L\'image sélectionnée dépasse la taille maximum: ',
+			lowestPx: 'L\'image sélectionnée est trop petite. Dimensions attendues: '
+		}
+	},
+	nl: {
+		hint: 'Klik hier of sleep een afbeelding in dit vlak',
+		loading: 'Uploaden…',
+		noSupported: 'Je browser wordt helaas niet ondersteund. Gebruik IE10+ of een andere browser.',
+		success: 'Upload succesvol',
+		fail: 'Upload mislukt',
+		preview: 'Voorbeeld',
+		btn: {
+			off: 'Annuleren',
+			close: 'Sluiten',
+			back: 'Terug',
+			save: 'Opslaan'
+		},
+		error: {
+			onlyImg: 'Alleen afbeeldingen',
+			outOfSize: 'De afbeelding is groter dan: ',
+			lowestPx: 'De afbeelding is te klein! Minimale afmetingen: '
+		}
+	},
+	tr: {
+		hint: 'Tıkla veya yüklemek istediğini buraya sürükle',
+		loading: 'Yükleniyor…',
+		noSupported: 'Tarayıcı desteklenmiyor, lütfen IE10+ veya farklı tarayıcı kullanın',
+		success: 'Yükleme başarılı',
+		fail: 'Yüklemede hata oluştu',
+		preview: 'Önizle',
+		btn: {
+			off: 'İptal',
+			close: 'Kapat',
+			back: 'Geri',
+			save: 'Kaydet'
+		},
+		error: {
+			onlyImg: 'Sadece resim',
+			outOfSize: 'Resim yükleme limitini aşıyor: ',
+			lowestPx: 'Resmin boyutu çok küçük. En az olması gereken: '
+		}
+	},
+	'es-MX': {
+		hint:'Selecciona o arrastra una imagen',
+		loading:'Subiendo...',
+		noSupported:'Tu navegador no es soportado, porfavor usa IE10+ u otros navegadores mas recientes',
+		success:'Subido exitosamente',
+		fail:'Sucedió un error',
+		preview:'Vista previa',
+		btn:{
+			off:'Cancelar',
+			close:'Cerrar',
+			back:'Atras',
+			save:'Guardar'
+		},
+		error:{
+			onlyImg:'Unicamente imagenes',
+			outOfSize:'La imagen excede el tamaño maximo:',
+			lowestPx:'La imagen es demasiado pequeño. Se espera por lo menos:'
+		}
+	}
+});
+
+
+/***/ }),
+/* 53 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    'jpg': 'image/jpeg',
+    'png': 'image/png',
+    'gif': 'image/gif',
+    'svg': 'image/svg+xml',
+    'psd': 'image/photoshop'
+});
+
+
+/***/ }),
+/* 54 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/**
+ * database64文件格式转换为2进制
+ *
+ * @param  {[String]} data dataURL 的格式为 “data:image/png;base64,****”,逗号之前都是一些说明性的文字，我们只需要逗号之后的就行了
+ * @param  {[String]} mime [description]
+ * @return {[blob]}      [description]
+ */
+/* harmony default export */ __webpack_exports__["a"] = (function(data, mime) {
+	data = data.split(',')[1];
+	data = window.atob(data);
+	var ia = new Uint8Array(data.length);
+	for (var i = 0; i < data.length; i++) {
+		ia[i] = data.charCodeAt(i);
+	};
+	// canvas.toDataURL 返回的默认格式就是 image/png
+	return new Blob([ia], {
+		type: mime
+	});
+});;
+
+
+/***/ }),
+/* 55 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/**
+ * 点击波纹效果
+ *
+ * @param  {[event]} e        [description]
+ * @param  {[Object]} arg_opts [description]
+ * @return {[bollean]}          [description]
+ */
+/* harmony default export */ __webpack_exports__["a"] = (function(e, arg_opts) {
+	var opts = Object.assign({
+			ele: e.target, // 波纹作用元素
+			type: 'hit', // hit点击位置扩散　center中心点扩展
+			bgc: 'rgba(0, 0, 0, 0.15)' // 波纹颜色
+		}, arg_opts),
+		target = opts.ele;
+	if (target) {
+		var rect = target.getBoundingClientRect(),
+			ripple = target.querySelector('.e-ripple');
+		if (!ripple) {
+			ripple = document.createElement('span');
+			ripple.className = 'e-ripple';
+			ripple.style.height = ripple.style.width = Math.max(rect.width, rect.height) + 'px';
+			target.appendChild(ripple);
+		} else {
+			ripple.className = 'e-ripple';
+		}
+		switch (opts.type) {
+			case 'center':
+				ripple.style.top = (rect.height / 2 - ripple.offsetHeight / 2) + 'px';
+				ripple.style.left = (rect.width / 2 - ripple.offsetWidth / 2) + 'px';
+				break;
+			default:
+				ripple.style.top = (e.pageY - rect.top - ripple.offsetHeight / 2 - document.body.scrollTop) + 'px';
+				ripple.style.left = (e.pageX - rect.left - ripple.offsetWidth / 2 - document.body.scrollLeft) + 'px';
+		}
+		ripple.style.backgroundColor = opts.bgc;
+		ripple.className = 'e-ripple z-active';
+		return false;
+	}
+});;
+
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: _vm.value,
+          expression: "value"
+        }
+      ],
+      staticClass: "vue-image-crop-upload"
+    },
+    [
+      _c("div", { staticClass: "vicp-wrap" }, [
+        _c("div", { staticClass: "vicp-close", on: { click: _vm.off } }, [
+          _c("i", { staticClass: "vicp-icon4" })
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.step == 1,
+                expression: "step == 1"
+              }
+            ],
+            staticClass: "vicp-step1"
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "vicp-drop-area",
+                on: {
+                  dragleave: _vm.preventDefault,
+                  dragover: _vm.preventDefault,
+                  dragenter: _vm.preventDefault,
+                  click: _vm.handleClick,
+                  drop: _vm.handleChange
+                }
+              },
+              [
+                _c(
+                  "i",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.loading != 1,
+                        expression: "loading != 1"
+                      }
+                    ],
+                    staticClass: "vicp-icon1"
+                  },
+                  [
+                    _c("i", { staticClass: "vicp-icon1-arrow" }),
+                    _vm._v(" "),
+                    _c("i", { staticClass: "vicp-icon1-body" }),
+                    _vm._v(" "),
+                    _c("i", { staticClass: "vicp-icon1-bottom" })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.loading !== 1,
+                        expression: "loading !== 1"
+                      }
+                    ],
+                    staticClass: "vicp-hint"
+                  },
+                  [_vm._v(_vm._s(_vm.lang.hint))]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.isSupported,
+                        expression: "!isSupported"
+                      }
+                    ],
+                    staticClass: "vicp-no-supported-hint"
+                  },
+                  [_vm._v(_vm._s(_vm.lang.noSupported))]
+                ),
+                _vm._v(" "),
+                _vm.step == 1
+                  ? _c("input", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: false,
+                          expression: "false"
+                        }
+                      ],
+                      ref: "fileinput",
+                      attrs: { type: "file" },
+                      on: { change: _vm.handleChange }
+                    })
+                  : _vm._e()
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.hasError,
+                    expression: "hasError"
+                  }
+                ],
+                staticClass: "vicp-error"
+              },
+              [
+                _c("i", { staticClass: "vicp-icon2" }),
+                _vm._v(" " + _vm._s(_vm.errorMsg) + "\r\n\t\t\t")
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "vicp-operate" }, [
+              _c("a", { on: { click: _vm.off, mousedown: _vm.ripple } }, [
+                _vm._v(_vm._s(_vm.lang.btn.off))
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _vm.step == 2
+          ? _c("div", { staticClass: "vicp-step2" }, [
+              _c("div", { staticClass: "vicp-crop" }, [
+                _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: true,
+                        expression: "true"
+                      }
+                    ],
+                    staticClass: "vicp-crop-left"
+                  },
+                  [
+                    _c("div", { staticClass: "vicp-img-container" }, [
+                      _c("img", {
+                        ref: "img",
+                        staticClass: "vicp-img",
+                        style: _vm.sourceImgStyle,
+                        attrs: { src: _vm.sourceImgUrl, draggable: "false" },
+                        on: {
+                          drag: _vm.preventDefault,
+                          dragstart: _vm.preventDefault,
+                          dragend: _vm.preventDefault,
+                          dragleave: _vm.preventDefault,
+                          dragover: _vm.preventDefault,
+                          dragenter: _vm.preventDefault,
+                          drop: _vm.preventDefault,
+                          touchstart: _vm.imgStartMove,
+                          touchmove: _vm.imgMove,
+                          touchend: _vm.createImg,
+                          touchcancel: _vm.createImg,
+                          mousedown: _vm.imgStartMove,
+                          mousemove: _vm.imgMove,
+                          mouseup: _vm.createImg,
+                          mouseout: _vm.createImg
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", {
+                        staticClass: "vicp-img-shade vicp-img-shade-1",
+                        style: _vm.sourceImgShadeStyle
+                      }),
+                      _vm._v(" "),
+                      _c("div", {
+                        staticClass: "vicp-img-shade vicp-img-shade-2",
+                        style: _vm.sourceImgShadeStyle
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "vicp-range" }, [
+                      _c("input", {
+                        attrs: {
+                          type: "range",
+                          step: "1",
+                          min: "0",
+                          max: "100"
+                        },
+                        domProps: { value: _vm.scale.range },
+                        on: { input: _vm.zoomChange }
+                      }),
+                      _vm._v(" "),
+                      _c("i", {
+                        staticClass: "vicp-icon5",
+                        on: {
+                          mousedown: _vm.startZoomSub,
+                          mouseout: _vm.endZoomSub,
+                          mouseup: _vm.endZoomSub
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("i", {
+                        staticClass: "vicp-icon6",
+                        on: {
+                          mousedown: _vm.startZoomAdd,
+                          mouseout: _vm.endZoomAdd,
+                          mouseup: _vm.endZoomAdd
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    !_vm.noRotate
+                      ? _c("div", { staticClass: "vicp-rotate" }, [
+                          _c(
+                            "i",
+                            {
+                              on: {
+                                mousedown: _vm.startRotateLeft,
+                                mouseout: _vm.endRotate,
+                                mouseup: _vm.endRotate
+                              }
+                            },
+                            [_vm._v("↺")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "i",
+                            {
+                              on: {
+                                mousedown: _vm.startRotateRight,
+                                mouseout: _vm.endRotate,
+                                mouseup: _vm.endRotate
+                              }
+                            },
+                            [_vm._v("↻")]
+                          )
+                        ])
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: true,
+                        expression: "true"
+                      }
+                    ],
+                    staticClass: "vicp-crop-right"
+                  },
+                  [
+                    _c("div", { staticClass: "vicp-preview" }, [
+                      !_vm.noSquare
+                        ? _c("div", { staticClass: "vicp-preview-item" }, [
+                            _c("img", {
+                              style: _vm.previewStyle,
+                              attrs: { src: _vm.createImgUrl }
+                            }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v(_vm._s(_vm.lang.preview))])
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      !_vm.noCircle
+                        ? _c(
+                            "div",
+                            {
+                              staticClass:
+                                "vicp-preview-item vicp-preview-item-circle"
+                            },
+                            [
+                              _c("img", {
+                                style: _vm.previewStyle,
+                                attrs: { src: _vm.createImgUrl }
+                              }),
+                              _vm._v(" "),
+                              _c("span", [_vm._v(_vm._s(_vm.lang.preview))])
+                            ]
+                          )
+                        : _vm._e()
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "vicp-operate" }, [
+                _c(
+                  "a",
+                  {
+                    on: {
+                      click: function($event) {
+                        _vm.setStep(1)
+                      },
+                      mousedown: _vm.ripple
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.lang.btn.back))]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "vicp-operate-btn",
+                    on: { click: _vm.prepareUpload, mousedown: _vm.ripple }
+                  },
+                  [_vm._v(_vm._s(_vm.lang.btn.save))]
+                )
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.step == 3
+          ? _c("div", { staticClass: "vicp-step3" }, [
+              _c("div", { staticClass: "vicp-upload" }, [
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.loading === 1,
+                        expression: "loading === 1"
+                      }
+                    ],
+                    staticClass: "vicp-loading"
+                  },
+                  [_vm._v(_vm._s(_vm.lang.loading))]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "vicp-progress-wrap" }, [
+                  _c("span", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.loading === 1,
+                        expression: "loading === 1"
+                      }
+                    ],
+                    staticClass: "vicp-progress",
+                    style: _vm.progressStyle
+                  })
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.hasError,
+                        expression: "hasError"
+                      }
+                    ],
+                    staticClass: "vicp-error"
+                  },
+                  [
+                    _c("i", { staticClass: "vicp-icon2" }),
+                    _vm._v(" " + _vm._s(_vm.errorMsg) + "\r\n\t\t\t\t")
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.loading === 2,
+                        expression: "loading === 2"
+                      }
+                    ],
+                    staticClass: "vicp-success"
+                  },
+                  [
+                    _c("i", { staticClass: "vicp-icon3" }),
+                    _vm._v(" " + _vm._s(_vm.lang.success) + "\r\n\t\t\t\t")
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "vicp-operate" }, [
+                _c(
+                  "a",
+                  {
+                    on: {
+                      click: function($event) {
+                        _vm.setStep(2)
+                      },
+                      mousedown: _vm.ripple
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.lang.btn.back))]
+                ),
+                _vm._v(" "),
+                _c("a", { on: { click: _vm.off, mousedown: _vm.ripple } }, [
+                  _vm._v(_vm._s(_vm.lang.btn.close))
+                ])
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("canvas", {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: false,
+              expression: "false"
+            }
+          ],
+          ref: "canvas",
+          attrs: { width: _vm.width, height: _vm.height }
+        })
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-264afbb1", module.exports)
+  }
+}
+
+/***/ }),
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -46158,13 +47853,13 @@ if (false) {
 }
 
 /***/ }),
-/* 49 */
+/* 58 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert2__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert2_dist_sweetalert2_min_css__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert2_dist_sweetalert2_min_css__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert2_dist_sweetalert2_min_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_sweetalert2_dist_sweetalert2_min_css__);
 
 
@@ -46189,7 +47884,7 @@ VueSweetalert2.install = function(Vue) {
 
 
 /***/ }),
-/* 50 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -47874,13 +49569,13 @@ if (window.Sweetalert2) window.sweetAlert = window.swal = window.Sweetalert2;
 
 
 /***/ }),
-/* 51 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(52);
+var content = __webpack_require__(61);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -47888,7 +49583,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(53)(content, options);
+var update = __webpack_require__(62)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -47905,7 +49600,7 @@ if(false) {
 }
 
 /***/ }),
-/* 52 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -47919,7 +49614,7 @@ exports.push([module.i, "body.swal2-shown{overflow-y:hidden}body.swal2-iosfix{po
 
 
 /***/ }),
-/* 53 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -47965,7 +49660,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(54);
+var	fixUrls = __webpack_require__(63);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -48278,7 +49973,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 54 */
+/* 63 */
 /***/ (function(module, exports) {
 
 
@@ -48373,15 +50068,15 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 55 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(56)
+var __vue_script__ = __webpack_require__(65)
 /* template */
-var __vue_template__ = __webpack_require__(57)
+var __vue_template__ = __webpack_require__(66)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48421,7 +50116,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 56 */
+/* 65 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48450,7 +50145,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 57 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -48493,17 +50188,17 @@ if (false) {
 }
 
 /***/ }),
-/* 58 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(59)
+  __webpack_require__(68)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(61)
+var __vue_script__ = __webpack_require__(70)
 /* template */
 var __vue_template__ = __webpack_require__(80)
 /* template functional */
@@ -48545,13 +50240,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 59 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(60);
+var content = __webpack_require__(69);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -48571,7 +50266,7 @@ if(false) {
 }
 
 /***/ }),
-/* 60 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -48579,13 +50274,13 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n.register-vue-container\r\n{\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  min-height:100vh;\n}\n.register-form\r\n{\r\n  -webkit-box-flex:1;\r\n      -ms-flex:1;\r\n          flex:1;\r\n  border-radius: 4px;\r\n  background: #fff;\n}\n.register-logo\r\n{\r\n  -webkit-box-flex:1;\r\n      -ms-flex:1;\r\n          flex:1;\r\n  background: #fff;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-orient: vertical;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: column;\r\n          flex-direction: column;\r\n  padding:30px;\n}\n.register-logo h5\r\n{\r\n  font-size: 19px;\r\n  text-align: center;\n}\n.register-logo h4\r\n{\r\n  text-align: center;\n}\n.register-logo h4 p\r\n{\r\n  display: inline-block;\r\n  cursor: pointer;\n}\n.register-logo h1\r\n{\r\n  margin:0 auto;\r\n  max-width:300px;\n}\n.register-logo h1 embed\r\n{\r\n  width: 100%;\n}\n.choices\r\n{\r\n  padding:0px 80px;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\n}\n.choices a\r\n{\r\n  margin-right: 10px;\n}\n.login-container\r\n{\r\n  padding:30px 80px!important;\n}\n.register-form h6\r\n{\r\n  padding:10px 80px;\r\n  margin-top: 30px;\r\n  font-size: 25px;\n}\r\n", ""]);
+exports.push([module.i, "\n.register-vue-container\r\n{\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  min-height:100vh;\n}\n.register-form\r\n{\r\n  -webkit-box-flex:1;\r\n      -ms-flex:1;\r\n          flex:1;\r\n  border-radius: 4px;\n}\n.register-logo\r\n{\r\n  -webkit-box-flex:1;\r\n      -ms-flex:1;\r\n          flex:1;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-orient: vertical;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: column;\r\n          flex-direction: column;\r\n  padding:30px;\n}\n.register-logo h5\r\n{\r\n  font-size: 19px;\r\n  text-align: center;\n}\n.register-logo h4\r\n{\r\n  text-align: center;\n}\n.register-logo h4 p\r\n{\r\n  display: inline-block;\r\n  cursor: pointer;\n}\n.register-logo h1\r\n{\r\n  margin:0 auto;\r\n  max-width:300px;\n}\n.register-logo h1 embed\r\n{\r\n  width: 100%;\n}\n.choices\r\n{\r\n  padding:0px 80px;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\n}\n.choices a\r\n{\r\n  margin-right: 10px;\n}\n.login-container\r\n{\r\n  padding:30px 80px!important;\n}\n.register-form h6\r\n{\r\n  padding:10px 80px;\r\n  margin-top: 30px;\r\n  font-size: 25px;\n}\r\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 61 */
+/* 70 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48612,9 +50307,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-Vue.component('registercustomer', __webpack_require__(62));
-Vue.component('registercompany', __webpack_require__(13));
-Vue.component('Loginform', __webpack_require__(14));
+Vue.component('registercustomer', __webpack_require__(71));
+Vue.component('registercompany', __webpack_require__(14));
+Vue.component('Loginform', __webpack_require__(15));
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -48627,17 +50322,17 @@ Vue.component('Loginform', __webpack_require__(14));
 });
 
 /***/ }),
-/* 62 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(63)
+  __webpack_require__(72)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(65)
+var __vue_script__ = __webpack_require__(74)
 /* template */
 var __vue_template__ = __webpack_require__(75)
 /* template functional */
@@ -48679,13 +50374,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 63 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(64);
+var content = __webpack_require__(73);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -48705,7 +50400,7 @@ if(false) {
 }
 
 /***/ }),
-/* 64 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -48719,14 +50414,14 @@ exports.push([module.i, "\n.customer-reg-container\r\n{\r\n  padding:25px 80px 5
 
 
 /***/ }),
-/* 65 */
+/* 74 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_image_crop_upload__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_image_crop_upload__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_image_crop_upload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_image_crop_upload__);
 //
 //
@@ -48788,7 +50483,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       UserName: '',
       Password: '',
       PasswordConfirmation: '',
-      show: true,
+      show: false,
       params: {
         token: '123456798',
         name: 'avatar'
@@ -48866,1724 +50561,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   }
 
 });
-
-/***/ }),
-/* 66 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(67)
-}
-var normalizeComponent = __webpack_require__(2)
-/* script */
-var __vue_script__ = __webpack_require__(69)
-/* template */
-var __vue_template__ = __webpack_require__(74)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "node_modules\\vue-image-crop-upload\\upload-2.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-264afbb1", Component.options)
-  } else {
-    hotAPI.reload("data-v-264afbb1", Component.options)
-' + '  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 67 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(68);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(3)("7e9f6990", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../css-loader/index.js!../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-264afbb1\",\"scoped\":false,\"hasInlineConfig\":true}!../vue-loader/lib/selector.js?type=styles&index=0&bustCache!./upload-2.vue", function() {
-     var newContent = require("!!../css-loader/index.js!../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-264afbb1\",\"scoped\":false,\"hasInlineConfig\":true}!../vue-loader/lib/selector.js?type=styles&index=0&bustCache!./upload-2.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 68 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n@charset \"UTF-8\";\n@-webkit-keyframes vicp_progress {\n0% {\r\n    background-position-y: 0;\n}\n100% {\r\n    background-position-y: 40px;\n}\n}\n@keyframes vicp_progress {\n0% {\r\n    background-position-y: 0;\n}\n100% {\r\n    background-position-y: 40px;\n}\n}\n@-webkit-keyframes vicp {\n0% {\r\n    opacity: 0;\r\n    -webkit-transform: scale(0) translatey(-60px);\r\n            transform: scale(0) translatey(-60px);\n}\n100% {\r\n    opacity: 1;\r\n    -webkit-transform: scale(1) translatey(0);\r\n            transform: scale(1) translatey(0);\n}\n}\n@keyframes vicp {\n0% {\r\n    opacity: 0;\r\n    -webkit-transform: scale(0) translatey(-60px);\r\n            transform: scale(0) translatey(-60px);\n}\n100% {\r\n    opacity: 1;\r\n    -webkit-transform: scale(1) translatey(0);\r\n            transform: scale(1) translatey(0);\n}\n}\n.vue-image-crop-upload {\r\n  position: fixed;\r\n  display: block;\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  z-index: 10000;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: rgba(0, 0, 0, 0.65);\r\n  -webkit-tap-highlight-color: transparent;\r\n  -moz-tap-highlight-color: transparent;\n}\n.vue-image-crop-upload .vicp-wrap {\r\n    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);\r\n            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);\r\n    position: fixed;\r\n    display: block;\r\n    -webkit-box-sizing: border-box;\r\n            box-sizing: border-box;\r\n    z-index: 10000;\r\n    top: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n    margin: auto;\r\n    width: 600px;\r\n    height: 330px;\r\n    padding: 25px;\r\n    background-color: #fff;\r\n    border-radius: 2px;\r\n    -webkit-animation: vicp 0.12s ease-in;\r\n            animation: vicp 0.12s ease-in;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-close {\r\n      position: absolute;\r\n      right: -30px;\r\n      top: -30px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4 {\r\n        position: relative;\r\n        display: block;\r\n        width: 30px;\r\n        height: 30px;\r\n        cursor: pointer;\r\n        -webkit-transition: -webkit-transform 0.18s;\r\n        transition: -webkit-transform 0.18s;\r\n        transition: transform 0.18s;\r\n        transition: transform 0.18s, -webkit-transform 0.18s;\r\n        -webkit-transform: rotate(0);\r\n                transform: rotate(0);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4::after, .vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4::before {\r\n          -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);\r\n                  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);\r\n          content: '';\r\n          position: absolute;\r\n          top: 12px;\r\n          left: 4px;\r\n          width: 20px;\r\n          height: 3px;\r\n          -webkit-transform: rotate(45deg);\r\n                  transform: rotate(45deg);\r\n          background-color: #fff;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4::after {\r\n          -webkit-transform: rotate(-45deg);\r\n                  transform: rotate(-45deg);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4:hover {\r\n          -webkit-transform: rotate(90deg);\r\n                  transform: rotate(90deg);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area {\r\n      position: relative;\r\n      -webkit-box-sizing: border-box;\r\n              box-sizing: border-box;\r\n      padding: 35px;\r\n      height: 170px;\r\n      background-color: rgba(0, 0, 0, 0.03);\r\n      text-align: center;\r\n      border: 1px dashed rgba(0, 0, 0, 0.08);\r\n      overflow: hidden;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-icon1 {\r\n        display: block;\r\n        margin: 0 auto 6px;\r\n        width: 42px;\r\n        height: 42px;\r\n        overflow: hidden;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-icon1 .vicp-icon1-arrow {\r\n          display: block;\r\n          margin: 0 auto;\r\n          width: 0;\r\n          height: 0;\r\n          border-bottom: 14.7px solid rgba(0, 0, 0, 0.3);\r\n          border-left: 14.7px solid transparent;\r\n          border-right: 14.7px solid transparent;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-icon1 .vicp-icon1-body {\r\n          display: block;\r\n          width: 12.6px;\r\n          height: 14.7px;\r\n          margin: 0 auto;\r\n          background-color: rgba(0, 0, 0, 0.3);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-icon1 .vicp-icon1-bottom {\r\n          -webkit-box-sizing: border-box;\r\n                  box-sizing: border-box;\r\n          display: block;\r\n          height: 12.6px;\r\n          border: 6px solid rgba(0, 0, 0, 0.3);\r\n          border-top: none;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-hint {\r\n        display: block;\r\n        padding: 15px;\r\n        font-size: 14px;\r\n        color: #666;\r\n        line-height: 30px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-no-supported-hint {\r\n        display: block;\r\n        position: absolute;\r\n        top: 0;\r\n        left: 0;\r\n        padding: 30px;\r\n        width: 100%;\r\n        height: 60px;\r\n        line-height: 30px;\r\n        background-color: #eee;\r\n        text-align: center;\r\n        color: #666;\r\n        font-size: 14px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area:hover {\r\n        cursor: pointer;\r\n        border-color: rgba(0, 0, 0, 0.1);\r\n        background-color: rgba(0, 0, 0, 0.05);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop {\r\n      overflow: hidden;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left {\r\n        float: left;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container {\r\n          position: relative;\r\n          display: block;\r\n          width: 240px;\r\n          height: 180px;\r\n          background-color: #e5e5e0;\r\n          overflow: hidden;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container .vicp-img {\r\n            position: absolute;\r\n            display: block;\r\n            cursor: move;\r\n            -webkit-user-select: none;\r\n               -moz-user-select: none;\r\n                -ms-user-select: none;\r\n                    user-select: none;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container .vicp-img-shade {\r\n            -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);\r\n                    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);\r\n            position: absolute;\r\n            background-color: rgba(241, 242, 243, 0.8);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container .vicp-img-shade.vicp-img-shade-1 {\r\n              top: 0;\r\n              left: 0;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container .vicp-img-shade.vicp-img-shade-2 {\r\n              bottom: 0;\r\n              right: 0;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate {\r\n          position: relative;\r\n          width: 240px;\r\n          height: 18px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate i {\r\n            display: block;\r\n            width: 18px;\r\n            height: 18px;\r\n            border-radius: 100%;\r\n            line-height: 18px;\r\n            text-align: center;\r\n            font-size: 12px;\r\n            font-weight: bold;\r\n            background-color: rgba(0, 0, 0, 0.08);\r\n            color: #fff;\r\n            overflow: hidden;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate i:hover {\r\n              -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);\r\n                      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);\r\n              cursor: pointer;\r\n              background-color: rgba(0, 0, 0, 0.14);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate i:first-child {\r\n              float: left;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate i:last-child {\r\n              float: right;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range {\r\n          position: relative;\r\n          margin: 30px 0 10px 0;\r\n          width: 240px;\r\n          height: 18px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon5,\r\n          .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6 {\r\n            position: absolute;\r\n            top: 0;\r\n            width: 18px;\r\n            height: 18px;\r\n            border-radius: 100%;\r\n            background-color: rgba(0, 0, 0, 0.08);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon5:hover,\r\n            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6:hover {\r\n              -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);\r\n                      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);\r\n              cursor: pointer;\r\n              background-color: rgba(0, 0, 0, 0.14);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon5 {\r\n            left: 0;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon5::before {\r\n              position: absolute;\r\n              content: '';\r\n              display: block;\r\n              left: 3px;\r\n              top: 8px;\r\n              width: 12px;\r\n              height: 2px;\r\n              background-color: #fff;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6 {\r\n            right: 0;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6::before {\r\n              position: absolute;\r\n              content: '';\r\n              display: block;\r\n              left: 3px;\r\n              top: 8px;\r\n              width: 12px;\r\n              height: 2px;\r\n              background-color: #fff;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6::after {\r\n              position: absolute;\r\n              content: '';\r\n              display: block;\r\n              top: 3px;\r\n              left: 8px;\r\n              width: 2px;\r\n              height: 12px;\r\n              background-color: #fff;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range] {\r\n            display: block;\r\n            padding-top: 5px;\r\n            margin: 0 auto;\r\n            width: 180px;\r\n            height: 8px;\r\n            vertical-align: top;\r\n            background: transparent;\r\n            -webkit-appearance: none;\r\n               -moz-appearance: none;\r\n                    appearance: none;\r\n            cursor: pointer;\r\n            /* 滑块\r\n\t\t\t\t\t\t\t ---------------------------------------------------------------*/\r\n            /* 轨道\r\n\t\t\t\t\t\t\t ---------------------------------------------------------------*/\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:focus {\r\n              outline: none;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-webkit-slider-thumb {\r\n              -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);\r\n                      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);\r\n              -webkit-appearance: none;\r\n                      appearance: none;\r\n              margin-top: -3px;\r\n              width: 12px;\r\n              height: 12px;\r\n              background-color: #61c091;\r\n              border-radius: 100%;\r\n              border: none;\r\n              -webkit-transition: 0.2s;\r\n              transition: 0.2s;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-moz-range-thumb {\r\n              box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);\r\n              -moz-appearance: none;\r\n                   appearance: none;\r\n              width: 12px;\r\n              height: 12px;\r\n              background-color: #61c091;\r\n              border-radius: 100%;\r\n              border: none;\r\n              -webkit-transition: 0.2s;\r\n              transition: 0.2s;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-ms-thumb {\r\n              box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);\r\n              appearance: none;\r\n              width: 12px;\r\n              height: 12px;\r\n              background-color: #61c091;\r\n              border: none;\r\n              border-radius: 100%;\r\n              -webkit-transition: 0.2s;\r\n              transition: 0.2s;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:active::-moz-range-thumb {\r\n              box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);\r\n              width: 14px;\r\n              height: 14px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:active::-ms-thumb {\r\n              box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);\r\n              width: 14px;\r\n              height: 14px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:active::-webkit-slider-thumb {\r\n              -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);\r\n                      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);\r\n              margin-top: -4px;\r\n              width: 14px;\r\n              height: 14px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-webkit-slider-runnable-track {\r\n              -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);\r\n                      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);\r\n              width: 100%;\r\n              height: 6px;\r\n              cursor: pointer;\r\n              border-radius: 2px;\r\n              border: none;\r\n              background-color: rgba(68, 170, 119, 0.3);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-moz-range-track {\r\n              box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);\r\n              width: 100%;\r\n              height: 6px;\r\n              cursor: pointer;\r\n              border-radius: 2px;\r\n              border: none;\r\n              background-color: rgba(68, 170, 119, 0.3);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-ms-track {\r\n              box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);\r\n              width: 100%;\r\n              cursor: pointer;\r\n              background: transparent;\r\n              border-color: transparent;\r\n              color: transparent;\r\n              height: 6px;\r\n              border-radius: 2px;\r\n              border: none;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-ms-fill-lower {\r\n              background-color: rgba(68, 170, 119, 0.3);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-ms-fill-upper {\r\n              background-color: rgba(68, 170, 119, 0.15);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:focus::-webkit-slider-runnable-track {\r\n              background-color: rgba(68, 170, 119, 0.5);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:focus::-moz-range-track {\r\n              background-color: rgba(68, 170, 119, 0.5);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:focus::-ms-fill-lower {\r\n              background-color: rgba(68, 170, 119, 0.45);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:focus::-ms-fill-upper {\r\n              background-color: rgba(68, 170, 119, 0.25);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right {\r\n        float: right;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview {\r\n          height: 150px;\r\n          overflow: hidden;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item {\r\n            position: relative;\r\n            padding: 5px;\r\n            width: 100px;\r\n            height: 100px;\r\n            float: left;\r\n            margin-right: 16px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item span {\r\n              position: absolute;\r\n              bottom: -30px;\r\n              width: 100%;\r\n              font-size: 14px;\r\n              color: #bbb;\r\n              display: block;\r\n              text-align: center;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item img {\r\n              position: absolute;\r\n              display: block;\r\n              top: 0;\r\n              bottom: 0;\r\n              left: 0;\r\n              right: 0;\r\n              margin: auto;\r\n              padding: 3px;\r\n              background-color: #fff;\r\n              border: 1px solid rgba(0, 0, 0, 0.15);\r\n              overflow: hidden;\r\n              -webkit-user-select: none;\r\n                 -moz-user-select: none;\r\n                  -ms-user-select: none;\r\n                      user-select: none;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item.vicp-preview-item-circle {\r\n              margin-right: 0;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item.vicp-preview-item-circle img {\r\n                border-radius: 100%;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload {\r\n      position: relative;\r\n      -webkit-box-sizing: border-box;\r\n              box-sizing: border-box;\r\n      padding: 35px;\r\n      height: 170px;\r\n      background-color: rgba(0, 0, 0, 0.03);\r\n      text-align: center;\r\n      border: 1px dashed #ddd;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-loading {\r\n        display: block;\r\n        padding: 15px;\r\n        font-size: 16px;\r\n        color: #999;\r\n        line-height: 30px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-progress-wrap {\r\n        margin-top: 12px;\r\n        background-color: rgba(0, 0, 0, 0.08);\r\n        border-radius: 3px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-progress-wrap .vicp-progress {\r\n          position: relative;\r\n          display: block;\r\n          height: 5px;\r\n          border-radius: 3px;\r\n          background-color: #4a7;\r\n          -webkit-box-shadow: 0 2px 6px 0 rgba(68, 170, 119, 0.3);\r\n                  box-shadow: 0 2px 6px 0 rgba(68, 170, 119, 0.3);\r\n          -webkit-transition: width 0.15s linear;\r\n          transition: width 0.15s linear;\r\n          background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);\r\n          background-size: 40px 40px;\r\n          -webkit-animation: vicp_progress 0.5s linear infinite;\r\n                  animation: vicp_progress 0.5s linear infinite;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-progress-wrap .vicp-progress::after {\r\n            content: '';\r\n            position: absolute;\r\n            display: block;\r\n            top: -3px;\r\n            right: -3px;\r\n            width: 9px;\r\n            height: 9px;\r\n            border: 1px solid rgba(245, 246, 247, 0.7);\r\n            -webkit-box-shadow: 0 1px 4px 0 rgba(68, 170, 119, 0.7);\r\n                    box-shadow: 0 1px 4px 0 rgba(68, 170, 119, 0.7);\r\n            border-radius: 100%;\r\n            background-color: #4a7;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-error,\r\n      .vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-success {\r\n        height: 100px;\r\n        line-height: 100px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-operate {\r\n      position: absolute;\r\n      right: 20px;\r\n      bottom: 20px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-operate a {\r\n        position: relative;\r\n        float: left;\r\n        display: block;\r\n        margin-left: 10px;\r\n        width: 100px;\r\n        height: 36px;\r\n        line-height: 36px;\r\n        text-align: center;\r\n        cursor: pointer;\r\n        font-size: 14px;\r\n        color: #4a7;\r\n        border-radius: 2px;\r\n        overflow: hidden;\r\n        -webkit-user-select: none;\r\n           -moz-user-select: none;\r\n            -ms-user-select: none;\r\n                user-select: none;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-operate a:hover {\r\n          background-color: rgba(0, 0, 0, 0.03);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-error,\r\n    .vue-image-crop-upload .vicp-wrap .vicp-success {\r\n      display: block;\r\n      font-size: 14px;\r\n      line-height: 24px;\r\n      height: 24px;\r\n      color: #d10;\r\n      text-align: center;\r\n      vertical-align: top;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-success {\r\n      color: #4a7;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-icon3 {\r\n      position: relative;\r\n      display: inline-block;\r\n      width: 20px;\r\n      height: 20px;\r\n      top: 4px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-icon3::after {\r\n        position: absolute;\r\n        top: 3px;\r\n        left: 6px;\r\n        width: 6px;\r\n        height: 10px;\r\n        border-width: 0 2px 2px 0;\r\n        border-color: #4a7;\r\n        border-style: solid;\r\n        -webkit-transform: rotate(45deg);\r\n                transform: rotate(45deg);\r\n        content: '';\n}\n.vue-image-crop-upload .vicp-wrap .vicp-icon2 {\r\n      position: relative;\r\n      display: inline-block;\r\n      width: 20px;\r\n      height: 20px;\r\n      top: 4px;\n}\n.vue-image-crop-upload .vicp-wrap .vicp-icon2::after, .vue-image-crop-upload .vicp-wrap .vicp-icon2::before {\r\n        content: '';\r\n        position: absolute;\r\n        top: 9px;\r\n        left: 4px;\r\n        width: 13px;\r\n        height: 2px;\r\n        background-color: #d10;\r\n        -webkit-transform: rotate(45deg);\r\n                transform: rotate(45deg);\n}\n.vue-image-crop-upload .vicp-wrap .vicp-icon2::after {\r\n        -webkit-transform: rotate(-45deg);\r\n                transform: rotate(-45deg);\n}\n.e-ripple {\r\n  position: absolute;\r\n  border-radius: 100%;\r\n  background-color: rgba(0, 0, 0, 0.15);\r\n  background-clip: padding-box;\r\n  pointer-events: none;\r\n  -webkit-user-select: none;\r\n     -moz-user-select: none;\r\n      -ms-user-select: none;\r\n          user-select: none;\r\n  -webkit-transform: scale(0);\r\n          transform: scale(0);\r\n  opacity: 1;\n}\n.e-ripple.z-active {\r\n    opacity: 0;\r\n    -webkit-transform: scale(2);\r\n            transform: scale(2);\r\n    -webkit-transition: opacity 1.2s ease-out, -webkit-transform 0.6s ease-out;\r\n    transition: opacity 1.2s ease-out, -webkit-transform 0.6s ease-out;\r\n    transition: opacity 1.2s ease-out, transform 0.6s ease-out;\r\n    transition: opacity 1.2s ease-out, transform 0.6s ease-out, -webkit-transform 0.6s ease-out;\n}\r\n\r\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 69 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_language_js__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_mimes_js__ = __webpack_require__(71);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_data2blob_js__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_effectRipple_js__ = __webpack_require__(73);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	props: {
-		// 域，上传文件name，触发事件会带上（如果一个页面多个图片上传控件，可以做区分
-		field: {
-			type: String,
-			'default': 'avatar'
-		},
-		// 原名key，类似于id，触发事件会带上（如果一个页面多个图片上传控件，可以做区分
-		ki: {
-			'default': 0
-		},
-		// 显示该控件与否
-		value: {
-			'default': true
-		},
-		// 上传地址
-		url: {
-			type: String,
-			'default': ''
-		},
-		// 其他要上传文件附带的数据，对象格式
-		params: {
-			type: Object,
-			'default': null
-		},
-		//Add custom headers
-		headers: {
-			type: Object,
-			'default': null
-		},
-		// 剪裁图片的宽
-		width: {
-			type: Number,
-			default: 200
-		},
-		// 剪裁图片的高
-		height: {
-			type: Number,
-			default: 200
-		},
-		// 不显示旋转功能
-		noRotate: {
-			type: Boolean,
-			default: true
-		},
-		// 不预览圆形图片
-		noCircle: {
-			type: Boolean,
-			default: false
-		},
-		// 不预览方形图片
-		noSquare: {
-			type: Boolean,
-			default: false
-		},
-		// 单文件大小限制
-		maxSize: {
-			type: Number,
-			'default': 10240
-		},
-		// 语言类型
-		langType: {
-			type: String,
-			'default': 'zh'
-		},
-		// 语言包
-		langExt: {
-			type: Object,
-			'default': null
-		},
-		// 图片上传格式
-		imgFormat: {
-			type: String,
-			'default': 'png'
-		}
-	},
-	data: function data() {
-		var that = this,
-		    imgFormat = that.imgFormat,
-		    langType = that.langType,
-		    langExt = that.langExt,
-		    width = that.width,
-		    height = that.height,
-		    isSupported = true,
-		    allowImgFormat = ['jpg', 'png'],
-		    tempImgFormat = allowImgFormat.indexOf(imgFormat) === -1 ? 'jpg' : imgFormat,
-		    lang = __WEBPACK_IMPORTED_MODULE_0__utils_language_js__["a" /* default */][langType] ? __WEBPACK_IMPORTED_MODULE_0__utils_language_js__["a" /* default */][langType] : __WEBPACK_IMPORTED_MODULE_0__utils_language_js__["a" /* default */]['en'],
-		    mime = __WEBPACK_IMPORTED_MODULE_1__utils_mimes_js__["a" /* default */][tempImgFormat];
-		// 规范图片格式
-		that.imgFormat = tempImgFormat;
-
-		if (langExt) {
-			Object.assign(lang, langExt);
-		}
-		if (typeof FormData != 'function') {
-			isSupported = false;
-		}
-		return {
-			// 图片的mime
-			mime: mime,
-
-			// 语言包
-			lang: lang,
-
-			// 浏览器是否支持该控件
-			isSupported: isSupported,
-			// 浏览器是否支持触屏事件
-			isSupportTouch: document.hasOwnProperty("ontouchstart"),
-
-			// 步骤
-			step: 1, //1选择文件 2剪裁 3上传
-
-			// 上传状态及进度
-			loading: 0, //0未开始 1正在 2成功 3错误
-			progress: 0,
-
-			// 是否有错误及错误信息
-			hasError: false,
-			errorMsg: '',
-
-			// 需求图宽高比
-			ratio: width / height,
-
-			// 原图地址、生成图片地址
-			sourceImg: null,
-			sourceImgUrl: '',
-			createImgUrl: '',
-
-			// 原图片拖动事件初始值
-			sourceImgMouseDown: {
-				on: false,
-				mX: 0, //鼠标按下的坐标
-				mY: 0,
-				x: 0, //scale原图坐标
-				y: 0
-			},
-
-			// 生成图片预览的容器大小
-			previewContainer: {
-				width: 100,
-				height: 100
-			},
-
-			// 原图容器宽高
-			sourceImgContainer: { // sic
-				width: 240,
-				height: 184 // 如果生成图比例与此一致会出现bug，先改成特殊的格式吧，哈哈哈
-			},
-
-			// 原图展示属性
-			scale: {
-				zoomAddOn: false, //按钮缩放事件开启
-				zoomSubOn: false, //按钮缩放事件开启
-				range: 1, //最大100
-
-				rotateLeft: false, //按钮向左旋转事件开启
-				rotateRight: false, //按钮向右旋转事件开启
-				degree: 0, // 旋转度数
-
-				x: 0,
-				y: 0,
-				width: 0,
-				height: 0,
-				maxWidth: 0,
-				maxHeight: 0,
-				minWidth: 0, //最宽
-				minHeight: 0,
-				naturalWidth: 0, //原宽
-				naturalHeight: 0
-			}
-		};
-	},
-
-	computed: {
-		// 进度条样式
-		progressStyle: function progressStyle() {
-			var progress = this.progress;
-
-			return {
-				width: progress + '%'
-			};
-		},
-
-		// 原图样式
-		sourceImgStyle: function sourceImgStyle() {
-			var scale = this.scale,
-			    sourceImgMasking = this.sourceImgMasking,
-			    top = scale.y + sourceImgMasking.y + 'px',
-			    left = scale.x + sourceImgMasking.x + 'px';
-
-			return {
-				top: top,
-				left: left,
-				width: scale.width + 'px',
-				height: scale.height + 'px',
-				transform: 'rotate(' + scale.degree + 'deg)', // 旋转时 左侧原始图旋转样式
-				'-ms-transform': 'rotate(' + scale.degree + 'deg)', // 兼容IE9
-				'-moz-transform': 'rotate(' + scale.degree + 'deg)', // 兼容FireFox
-				'-webkit-transform': 'rotate(' + scale.degree + 'deg)', // 兼容Safari 和 chrome
-				'-o-transform': 'rotate(' + scale.degree + 'deg)' // 兼容 Opera
-			};
-		},
-
-		// 原图蒙版属性
-		sourceImgMasking: function sourceImgMasking() {
-			var width = this.width,
-			    height = this.height,
-			    ratio = this.ratio,
-			    sourceImgContainer = this.sourceImgContainer,
-			    sic = sourceImgContainer,
-			    sicRatio = sic.width / sic.height,
-			    x = 0,
-			    y = 0,
-			    w = sic.width,
-			    h = sic.height,
-			    scale = 1;
-
-			if (ratio < sicRatio) {
-				scale = sic.height / height;
-				w = sic.height * ratio;
-				x = (sic.width - w) / 2;
-			}
-			if (ratio > sicRatio) {
-				scale = sic.width / width;
-				h = sic.width / ratio;
-				y = (sic.height - h) / 2;
-			}
-			return {
-				scale: scale, // 蒙版相对需求宽高的缩放
-				x: x,
-				y: y,
-				width: w,
-				height: h
-			};
-		},
-
-		// 原图遮罩样式
-		sourceImgShadeStyle: function sourceImgShadeStyle() {
-			var sourceImgMasking = this.sourceImgMasking,
-			    sourceImgContainer = this.sourceImgContainer,
-			    sic = sourceImgContainer,
-			    sim = sourceImgMasking,
-			    w = sim.width == sic.width ? sim.width : (sic.width - sim.width) / 2,
-			    h = sim.height == sic.height ? sim.height : (sic.height - sim.height) / 2;
-
-			return {
-				width: w + 'px',
-				height: h + 'px'
-			};
-		},
-		previewStyle: function previewStyle() {
-			var width = this.width,
-			    height = this.height,
-			    ratio = this.ratio,
-			    previewContainer = this.previewContainer,
-			    pc = previewContainer,
-			    w = pc.width,
-			    h = pc.height,
-			    pcRatio = w / h;
-
-			if (ratio < pcRatio) {
-				w = pc.height * ratio;
-			}
-			if (ratio > pcRatio) {
-				h = pc.width / ratio;
-			}
-			return {
-				width: w + 'px',
-				height: h + 'px'
-			};
-		}
-	},
-	watch: {
-		value: function value(newValue) {
-			if (newValue && this.loading != 1) {
-				this.reset();
-			}
-		}
-	},
-	methods: {
-		// 点击波纹效果
-		ripple: function ripple(e) {
-			Object(__WEBPACK_IMPORTED_MODULE_3__utils_effectRipple_js__["a" /* default */])(e);
-		},
-
-		// 关闭控件
-		off: function off() {
-			var _this = this;
-
-			setTimeout(function () {
-				_this.$emit('input', false);
-				if (_this.step == 3 && _this.loading == 2) {
-					_this.setStep(1);
-				}
-			}, 200);
-		},
-
-		// 设置步骤
-		setStep: function setStep(no) {
-			var _this2 = this;
-
-			// 延时是为了显示动画效果呢，哈哈哈
-			setTimeout(function () {
-				_this2.step = no;
-			}, 200);
-		},
-
-
-		/* 图片选择区域函数绑定
-   ---------------------------------------------------------------*/
-		preventDefault: function preventDefault(e) {
-			e.preventDefault();
-			return false;
-		},
-		handleClick: function handleClick(e) {
-			if (this.loading !== 1) {
-				if (e.target !== this.$refs.fileinput) {
-					e.preventDefault();
-					if (document.activeElement !== this.$refs) {
-						this.$refs.fileinput.click();
-					}
-				}
-			}
-		},
-		handleChange: function handleChange(e) {
-			e.preventDefault();
-			if (this.loading !== 1) {
-				var files = e.target.files || e.dataTransfer.files;
-				this.reset();
-				if (this.checkFile(files[0])) {
-					this.setSourceImg(files[0]);
-				}
-			}
-		},
-
-		/* ---------------------------------------------------------------*/
-
-		// 检测选择的文件是否合适
-		checkFile: function checkFile(file) {
-			var that = this,
-			    lang = that.lang,
-			    maxSize = that.maxSize;
-			// 仅限图片
-			if (file.type.indexOf('image') === -1) {
-				that.hasError = true;
-				that.errorMsg = lang.error.onlyImg;
-				return false;
-			}
-
-			// 超出大小
-			if (file.size / 1024 > maxSize) {
-				that.hasError = true;
-				that.errorMsg = lang.error.outOfSize + maxSize + 'kb';
-				return false;
-			}
-			return true;
-		},
-
-		// 重置控件
-		reset: function reset() {
-			var that = this;
-			that.loading = 0;
-			that.hasError = false;
-			that.errorMsg = '';
-			that.progress = 0;
-		},
-
-		// 设置图片源
-		setSourceImg: function setSourceImg(file) {
-			var that = this,
-			    fr = new FileReader();
-			fr.onload = function (e) {
-				that.sourceImgUrl = fr.result;
-				that.startCrop();
-			};
-			fr.readAsDataURL(file);
-		},
-
-		// 剪裁前准备工作
-		startCrop: function startCrop() {
-			var that = this,
-			    width = that.width,
-			    height = that.height,
-			    ratio = that.ratio,
-			    scale = that.scale,
-			    sourceImgUrl = that.sourceImgUrl,
-			    sourceImgMasking = that.sourceImgMasking,
-			    lang = that.lang,
-			    sim = sourceImgMasking,
-			    img = new Image();
-
-			img.src = sourceImgUrl;
-			img.onload = function () {
-				var nWidth = img.naturalWidth,
-				    nHeight = img.naturalHeight,
-				    nRatio = nWidth / nHeight,
-				    w = sim.width,
-				    h = sim.height,
-				    x = 0,
-				    y = 0;
-				// 图片像素不达标
-				if (nWidth < width || nHeight < height) {
-					that.hasError = true;
-					that.errorMsg = lang.error.lowestPx + width + '*' + height;
-					return false;
-				}
-				if (ratio > nRatio) {
-					h = w / nRatio;
-					y = (sim.height - h) / 2;
-				}
-				if (ratio < nRatio) {
-					w = h * nRatio;
-					x = (sim.width - w) / 2;
-				}
-				scale.range = 0;
-				scale.x = x;
-				scale.y = y;
-				scale.width = w;
-				scale.height = h;
-				scale.degree = 0;
-				scale.minWidth = w;
-				scale.minHeight = h;
-				scale.maxWidth = nWidth * sim.scale;
-				scale.maxHeight = nHeight * sim.scale;
-				scale.naturalWidth = nWidth;
-				scale.naturalHeight = nHeight;
-				that.sourceImg = img;
-				that.createImg();
-				that.setStep(2);
-			};
-		},
-
-		// 鼠标按下图片准备移动
-		imgStartMove: function imgStartMove(e) {
-			e.preventDefault();
-			// 支持触摸事件，则鼠标事件无效
-			if (this.isSupportTouch && !e.targetTouches) {
-				return false;
-			}
-			var et = e.targetTouches ? e.targetTouches[0] : e,
-			    sourceImgMouseDown = this.sourceImgMouseDown,
-			    scale = this.scale,
-			    simd = sourceImgMouseDown;
-
-			simd.mX = et.screenX;
-			simd.mY = et.screenY;
-			simd.x = scale.x;
-			simd.y = scale.y;
-			simd.on = true;
-		},
-
-		// 鼠标按下状态下移动，图片移动
-		imgMove: function imgMove(e) {
-			e.preventDefault();
-			// 支持触摸事件，则鼠标事件无效
-			if (this.isSupportTouch && !e.targetTouches) {
-				return false;
-			}
-			var et = e.targetTouches ? e.targetTouches[0] : e,
-			    _sourceImgMouseDown = this.sourceImgMouseDown,
-			    on = _sourceImgMouseDown.on,
-			    mX = _sourceImgMouseDown.mX,
-			    mY = _sourceImgMouseDown.mY,
-			    x = _sourceImgMouseDown.x,
-			    y = _sourceImgMouseDown.y,
-			    scale = this.scale,
-			    sourceImgMasking = this.sourceImgMasking,
-			    sim = sourceImgMasking,
-			    nX = et.screenX,
-			    nY = et.screenY,
-			    dX = nX - mX,
-			    dY = nY - mY,
-			    rX = x + dX,
-			    rY = y + dY;
-
-			if (!on) return;
-			if (rX > 0) {
-				rX = 0;
-			}
-			if (rY > 0) {
-				rY = 0;
-			}
-			if (rX < sim.width - scale.width) {
-				rX = sim.width - scale.width;
-			}
-			if (rY < sim.height - scale.height) {
-				rY = sim.height - scale.height;
-			}
-			scale.x = rX;
-			scale.y = rY;
-		},
-
-		// 按钮按下开始向右旋转
-		startRotateRight: function startRotateRight(e) {
-			var that = this,
-			    scale = that.scale;
-
-			scale.rotateRight = true;
-			function rotate() {
-				if (scale.rotateRight) {
-					var degree = ++scale.degree;
-					that.createImg(degree);
-					setTimeout(function () {
-						rotate();
-					}, 60);
-				}
-			}
-			rotate();
-		},
-
-		// 按钮按下开始向右旋转
-		startRotateLeft: function startRotateLeft(e) {
-			var that = this,
-			    scale = that.scale;
-
-			scale.rotateLeft = true;
-			function rotate() {
-				if (scale.rotateLeft) {
-					var degree = --scale.degree;
-					that.createImg(degree);
-					setTimeout(function () {
-						rotate();
-					}, 60);
-				}
-			}
-			rotate();
-		},
-
-		// 停止旋转
-		endRotate: function endRotate() {
-			var scale = this.scale;
-
-			scale.rotateLeft = false;
-			scale.rotateRight = false;
-		},
-
-		// 按钮按下开始放大
-		startZoomAdd: function startZoomAdd(e) {
-			var that = this,
-			    scale = that.scale;
-
-			scale.zoomAddOn = true;
-
-			function zoom() {
-				if (scale.zoomAddOn) {
-					var range = scale.range >= 100 ? 100 : ++scale.range;
-					that.zoomImg(range);
-					setTimeout(function () {
-						zoom();
-					}, 60);
-				}
-			}
-			zoom();
-		},
-
-		// 按钮松开或移开取消放大
-		endZoomAdd: function endZoomAdd(e) {
-			this.scale.zoomAddOn = false;
-		},
-
-		// 按钮按下开始缩小
-		startZoomSub: function startZoomSub(e) {
-			var that = this,
-			    scale = that.scale;
-
-			scale.zoomSubOn = true;
-
-			function zoom() {
-				if (scale.zoomSubOn) {
-					var range = scale.range <= 0 ? 0 : --scale.range;
-					that.zoomImg(range);
-					setTimeout(function () {
-						zoom();
-					}, 60);
-				}
-			}
-			zoom();
-		},
-
-		// 按钮松开或移开取消缩小
-		endZoomSub: function endZoomSub(e) {
-			var scale = this.scale;
-
-			scale.zoomSubOn = false;
-		},
-		zoomChange: function zoomChange(e) {
-			this.zoomImg(e.target.value);
-		},
-
-		// 缩放原图
-		zoomImg: function zoomImg(newRange) {
-			var that = this,
-			    sourceImgMasking = this.sourceImgMasking,
-			    sourceImgMouseDown = this.sourceImgMouseDown,
-			    scale = this.scale,
-			    maxWidth = scale.maxWidth,
-			    maxHeight = scale.maxHeight,
-			    minWidth = scale.minWidth,
-			    minHeight = scale.minHeight,
-			    width = scale.width,
-			    height = scale.height,
-			    x = scale.x,
-			    y = scale.y,
-			    range = scale.range,
-			    sim = sourceImgMasking,
-			    sWidth = sim.width,
-			    sHeight = sim.height,
-			    nWidth = minWidth + (maxWidth - minWidth) * newRange / 100,
-			    nHeight = minHeight + (maxHeight - minHeight) * newRange / 100,
-			    nX = sWidth / 2 - nWidth / width * (sWidth / 2 - x),
-			    nY = sHeight / 2 - nHeight / height * (sHeight / 2 - y);
-
-			// 判断新坐标是否超过蒙版限制
-			if (nX > 0) {
-				nX = 0;
-			}
-			if (nY > 0) {
-				nY = 0;
-			}
-			if (nX < sWidth - nWidth) {
-				nX = sWidth - nWidth;
-			}
-			if (nY < sHeight - nHeight) {
-				nY = sHeight - nHeight;
-			}
-
-			// 赋值处理
-			scale.x = nX;
-			scale.y = nY;
-			scale.width = nWidth;
-			scale.height = nHeight;
-			scale.range = newRange;
-			setTimeout(function () {
-				if (scale.range == newRange) {
-					that.createImg();
-				}
-			}, 300);
-		},
-
-		// 生成需求图片
-		createImg: function createImg(e) {
-			var that = this,
-			    mime = that.mime,
-			    sourceImg = that.sourceImg,
-			    _that$scale = that.scale,
-			    x = _that$scale.x,
-			    y = _that$scale.y,
-			    width = _that$scale.width,
-			    height = _that$scale.height,
-			    degree = _that$scale.degree,
-			    scale = that.sourceImgMasking.scale,
-			    canvas = that.$refs.canvas,
-			    ctx = canvas.getContext('2d');
-
-			if (e) {
-				// 取消鼠标按下移动状态
-				that.sourceImgMouseDown.on = false;
-			}
-			canvas.width = that.width;
-			canvas.height = that.height;
-			ctx.clearRect(0, 0, that.width, that.height);
-
-			// 将透明区域设置为白色底边
-			ctx.fillStyle = "#fff";
-			ctx.fillRect(0, 0, that.width, that.height);
-
-			ctx.translate(that.width * 0.5, that.height * 0.5);
-			ctx.rotate(Math.PI * degree / 180);
-			ctx.translate(-that.width * 0.5, -that.height * 0.5);
-
-			ctx.drawImage(sourceImg, x / scale, y / scale, width / scale, height / scale);
-			that.createImgUrl = canvas.toDataURL(mime);
-		},
-		prepareUpload: function prepareUpload() {
-			var url = this.url,
-			    createImgUrl = this.createImgUrl,
-			    field = this.field,
-			    ki = this.ki;
-
-			this.$emit('crop-success', createImgUrl, field, ki);
-			if (typeof url == 'string' && url) {
-				this.upload();
-			} else {
-				this.off();
-			}
-		},
-
-		// 上传图片
-		upload: function upload() {
-			var that = this,
-			    lang = this.lang,
-			    imgFormat = this.imgFormat,
-			    mime = this.mime,
-			    url = this.url,
-			    params = this.params,
-			    headers = this.headers,
-			    field = this.field,
-			    ki = this.ki,
-			    createImgUrl = this.createImgUrl,
-			    fmData = new FormData();
-
-			fmData.append(field, Object(__WEBPACK_IMPORTED_MODULE_2__utils_data2blob_js__["a" /* default */])(createImgUrl, mime), field + '.' + imgFormat);
-
-			// 添加其他参数
-			if ((typeof params === 'undefined' ? 'undefined' : _typeof(params)) == 'object' && params) {
-				Object.keys(params).forEach(function (k) {
-					fmData.append(k, params[k]);
-				});
-			}
-
-			// 监听进度回调
-			var uploadProgress = function uploadProgress(event) {
-				if (event.lengthComputable) {
-					that.progress = 100 * Math.round(event.loaded) / event.total;
-				}
-			};
-
-			// 上传文件
-			that.reset();
-			that.loading = 1;
-			that.setStep(3);
-			new Promise(function (resolve, reject) {
-				var client = new XMLHttpRequest();
-				client.open('POST', url, true);
-				client.onreadystatechange = function () {
-					if (this.readyState !== 4) {
-						return;
-					}
-					if (this.status === 200 || this.status === 201) {
-						resolve(JSON.parse(this.responseText));
-					} else {
-						reject(this.status);
-					}
-				};
-				client.upload.addEventListener("progress", uploadProgress, false); //监听进度
-				// 设置header
-				if ((typeof headers === 'undefined' ? 'undefined' : _typeof(headers)) == 'object' && headers) {
-					Object.keys(headers).forEach(function (k) {
-						client.setRequestHeader(k, headers[k]);
-					});
-				}
-				client.send(fmData);
-			}).then(
-			// 上传成功
-			function (resData) {
-				if (that.value) {
-					that.loading = 2;
-					that.$emit('crop-upload-success', resData, field, ki);
-				}
-			},
-			// 上传失败
-			function (sts) {
-				if (that.value) {
-					that.loading = 3;
-					that.hasError = true;
-					that.errorMsg = lang.fail;
-					that.$emit('crop-upload-fail', sts, field, ki);
-				}
-			});
-		}
-	},
-	created: function created() {
-		var _this3 = this;
-
-		// 绑定按键esc隐藏此插件事件
-		document.addEventListener('keyup', function (e) {
-			if (_this3.value && (e.key == 'Escape' || e.keyCode == 27)) {
-				_this3.off();
-			}
-		});
-	}
-});
-
-/***/ }),
-/* 70 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = ({
-	zh: {
-		hint: '点击，或拖动图片至此处',
-		loading: '正在上传……',
-		noSupported: '浏览器不支持该功能，请使用IE10以上或其他现在浏览器！',
-		success: '上传成功',
-		fail: '图片上传失败',
-		preview: '头像预览',
-		btn: {
-			off: '取消',
-			close: '关闭',
-			back: '上一步',
-			save: '保存'
-		},
-		error: {
-			onlyImg: '仅限图片格式',
-			outOfSize: '单文件大小不能超过 ',
-			lowestPx: '图片最低像素为（宽*高）：'
-		}
-	},
-	en: {
-		hint: 'Click or drag the file here to upload',
-		loading: 'Uploading…',
-		noSupported: 'Browser is not supported, please use IE10+ or other browsers',
-		success: 'Upload success',
-		fail: 'Upload failed',
-		preview: 'Preview',
-		btn: {
-			off: 'Cancel',
-			close: 'Close',
-			back: 'Back',
-			save: 'Save'
-		},
-		error: {
-			onlyImg: 'Image only',
-			outOfSize: 'Image exceeds size limit: ',
-			lowestPx: 'Image\'s size is too low. Expected at least: '
-		}
-	},
-	ro: {
-		hint: 'Atinge sau trage fișierul aici',
-		loading: 'Se încarcă',
-		noSupported: 'Browser-ul tău nu suportă acest feature. Te rugăm încearcă cu alt browser.',
-		success: 'S-a încărcat cu succes',
-		fail: 'A apărut o problemă la încărcare',
-		preview: 'Previzualizează',
-
-		btn: {
-			off: 'Anulează',
-			close: 'Închide',
-			back: 'Înapoi',
-			save: 'Salvează'
-		},
-
-		error: {
-			onlyImg: 'Doar imagini',
-			outOfSize: 'Imaginea depășește limita de: ',
-			loewstPx: 'Imaginea este prea mică; Minim: '
-		}
-	},
-	ru: {
-		hint: 'Нажмите, или перетащите файл в это окно',
-		loading: 'Загружаю……',
-		noSupported: 'Ваш браузер не поддерживается, пожалуйста, используйте IE10 + или другие браузеры',
-		success: 'Загрузка выполнена успешно',
-		fail: 'Ошибка загрузки',
-		preview: 'Предпросмотр',
-		btn: {
-			off: 'Отменить',
-			close: 'Закрыть',
-			back: 'Назад',
-			save: 'Сохранить'
-		},
-		error: {
-			onlyImg: 'Только изображения',
-			outOfSize: 'Изображение превышает предельный размер: ',
-			lowestPx: 'Минимальный размер изображения: '
-		}
-	},
-	'pt-br': {
-		hint: 'Clique ou arraste o arquivo aqui para carregar',
-		loading: 'Carregando…',
-		noSupported: 'Browser não suportado, use o IE10+ ou outro browser',
-		success: 'Sucesso ao carregar imagem',
-		fail: 'Falha ao carregar imagem',
-		preview: 'Pré-visualizar',
-		btn: {
-			off: 'Cancelar',
-			close: 'Fechar',
-			back: 'Voltar',
-			save: 'Salvar'
-		},
-		error: {
-			onlyImg: 'Apenas imagens',
-			outOfSize: 'A imagem excede o limite de tamanho: ',
-			lowestPx: 'O tamanho da imagem é muito pequeno. Tamanho mínimo: '
-		}
-	},
-	fr: {
-		hint: 'Cliquez ou glissez le fichier ici.',
-		loading: 'Téléchargement…',
-		noSupported: 'Votre navigateur n\'est pas supporté. Utilisez IE10 + ou un autre navigateur s\'il vous plaît.',
-		success: 'Téléchargement réussit',
-		fail: 'Téléchargement echoué',
-		preview: 'Aperçu',
-		btn: {
-			off: 'Annuler',
-			close: 'Fermer',
-			back: 'Retour',
-			save: 'Enregistrer'
-		},
-		error: {
-			onlyImg: 'Image uniquement',
-			outOfSize: 'L\'image sélectionnée dépasse la taille maximum: ',
-			lowestPx: 'L\'image sélectionnée est trop petite. Dimensions attendues: '
-		}
-	},
-	nl: {
-		hint: 'Klik hier of sleep een afbeelding in dit vlak',
-		loading: 'Uploaden…',
-		noSupported: 'Je browser wordt helaas niet ondersteund. Gebruik IE10+ of een andere browser.',
-		success: 'Upload succesvol',
-		fail: 'Upload mislukt',
-		preview: 'Voorbeeld',
-		btn: {
-			off: 'Annuleren',
-			close: 'Sluiten',
-			back: 'Terug',
-			save: 'Opslaan'
-		},
-		error: {
-			onlyImg: 'Alleen afbeeldingen',
-			outOfSize: 'De afbeelding is groter dan: ',
-			lowestPx: 'De afbeelding is te klein! Minimale afmetingen: '
-		}
-	},
-	tr: {
-		hint: 'Tıkla veya yüklemek istediğini buraya sürükle',
-		loading: 'Yükleniyor…',
-		noSupported: 'Tarayıcı desteklenmiyor, lütfen IE10+ veya farklı tarayıcı kullanın',
-		success: 'Yükleme başarılı',
-		fail: 'Yüklemede hata oluştu',
-		preview: 'Önizle',
-		btn: {
-			off: 'İptal',
-			close: 'Kapat',
-			back: 'Geri',
-			save: 'Kaydet'
-		},
-		error: {
-			onlyImg: 'Sadece resim',
-			outOfSize: 'Resim yükleme limitini aşıyor: ',
-			lowestPx: 'Resmin boyutu çok küçük. En az olması gereken: '
-		}
-	},
-	'es-MX': {
-		hint:'Selecciona o arrastra una imagen',
-		loading:'Subiendo...',
-		noSupported:'Tu navegador no es soportado, porfavor usa IE10+ u otros navegadores mas recientes',
-		success:'Subido exitosamente',
-		fail:'Sucedió un error',
-		preview:'Vista previa',
-		btn:{
-			off:'Cancelar',
-			close:'Cerrar',
-			back:'Atras',
-			save:'Guardar'
-		},
-		error:{
-			onlyImg:'Unicamente imagenes',
-			outOfSize:'La imagen excede el tamaño maximo:',
-			lowestPx:'La imagen es demasiado pequeño. Se espera por lo menos:'
-		}
-	}
-});
-
-
-/***/ }),
-/* 71 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = ({
-    'jpg': 'image/jpeg',
-    'png': 'image/png',
-    'gif': 'image/gif',
-    'svg': 'image/svg+xml',
-    'psd': 'image/photoshop'
-});
-
-
-/***/ }),
-/* 72 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/**
- * database64文件格式转换为2进制
- *
- * @param  {[String]} data dataURL 的格式为 “data:image/png;base64,****”,逗号之前都是一些说明性的文字，我们只需要逗号之后的就行了
- * @param  {[String]} mime [description]
- * @return {[blob]}      [description]
- */
-/* harmony default export */ __webpack_exports__["a"] = (function(data, mime) {
-	data = data.split(',')[1];
-	data = window.atob(data);
-	var ia = new Uint8Array(data.length);
-	for (var i = 0; i < data.length; i++) {
-		ia[i] = data.charCodeAt(i);
-	};
-	// canvas.toDataURL 返回的默认格式就是 image/png
-	return new Blob([ia], {
-		type: mime
-	});
-});;
-
-
-/***/ }),
-/* 73 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/**
- * 点击波纹效果
- *
- * @param  {[event]} e        [description]
- * @param  {[Object]} arg_opts [description]
- * @return {[bollean]}          [description]
- */
-/* harmony default export */ __webpack_exports__["a"] = (function(e, arg_opts) {
-	var opts = Object.assign({
-			ele: e.target, // 波纹作用元素
-			type: 'hit', // hit点击位置扩散　center中心点扩展
-			bgc: 'rgba(0, 0, 0, 0.15)' // 波纹颜色
-		}, arg_opts),
-		target = opts.ele;
-	if (target) {
-		var rect = target.getBoundingClientRect(),
-			ripple = target.querySelector('.e-ripple');
-		if (!ripple) {
-			ripple = document.createElement('span');
-			ripple.className = 'e-ripple';
-			ripple.style.height = ripple.style.width = Math.max(rect.width, rect.height) + 'px';
-			target.appendChild(ripple);
-		} else {
-			ripple.className = 'e-ripple';
-		}
-		switch (opts.type) {
-			case 'center':
-				ripple.style.top = (rect.height / 2 - ripple.offsetHeight / 2) + 'px';
-				ripple.style.left = (rect.width / 2 - ripple.offsetWidth / 2) + 'px';
-				break;
-			default:
-				ripple.style.top = (e.pageY - rect.top - ripple.offsetHeight / 2 - document.body.scrollTop) + 'px';
-				ripple.style.left = (e.pageX - rect.left - ripple.offsetWidth / 2 - document.body.scrollLeft) + 'px';
-		}
-		ripple.style.backgroundColor = opts.bgc;
-		ripple.className = 'e-ripple z-active';
-		return false;
-	}
-});;
-
-
-/***/ }),
-/* 74 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      directives: [
-        {
-          name: "show",
-          rawName: "v-show",
-          value: _vm.value,
-          expression: "value"
-        }
-      ],
-      staticClass: "vue-image-crop-upload"
-    },
-    [
-      _c("div", { staticClass: "vicp-wrap" }, [
-        _c("div", { staticClass: "vicp-close", on: { click: _vm.off } }, [
-          _c("i", { staticClass: "vicp-icon4" })
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.step == 1,
-                expression: "step == 1"
-              }
-            ],
-            staticClass: "vicp-step1"
-          },
-          [
-            _c(
-              "div",
-              {
-                staticClass: "vicp-drop-area",
-                on: {
-                  dragleave: _vm.preventDefault,
-                  dragover: _vm.preventDefault,
-                  dragenter: _vm.preventDefault,
-                  click: _vm.handleClick,
-                  drop: _vm.handleChange
-                }
-              },
-              [
-                _c(
-                  "i",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.loading != 1,
-                        expression: "loading != 1"
-                      }
-                    ],
-                    staticClass: "vicp-icon1"
-                  },
-                  [
-                    _c("i", { staticClass: "vicp-icon1-arrow" }),
-                    _vm._v(" "),
-                    _c("i", { staticClass: "vicp-icon1-body" }),
-                    _vm._v(" "),
-                    _c("i", { staticClass: "vicp-icon1-bottom" })
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.loading !== 1,
-                        expression: "loading !== 1"
-                      }
-                    ],
-                    staticClass: "vicp-hint"
-                  },
-                  [_vm._v(_vm._s(_vm.lang.hint))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: !_vm.isSupported,
-                        expression: "!isSupported"
-                      }
-                    ],
-                    staticClass: "vicp-no-supported-hint"
-                  },
-                  [_vm._v(_vm._s(_vm.lang.noSupported))]
-                ),
-                _vm._v(" "),
-                _vm.step == 1
-                  ? _c("input", {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: false,
-                          expression: "false"
-                        }
-                      ],
-                      ref: "fileinput",
-                      attrs: { type: "file" },
-                      on: { change: _vm.handleChange }
-                    })
-                  : _vm._e()
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.hasError,
-                    expression: "hasError"
-                  }
-                ],
-                staticClass: "vicp-error"
-              },
-              [
-                _c("i", { staticClass: "vicp-icon2" }),
-                _vm._v(" " + _vm._s(_vm.errorMsg) + "\r\n\t\t\t")
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "vicp-operate" }, [
-              _c("a", { on: { click: _vm.off, mousedown: _vm.ripple } }, [
-                _vm._v(_vm._s(_vm.lang.btn.off))
-              ])
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _vm.step == 2
-          ? _c("div", { staticClass: "vicp-step2" }, [
-              _c("div", { staticClass: "vicp-crop" }, [
-                _c(
-                  "div",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: true,
-                        expression: "true"
-                      }
-                    ],
-                    staticClass: "vicp-crop-left"
-                  },
-                  [
-                    _c("div", { staticClass: "vicp-img-container" }, [
-                      _c("img", {
-                        ref: "img",
-                        staticClass: "vicp-img",
-                        style: _vm.sourceImgStyle,
-                        attrs: { src: _vm.sourceImgUrl, draggable: "false" },
-                        on: {
-                          drag: _vm.preventDefault,
-                          dragstart: _vm.preventDefault,
-                          dragend: _vm.preventDefault,
-                          dragleave: _vm.preventDefault,
-                          dragover: _vm.preventDefault,
-                          dragenter: _vm.preventDefault,
-                          drop: _vm.preventDefault,
-                          touchstart: _vm.imgStartMove,
-                          touchmove: _vm.imgMove,
-                          touchend: _vm.createImg,
-                          touchcancel: _vm.createImg,
-                          mousedown: _vm.imgStartMove,
-                          mousemove: _vm.imgMove,
-                          mouseup: _vm.createImg,
-                          mouseout: _vm.createImg
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("div", {
-                        staticClass: "vicp-img-shade vicp-img-shade-1",
-                        style: _vm.sourceImgShadeStyle
-                      }),
-                      _vm._v(" "),
-                      _c("div", {
-                        staticClass: "vicp-img-shade vicp-img-shade-2",
-                        style: _vm.sourceImgShadeStyle
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "vicp-range" }, [
-                      _c("input", {
-                        attrs: {
-                          type: "range",
-                          step: "1",
-                          min: "0",
-                          max: "100"
-                        },
-                        domProps: { value: _vm.scale.range },
-                        on: { input: _vm.zoomChange }
-                      }),
-                      _vm._v(" "),
-                      _c("i", {
-                        staticClass: "vicp-icon5",
-                        on: {
-                          mousedown: _vm.startZoomSub,
-                          mouseout: _vm.endZoomSub,
-                          mouseup: _vm.endZoomSub
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("i", {
-                        staticClass: "vicp-icon6",
-                        on: {
-                          mousedown: _vm.startZoomAdd,
-                          mouseout: _vm.endZoomAdd,
-                          mouseup: _vm.endZoomAdd
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    !_vm.noRotate
-                      ? _c("div", { staticClass: "vicp-rotate" }, [
-                          _c(
-                            "i",
-                            {
-                              on: {
-                                mousedown: _vm.startRotateLeft,
-                                mouseout: _vm.endRotate,
-                                mouseup: _vm.endRotate
-                              }
-                            },
-                            [_vm._v("↺")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "i",
-                            {
-                              on: {
-                                mousedown: _vm.startRotateRight,
-                                mouseout: _vm.endRotate,
-                                mouseup: _vm.endRotate
-                              }
-                            },
-                            [_vm._v("↻")]
-                          )
-                        ])
-                      : _vm._e()
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: true,
-                        expression: "true"
-                      }
-                    ],
-                    staticClass: "vicp-crop-right"
-                  },
-                  [
-                    _c("div", { staticClass: "vicp-preview" }, [
-                      !_vm.noSquare
-                        ? _c("div", { staticClass: "vicp-preview-item" }, [
-                            _c("img", {
-                              style: _vm.previewStyle,
-                              attrs: { src: _vm.createImgUrl }
-                            }),
-                            _vm._v(" "),
-                            _c("span", [_vm._v(_vm._s(_vm.lang.preview))])
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      !_vm.noCircle
-                        ? _c(
-                            "div",
-                            {
-                              staticClass:
-                                "vicp-preview-item vicp-preview-item-circle"
-                            },
-                            [
-                              _c("img", {
-                                style: _vm.previewStyle,
-                                attrs: { src: _vm.createImgUrl }
-                              }),
-                              _vm._v(" "),
-                              _c("span", [_vm._v(_vm._s(_vm.lang.preview))])
-                            ]
-                          )
-                        : _vm._e()
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "vicp-operate" }, [
-                _c(
-                  "a",
-                  {
-                    on: {
-                      click: function($event) {
-                        _vm.setStep(1)
-                      },
-                      mousedown: _vm.ripple
-                    }
-                  },
-                  [_vm._v(_vm._s(_vm.lang.btn.back))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "vicp-operate-btn",
-                    on: { click: _vm.prepareUpload, mousedown: _vm.ripple }
-                  },
-                  [_vm._v(_vm._s(_vm.lang.btn.save))]
-                )
-              ])
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.step == 3
-          ? _c("div", { staticClass: "vicp-step3" }, [
-              _c("div", { staticClass: "vicp-upload" }, [
-                _c(
-                  "span",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.loading === 1,
-                        expression: "loading === 1"
-                      }
-                    ],
-                    staticClass: "vicp-loading"
-                  },
-                  [_vm._v(_vm._s(_vm.lang.loading))]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "vicp-progress-wrap" }, [
-                  _c("span", {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.loading === 1,
-                        expression: "loading === 1"
-                      }
-                    ],
-                    staticClass: "vicp-progress",
-                    style: _vm.progressStyle
-                  })
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.hasError,
-                        expression: "hasError"
-                      }
-                    ],
-                    staticClass: "vicp-error"
-                  },
-                  [
-                    _c("i", { staticClass: "vicp-icon2" }),
-                    _vm._v(" " + _vm._s(_vm.errorMsg) + "\r\n\t\t\t\t")
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.loading === 2,
-                        expression: "loading === 2"
-                      }
-                    ],
-                    staticClass: "vicp-success"
-                  },
-                  [
-                    _c("i", { staticClass: "vicp-icon3" }),
-                    _vm._v(" " + _vm._s(_vm.lang.success) + "\r\n\t\t\t\t")
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "vicp-operate" }, [
-                _c(
-                  "a",
-                  {
-                    on: {
-                      click: function($event) {
-                        _vm.setStep(2)
-                      },
-                      mousedown: _vm.ripple
-                    }
-                  },
-                  [_vm._v(_vm._s(_vm.lang.btn.back))]
-                ),
-                _vm._v(" "),
-                _c("a", { on: { click: _vm.off, mousedown: _vm.ripple } }, [
-                  _vm._v(_vm._s(_vm.lang.btn.close))
-                ])
-              ])
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c("canvas", {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: false,
-              expression: "false"
-            }
-          ],
-          ref: "canvas",
-          attrs: { width: _vm.width, height: _vm.height }
-        })
-      ])
-    ]
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-264afbb1", module.exports)
-  }
-}
 
 /***/ }),
 /* 75 */
@@ -50838,7 +50815,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n.login-container\r\n{\r\n  height: 100vh;\r\n  width:600px;\r\n  padding:30px 100px;\r\n  margin: 0 auto;\r\n  background: #fff;\n}\n.login-btn-container\r\n{\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  margin-top: 30px;\r\n  -webkit-box-pack:justify;\r\n      -ms-flex-pack:justify;\r\n          justify-content:space-between;\n}\n.login-title-head\r\n{\r\n  margin-bottom: 100px;\n}\r\n", ""]);
+exports.push([module.i, "\n.login-container\r\n{\r\n  height: 100vh;\r\n  width:600px;\r\n  padding:30px 100px;\r\n  margin: 0 auto;\r\n  background: #f3f3f3;\n}\n.login-btn-container\r\n{\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  margin-top: 30px;\r\n  -webkit-box-pack:justify;\r\n      -ms-flex-pack:justify;\r\n          justify-content:space-between;\n}\n.login-title-head\r\n{\r\n  margin-bottom: 100px;\n}\r\n", ""]);
 
 // exports
 
@@ -50849,7 +50826,7 @@ exports.push([module.i, "\n.login-container\r\n{\r\n  height: 100vh;\r\n  width:
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 //
 //
@@ -50895,6 +50872,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.$swal(msg);
     },
     sendLogin: function sendLogin() {
+      this.loadingActive = true;
       var vm = this;
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/user-login', {
         username: this.username,
@@ -51020,7 +50998,7 @@ var render = function() {
           attrs: { type: "submit", name: "action" },
           on: {
             click: function($event) {
-              _vm.sendLogin(), (_vm.loadingActive = true)
+              _vm.sendLogin()
             }
           }
         },
@@ -51116,7 +51094,7 @@ var render = function() {
         _c(
           "p",
           {
-            staticClass: "withfont",
+            staticClass: "withfont blue-text",
             on: {
               click: function($event) {
                 _vm.customerform = false
@@ -51158,30 +51136,18 @@ if (false) {
 
 /***/ }),
 /* 81 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 82 */,
-/* 83 */,
-/* 84 */,
-/* 85 */,
-/* 86 */,
-/* 87 */,
-/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(89)
+  __webpack_require__(82)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(91)
+var __vue_script__ = __webpack_require__(84)
 /* template */
-var __vue_template__ = __webpack_require__(92)
+var __vue_template__ = __webpack_require__(85)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -51221,13 +51187,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 89 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(90);
+var content = __webpack_require__(83);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -51247,7 +51213,7 @@ if(false) {
 }
 
 /***/ }),
-/* 90 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -51255,17 +51221,21 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 91 */
+/* 84 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_image_crop_upload__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_image_crop_upload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_image_crop_upload__);
 //
 //
 //
@@ -51447,201 +51417,841 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      smallPic: true,
+      show: false,
+      params: {
+        token: '123456798',
+        name: 'avatar'
+      },
+      headers: {
+        smail: '*_~'
+      },
+      imgDataUrl: '',
+      AboutCompany: [],
+      FoodName: '',
+      FoodDescription: '',
+      AmountSmall: '',
+      AmountMedium: '',
+      AmountLarge: '',
+      GoodForSmall: '',
+      GoodForMedium: '',
+      GoodForLarge: '',
+      FoodImageActive: false
+    };
+  },
+
+  components: {
+    'my-upload': __WEBPACK_IMPORTED_MODULE_1_vue_image_crop_upload___default.a
+  },
+  created: function created() {
+    this.GetCompanyDetail();
   },
 
   props: ['company', 'user'],
-  methods: {}
+  methods: {
+    GetCompanyDetail: function GetCompanyDetail() {
+      var vm = this;
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/company-show-data/' + this.company.id).then(function (response) {
+        console.log(response);
+        vm.AboutCompany = response.data;
+      });
+    },
+    AddNewFood: function AddNewFood() {
+      var vm = this;
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/store-food', {
+        FoodImage: this.imgDataUrl,
+        name: this.FoodName,
+        description: this.FoodDescription,
+        AmountS: this.AmountSmall,
+        AmountM: this.AmountMedium,
+        AmountL: this.AmountLarge,
+        goodforS: this.GoodForSmall,
+        goodforM: this.GoodForMedium,
+        goodforL: this.GoodForLarge,
+        companyid: this.AboutCompany.id
+      }).then(function (response) {
+        console.log(response);
+        vm.$swal({
+          position: 'top-right',
+          type: 'success',
+          title: 'New product added',
+          showConfirmButton: true,
+          timer: 1500
+        });
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    toggleShow: function toggleShow() {
+      this.show = !this.show;
+    },
+    changeLogo: function changeLogo() {
+      var vm = this;
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.put('/company-profile-image/' + this.company.id, {
+        Logo: this.imgDataUrl
+      }).then(function (response) {
+        console.log(response);
+        vm.GetCompanyDetail();
+        vm.$swal({
+          position: 'top-right',
+          type: 'success',
+          title: 'Your Logo has been changed',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        vm.imgDataUrl = '';
+      });
+    },
+    changeCover: function changeCover() {
+      var vm = this;
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.put('/company-cover-image/' + this.company.id, {
+        Cover: this.imgDataUrl
+      }).then(function (response) {
+        vm.GetCompanyDetail();
+        vm.$swal({
+          position: 'top-right',
+          type: 'success',
+          title: 'Your Cover has been changed',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        vm.imgDataUrl = '';
+      });
+    },
+
+    /**
+     * crop success
+     *
+     * [param] imgDataUrl
+     * [param] field
+     */
+    cropSuccess: function cropSuccess(imgDataUrl, field) {
+      console.log('-------- crop success --------');
+      this.imgDataUrl = imgDataUrl;
+      if (this.smallPic == true && this.FoodImageActive == false) {
+        this.changeLogo();
+      } else if (this.smallPic == false && this.FoodImageActive == false) {
+        this.changeCover();
+      }
+    },
+
+    /**
+     * upload success
+     *
+     * [param] jsonData  server api return data, already json encode
+     * [param] field
+     */
+    cropUploadSuccess: function cropUploadSuccess(jsonData, field) {
+      console.log('-------- upload success --------');
+      console.log(jsonData);
+      console.log('field: ' + field);
+    },
+
+    /**
+     * upload fail
+     *
+     * [param] status    server api return error status, like 500
+     * [param] field
+     */
+    cropUploadFail: function cropUploadFail(status, field) {
+      console.log('-------- upload fail --------');
+      console.log(status);
+      console.log('field: ' + field);
+    }
+  }
 });
 
 /***/ }),
-/* 92 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "CompanyProfileContainer" }, [
-    _vm._m(0, false, false),
-    _vm._v(" "),
-    _vm._m(1, false, false),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "company-cover-hero",
-        staticStyle: {
-          "background-image":
-            "linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.4)),url('/DesignPic/food3.jpg')"
-        }
-      },
-      [
-        _c("div", { staticClass: "company-logo" }, [
-          _c("img", {
+  return _c(
+    "div",
+    { staticClass: "CompanyProfileContainer" },
+    [
+      _c(
+        "div",
+        { staticClass: "modal modal-fixed-footer", attrs: { id: "modal1" } },
+        [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("h5", [_vm._v("Add food menu")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "food-form-container" }, [
+              _c("div", { staticClass: "input-field col s6" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.FoodName,
+                      expression: "FoodName"
+                    }
+                  ],
+                  attrs: {
+                    id: "icon_prefix",
+                    type: "text",
+                    "data-length": "20"
+                  },
+                  domProps: { value: _vm.FoodName },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.FoodName = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "icon_prefix" } }, [_vm._v("Name")])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-field col s12" }, [
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.FoodDescription,
+                      expression: "FoodDescription"
+                    }
+                  ],
+                  staticClass: "materialize-textarea",
+                  attrs: { id: "textarea1", "data-length": "100" },
+                  domProps: { value: _vm.FoodDescription },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.FoodDescription = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "textarea1" } }, [
+                  _vm._v("Description")
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(0, false, false),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn",
+                  on: {
+                    click: [
+                      _vm.toggleShow,
+                      function($event) {
+                        _vm.FoodImageActive = true
+                      }
+                    ]
+                  }
+                },
+                [_vm._v("food image")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "input-field col s6" }, [
+                  _c("i", { staticClass: "material-icons prefix" }, [
+                    _vm._v("local_parking")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.AmountSmall,
+                        expression: "AmountSmall"
+                      }
+                    ],
+                    attrs: { id: "icon_prefix", type: "number" },
+                    domProps: { value: _vm.AmountSmall },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.AmountSmall = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "icon_prefix" } }, [
+                    _vm._v("Small size price")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-field col s6" }, [
+                  _c("i", { staticClass: "material-icons prefix" }, [
+                    _vm._v("drag_handle")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.GoodForSmall,
+                        expression: "GoodForSmall"
+                      }
+                    ],
+                    attrs: { id: "icon_prefix", type: "number" },
+                    domProps: { value: _vm.GoodForSmall },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.GoodForSmall = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "icon_prefix" } }, [
+                    _vm._v("People")
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "input-field col s6" }, [
+                  _c("i", { staticClass: "material-icons prefix" }, [
+                    _vm._v("local_parking")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.AmountMedium,
+                        expression: "AmountMedium"
+                      }
+                    ],
+                    attrs: { id: "icon_prefix", type: "number" },
+                    domProps: { value: _vm.AmountMedium },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.AmountMedium = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "icon_prefix" } }, [
+                    _vm._v("Medium size price")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-field col s6" }, [
+                  _c("i", { staticClass: "material-icons prefix" }, [
+                    _vm._v("drag_handle")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.GoodForMedium,
+                        expression: "GoodForMedium"
+                      }
+                    ],
+                    attrs: { id: "icon_prefix", type: "number" },
+                    domProps: { value: _vm.GoodForMedium },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.GoodForMedium = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "icon_prefix" } }, [
+                    _vm._v("People")
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "input-field col s6" }, [
+                  _c("i", { staticClass: "material-icons prefix" }, [
+                    _vm._v("local_parking")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.AmountLarge,
+                        expression: "AmountLarge"
+                      }
+                    ],
+                    attrs: { id: "icon_prefix", type: "number" },
+                    domProps: { value: _vm.AmountLarge },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.AmountLarge = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "icon_prefix" } }, [
+                    _vm._v("Large size price")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-field col s6" }, [
+                  _c("i", { staticClass: "material-icons prefix" }, [
+                    _vm._v("drag_handle")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.GoodForLarge,
+                        expression: "GoodForLarge"
+                      }
+                    ],
+                    attrs: { id: "icon_prefix", type: "number" },
+                    domProps: { value: _vm.GoodForLarge },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.GoodForLarge = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "icon_prefix" } }, [
+                    _vm._v("People")
+                  ])
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-footer" }, [
+            _c(
+              "a",
+              {
+                staticClass:
+                  "modal-action modal-close waves-effect waves-green btn-flat ",
+                attrs: { href: "#!" }
+              },
+              [_vm._v("Cancel")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass:
+                  "modal-action modal-close waves-effect waves-green btn-flat ",
+                attrs: { href: "#!" },
+                on: {
+                  click: function($event) {
+                    _vm.AddNewFood()
+                  }
+                }
+              },
+              [_vm._v("Save")]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _vm.AboutCompany.heroPicture != null
+        ? _c(
+            "div",
+            {
+              staticClass: "company-cover-hero",
+              style:
+                "background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(/storage/images/" +
+                _vm.AboutCompany.heroPicture +
+                ")"
+            },
+            [
+              _c("div", { attrs: { id: "company-logo" } }, [
+                _vm.AboutCompany.logo != null
+                  ? _c("img", {
+                      attrs: {
+                        src: "/storage/images/" + _vm.AboutCompany.logo,
+                        alt: "logo"
+                      }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.user != null && _vm.AboutCompany.user_id == _vm.user.id
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "edit-profile-btn",
+                        on: {
+                          click: [
+                            _vm.toggleShow,
+                            function($event) {
+                              _vm.smallPic = true
+                            }
+                          ]
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "material-icons" }, [
+                          _vm._v("camera_alt")
+                        ])
+                      ]
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("h2", { staticClass: "company-name" }, [
+                _vm._v(_vm._s(_vm.AboutCompany.name))
+              ]),
+              _vm._v(" "),
+              _vm.user != null && _vm.AboutCompany.user_id == _vm.user.id
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "company-cover-edit",
+                      on: {
+                        click: [
+                          function($event) {
+                            _vm.smallPic = false
+                          },
+                          _vm.toggleShow
+                        ]
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "material-icons" }, [
+                        _vm._v("camera_alt")
+                      ])
+                    ]
+                  )
+                : _vm._e()
+            ]
+          )
+        : _c("div", { staticClass: "company-cover-hero" }, [
+            _c("div", { attrs: { id: "company-logo" } }, [
+              _vm.AboutCompany.logo != null
+                ? _c("img", {
+                    attrs: {
+                      src: "/storage/images/" + _vm.AboutCompany.logo,
+                      alt: "logo"
+                    }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.user != null && _vm.AboutCompany.user_id == _vm.user.id
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "edit-profile-btn",
+                      on: {
+                        click: [
+                          _vm.toggleShow,
+                          function($event) {
+                            _vm.smallPic = true
+                          }
+                        ]
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "material-icons" }, [
+                        _vm._v("camera_alt")
+                      ])
+                    ]
+                  )
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("h2", { staticClass: "company-name" }, [
+              _vm._v(_vm._s(_vm.AboutCompany.name))
+            ]),
+            _vm._v(" "),
+            _vm.user != null && _vm.AboutCompany.user_id == _vm.user.id
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "company-cover-edit",
+                    on: {
+                      click: [
+                        function($event) {
+                          _vm.smallPic = false
+                        },
+                        _vm.toggleShow
+                      ]
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "material-icons" }, [
+                      _vm._v("camera_alt")
+                    ])
+                  ]
+                )
+              : _vm._e()
+          ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "about-company-data" }, [
+        _c("table", [
+          _vm._m(1, false, false),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td"),
+            _vm._v(" "),
+            _c("td", [_c("p", [_vm._v(_vm._s(_vm.AboutCompany.description))])]),
+            _vm._v(" "),
+            _c("td"),
+            _vm._v(" "),
+            _vm._m(2, false, false)
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div"),
+      _vm._v(" "),
+      _vm._m(3, false, false),
+      _vm._v(" "),
+      _vm.user != null && _vm.user.id == _vm.AboutCompany.user_id
+        ? _c("div", { staticClass: "fixed-action-btn" }, [
+            _vm._m(4, false, false)
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm._m(5, false, false),
+      _vm._v(" "),
+      _vm.smallPic == true || _vm.FoodImageActive == true
+        ? _c("my-upload", {
             attrs: {
-              src: "/storage/images/" + _vm.company[0].logo,
-              alt: "logo"
+              field: "img",
+              langType: "En",
+              width: 300,
+              height: 300,
+              params: _vm.params,
+              headers: _vm.headers,
+              "img-format": "png"
+            },
+            on: {
+              "crop-success": _vm.cropSuccess,
+              "crop-upload-success": _vm.cropUploadSuccess,
+              "crop-upload-fail": _vm.cropUploadFail
+            },
+            model: {
+              value: _vm.show,
+              callback: function($$v) {
+                _vm.show = $$v
+              },
+              expression: "show"
             }
           })
-        ]),
-        _vm._v(" "),
-        _c("h2", { staticClass: "company-name" }, [
-          _vm._v(_vm._s(_vm.company[0].name))
-        ])
-      ]
-    ),
-    _vm._v(" "),
-    _vm._m(2, false, false),
-    _vm._v(" "),
-    _vm._m(3, false, false)
-  ])
+        : _c("my-upload", {
+            attrs: {
+              field: "img",
+              langType: "En",
+              width: 400,
+              height: 400,
+              params: _vm.params,
+              headers: _vm.headers,
+              "img-format": "png"
+            },
+            on: {
+              "crop-success": _vm.cropSuccess,
+              "crop-upload-success": _vm.cropUploadSuccess,
+              "crop-upload-fail": _vm.cropUploadFail
+            },
+            model: {
+              value: _vm.show,
+              callback: function($$v) {
+                _vm.show = $$v
+              },
+              expression: "show"
+            }
+          })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "modal modal-fixed-footer", attrs: { id: "modal1" } },
-      [
-        _c("div", { staticClass: "modal-content" }, [
-          _c("h5", [_vm._v("Add food menu")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "food-form-container" }, [
-            _c("div", { staticClass: "input-field col s6" }, [
-              _c("input", {
-                attrs: { id: "icon_prefix", type: "text", "data-length": "20" }
-              }),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "icon_prefix" } }, [_vm._v("Name")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-field col s12" }, [
-              _c("textarea", {
-                staticClass: "materialize-textarea",
-                attrs: { id: "textarea1", "data-length": "100" }
-              }),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "textarea1" } }, [
-                _vm._v("Description")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-field col s12" }, [
-              _c("select", { attrs: { multiple: "" } }, [
-                _c(
-                  "option",
-                  { attrs: { value: "", disabled: "", selected: "" } },
-                  [_vm._v("Choose")]
-                ),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "1" } }, [_vm._v("Option 1")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "2" } }, [_vm._v("Option 2")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "3" } }, [_vm._v("Option 3")])
-              ]),
-              _vm._v(" "),
-              _c("label", [_vm._v("Category")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-field col s6" }, [
-              _c("input", { attrs: { id: "icon_prefix", type: "number" } }),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "icon_prefix" } }, [
-                _vm._v("Small size price")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-field col s6" }, [
-              _c("input", { attrs: { id: "icon_prefix", type: "number" } }),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "icon_prefix" } }, [
-                _vm._v("Medium size price")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-field col s6" }, [
-              _c("input", { attrs: { id: "icon_prefix", type: "number" } }),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "icon_prefix" } }, [
-                _vm._v("Large size price")
-              ])
-            ])
-          ])
+    return _c("div", { staticClass: "input-field col s12" }, [
+      _c("select", { attrs: { multiple: "" } }, [
+        _c("option", { attrs: { value: "", disabled: "", selected: "" } }, [
+          _vm._v("Choose")
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "modal-footer" }, [
-          _c(
-            "a",
-            {
-              staticClass:
-                "modal-action modal-close waves-effect waves-green btn-flat ",
-              attrs: { href: "#!" }
-            },
-            [_vm._v("Cancel")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass:
-                "modal-action modal-close waves-effect waves-green btn-flat ",
-              attrs: { href: "#!" }
-            },
-            [_vm._v("Save")]
-          )
-        ])
-      ]
-    )
+        _c("option", { attrs: { value: "1" } }, [_vm._v("Option 1")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "2" } }, [_vm._v("Option 2")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "3" } }, [_vm._v("Option 3")])
+      ]),
+      _vm._v(" "),
+      _c("label", [_vm._v("Category")])
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "admin-options" }, [
-      _c("div", { staticClass: "fixed-action-btn toolbar" }, [
-        _c("a", { staticClass: "btn-floating btn-large blue" }, [
-          _c("i", { staticClass: "large material-icons" }, [
-            _vm._v("mode_edit")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("ul", [
-          _c("li", { staticClass: "waves-effect waves-light" }, [
-            _c("a", { attrs: { href: "#modal1" } }, [
-              _c("i", { staticClass: "material-icons" }, [_vm._v("add")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "waves-effect waves-light" }, [
-            _c("a", { attrs: { href: "#!" } }, [
-              _c("i", { staticClass: "material-icons" }, [_vm._v("delete")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "waves-effect waves-light" }, [
-            _c("a", { attrs: { href: "#!" } }, [
-              _c("i", { staticClass: "material-icons" }, [
-                _vm._v("attach_money")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "waves-effect waves-light" }, [
-            _c("a", { attrs: { href: "#!" } }, [
-              _c("i", { staticClass: "material-icons" }, [
-                _vm._v("photo_size_select_actual")
-              ])
-            ])
-          ])
-        ])
-      ])
+    return _c("tr", [
+      _c("th"),
+      _vm._v(" "),
+      _c("th", [_vm._v("Why choose us?")]),
+      _vm._v(" "),
+      _c("th"),
+      _vm._v(" "),
+      _c("th", [_vm._v("Quick links")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("a", { attrs: { href: "#" } }, [_vm._v("www.facebook.com")]),
+      _vm._v(" | "),
+      _c("a", { attrs: { href: "#" } }, [_vm._v("www.twitter.com")]),
+      _vm._v(" | "),
+      _c("a", { attrs: { href: "#" } }, [_vm._v("www.youtube.com")])
     ])
   },
   function() {
@@ -51667,6 +52277,65 @@ var staticRenderFns = [
               "span",
               { staticClass: "card-title activator grey-text text-darken-4" },
               [
+                _vm._v("Food 1"),
+                _c("i", { staticClass: "material-icons right" }, [
+                  _vm._v("more_vert")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("p", { staticClass: "bold" }, [
+              _vm._v("\n             P 3,000.00\n           ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "menu-options" }, [
+              _c("a", { staticClass: "btn", attrs: { href: "#" } }, [
+                _c("i", { staticClass: "material-icons" }, [
+                  _vm._v("restaurant")
+                ]),
+                _vm._v(" Reserve")
+              ]),
+              _vm._v(" "),
+              _c("i", { staticClass: "material-icons fav-btn" }, [
+                _vm._v("favorite")
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-reveal" }, [
+            _c("span", { staticClass: "card-title grey-text text-darken-4" }, [
+              _c("i", { staticClass: "material-icons right" }, [
+                _vm._v("close")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "Here is some more information about this product that is only revealed once clicked on."
+              )
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "showcase-box" }, [
+        _c("div", { staticClass: "card" }, [
+          _c(
+            "div",
+            { staticClass: "card-image waves-effect waves-block waves-light" },
+            [
+              _c("img", {
+                staticClass: "activator",
+                attrs: { src: "/DesignPic/1.jpg" }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-content" }, [
+            _c(
+              "span",
+              { staticClass: "card-title activator grey-text text-darken-4" },
+              [
                 _vm._v("Card Title"),
                 _c("i", { staticClass: "material-icons right" }, [
                   _vm._v("more_vert")
@@ -51674,8 +52343,21 @@ var staticRenderFns = [
               ]
             ),
             _vm._v(" "),
-            _c("p", [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("This is a link")])
+            _c("p", { staticClass: "bold" }, [
+              _vm._v("\n             P 3,000.00\n           ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "menu-options" }, [
+              _c("a", { staticClass: "btn", attrs: { href: "#" } }, [
+                _c("i", { staticClass: "material-icons" }, [
+                  _vm._v("restaurant")
+                ]),
+                _vm._v(" Reserve")
+              ]),
+              _vm._v(" "),
+              _c("i", { staticClass: "material-icons fav-btn" }, [
+                _vm._v("favorite")
+              ])
             ])
           ]),
           _vm._v(" "),
@@ -51721,8 +52403,21 @@ var staticRenderFns = [
               ]
             ),
             _vm._v(" "),
-            _c("p", [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("This is a link")])
+            _c("p", { staticClass: "bold" }, [
+              _vm._v("\n             P 3,000.00\n           ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "menu-options" }, [
+              _c("a", { staticClass: "btn", attrs: { href: "#" } }, [
+                _c("i", { staticClass: "material-icons" }, [
+                  _vm._v("restaurant")
+                ]),
+                _vm._v(" Reserve")
+              ]),
+              _vm._v(" "),
+              _c("i", { staticClass: "material-icons fav-btn" }, [
+                _vm._v("favorite")
+              ])
             ])
           ]),
           _vm._v(" "),
@@ -51768,8 +52463,21 @@ var staticRenderFns = [
               ]
             ),
             _vm._v(" "),
-            _c("p", [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("This is a link")])
+            _c("p", { staticClass: "bold" }, [
+              _vm._v("\n             P 3,000.00\n           ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "menu-options" }, [
+              _c("a", { staticClass: "btn", attrs: { href: "#" } }, [
+                _c("i", { staticClass: "material-icons" }, [
+                  _vm._v("restaurant")
+                ]),
+                _vm._v(" Reserve")
+              ]),
+              _vm._v(" "),
+              _c("i", { staticClass: "material-icons fav-btn" }, [
+                _vm._v("favorite")
+              ])
             ])
           ]),
           _vm._v(" "),
@@ -51815,8 +52523,21 @@ var staticRenderFns = [
               ]
             ),
             _vm._v(" "),
-            _c("p", [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("This is a link")])
+            _c("p", { staticClass: "bold" }, [
+              _vm._v("\n             P 3,000.00\n           ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "menu-options" }, [
+              _c("a", { staticClass: "btn", attrs: { href: "#" } }, [
+                _c("i", { staticClass: "material-icons" }, [
+                  _vm._v("restaurant")
+                ]),
+                _vm._v(" Reserve")
+              ]),
+              _vm._v(" "),
+              _c("i", { staticClass: "material-icons  fav-btn" }, [
+                _vm._v("favorite")
+              ])
             ])
           ]),
           _vm._v(" "),
@@ -51862,55 +52583,21 @@ var staticRenderFns = [
               ]
             ),
             _vm._v(" "),
-            _c("p", [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("This is a link")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-reveal" }, [
-            _c("span", { staticClass: "card-title grey-text text-darken-4" }, [
-              _vm._v("Card Title"),
-              _c("i", { staticClass: "material-icons right" }, [
-                _vm._v("close")
-              ])
+            _c("p", { staticClass: "bold" }, [
+              _vm._v("\n             P 3,000.00\n           ")
             ]),
             _vm._v(" "),
-            _c("p", [
-              _vm._v(
-                "Here is some more information about this product that is only revealed once clicked on."
-              )
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "showcase-box" }, [
-        _c("div", { staticClass: "card" }, [
-          _c(
-            "div",
-            { staticClass: "card-image waves-effect waves-block waves-light" },
-            [
-              _c("img", {
-                staticClass: "activator",
-                attrs: { src: "/DesignPic/1.jpg" }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-content" }, [
-            _c(
-              "span",
-              { staticClass: "card-title activator grey-text text-darken-4" },
-              [
-                _vm._v("Card Title"),
-                _c("i", { staticClass: "material-icons right" }, [
-                  _vm._v("more_vert")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("p", [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("This is a link")])
+            _c("div", { staticClass: "menu-options" }, [
+              _c("a", { staticClass: "btn", attrs: { href: "#" } }, [
+                _c("i", { staticClass: "material-icons" }, [
+                  _vm._v("restaurant")
+                ]),
+                _vm._v(" Reserve")
+              ]),
+              _vm._v(" "),
+              _c("i", { staticClass: "material-icons fav-btn" }, [
+                _vm._v("favorite")
+              ])
             ])
           ]),
           _vm._v(" "),
@@ -51931,6 +52618,19 @@ var staticRenderFns = [
         ])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "btn-floating btn-large waves-effect waves-light red",
+        attrs: { href: "#modal1" }
+      },
+      [_c("i", { staticClass: "material-icons" }, [_vm._v("add")])]
+    )
   },
   function() {
     var _vm = this
@@ -51989,6 +52689,12 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-70e40203", module.exports)
   }
 }
+
+/***/ }),
+/* 86 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

@@ -15,7 +15,7 @@
   <div class="register-logo">
     <h1><embed src="/DesignPic/mylogo.svg"></h1>
     <h5>Give your business a website</h5>
-    <h4>It's for free! <p class="withfont" v-on:click="customerform=false">Join</p> now.</h4>
+    <h4>It's for free! <p class="withfont blue-text" v-on:click="customerform=false">Join</p> now.</h4>
   </div>
 </div>
 </template>
@@ -45,12 +45,10 @@
 {
   flex:1;
   border-radius: 4px;
-  background: #fff;
 }
 .register-logo
 {
   flex:1;
-  background: #fff;
   display: flex;
   flex-direction: column;
   padding:30px;

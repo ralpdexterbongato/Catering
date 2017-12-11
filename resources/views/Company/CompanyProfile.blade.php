@@ -1,7 +1,11 @@
 @extends('layouts.layout')
 @section('title')
-{{$companyData[0]->name}} company
+Company Profile
 @endsection
 @section('content')
-  <companyprofile :user="{{Auth::user()}}" :company="{{$companyData}}"></companyprofile>
+  @if (Auth::check())
+    <companyprofile :user="{{Auth::user()}}" :company="{{$CompanyData}}"></companyprofile>
+  @else
+    <companyprofile :company="{{$CompanyData}}"></companyprofile>
+  @endif
 @endsection

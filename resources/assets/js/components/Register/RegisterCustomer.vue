@@ -57,7 +57,7 @@ import myUpload from 'vue-image-crop-upload';
       UserName:'',
       Password:'',
       PasswordConfirmation:'',
-      show: true,
+      show: false,
             params: {
                 token: '123456798',
                 name: 'avatar'

@@ -17,6 +17,8 @@ class CreatePricesTable extends Migration
             $table->increments('id');
             $table->decimal('Amount');
             $table->char('Size');
+            $table->integer('food_id');
+            $table->integer('goodfor');
             $table->timestamps();
         });
     }
