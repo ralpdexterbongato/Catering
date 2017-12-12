@@ -51221,7 +51221,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -51236,56 +51236,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_image_crop_upload__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_image_crop_upload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_image_crop_upload__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -51553,7 +51503,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       GoodForSmall: '',
       GoodForMedium: '',
       GoodForLarge: '',
-      FoodImageActive: false
+      FoodImageActive: false,
+      CompanyProduct: [],
+      SelectedSize: [],
+      CompanySession: []
     };
   },
 
@@ -51562,10 +51515,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   created: function created() {
     this.GetCompanyDetail();
+    this.getCompanyProducts();
+    this.showAddedSession();
   },
 
   props: ['company', 'user'],
   methods: {
+    addToSessionList: function addToSessionList(FoodData, key) {
+      if (this.SelectedSize[key] == null) {
+        this.SelectedSize[key] = 0;
+      }
+      var vm = this;
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/mylist-session/' + this.company.id, {
+        FoodId: FoodData.id,
+        FoodName: FoodData.name,
+        Size: this.SelectedSize[key],
+        FoodImage: FoodData.image,
+        Price: FoodData.prices[this.SelectedSize[key]].Amount
+      }).then(function (response) {
+        console.log(response);
+        vm.showAddedSession();
+        vm.$swal({
+          position: 'top-right',
+          type: 'success',
+          title: '1 item added to your list',
+          showConfirmButton: true
+        });
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    showAddedSession: function showAddedSession() {
+      var vm = this;
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/mylist-session-show/' + this.company.id).then(function (response) {
+        console.log(response);
+        vm.CompanySession = response.data;
+      });
+    },
     GetCompanyDetail: function GetCompanyDetail() {
       var vm = this;
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/company-show-data/' + this.company.id).then(function (response) {
@@ -51588,13 +51574,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         companyid: this.AboutCompany.id
       }).then(function (response) {
         console.log(response);
+
         vm.$swal({
           position: 'top-right',
           type: 'success',
           title: 'New product added',
-          showConfirmButton: true,
-          timer: 1500
+          showConfirmButton: true
         });
+        vm.getCompanyProducts();
       }, function (error) {
         console.log(error);
       });
@@ -51613,8 +51600,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           position: 'top-right',
           type: 'success',
           title: 'Your Logo has been changed',
-          showConfirmButton: false,
-          timer: 1500
+          showConfirmButton: true
         });
         vm.imgDataUrl = '';
       });
@@ -51629,10 +51615,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           position: 'top-right',
           type: 'success',
           title: 'Your Cover has been changed',
-          showConfirmButton: false,
-          timer: 1500
+          showConfirmButton: true
+
         });
         vm.imgDataUrl = '';
+      });
+    },
+    getCompanyProducts: function getCompanyProducts() {
+      var vm = this;
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/show-company-products/' + this.company.id).then(function (response) {
+        console.log(response);
+        vm.CompanyProduct = response.data.data;
       });
     },
 
@@ -51692,7 +51685,72 @@ var render = function() {
     [
       _c(
         "div",
-        { staticClass: "modal modal-fixed-footer", attrs: { id: "modal1" } },
+        { staticClass: "modal modal-fixed-footer", attrs: { id: "listmodal" } },
+        [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("h4", [_vm._v("List of order")]),
+            _vm._v(" "),
+            _vm._m(0, false, false),
+            _vm._v(" "),
+            _c("div", { staticClass: "added-session-table" }, [
+              _c(
+                "table",
+                _vm._l(_vm.CompanySession, function(session) {
+                  return _c("tr", [
+                    _c("td", [
+                      _c("img", {
+                        attrs: { src: "/storage/images/" + session.foodImage }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(session.foodName))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(session.foodPrice))]),
+                    _vm._v(" "),
+                    _vm._m(1, true, false)
+                  ])
+                })
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-footer" }, [
+            _c("a", { staticClass: "total-session" }, [_vm._v("Total:$1000")]),
+            _vm._v(" "),
+            _vm.user != null
+              ? _c(
+                  "a",
+                  {
+                    staticClass:
+                      "modal-action modal-close waves-effect waves-light btn-flat blue-text",
+                    attrs: { href: "#!" }
+                  },
+                  [_vm._v("Send")]
+                )
+              : _c(
+                  "a",
+                  {
+                    staticClass:
+                      "modal-action modal-close waves-effect waves-light btn-flat blue-text",
+                    attrs: { href: "/register" }
+                  },
+                  [
+                    _c("i", { staticClass: "material-icons blue-text" }, [
+                      _vm._v("info")
+                    ]),
+                    _vm._v(" Login | Register")
+                  ]
+                )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal modal-fixed-footer",
+          attrs: { id: "addproductmodal" }
+        },
         [
           _c("div", { staticClass: "modal-content" }, [
             _c("h5", [_vm._v("Add food menu")]),
@@ -51755,12 +51813,12 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(0, false, false),
+              _vm._m(2, false, false),
               _vm._v(" "),
               _c(
                 "a",
                 {
-                  staticClass: "btn",
+                  staticClass: "btn food-image-finder",
                   on: {
                     click: [
                       _vm.toggleShow,
@@ -51772,6 +51830,10 @@ var render = function() {
                 },
                 [_vm._v("food image")]
               ),
+              _vm._v(" "),
+              _c("div", { staticClass: "preview" }, [
+                _c("img", { attrs: { src: _vm.imgDataUrl, alt: "preview" } })
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "input-field col s6" }, [
@@ -52130,7 +52192,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "about-company-data" }, [
         _c("table", [
-          _vm._m(1, false, false),
+          _vm._m(3, false, false),
           _vm._v(" "),
           _c("tr", [
             _c("td"),
@@ -52139,30 +52201,203 @@ var render = function() {
             _vm._v(" "),
             _c("td"),
             _vm._v(" "),
-            _vm._m(2, false, false)
+            _vm._m(4, false, false)
           ])
         ])
       ]),
       _vm._v(" "),
       _c("div"),
       _vm._v(" "),
-      _vm._m(3, false, false),
+      _c(
+        "div",
+        { staticClass: "menu-showcase" },
+        _vm._l(_vm.CompanyProduct, function(product, productKey) {
+          return _c("div", { staticClass: "showcase-box" }, [
+            _c("div", { staticClass: "card" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "card-image waves-effect waves-block waves-light"
+                },
+                [
+                  _c("img", {
+                    staticClass: "activator",
+                    attrs: { src: "/storage/images/" + product.image }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-content" }, [
+                _c(
+                  "span",
+                  {
+                    staticClass: "card-title activator grey-text text-darken-4"
+                  },
+                  [
+                    _vm._v(_vm._s(product.name)),
+                    _c("i", { staticClass: "material-icons right" }, [
+                      _vm._v("more_vert")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _vm.SelectedSize[productKey] == 0 ||
+                _vm.SelectedSize[productKey] == null
+                  ? _c("p", { staticClass: "bold" }, [
+                      _vm._v(
+                        "\n             P " +
+                          _vm._s(product.prices[0].Amount) +
+                          " Normal size\n           "
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.SelectedSize[productKey] == 1
+                  ? _c("p", { staticClass: "bold" }, [
+                      _vm._v(
+                        "\n             P " +
+                          _vm._s(product.prices[1].Amount) +
+                          " Medium size\n           "
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.SelectedSize[productKey] == 2
+                  ? _c("p", { staticClass: "bold" }, [
+                      _vm._v(
+                        "\n             P " +
+                          _vm._s(product.prices[2].Amount) +
+                          " Large size\n           "
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("div", { staticClass: "menu-options" }, [
+                  (_vm.user != null &&
+                    _vm.AboutCompany.user_id != _vm.user.id) ||
+                  _vm.user == null
+                    ? _c(
+                        "i",
+                        {
+                          staticClass: "material-icons add-btn",
+                          on: {
+                            click: function($event) {
+                              _vm.addToSessionList(product, productKey)
+                            }
+                          }
+                        },
+                        [_vm._v("add")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("i", { staticClass: "material-icons view-btn" }, [
+                    _vm._v("remove_red_eye")
+                  ]),
+                  _vm._v(" "),
+                  _c("i", { staticClass: "material-icons fav-btn" }, [
+                    _vm._v("favorite")
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-reveal" }, [
+                _vm._m(5, true, false),
+                _vm._v(" "),
+                _c("p", [_vm._v(_vm._s(product.description))]),
+                _vm._v(" "),
+                _c("div", { staticClass: "size-price" }, [
+                  _c(
+                    "table",
+                    [
+                      _vm._m(6, true, false),
+                      _vm._v(" "),
+                      _vm._l(product.prices, function(price, key) {
+                        return _c("tr", [
+                          _c("td", [_vm._v("P " + _vm._s(price.Amount))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(price.Size))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(price.goodfor))]),
+                          _vm._v(" "),
+                          (_vm.user != null &&
+                            _vm.AboutCompany.user_id != _vm.user.id) ||
+                          _vm.user == null
+                            ? _c("td", [
+                                _c("p", [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.SelectedSize[productKey],
+                                        expression: "SelectedSize[productKey]"
+                                      }
+                                    ],
+                                    attrs: {
+                                      type: "radio",
+                                      checked: "",
+                                      name: productKey,
+                                      id: product.id + "choose" + key
+                                    },
+                                    domProps: {
+                                      value: key,
+                                      checked: _vm._q(
+                                        _vm.SelectedSize[productKey],
+                                        key
+                                      )
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        _vm.$set(
+                                          _vm.SelectedSize,
+                                          productKey,
+                                          key
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "label",
+                                    {
+                                      attrs: {
+                                        for: product.id + "choose" + key
+                                      }
+                                    },
+                                    [_vm._v("choose")]
+                                  )
+                                ])
+                              ])
+                            : _vm._e()
+                        ])
+                      })
+                    ],
+                    2
+                  )
+                ])
+              ])
+            ])
+          ])
+        })
+      ),
       _vm._v(" "),
       _vm.user != null && _vm.user.id == _vm.AboutCompany.user_id
         ? _c("div", { staticClass: "fixed-action-btn" }, [
-            _vm._m(4, false, false)
+            _vm._m(7, false, false)
           ])
-        : _vm._e(),
+        : _c("div", { staticClass: "fixed-action-btn" }, [
+            _vm._m(8, false, false)
+          ]),
       _vm._v(" "),
-      _vm._m(5, false, false),
+      _vm._m(9, false, false),
       _vm._v(" "),
       _vm.smallPic == true || _vm.FoodImageActive == true
         ? _c("my-upload", {
             attrs: {
               field: "img",
               langType: "En",
-              width: 300,
-              height: 300,
+              width: 200,
+              height: 200,
               params: _vm.params,
               headers: _vm.headers,
               "img-format": "png"
@@ -52184,8 +52419,8 @@ var render = function() {
             attrs: {
               field: "img",
               langType: "En",
-              width: 400,
-              height: 400,
+              width: 900,
+              height: 900,
               params: _vm.params,
               headers: _vm.headers,
               "img-format": "png"
@@ -52208,6 +52443,25 @@ var render = function() {
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _c("i", { staticClass: "material-icons blue-text" }, [_vm._v("info")]),
+      _vm._v(
+        " Be sure to click send when done, so we can receive your reservation. Thank you"
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("i", { staticClass: "material-icons grey-text" }, [_vm._v("close")])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -52258,365 +52512,24 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "menu-showcase" }, [
-      _c("div", { staticClass: "showcase-box" }, [
-        _c("div", { staticClass: "card" }, [
-          _c(
-            "div",
-            { staticClass: "card-image waves-effect waves-block waves-light" },
-            [
-              _c("img", {
-                staticClass: "activator",
-                attrs: { src: "/DesignPic/1.jpg" }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-content" }, [
-            _c(
-              "span",
-              { staticClass: "card-title activator grey-text text-darken-4" },
-              [
-                _vm._v("Food 1"),
-                _c("i", { staticClass: "material-icons right" }, [
-                  _vm._v("more_vert")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("p", { staticClass: "bold" }, [
-              _vm._v("\n             P 3,000.00\n           ")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "menu-options" }, [
-              _c("a", { staticClass: "btn", attrs: { href: "#" } }, [
-                _c("i", { staticClass: "material-icons" }, [
-                  _vm._v("restaurant")
-                ]),
-                _vm._v(" Reserve")
-              ]),
-              _vm._v(" "),
-              _c("i", { staticClass: "material-icons fav-btn" }, [
-                _vm._v("favorite")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-reveal" }, [
-            _c("span", { staticClass: "card-title grey-text text-darken-4" }, [
-              _c("i", { staticClass: "material-icons right" }, [
-                _vm._v("close")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("p", [
-              _vm._v(
-                "Here is some more information about this product that is only revealed once clicked on."
-              )
-            ])
-          ])
-        ])
+    return _c("span", { staticClass: "card-title grey-text text-darken-4" }, [
+      _c("i", { staticClass: "material-icons right" }, [_vm._v("close")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("Price")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Size")]),
+      _vm._v(" "),
+      _c("th", [
+        _c("i", { staticClass: "material-icons" }, [_vm._v("people")])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "showcase-box" }, [
-        _c("div", { staticClass: "card" }, [
-          _c(
-            "div",
-            { staticClass: "card-image waves-effect waves-block waves-light" },
-            [
-              _c("img", {
-                staticClass: "activator",
-                attrs: { src: "/DesignPic/1.jpg" }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-content" }, [
-            _c(
-              "span",
-              { staticClass: "card-title activator grey-text text-darken-4" },
-              [
-                _vm._v("Card Title"),
-                _c("i", { staticClass: "material-icons right" }, [
-                  _vm._v("more_vert")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("p", { staticClass: "bold" }, [
-              _vm._v("\n             P 3,000.00\n           ")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "menu-options" }, [
-              _c("a", { staticClass: "btn", attrs: { href: "#" } }, [
-                _c("i", { staticClass: "material-icons" }, [
-                  _vm._v("restaurant")
-                ]),
-                _vm._v(" Reserve")
-              ]),
-              _vm._v(" "),
-              _c("i", { staticClass: "material-icons fav-btn" }, [
-                _vm._v("favorite")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-reveal" }, [
-            _c("span", { staticClass: "card-title grey-text text-darken-4" }, [
-              _vm._v("Card Title"),
-              _c("i", { staticClass: "material-icons right" }, [
-                _vm._v("close")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("p", [
-              _vm._v(
-                "Here is some more information about this product that is only revealed once clicked on."
-              )
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "showcase-box" }, [
-        _c("div", { staticClass: "card" }, [
-          _c(
-            "div",
-            { staticClass: "card-image waves-effect waves-block waves-light" },
-            [
-              _c("img", {
-                staticClass: "activator",
-                attrs: { src: "/DesignPic/1.jpg" }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-content" }, [
-            _c(
-              "span",
-              { staticClass: "card-title activator grey-text text-darken-4" },
-              [
-                _vm._v("Card Title"),
-                _c("i", { staticClass: "material-icons right" }, [
-                  _vm._v("more_vert")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("p", { staticClass: "bold" }, [
-              _vm._v("\n             P 3,000.00\n           ")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "menu-options" }, [
-              _c("a", { staticClass: "btn", attrs: { href: "#" } }, [
-                _c("i", { staticClass: "material-icons" }, [
-                  _vm._v("restaurant")
-                ]),
-                _vm._v(" Reserve")
-              ]),
-              _vm._v(" "),
-              _c("i", { staticClass: "material-icons fav-btn" }, [
-                _vm._v("favorite")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-reveal" }, [
-            _c("span", { staticClass: "card-title grey-text text-darken-4" }, [
-              _vm._v("Card Title"),
-              _c("i", { staticClass: "material-icons right" }, [
-                _vm._v("close")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("p", [
-              _vm._v(
-                "Here is some more information about this product that is only revealed once clicked on."
-              )
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "showcase-box" }, [
-        _c("div", { staticClass: "card" }, [
-          _c(
-            "div",
-            { staticClass: "card-image waves-effect waves-block waves-light" },
-            [
-              _c("img", {
-                staticClass: "activator",
-                attrs: { src: "/DesignPic/1.jpg" }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-content" }, [
-            _c(
-              "span",
-              { staticClass: "card-title activator grey-text text-darken-4" },
-              [
-                _vm._v("Card Title"),
-                _c("i", { staticClass: "material-icons right" }, [
-                  _vm._v("more_vert")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("p", { staticClass: "bold" }, [
-              _vm._v("\n             P 3,000.00\n           ")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "menu-options" }, [
-              _c("a", { staticClass: "btn", attrs: { href: "#" } }, [
-                _c("i", { staticClass: "material-icons" }, [
-                  _vm._v("restaurant")
-                ]),
-                _vm._v(" Reserve")
-              ]),
-              _vm._v(" "),
-              _c("i", { staticClass: "material-icons fav-btn" }, [
-                _vm._v("favorite")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-reveal" }, [
-            _c("span", { staticClass: "card-title grey-text text-darken-4" }, [
-              _vm._v("Card Title"),
-              _c("i", { staticClass: "material-icons right" }, [
-                _vm._v("close")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("p", [
-              _vm._v(
-                "Here is some more information about this product that is only revealed once clicked on."
-              )
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "showcase-box" }, [
-        _c("div", { staticClass: "card" }, [
-          _c(
-            "div",
-            { staticClass: "card-image waves-effect waves-block waves-light" },
-            [
-              _c("img", {
-                staticClass: "activator",
-                attrs: { src: "/DesignPic/1.jpg" }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-content" }, [
-            _c(
-              "span",
-              { staticClass: "card-title activator grey-text text-darken-4" },
-              [
-                _vm._v("Card Title"),
-                _c("i", { staticClass: "material-icons right" }, [
-                  _vm._v("more_vert")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("p", { staticClass: "bold" }, [
-              _vm._v("\n             P 3,000.00\n           ")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "menu-options" }, [
-              _c("a", { staticClass: "btn", attrs: { href: "#" } }, [
-                _c("i", { staticClass: "material-icons" }, [
-                  _vm._v("restaurant")
-                ]),
-                _vm._v(" Reserve")
-              ]),
-              _vm._v(" "),
-              _c("i", { staticClass: "material-icons  fav-btn" }, [
-                _vm._v("favorite")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-reveal" }, [
-            _c("span", { staticClass: "card-title grey-text text-darken-4" }, [
-              _vm._v("Card Title"),
-              _c("i", { staticClass: "material-icons right" }, [
-                _vm._v("close")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("p", [
-              _vm._v(
-                "Here is some more information about this product that is only revealed once clicked on."
-              )
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "showcase-box" }, [
-        _c("div", { staticClass: "card" }, [
-          _c(
-            "div",
-            { staticClass: "card-image waves-effect waves-block waves-light" },
-            [
-              _c("img", {
-                staticClass: "activator",
-                attrs: { src: "/DesignPic/1.jpg" }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-content" }, [
-            _c(
-              "span",
-              { staticClass: "card-title activator grey-text text-darken-4" },
-              [
-                _vm._v("Card Title"),
-                _c("i", { staticClass: "material-icons right" }, [
-                  _vm._v("more_vert")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("p", { staticClass: "bold" }, [
-              _vm._v("\n             P 3,000.00\n           ")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "menu-options" }, [
-              _c("a", { staticClass: "btn", attrs: { href: "#" } }, [
-                _c("i", { staticClass: "material-icons" }, [
-                  _vm._v("restaurant")
-                ]),
-                _vm._v(" Reserve")
-              ]),
-              _vm._v(" "),
-              _c("i", { staticClass: "material-icons fav-btn" }, [
-                _vm._v("favorite")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-reveal" }, [
-            _c("span", { staticClass: "card-title grey-text text-darken-4" }, [
-              _vm._v("Card Title"),
-              _c("i", { staticClass: "material-icons right" }, [
-                _vm._v("close")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("p", [
-              _vm._v(
-                "Here is some more information about this product that is only revealed once clicked on."
-              )
-            ])
-          ])
-        ])
-      ])
+      _c("th")
     ])
   },
   function() {
@@ -52627,9 +52540,26 @@ var staticRenderFns = [
       "a",
       {
         staticClass: "btn-floating btn-large waves-effect waves-light red",
-        attrs: { href: "#modal1" }
+        attrs: { href: "#addproductmodal" }
       },
       [_c("i", { staticClass: "material-icons" }, [_vm._v("add")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "btn-floating btn-large waves-effect waves-light red",
+        attrs: { href: "#listmodal" }
+      },
+      [
+        _c("i", { staticClass: "material-icons" }, [
+          _vm._v("format_list_numbered")
+        ])
+      ]
     )
   },
   function() {

@@ -7,4 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class price extends Model
 {
   protected $table='prices';
+
+  public function food()
+  {
+    return $this->belongsTo('App\Food');
+  }
 }

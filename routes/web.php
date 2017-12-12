@@ -32,3 +32,7 @@ Route::put('/company-profile-image/{companyid}','companyProfileController@update
 Route::put('/company-cover-image/{companyid}','companyCoverController@update');
 
 Route::post('/store-food','foodcontroller@store');
+Route::get('/show-company-products/{companyid}','foodcontroller@displaycompanyfood');
+
+Route::post('/mylist-session/{companyid}','OrderSessionController@store');
+Route::get('/mylist-session-show/{companyid}','OrderSessionController@show');

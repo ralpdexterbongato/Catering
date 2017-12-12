@@ -1,6 +1,27 @@
 <template lang="html">
   <div class="CompanyProfileContainer">
-      <div id="modal1" class="modal modal-fixed-footer">
+    <div id="listmodal" class="modal modal-fixed-footer">
+       <div class="modal-content">
+         <h4>List of order</h4>
+         <p><i class="material-icons blue-text">info</i> Be sure to click send when done, so we can receive your reservation. Thank you</p>
+         <div class="added-session-table">
+           <table>
+             <tr v-for="session in CompanySession">
+               <td><img :src="'/storage/images/'+session.foodImage"></td>
+               <td>{{session.foodName}}</td>
+               <td>{{session.foodPrice}}</td>
+               <td><i class="material-icons grey-text">close</i></td>
+             </tr>
+           </table>
+         </div>
+       </div>
+       <div class="modal-footer">
+         <a class="total-session">Total:$1000</a>
+         <a v-if="user!=null" href="#!" class="modal-action modal-close waves-effect waves-light btn-flat blue-text">Send</a>
+         <a v-else href="/register" class="modal-action modal-close waves-effect waves-light btn-flat blue-text"><i class="material-icons blue-text">info</i> Login | Register</a>
+       </div>
+     </div>
+      <div id="addproductmodal" class="modal modal-fixed-footer">
        <div class="modal-content">
          <h5>Add food menu</h5>
         <div class="food-form-container">
@@ -21,7 +42,10 @@
             </select>
             <label>Category</label>
           </div>
-          <a class="btn" @click="toggleShow" v-on:click="FoodImageActive=true">food image</a>
+          <a class="btn food-image-finder" @click="toggleShow" v-on:click="FoodImageActive=true">food image</a>
+          <div class="preview">
+            <img :src="imgDataUrl" alt="preview">
+          </div>
           <div class="row">
             <div class="input-field col s6">
               <i class="material-icons prefix">local_parking</i>
@@ -110,135 +134,61 @@
     <div>
     </div>
     <div class="menu-showcase">
-      <div class="showcase-box">
+      <div class="showcase-box" v-for="(product,productKey) in CompanyProduct">
         <div class="card">
            <div class="card-image waves-effect waves-block waves-light">
-             <img class="activator" src="/DesignPic/1.jpg">
+             <img class="activator" :src="'/storage/images/'+product.image">
            </div>
            <div class="card-content">
-             <span class="card-title activator grey-text text-darken-4">Food 1<i class="material-icons right">more_vert</i></span>
-             <p class="bold">
-               P 3,000.00
+             <span class="card-title activator grey-text text-darken-4">{{product.name}}<i class="material-icons right">more_vert</i></span>
+             <p class="bold" v-if="SelectedSize[productKey]==0 || SelectedSize[productKey]==null ">
+               P {{product.prices[0].Amount}} Normal size
+             </p>
+             <p class="bold" v-if="SelectedSize[productKey]==1">
+               P {{product.prices[1].Amount}} Medium size
+             </p>
+             <p class="bold" v-if="SelectedSize[productKey]==2">
+               P {{product.prices[2].Amount}} Large size
              </p>
              <div class="menu-options">
-               <a href="#" class="btn"><i class="material-icons">restaurant</i> Reserve</a>
+               <i class="material-icons add-btn" v-if="(((user!=null) && (AboutCompany.user_id!=user.id))||(user==null))" v-on:click="addToSessionList(product,productKey)">add</i>
+               <i class="material-icons view-btn">remove_red_eye</i>
                <i class="material-icons fav-btn">favorite</i>
              </div>
            </div>
            <div class="card-reveal">
              <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
-             <p>Here is some more information about this product that is only revealed once clicked on.</p>
-           </div>
-         </div>
-      </div>
-      <div class="showcase-box">
-        <div class="card">
-           <div class="card-image waves-effect waves-block waves-light">
-             <img class="activator" src="/DesignPic/1.jpg">
-           </div>
-           <div class="card-content">
-             <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-             <p class="bold">
-               P 3,000.00
-             </p>
-             <div class="menu-options">
-               <a href="#" class="btn"><i class="material-icons">restaurant</i> Reserve</a>
-               <i class="material-icons fav-btn">favorite</i>
+             <p>{{product.description}}</p>
+             <div class="size-price">
+               <table>
+                 <tr>
+                   <th>Price</th>
+                   <th>Size</th>
+                   <th><i class="material-icons">people</i></th>
+                   <th></th>
+                 </tr>
+                 <tr v-for="(price,key) in product.prices">
+                   <td>P {{price.Amount}}</td>
+                   <td>{{price.Size}}</td>
+                   <td>{{price.goodfor}}</td>
+                   <td v-if="(((user!=null) && (AboutCompany.user_id!=user.id))||(user==null)) ">
+                     <p>
+                      <input type="radio" v-model="SelectedSize[productKey]" checked :value="key"   :name="productKey" :id="product.id+'choose'+key" />
+                      <label :for="product.id+'choose'+key">choose</label>
+                    </p>
+                   </td>
+                 </tr>
+               </table>
              </div>
-           </div>
-           <div class="card-reveal">
-             <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-             <p>Here is some more information about this product that is only revealed once clicked on.</p>
-           </div>
-         </div>
-      </div>
-      <div class="showcase-box">
-        <div class="card">
-           <div class="card-image waves-effect waves-block waves-light">
-             <img class="activator" src="/DesignPic/1.jpg">
-           </div>
-           <div class="card-content">
-             <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-             <p class="bold">
-               P 3,000.00
-             </p>
-             <div class="menu-options">
-               <a href="#" class="btn"><i class="material-icons">restaurant</i> Reserve</a>
-               <i class="material-icons fav-btn">favorite</i>
-             </div>
-           </div>
-           <div class="card-reveal">
-             <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-             <p>Here is some more information about this product that is only revealed once clicked on.</p>
-           </div>
-         </div>
-      </div>
-      <div class="showcase-box">
-        <div class="card">
-           <div class="card-image waves-effect waves-block waves-light">
-             <img class="activator" src="/DesignPic/1.jpg">
-           </div>
-           <div class="card-content">
-             <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-             <p class="bold">
-               P 3,000.00
-             </p>
-             <div class="menu-options">
-               <a href="#" class="btn"><i class="material-icons">restaurant</i> Reserve</a>
-               <i class="material-icons fav-btn">favorite</i>
-             </div>
-           </div>
-           <div class="card-reveal">
-             <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-             <p>Here is some more information about this product that is only revealed once clicked on.</p>
-           </div>
-         </div>
-      </div>
-      <div class="showcase-box">
-        <div class="card">
-           <div class="card-image waves-effect waves-block waves-light">
-             <img class="activator" src="/DesignPic/1.jpg">
-           </div>
-           <div class="card-content">
-             <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-             <p class="bold">
-               P 3,000.00
-             </p>
-             <div class="menu-options">
-               <a href="#" class="btn"><i class="material-icons">restaurant</i> Reserve</a>
-               <i class="material-icons  fav-btn">favorite</i>
-             </div>
-           </div>
-           <div class="card-reveal">
-             <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-             <p>Here is some more information about this product that is only revealed once clicked on.</p>
-           </div>
-         </div>
-      </div>
-      <div class="showcase-box">
-        <div class="card">
-           <div class="card-image waves-effect waves-block waves-light">
-             <img class="activator" src="/DesignPic/1.jpg">
-           </div>
-           <div class="card-content">
-             <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-             <p class="bold">
-               P 3,000.00
-             </p>
-             <div class="menu-options">
-               <a href="#" class="btn"><i class="material-icons">restaurant</i> Reserve</a>
-               <i class="material-icons fav-btn">favorite</i>
-             </div>
-           </div>
-           <div class="card-reveal">
-             <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-             <p>Here is some more information about this product that is only revealed once clicked on.</p>
            </div>
          </div>
       </div>
     </div>
     <div class="fixed-action-btn" v-if="((user!=null)&&(user.id==AboutCompany.user_id))">
-       <a href="#modal1" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+       <a href="#addproductmodal" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+    </div>
+    <div class="fixed-action-btn" v-else>
+      <a href="#listmodal" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">format_list_numbered</i></a>
     </div>
     <div class="bottom-company-details">
       <div class="left-bottom-company">
@@ -269,8 +219,8 @@
         @crop-upload-fail="cropUploadFail"
         v-model="show"
         langType="En"
-        :width="300"
-        :height="300"
+        :width="200"
+        :height="200"
         :params="params"
         :headers="headers"
         img-format="png">
@@ -281,8 +231,8 @@
           @crop-upload-fail="cropUploadFail"
           v-model="show"
           langType="En"
-          :width="400"
-          :height="400"
+          :width="900"
+          :height="900"
           :params="params"
           :headers="headers"
           img-format="png">
@@ -315,7 +265,10 @@ import myUpload from 'vue-image-crop-upload';
          GoodForSmall:'',
          GoodForMedium:'',
          GoodForLarge:'',
-         FoodImageActive:false
+         FoodImageActive:false,
+         CompanyProduct:[],
+         SelectedSize:[],
+         CompanySession:[]
       }
     },
     components: {
@@ -324,9 +277,48 @@ import myUpload from 'vue-image-crop-upload';
     created()
     {
       this.GetCompanyDetail();
+      this.getCompanyProducts();
+      this.showAddedSession();
     },
     props: ['company','user'],
     methods: {
+      addToSessionList(FoodData,key)
+      {
+        if (this.SelectedSize[key]==null)
+        {
+          this.SelectedSize[key]=0;
+        }
+        var vm=this;
+        axios.post('/mylist-session/'+this.company.id,{
+          FoodId:FoodData.id,
+          FoodName:FoodData.name,
+          Size:this.SelectedSize[key],
+          FoodImage:FoodData.image,
+          Price:FoodData.prices[this.SelectedSize[key]].Amount,
+        }).then(function(response)
+        {
+          console.log(response);
+          vm.showAddedSession();
+          vm.$swal({
+              position: 'top-right',
+              type: 'success',
+              title: '1 item added to your list',
+              showConfirmButton:true
+            });
+        },function(error)
+        {
+          console.log(error);
+        });
+      },
+      showAddedSession()
+      {
+        var vm=this;
+        axios.get('/mylist-session-show/'+this.company.id).then(function(response)
+        {
+          console.log(response);
+          vm.CompanySession=response.data;
+        })
+      },
       GetCompanyDetail()
       {
         var vm=this;
@@ -353,13 +345,14 @@ import myUpload from 'vue-image-crop-upload';
         }).then(function(response)
         {
           console.log(response);
+
           vm.$swal({
               position: 'top-right',
               type: 'success',
               title: 'New product added',
-              showConfirmButton: true,
-              timer: 1500
+              showConfirmButton:true
             });
+          vm.getCompanyProducts();
         },function(error)
         {
           console.log(error);
@@ -382,8 +375,7 @@ import myUpload from 'vue-image-crop-upload';
                     position: 'top-right',
                     type: 'success',
                     title: 'Your Logo has been changed',
-                    showConfirmButton: false,
-                    timer: 1500
+                    showConfirmButton: true
                   });
                   vm.imgDataUrl='';
               });
@@ -401,10 +393,19 @@ import myUpload from 'vue-image-crop-upload';
                     position: 'top-right',
                     type: 'success',
                     title: 'Your Cover has been changed',
-                    showConfirmButton: false,
-                    timer: 1500
+                    showConfirmButton: true
+
                   });
                   vm.imgDataUrl='';
+              });
+            },
+            getCompanyProducts()
+            {
+              var vm=this;
+              axios.get(`/show-company-products/`+this.company.id).then(function(response)
+              {
+                console.log(response);
+                vm.CompanyProduct=response.data.data;
               });
             },
             /**

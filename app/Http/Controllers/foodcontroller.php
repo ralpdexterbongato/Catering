@@ -37,4 +37,8 @@ class foodcontroller extends Controller
       }
       return ['success'=>'success'];
     }
+    public function displaycompanyfood($companyId)
+    {
+      return food::orderBy('id','DESC')->where('company_id', $companyId)->with('prices')->paginate(6);
+    }
 }
