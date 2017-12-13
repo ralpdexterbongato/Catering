@@ -6,19 +6,23 @@
          <p><i class="material-icons blue-text">info</i> Be sure to click send when done, so we can receive your reservation. Thank you</p>
          <div class="added-session-table">
            <table>
-             <tr v-for="session in CompanySession">
+             <tr v-for="(session,loopkey) in CompanySession">
                <td><img :src="'/storage/images/'+session.foodImage"></td>
                <td>{{session.foodName}}</td>
-               <td>{{session.foodPrice}}</td>
-               <td><i class="material-icons grey-text">close</i></td>
+               <td>P {{session.foodPrice}}</td>
+               <td>{{session.Qty}} <span v-if="session.Qty==1">pc.</span><span v-else>pcs.</span></td>
+               <td v-on:click="RemoveFromList(session.foodId)"><i class="material-icons grey-text">close</i></td>
              </tr>
            </table>
          </div>
        </div>
        <div class="modal-footer">
-         <a class="total-session">Total:$1000</a>
+         <a class="total-session">Total:P {{ListTotal}}</a>
          <a v-if="user!=null" href="#!" class="modal-action modal-close waves-effect waves-light btn-flat blue-text">Send</a>
-         <a v-else href="/register" class="modal-action modal-close waves-effect waves-light btn-flat blue-text"><i class="material-icons blue-text">info</i> Login | Register</a>
+        <span>
+          <a href="#" id="login-opener-2" class="modal-action modal-close waves-effect waves-light btn-flat blue-text">Login</a>
+          <a href="/register" class="modal-action modal-close waves-effect waves-light btn-flat blue-text">Register</a>
+        </span>
        </div>
      </div>
       <div id="addproductmodal" class="modal modal-fixed-footer">
@@ -151,9 +155,14 @@
                P {{product.prices[2].Amount}} Large size
              </p>
              <div class="menu-options">
-               <i class="material-icons add-btn" v-if="(((user!=null) && (AboutCompany.user_id!=user.id))||(user==null))" v-on:click="addToSessionList(product,productKey)">add</i>
-               <i class="material-icons view-btn">remove_red_eye</i>
-               <i class="material-icons fav-btn">favorite</i>
+               <div class="quantity-input">
+                 <input type="number" min="1" v-model="QtyWant[productKey]" placeholder="1" v-if="(((user!=null) && (AboutCompany.user_id!=user.id))||(user==null))">
+               </div>
+               <div class="menu-option-btn">
+                 <i class="material-icons add-btn" v-if="(((user!=null) && (AboutCompany.user_id!=user.id))||(user==null))" v-on:click="addToSessionList(product,productKey)">add</i>
+                 <i class="material-icons view-btn">remove_red_eye</i>
+                 <i class="material-icons fav-btn">favorite</i>
+               </div>
              </div>
            </div>
            <div class="card-reveal">
@@ -219,8 +228,8 @@
         @crop-upload-fail="cropUploadFail"
         v-model="show"
         langType="En"
-        :width="200"
-        :height="200"
+        :width="300"
+        :height="300"
         :params="params"
         :headers="headers"
         img-format="png">
@@ -268,7 +277,9 @@ import myUpload from 'vue-image-crop-upload';
          FoodImageActive:false,
          CompanyProduct:[],
          SelectedSize:[],
-         CompanySession:[]
+         CompanySession:[],
+         QtyWant:[],
+         ListTotal:'0',
       }
     },
     components: {
@@ -288,6 +299,10 @@ import myUpload from 'vue-image-crop-upload';
         {
           this.SelectedSize[key]=0;
         }
+        if (this.QtyWant[key]==null)
+        {
+          this.QtyWant[key]=1;
+        }
         var vm=this;
         axios.post('/mylist-session/'+this.company.id,{
           FoodId:FoodData.id,
@@ -295,6 +310,7 @@ import myUpload from 'vue-image-crop-upload';
           Size:this.SelectedSize[key],
           FoodImage:FoodData.image,
           Price:FoodData.prices[this.SelectedSize[key]].Amount,
+          Qty:this.QtyWant[key]
         }).then(function(response)
         {
           console.log(response);
@@ -316,7 +332,8 @@ import myUpload from 'vue-image-crop-upload';
         axios.get('/mylist-session-show/'+this.company.id).then(function(response)
         {
           console.log(response);
-          vm.CompanySession=response.data;
+          vm.CompanySession=response.data.foodsaved;
+          vm.ListTotal = response.data.total;
         })
       },
       GetCompanyDetail()
@@ -358,6 +375,21 @@ import myUpload from 'vue-image-crop-upload';
           console.log(error);
         });
       },
+      RemoveFromList(foodid)
+      {
+        var vm=this;
+        axios.delete(`/mylist-session-delete/`+this.company.id+`/`+foodid).then(function(response)
+        {
+          console.log(response);
+          vm.showAddedSession();
+          vm.$swal({
+              position: 'top-right',
+              type: 'success',
+              title: '1 item removed from your list',
+              showConfirmButton:true
+            });
+        });
+      },
       toggleShow() {
                 this.show = !this.show;
             },
@@ -377,7 +409,7 @@ import myUpload from 'vue-image-crop-upload';
                     title: 'Your Logo has been changed',
                     showConfirmButton: true
                   });
-                  vm.imgDataUrl='';
+                vm.imgDataUrl='';
               });
             },
             changeCover()

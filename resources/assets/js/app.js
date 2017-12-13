@@ -24,6 +24,7 @@ Vue.component('example', require('./components/Example.vue'));
 Vue.component('register', require('./components/Register/RegisterCreate.vue'));
 Vue.component('login', require('./components/Login/UserLogin.vue'));
 Vue.component('companyprofile', require('./components/Company/Profile.vue'));
+Vue.component('companyindex', require('./components/Company/Index.vue'));
 const app = new Vue({
     el: '#app'
 });

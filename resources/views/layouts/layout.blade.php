@@ -178,6 +178,11 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
       });
+      $('#login-opener-2').on('click',function(event)
+      {
+        event.preventDefault();
+        $('#login-modal').addClass('active');
+      });
       $('#login-opener').on('click',function(event)
       {
         event.preventDefault();

@@ -21,7 +21,7 @@
           <ul>
             <a href="#"><li><i class="material-icons">local_dining</i><p>1,000</p></li></a>
             <a href="#"class="comments-count"><li><i class="material-icons">comment</i><p>1,200</p></li></a>
-            <a href="#"><li><i class="material-icons">person</i><p>400</p></li></a>
+            <a href="#"><li><i class="material-icons">remove_red_eye</i><p>400</p></li></a>
           </ul>
         </div>
       </div>
@@ -43,7 +43,7 @@
           <ul>
             <a href="#"><li><i class="material-icons">local_dining</i><p>1,000</p></li></a>
             <a href="#"class="comments-count"><li><i class="material-icons">comment</i><p>1,200</p></li></a>
-            <a href="#"><li><i class="material-icons">person</i><p>400</p></li></a>
+            <a href="#"><li><i class="material-icons">remove_red_eye</i><p>400</p></li></a>
           </ul>
         </div>
       </div>
@@ -65,7 +65,7 @@
           <ul>
             <a href="#"><li><i class="material-icons">local_dining</i><p>1,000</p></li></a>
             <a href="#"class="comments-count"><li><i class="material-icons">comment</i><p>1,200</p></li></a>
-            <a href="#"><li><i class="material-icons">person</i><p>400</p></li></a>
+            <a href="#"><li><i class="material-icons">remove_red_eye</i><p>400</p></li></a>
           </ul>
         </div>
       </div>
@@ -87,7 +87,7 @@
           <ul>
             <a href="#"><li><i class="material-icons">local_dining</i><p>1,000</p></li></a>
             <a href="#"class="comments-count"><li><i class="material-icons">comment</i><p>1,200</p></li></a>
-            <a href="#"><li><i class="material-icons">person</i><p>400</p></li></a>
+            <a href="#"><li><i class="material-icons">remove_red_eye</i><p>400</p></li></a>
           </ul>
         </div>
       </div>
@@ -109,7 +109,7 @@
           <ul>
             <a href="#"><li><i class="material-icons">local_dining</i><p>1,000</p></li></a>
             <a href="#"class="comments-count"><li><i class="material-icons">comment</i><p>1,200</p></li></a>
-            <a href="#"><li><i class="material-icons">person</i><p>400</p></li></a>
+            <a href="#"><li><i class="material-icons">remove_red_eye</i><p>400</p></li></a>
           </ul>
         </div>
       </div>
@@ -131,7 +131,7 @@
           <ul>
             <a href="#"><li><i class="material-icons">local_dining</i><p>1,000</p></li></a>
             <a href="#"class="comments-count"><li><i class="material-icons">comment</i><p>1,200</p></li></a>
-            <a href="#"><li><i class="material-icons">person</i><p>400</p></li></a>
+            <a href="#"><li><i class="material-icons">remove_red_eye</i><p>400</p></li></a>
           </ul>
         </div>
       </div>
@@ -153,7 +153,7 @@
           <ul>
             <a href="#"><li><i class="material-icons">local_dining</i><p>1,000</p></li></a>
             <a href="#"class="comments-count"><li><i class="material-icons">comment</i><p>1,200</p></li></a>
-            <a href="#"><li><i class="material-icons">person</i><p>400</p></li></a>
+            <a href="#"><li><i class="material-icons">remove_red_eye</i><p>400</p></li></a>
           </ul>
         </div>
       </div>
@@ -175,7 +175,7 @@
           <ul>
             <a href="#"><li><i class="material-icons">local_dining</i><p>1,000</p></li></a>
             <a href="#"class="comments-count"><li><i class="material-icons">comment</i><p>1,200</p></li></a>
-            <a href="#"><li><i class="material-icons">person</i><p>400</p></li></a>
+            <a href="#"><li><i class="material-icons">remove_red_eye</i><p>400</p></li></a>
           </ul>
         </div>
       </div>
@@ -197,7 +197,7 @@
           <ul>
             <a href="#"><li><i class="material-icons">local_dining</i><p>1,000</p></li></a>
             <a href="#"class="comments-count"><li><i class="material-icons">comment</i><p>1,200</p></li></a>
-            <a href="#"><li><i class="material-icons">person</i><p>400</p></li></a>
+            <a href="#"><li><i class="material-icons">remove_red_eye</i><p>400</p></li></a>
           </ul>
         </div>
       </div>
@@ -219,7 +219,7 @@
           <ul>
             <a href="#"><li><i class="material-icons">local_dining</i><p>1,000</p></li></a>
             <a href="#"class="comments-count"><li><i class="material-icons">comment</i><p>1,200</p></li></a>
-            <a href="#"><li><i class="material-icons">person</i><p>400</p></li></a>
+            <a href="#"><li><i class="material-icons">remove_red_eye</i><p>400</p></li></a>
           </ul>
         </div>
       </div>
@@ -241,7 +241,7 @@
           <ul>
             <a href="#"><li><i class="material-icons">local_dining</i><p>1,000</p></li></a>
             <a href="#"class="comments-count"><li><i class="material-icons">comment</i><p>1,200</p></li></a>
-            <a href="#"><li><i class="material-icons">person</i><p>400</p></li></a>
+            <a href="#"><li><i class="material-icons">remove_red_eye</i><p>400</p></li></a>
           </ul>
         </div>
       </div>
@@ -263,7 +263,7 @@
           <ul>
             <a href="#"><li><i class="material-icons">local_dining</i><p>1,000</p></li></a>
             <a href="#"class="comments-count"><li><i class="material-icons">comment</i><p>1,200</p></li></a>
-            <a href="#"><li><i class="material-icons">person</i><p>400</p></li></a>
+            <a href="#"><li><i class="material-icons">remove_red_eye</i><p>400</p></li></a>
           </ul>
         </div>
       </div>

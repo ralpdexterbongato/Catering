@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/company','companycontroller@index');
+Route::get('/company-index-data','companycontroller@indexData');
 Route::get('/food','foodcontroller@Index');
 Route::get('/register','registercontroller@create');
 Route::post('/register-store','registercontroller@store');
@@ -36,3 +37,4 @@ Route::get('/show-company-products/{companyid}','foodcontroller@displaycompanyfo
 
 Route::post('/mylist-session/{companyid}','OrderSessionController@store');
 Route::get('/mylist-session-show/{companyid}','OrderSessionController@show');
+Route::delete('/mylist-session-delete/{companyid}/{foodid}','OrderSessionController@delete');

@@ -14,6 +14,10 @@ class companycontroller extends Controller
     {
       return view('Company.CompanyIndex');
     }
+    public function indexData()
+    {
+      return $companies=company::orderBy('created_at')->paginate(9);
+    }
     public function store(Request $request)
     {
       $this->validate($request,[
@@ -52,4 +56,5 @@ class companycontroller extends Controller
       $companyId=company::where('user_id', Auth::user()->id)->value('id');
       return redirect('company-show/'.$companyId);
     }
+
 }
