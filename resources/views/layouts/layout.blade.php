@@ -36,6 +36,7 @@
                   <img src="/storage/images/{{Auth::user()->avatar}}" alt="">
                 @else
                   <i class="material-icons">account_circle</i>
+                  {{-- <a href="#" class="btn btn-floating pulse"><i class="material-icons">person</i></a> --}}
                 @endif
               </a>
               <ul class="nav-drop">
