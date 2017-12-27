@@ -2,28 +2,28 @@
 <div class="customer-reg-container">
   <div class="input-field col s6">
     <i class="material-icons prefix">account_circle</i>
-    <input id="icon_prefix" v-model="FullName" type="text" class="validate">
-    <label for="icon_prefix">Fullname</label>
+    <input id="fullname" v-model="FullName" type="text" class="validate">
+    <label for="fullname">Fullname</label>
   </div>
   <div class="input-field col s6">
     <i class="material-icons prefix">mail</i>
-    <input id="icon_mail" v-model="Email" type="email" class="validate">
-    <label for="icon_mail">Email</label>
+    <input id="email" v-model="Email" type="email" class="validate">
+    <label for="email">Email</label>
   </div>
   <div class="input-field col s6">
     <i class="material-icons prefix">person</i>
-    <input id="icon_prefix" type="text" v-model="UserName" class="validate">
-    <label for="icon_prefix">Username</label>
+    <input id="username" type="text" v-model="UserName" class="validate">
+    <label for="username">Username</label>
   </div>
   <div class="input-field col s6">
     <i class="material-icons prefix">lock</i>
-    <input id="icon_mail" type="password" v-model="Password" class="validate">
-    <label for="icon_mail">Password</label>
+    <input id="pword" type="password" v-model="Password" class="validate">
+    <label for="pword">Password</label>
   </div>
   <div class="input-field col s6">
     <i class="material-icons prefix">vpn_key</i>
-    <input id="icon_mail" type="password" v-model="PasswordConfirmation" class="validate">
-    <label for="icon_mail">Confirm-Password</label>
+    <input id="pword-confirm" type="password" v-model="PasswordConfirmation" class="validate">
+    <label for="pword-confirm">Confirm-Password</label>
   </div>
   <div class="submit-btn">
     <a class="btn" @click="toggleShow">upload image</a>

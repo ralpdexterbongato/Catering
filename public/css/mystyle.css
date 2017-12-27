@@ -57,6 +57,19 @@ table {
 -webkit-box-shadow: 0 1px 0 0 #fff!important;
 box-shadow: 0 1px 0 0 #fff!important;
 }
+input[type="color"] {
+	-webkit-appearance: none;
+	border: none;
+	width:32px;
+	height: 32px;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: none;
+}
+
 .underlined
 {
 	text-decoration: underline;
@@ -64,7 +77,7 @@ box-shadow: 0 1px 0 0 #fff!important;
 a
 {
   text-decoration: none;
-	color: #03A9F4;
+	color: #f44336;
 }
 .bold
 {
@@ -87,9 +100,23 @@ html
 *{
 	box-sizing: border-box;
 }
+.picker__date-display
+{
+	background: #F44336;
+}
+.modal-titles
+{
+	font-size: 25px;
+}
 .withfont
 {
 	font-family: 'Kaushan Script', cursive;
+}
+.titles
+{
+	color: rgba(0, 0, 0, 0.7);
+	margin: 90px 0px 20px 0px;
+	font-size: 20px;
 }
 .pagination
 {
@@ -98,7 +125,7 @@ html
 }
 .highlight
 {
-  color: #03A9F4;
+  color:#F44336;
   font-weight:600;
   letter-spacing: 2px;
 }
@@ -221,17 +248,29 @@ nav
 }
 .right-header li.active
 {
-	color: #b3e5fc!important;
+	background-color: #f8f8f8!important;
+}
+.right-header ul li:hover
+{
+		background: #f8f8f8;
 }
 .right-header ul li
 {
-  margin-left:15px;
-	margin-top: 10px;
-  padding:30px 10px;
+  padding:30px 20px;
+	/*min-width: 80px;*/
+}
+.right-header ul li > i
+{
+	color: rgba(0, 0, 0, 0.7);
 }
 .right-header ul li a
 {
 	color: rgba(0, 0, 0, 0.7);
+	/*text-align: center;*/
+}
+.nav-parent:hover
+{
+	background: transparent!important
 }
 .nav-parent:hover .nav-drop
 {
@@ -251,13 +290,12 @@ nav
 {
 	position: absolute;
 	top:-100vh;
-	left:-70px;
+	left:-60px;
 	width: 180px;
 	display: flex;
 	flex-direction: column;
 	z-index: 5;
 	border-radius: 4px;
-	padding:5px;
 	background:#fff;
 	-webkit-box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
 box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
@@ -578,7 +616,7 @@ transform: scale(1.0);
 	height: 400px;
 	width: 100%;
 	background: #f7f7f7;
-	border:5px solid #fff;
+	border:8px solid #fff;
 	position: relative;
 	-webkit-box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
   box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
@@ -608,6 +646,7 @@ transform: scale(1.0);
 	height: 200px;
 	width: 200px;
 	border-radius:50%;
+	border:8px solid #fff;
 }
 #company-logo:hover .edit-profile-btn
 {
@@ -660,13 +699,28 @@ transform: scale(1.0);
 }
 .left-bottom-company
 {
-	padding:20px;
 	flex:1;
+}
+.left-bottom-company .card
+{
+	max-width: 300px;
 }
 .right-bottom-company
 {
 	flex:2;
 }
+/*company profile map*/
+.map-container
+{
+	height: 400px;
+	width: 100%;
+}
+#map-canvas,#company-profile-map
+{
+	width:100%;
+	height: 400px;
+}
+
 /*showcase profile*/
 .menu-showcase
 {
@@ -677,7 +731,7 @@ transform: scale(1.0);
 .showcase-box
 {
 	width:300px;
-	margin:20px;
+	margin:0px 0px 40px 0px;
 }
 .card-content a.btn
 {
@@ -694,15 +748,11 @@ transform: scale(1.0);
 	flex:2;
 	margin:auto;
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 }
-.quantity-input
+.menu-option-btn i
 {
-	flex:1;
-}
-.quantity-input input
-{
-	max-width: 30px;
+	margin:10px;
 }
 .view-btn:hover,.add-btn:hover
 {
@@ -731,7 +781,18 @@ transform: scale(1.0);
 /*aboutcompany*/
 .about-company-data
 {
-	padding:40px;
+	padding:40px 0px;
+	display: flex;
+}
+.left-about-company
+{
+	flex:1;
+	padding:20px 50px 20px 0px;
+}
+.right-about-company
+{
+	flex:2;
+	padding:20px 50px 20px 0px;
 }
 .about-company-data table
 {
@@ -739,15 +800,14 @@ transform: scale(1.0);
 }
 .about-company-data td p
 {
-	text-indent:50px;
 	text-align: justify;
 }
-
-/*food company show*/
-.size-price table tr
+.about-company-data th,.about-company-data td
 {
-	border-bottom: 1px solid #e4e4e4;
+	padding:15px 0px!important;
 }
+/*food company show*/
+
 
 
 /*session added list*/
@@ -761,8 +821,116 @@ transform: scale(1.0);
 	cursor: pointer;
 	color: #E34F34!important;
 }
-.total-session
+
+/*category setting css*/
+.category-chip
 {
-	color: rgba(0, 0, 0, 0.6);
-	font-weight: 600;
+display: inline-block;
+}
+.category-chip i
+{
+	font-size: 16px;
+	cursor: pointer;
+}
+.categories-list
+{
+	margin-top: 30px;
+}
+.categ-input
+{
+	margin: 40px 0px!important;
+}
+.category-boxes-container
+{
+	display: flex;
+	flex-wrap: wrap;
+	margin:20px 0px;
+}
+.category-boxes-container p
+{
+	background: #f3f3f3;
+	border-radius: 5px;
+	padding:5px 10px;
+	margin:5px;
+}
+
+/*packgages*/
+.packages-list .card
+{
+	max-width:300px;
+	margin:20px 0px;
+}
+.packages-list
+{
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+
+
+/*proceed*/
+.session-food-table
+{
+	padding:30px;
+}
+.session-food-table table td img
+{
+	width: 50px;
+}
+.proceed-forms
+{
+	margin-top: 50px;
+	display: flex;
+}
+.proceed-form-left,.proceed-form-right
+{
+	flex:1;
+	padding:30px;
+}
+#customer-location
+{
+	height: 330px;
+}
+.held-place-note
+{
+	display: flex;
+	margin-top: 30px;
+	margin-bottom:10px;
+}
+.held-place-note p
+{
+	margin-left: 10px;
+}
+.submit-btn-container
+{
+	padding:20px 30px;
+}
+.color-added-chips
+{
+	margin:30px 0px;
+}
+.available-colors-container
+{
+	width: 100%;
+}
+.color-form
+{
+	display: flex;
+	margin: 30px 0px;
+}
+.color-form i
+{
+	font-size: 35px!important;
+	color: rgba(0, 0, 0, 0.7);
+	cursor: pointer;
+}
+.color-added-chips .chip i
+{
+	font-size: 20px;
+}
+
+.company-settings-table-container table td img
+{
+	max-width: 100px;
 }

@@ -8,6 +8,7 @@ use Auth;
 use Carbon\Carbon;
 use Image;
 use App\User;
+use App\CompanyMap;
 class companycontroller extends Controller
 {
     public function Index()
@@ -21,7 +22,10 @@ class companycontroller extends Controller
     public function store(Request $request)
     {
       $this->validate($request,[
-        'name'=>'max:30|min:1'
+        'name'=>'max:30|min:1',
+        'description'=>'required|max:180',
+        'lat'=>'required',
+        'lng'=>'required'
       ]);
       if ($request->logo!=null)
       {
@@ -38,6 +42,13 @@ class companycontroller extends Controller
         $companyTbl->logo=$fileName;
       }
       $companyTbl->save();
+
+      $companyMapDB = new CompanyMap;
+      $companyMapDB->company_id=$companyTbl->id;
+      $companyMapDB->lat = $request->lat;
+      $companyMapDB->lng= $request->lng;
+      $companyMapDB->save();
+
       User::where('id',Auth::user()->id)->update(['role'=>'1']);
       return ['redirect'=>'/company-show/'.$companyTbl->id];
     }
@@ -45,7 +56,8 @@ class companycontroller extends Controller
     {
       $CompanyData = ['id'=>$id];
       $CompanyData = json_encode($CompanyData);
-      return view('Company.CompanyProfile',compact('CompanyData'));
+      $mapdata=CompanyMap::where('company_id', $id)->get();
+      return view('Company.CompanyProfile',compact('CompanyData','mapdata'));
     }
     public function showData($id)
     {

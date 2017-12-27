@@ -17,7 +17,14 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->integer('customer_id');
             $table->integer('company_id');
-            $table->integer('orderdetail_id');
+            $table->integer('package_id')->nullable();
+            $table->integer('expectedVisitors');
+            $table->date('date');
+            $table->string('timestart');
+            $table->integer('status');
+            $table->char('client_contact');
+            $table->string('address_lat')->nullable();
+            $table->string('address_lng')->nullable();
             $table->timestamps();
         });
     }

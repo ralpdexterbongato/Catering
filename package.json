@@ -22,6 +22,10 @@
     "cross-env": "dist/bin/cross-env.js"
   },
   "dependencies": {
-    "vue-sweetalert2": "^1.0.7"
+    "vue-image-crop-upload": "^2.1.3",
+    "vue-location-picker": "^1.0.1",
+    "vue-router": "^3.0.1",
+    "vue-sweetalert2": "^1.0.7",
+    "vue2-google-maps": "^0.8.4"
   }
 }

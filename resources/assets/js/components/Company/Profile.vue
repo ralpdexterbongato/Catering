@@ -1,25 +1,23 @@
 <template lang="html">
   <div class="CompanyProfileContainer">
-    <div id="listmodal" class="modal modal-fixed-footer">
+    <div id="MyList" class="modal modal-fixed-footer">
        <div class="modal-content">
-         <h4>List of order</h4>
-         <p><i class="material-icons blue-text">info</i> Be sure to click send when done, so we can receive your reservation. Thank you</p>
+         <h4 class="modal-titles">Customized package foods</h4>
+         <p v-if="user!=null"><i class="material-icons blue-text">info</i> Please click proceed when you are done. Thank you!</p>
+         <p v-else><i class="material-icons blue-text">info</i> Please Login or Register to proceed.</p>
          <div class="added-session-table">
            <table>
              <tr v-for="(session,loopkey) in CompanySession">
                <td><img :src="'/storage/images/'+session.foodImage"></td>
                <td>{{session.foodName}}</td>
-               <td>P {{session.foodPrice}}</td>
-               <td>{{session.Qty}} <span v-if="session.Qty==1">pc.</span><span v-else>pcs.</span></td>
-               <td v-on:click="RemoveFromList(session.foodId)"><i class="material-icons grey-text">close</i></td>
+               <td v-on:click="RemoveFromList(session.foodId,session.Size)"><i class="material-icons grey-text">close</i></td>
              </tr>
            </table>
          </div>
        </div>
        <div class="modal-footer">
-         <a class="total-session">Total:P {{ListTotal}}</a>
-         <a v-if="user!=null" href="#!" class="modal-action modal-close waves-effect waves-light btn-flat blue-text">Send</a>
-        <span>
+         <a :href="'/request-proceed/'+company.id" v-if="user!=null" class="modal-action modal-close waves-effect waves-light btn-flat blue-text">Proceed</a>
+        <span v-else>
           <a href="#" id="login-opener-2" class="modal-action modal-close waves-effect waves-light btn-flat blue-text">Login</a>
           <a href="/register" class="modal-action modal-close waves-effect waves-light btn-flat blue-text">Register</a>
         </span>
@@ -30,61 +28,22 @@
          <h5>Add food menu</h5>
         <div class="food-form-container">
           <div class="input-field col s6">
-            <input id="icon_prefix" v-model="FoodName" type="text" data-length="20">
-            <label for="icon_prefix" >Name</label>
+            <input id="foodname" v-model="FoodName" type="text" data-length="20">
+            <label for="foodname" >Name</label>
           </div>
           <div class="input-field col s12">
-            <textarea id="textarea1" v-model="FoodDescription" class="materialize-textarea" data-length="100"></textarea>
-            <label for="textarea1">Description</label>
+            <textarea id="fdescription" v-model="FoodDescription" class="materialize-textarea" data-length="100"></textarea>
+            <label for="fdescription">Description</label>
           </div>
-          <div class="input-field col s12">
-            <select multiple>
-              <option value="" disabled selected>Choose</option>
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
-            </select>
-            <label>Category</label>
+          <div class="category-boxes-container">
+            <p v-for="category in fetchedCategories">
+              <input type="checkbox" v-model="selectedCategory" :value="category.id" :id="'categ'+category.id"/>
+              <label :for="'categ'+category.id">{{category.name}}</label>
+            </p>
           </div>
           <a class="btn food-image-finder" @click="toggleShow" v-on:click="FoodImageActive=true">food image</a>
-          <div class="preview">
+          <div class="preview" v-if="imgDataUrl!=''">
             <img :src="imgDataUrl" alt="preview">
-          </div>
-          <div class="row">
-            <div class="input-field col s6">
-              <i class="material-icons prefix">local_parking</i>
-              <input id="icon_prefix" v-model="AmountSmall" type="number">
-              <label for="icon_prefix">Small size price</label>
-            </div>
-            <div class="input-field col s6">
-              <i class="material-icons prefix">drag_handle</i>
-              <input id="icon_prefix" v-model="GoodForSmall" type="number">
-              <label for="icon_prefix">People</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s6">
-              <i class="material-icons prefix">local_parking</i>
-              <input id="icon_prefix" v-model="AmountMedium" type="number">
-              <label for="icon_prefix">Medium size price</label>
-            </div>
-            <div class="input-field col s6">
-              <i class="material-icons prefix">drag_handle</i>
-              <input id="icon_prefix" v-model="GoodForMedium" type="number">
-              <label for="icon_prefix">People</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s6">
-              <i class="material-icons prefix">local_parking</i>
-              <input id="icon_prefix" v-model="AmountLarge" type="number">
-              <label for="icon_prefix">Large size price</label>
-            </div>
-            <div class="input-field col s6">
-              <i class="material-icons prefix">drag_handle</i>
-              <input id="icon_prefix" v-model="GoodForLarge" type="number">
-              <label for="icon_prefix">People</label>
-            </div>
           </div>
         </div>
        </div>
@@ -118,25 +77,48 @@
       </div>
     </div>
     <div class="about-company-data">
-      <table>
-        <tr>
-          <th></th>
-          <th>Why choose us?</th>
-          <th></th>
-          <th>Quick links</th>
-        </tr>
-        <tr>
-          <td></td>
-          <td>
-            <p>{{AboutCompany.description}}</p>
-          </td>
-          <td></td>
-          <td><a href="#">www.facebook.com</a> | <a href="#">www.twitter.com</a> | <a href="#">www.youtube.com</a></td>
-        </tr>
-      </table>
+      <div class="left-about-company">
+        <h6 class="bold">Why choose us?</h6>
+        <p>{{AboutCompany.description}}</p>
+      </div>
+      <div class="right-about-company">
+
+      </div>
     </div>
-    <div>
+    <h5 class="titles"><i class="material-icons">local_offer</i> Our packages</h5>
+    <div class="packages-list">
+      <div class="card">
+        <div class="card-image">
+          <img src="/DesignPic/1.jpg">
+          <a :href="'/request-proceed/'+company.id" class="btn-floating halfway-fab waves-effect waves-light redirect red"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+          <span class="card-title">P120 per head</span>
+          <p><span class="bold">Terms & Conditions:</span><br><br> 3 delicious menu with 3 types of drinks, can be held in your house or at our own restaurant minimum of 100 people only</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-image">
+          <img src="/DesignPic/1.jpg">
+          <a :href="'/request-proceed/'+company.id" class="btn-floating halfway-fab waves-effect waves-light redirect red"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+          <span class="card-title">P120 per head</span>
+          <p><span class="bold">Terms & Conditions:</span><br><br> 3 delicious menu with 3 types of drinks, can be held in your house or at our own restaurant minimum of 100 people only</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-image">
+          <img src="/DesignPic/1.jpg">
+          <a :href="'/request-proceed/'+company.id" class="btn-floating halfway-fab waves-effect waves-light redirect red"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+          <span class="card-title">P120 per head</span>
+          <p><span class="bold">Terms & Conditions:</span><br><br> 3 delicious menu with 3 types of drinks, can be held in your house or at our own restaurant minimum of 100 people only</p>
+        </div>
+      </div>
     </div>
+    <h5 class="titles"><i class="material-icons">touch_app</i> Custom package</h5>
     <div class="menu-showcase">
       <div class="showcase-box" v-for="(product,productKey) in CompanyProduct">
         <div class="card">
@@ -145,59 +127,25 @@
            </div>
            <div class="card-content">
              <span class="card-title activator grey-text text-darken-4">{{product.name}}<i class="material-icons right">more_vert</i></span>
-             <p class="bold" v-if="SelectedSize[productKey]==0 || SelectedSize[productKey]==null ">
-               P {{product.prices[0].Amount}} Normal size
-             </p>
-             <p class="bold" v-if="SelectedSize[productKey]==1">
-               P {{product.prices[1].Amount}} Medium size
-             </p>
-             <p class="bold" v-if="SelectedSize[productKey]==2">
-               P {{product.prices[2].Amount}} Large size
-             </p>
              <div class="menu-options">
-               <div class="quantity-input">
-                 <input type="number" min="1" v-model="QtyWant[productKey]" placeholder="1" v-if="(((user!=null) && (AboutCompany.user_id!=user.id))||(user==null))">
-               </div>
                <div class="menu-option-btn">
-                 <i class="material-icons add-btn" v-if="(((user!=null) && (AboutCompany.user_id!=user.id))||(user==null))" v-on:click="addToSessionList(product,productKey)">add</i>
+                 <i class="material-icons add-btn" v-if="(((user!=null) && (AboutCompany.user_id!=user.id))||(user==null))" v-on:click="addToSessionList(product)">add</i>
                  <i class="material-icons view-btn">remove_red_eye</i>
-                 <i class="material-icons fav-btn">favorite</i>
                </div>
              </div>
            </div>
            <div class="card-reveal">
              <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
              <p>{{product.description}}</p>
-             <div class="size-price">
-               <table>
-                 <tr>
-                   <th>Price</th>
-                   <th>Size</th>
-                   <th><i class="material-icons">people</i></th>
-                   <th></th>
-                 </tr>
-                 <tr v-for="(price,key) in product.prices">
-                   <td>P {{price.Amount}}</td>
-                   <td>{{price.Size}}</td>
-                   <td>{{price.goodfor}}</td>
-                   <td v-if="(((user!=null) && (AboutCompany.user_id!=user.id))||(user==null)) ">
-                     <p>
-                      <input type="radio" v-model="SelectedSize[productKey]" checked :value="key"   :name="productKey" :id="product.id+'choose'+key" />
-                      <label :for="product.id+'choose'+key">choose</label>
-                    </p>
-                   </td>
-                 </tr>
-               </table>
-             </div>
            </div>
          </div>
       </div>
     </div>
     <div class="fixed-action-btn" v-if="((user!=null)&&(user.id==AboutCompany.user_id))">
-       <a href="#addproductmodal" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+       <a class="btn-floating btn-large waves-effect waves-light red" v-on:click="[user.id==AboutCompany.user_id?fetchCategories():'']"><i class="material-icons" onclick="$('#addproductmodal').modal('open');">add</i></a>
     </div>
     <div class="fixed-action-btn" v-else>
-      <a href="#listmodal" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">format_list_numbered</i></a>
+      <a  onclick="$('#MyList').modal('open');" class="btn-floating btn-large waves-effect waves-light red" :class="[CompanySession!=null?'pulse':'']"><i class="material-icons">format_list_numbered</i></a>
     </div>
     <div class="bottom-company-details">
       <div class="left-bottom-company">
@@ -208,13 +156,11 @@
           <div class="card-tabs">
             <ul class="tabs tabs-fixed-width">
               <li class="tab"><a href="#test4">Email</a></li>
-              <li class="tab"><a class="active" href="#test5">Telephone</a></li>
               <li class="tab"><a href="#test6">Social media</a></li>
             </ul>
           </div>
           <div class="card-content grey lighten-4">
             <div id="test4">Mycompany@gmail.com</div>
-            <div id="test5"># 09105959449</div>
             <div id="test6">www.facebook.com</div>
           </div>
         </div>
@@ -246,6 +192,11 @@
           :headers="headers"
           img-format="png">
         </my-upload>
+        <h5 class="titles"><i class="material-icons">location_on</i> Our location</h5>
+        <div class="map-container">
+          <div id="company-profile-map">
+          </div>
+        </div>
   </div>
 </template>
 
@@ -268,18 +219,13 @@ import myUpload from 'vue-image-crop-upload';
          AboutCompany:[],
          FoodName:'',
          FoodDescription:'',
-         AmountSmall:'',
-         AmountMedium:'',
-         AmountLarge:'',
-         GoodForSmall:'',
-         GoodForMedium:'',
-         GoodForLarge:'',
          FoodImageActive:false,
          CompanyProduct:[],
          SelectedSize:[],
          CompanySession:[],
-         QtyWant:[],
          ListTotal:'0',
+         fetchedCategories:[],
+         selectedCategory:[]
       }
     },
     components: {
@@ -293,34 +239,33 @@ import myUpload from 'vue-image-crop-upload';
     },
     props: ['company','user'],
     methods: {
-      addToSessionList(FoodData,key)
+      addToSessionList(FoodData)
       {
-        if (this.SelectedSize[key]==null)
-        {
-          this.SelectedSize[key]=0;
-        }
-        if (this.QtyWant[key]==null)
-        {
-          this.QtyWant[key]=1;
-        }
         var vm=this;
         axios.post('/mylist-session/'+this.company.id,{
           FoodId:FoodData.id,
           FoodName:FoodData.name,
-          Size:this.SelectedSize[key],
           FoodImage:FoodData.image,
-          Price:FoodData.prices[this.SelectedSize[key]].Amount,
-          Qty:this.QtyWant[key]
         }).then(function(response)
         {
           console.log(response);
-          vm.showAddedSession();
-          vm.$swal({
-              position: 'top-right',
-              type: 'success',
-              title: '1 item added to your list',
-              showConfirmButton:true
-            });
+          if (response.data.error!=null) {
+            swal({
+                position: 'top-right',
+                type: 'error',
+                title: 'This item is already added',
+                showConfirmButton:true
+              });
+          }else
+          {
+            vm.showAddedSession();
+            swal({
+                position: 'top-right',
+                type: 'success',
+                title: '1 item added to your list',
+                showConfirmButton:true
+              });
+          }
         },function(error)
         {
           console.log(error);
@@ -352,37 +297,52 @@ import myUpload from 'vue-image-crop-upload';
           FoodImage:this.imgDataUrl,
           name:this.FoodName,
           description:this.FoodDescription,
-          AmountS:this.AmountSmall,
-          AmountM:this.AmountMedium,
-          AmountL:this.AmountLarge,
-          goodforS:this.GoodForSmall,
-          goodforM:this.GoodForMedium,
-          goodforL:this.GoodForLarge,
-          companyid:this.AboutCompany.id
+          companyid:this.AboutCompany.id,
+          categories:this.selectedCategory
         }).then(function(response)
         {
           console.log(response);
-
-          vm.$swal({
-              position: 'top-right',
-              type: 'success',
-              title: 'New product added',
-              showConfirmButton:true
-            });
+          if (response.data.error!=null)
+          {
+            swal({
+                position: 'top-right',
+                type: 'error',
+                title: response.data.error,
+                showConfirmButton:true
+              });
+          }else
+          {
+            vm.imgDataUrl = '';
+            vm.FoodName = '';
+            vm.FoodDescription = '';
+            vm.selectedCategory =[];
+            swal({
+                position: 'top-right',
+                type: 'success',
+                title: 'New product added',
+                showConfirmButton:true
+              });
+          }
           vm.getCompanyProducts();
         },function(error)
         {
           console.log(error);
+          swal({
+              position: 'top-right',
+              type: 'error',
+              title: error.response.data.message,
+              showConfirmButton:true
+            });
         });
       },
-      RemoveFromList(foodid)
+      RemoveFromList(foodid,size)
       {
         var vm=this;
-        axios.delete(`/mylist-session-delete/`+this.company.id+`/`+foodid).then(function(response)
+        axios.delete(`/mylist-session-delete/`+this.company.id+`/`+foodid+`/`+size).then(function(response)
         {
           console.log(response);
           vm.showAddedSession();
-          vm.$swal({
+          swal({
               position: 'top-right',
               type: 'success',
               title: '1 item removed from your list',
@@ -429,6 +389,15 @@ import myUpload from 'vue-image-crop-upload';
 
                   });
                   vm.imgDataUrl='';
+              });
+            },
+            fetchCategories()
+            {
+              var vm=this;
+              axios.get(`/fetch-categories`).then(function(response)
+              {
+                console.log(response);
+                vm.fetchedCategories=response.data;
               });
             },
             getCompanyProducts()

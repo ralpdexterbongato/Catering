@@ -20,6 +20,7 @@ class CreateCompaniesTable extends Migration
             $table->string('description')->nullable();
             $table->string('logo')->nullable();
             $table->string('heroPicture')->nullable();
+            $table->integer('minimum')->nullable();
             $table->timestamps();
         });
     }

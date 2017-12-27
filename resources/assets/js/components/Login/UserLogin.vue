@@ -77,7 +77,7 @@ import axios from 'axios';
   width:600px;
   padding:30px 100px;
   margin: 0 auto;
-  background: #f3f3f3;
+  background: #F5F5F5;
 }
 .login-btn-container
 {

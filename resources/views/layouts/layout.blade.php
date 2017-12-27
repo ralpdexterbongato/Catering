@@ -11,8 +11,13 @@
     <link rel="stylesheet" href="/css/mystyle.css">
     <link rel="stylesheet" href="/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Kaushan+Script|Handlee" rel="stylesheet">
-  </head>
   <body>
+    @php
+      function current_page($uri)
+      {
+        return strstr(request()->path(),$uri);
+      }
+    @endphp
     <header>
       <div class="header-container">
         <div class="left-header">
@@ -27,9 +32,10 @@
         </div>
         <div class="right-header">
           <ul>
-            <li class="active"><a href="/">About us</a></li>
-            <li><a href="/food">Most popular</a></li>
-            <li><a href="/company">Companies</a></li>
+            <li class="{{current_page('/') && current_page('company-show')==false?'active':''}}"><a href="/">About us</a></li>
+            <li class="{{current_page('food')?'active':''}}"><a href="/food">Most popular</a></li>
+            <li class="{{current_page('company') && current_page('company-show')==false?'active':''}}"><a href="/company">Companies</a></li>
+            <li><i class="material-icons">notifications</i></li>
             <li class="nav-parent">
               <a href="#">
                 @if (Auth::check())
@@ -41,11 +47,11 @@
               </a>
               <ul class="nav-drop">
                 @if (Auth::check())
-                  <a href="#"><li><i class="material-icons">restaurant</i> Reservations</li></a>
-                  <a href="#"><li><i class="material-icons">favorite</i> Favorites</li></a>
+                  <a href="#"><li><i class="material-icons">restaurant</i> Schedule</li></a>
+                  <a href="/comp-settings"><li><i class="material-icons">settings</i> Company</li></a>
                   @if (Auth::user()->role==0)
                     <a href="/register"><li><i class="material-icons">add</i> Company</li></a>
-                  @else
+                  @elseif(Auth::user()->role==1)
                     <a href="/company-show-own"><li><i class="material-icons">business</i> My Company</li></a>
                   @endif
                   <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><li><i class="material-icons">exit_to_app</i> Logout</li></a>
@@ -66,15 +72,6 @@
     </header>
     <section>
       <div class="content-container" id="app">
-        <nav>
-          <div class="nav-wrapper">
-             <div class="col s12">
-               <a href="#!" class="breadcrumb">First</a>
-               <a href="#!" class="breadcrumb">Second</a>
-               <a href="#!" class="breadcrumb">Third</a>
-             </div>
-          </div>
-        </nav>
         @if(Auth::check() && Auth::user()->verified=='1')
         <div class="verification-input">
           <p><i class="material-icons">mail_outline</i> Please verify your email <span class="bold">{{Auth::user()->email}}</span> , Thank you.</p>
@@ -140,8 +137,10 @@
               </ul>
             </li>
             <li><div class="divider"></div></li>
-            <li><a class="subheader">Subheader</a></li>
-            <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+            @if (Auth::user()->role==2)
+            <li><a class="subheader">Settings</a></li>
+            <li><a class="waves-effect" href="/category-setting">Categories</a></li>
+            @endif
           </ul>
             @endif
     <div class="main-content-container">
@@ -166,9 +165,14 @@
   <div class="footer-container-bot">
   </div>
 </footer>
+    <script src="/js/jquery.js"></script>
+    <script src="https://unpkg.com/sweetalert2@7.1.2/dist/sweetalert2.all.js">
+
+    </script>
     <script type="text/javascript" src="/js/app.js">
     </script>
     <script type="text/javascript" src="/js/materialize.min.js">
+    </script>
     </script>
     <script type="text/javascript">
     $(document).ready(function(){
@@ -203,9 +207,11 @@
       // Initialize collapsible (uncomment the line below if you use the dropdown variation)
       $('.collapsible').collapsible();
       $('.carousel.carousel-slider').carousel({fullWidth: true});
-      });
+
       $('.modal').modal();
       $('select').material_select();
+    });
     </script>
+    @yield('javascripts')
   </body>
 </html>

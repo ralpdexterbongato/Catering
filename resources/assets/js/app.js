@@ -6,12 +6,10 @@
  */
 
 require('./bootstrap');
-
 window.Vue = require('vue');
 import Router from 'vue-router';
 import company from './components/Register/RegisterCompany';
 import VueSweetalert2 from 'vue-sweetalert2';
-
 
 Vue.use(VueSweetalert2);
 /**
@@ -25,6 +23,10 @@ Vue.component('register', require('./components/Register/RegisterCreate.vue'));
 Vue.component('login', require('./components/Login/UserLogin.vue'));
 Vue.component('companyprofile', require('./components/Company/Profile.vue'));
 Vue.component('companyindex', require('./components/Company/Index.vue'));
+Vue.component('category', require('./components/Category/CategorySettings.vue'));
+Vue.component('proceed', require('./components/Request/proceed.vue'));
+Vue.component('companysettings', require('./components/Company/Settings.vue'));
+
 const app = new Vue({
-    el: '#app'
+    el: '#app',
 });

@@ -4,13 +4,20 @@
       <div class="indeterminate"></div>
     </div>
     <div class="input-field col s6">
-      <input id="last_name" v-model="name" type="text" class="validate">
-      <label for="last_name">Company name</label>
+      <input id="companyname" v-model="name" type="text" class="validate">
+      <label for="companyname">Company name</label>
     </div>
-    <div class="input-field col s6">
-      <input id="last_name" v-model="description" type="text" class="validate">
-      <label for="last_name">Description</label>
+    <div class="input-field col s12">
+      <textarea id="companydescription" v-model="description" class="materialize-textarea" data-length="180"></textarea>
+      <label for="companydescription">Description</label>
     </div>
+    <input type="text" id="searchgmap">
+    <div id="map-canvas">
+    </div>
+    <span class="hide">
+      <input type="text" id="lat" name="lataddress">
+      <input type="text" id="lng" name="lngaddress">
+    </span>
       <my-upload field="img"
           @crop-success="cropSuccess"
           @crop-upload-success="cropUploadSuccess"
@@ -28,7 +35,7 @@
         <i class="material-icons right">send</i>
       </button>
     </div>
-    <div class="preview">
+    <div class="preview" v-if="imgDataUrl!=''">
       <img :src="imgDataUrl">
     </div>
   </div>
@@ -39,6 +46,8 @@ import axios from 'axios';
 import myUpload from 'vue-image-crop-upload';
 export default {
   data () { return {
+    latCompany:'',
+    lngCompany:'',
     loading:false,
     name:'',
     description:'',
@@ -66,11 +75,23 @@ export default {
         name:this.name,
         description:this.description,
         logo:this.imgDataUrl,
+        lat:$('#lat').val(),
+        lng:$('#lng').val()
       }).then(function(response)
       {
         console.log(response);
         vm.loading=false;
         window.location =response.data.redirect;
+      }).catch(function(error)
+      {
+        console.log(error);
+        vm.loading=false;
+        swal({
+            position: 'top-right',
+            type: 'error',
+            title: error.response.data.message,
+            showConfirmButton:true
+          });
       });
     },
     toggleShow() {
@@ -86,6 +107,22 @@ export default {
               console.log('-------- crop success --------');
               this.imgDataUrl = imgDataUrl;
           },
+          cropUploadSuccess(jsonData, field){
+              console.log('-------- upload success --------');
+              console.log(jsonData);
+              console.log('field: ' + field);
+          },
+          /**
+           * upload fail
+           *
+           * [param] status    server api return error status, like 500
+           * [param] field
+           */
+          cropUploadFail(status, field){
+              console.log('-------- upload fail --------');
+              console.log(status);
+              console.log('field: ' + field);
+          }
 
   },
 }
@@ -102,6 +139,7 @@ export default {
   display: flex;
   justify-content:center;
   margin-bottom: 25px!important;
+  margin-top: 25px;
 }
 .register-company-submit a
 {

@@ -15,7 +15,7 @@
       </div>
       <div class="menu-bottom">
         <div class="menu-left-buttons">
-          <h5>RD RESTAURANT</h5>
+          <h5>RESTAURANT</h5>
         </div>
         <div class="menu-right-buttons">
           <ul>
@@ -37,7 +37,7 @@
       </div>
       <div class="menu-bottom">
         <div class="menu-left-buttons">
-          <h5>RD RESTAURANT</h5>
+          <h5>RESTAURANT</h5>
         </div>
         <div class="menu-right-buttons">
           <ul>
@@ -59,7 +59,7 @@
       </div>
       <div class="menu-bottom">
         <div class="menu-left-buttons">
-          <h5>RD RESTAURANT</h5>
+          <h5>RESTAURANT</h5>
         </div>
         <div class="menu-right-buttons">
           <ul>
@@ -81,7 +81,7 @@
       </div>
       <div class="menu-bottom">
         <div class="menu-left-buttons">
-          <h5>RD RESTAURANT</h5>
+          <h5>RESTAURANT</h5>
         </div>
         <div class="menu-right-buttons">
           <ul>
@@ -103,7 +103,7 @@
       </div>
       <div class="menu-bottom">
         <div class="menu-left-buttons">
-          <h5>RD RESTAURANT</h5>
+          <h5>RESTAURANT</h5>
         </div>
         <div class="menu-right-buttons">
           <ul>
@@ -125,7 +125,7 @@
       </div>
       <div class="menu-bottom">
         <div class="menu-left-buttons">
-          <h5>RD RESTAURANT</h5>
+          <h5>RESTAURANT</h5>
         </div>
         <div class="menu-right-buttons">
           <ul>
@@ -147,7 +147,7 @@
       </div>
       <div class="menu-bottom">
         <div class="menu-left-buttons">
-          <h5>RD RESTAURANT</h5>
+          <h5>RESTAURANT</h5>
         </div>
         <div class="menu-right-buttons">
           <ul>
@@ -169,7 +169,7 @@
       </div>
       <div class="menu-bottom">
         <div class="menu-left-buttons">
-          <h5>RD RESTAURANT</h5>
+          <h5>RESTAURANT</h5>
         </div>
         <div class="menu-right-buttons">
           <ul>
@@ -191,7 +191,7 @@
       </div>
       <div class="menu-bottom">
         <div class="menu-left-buttons">
-          <h5>RD RESTAURANT</h5>
+          <h5>RESTAURANT</h5>
         </div>
         <div class="menu-right-buttons">
           <ul>
@@ -213,7 +213,7 @@
       </div>
       <div class="menu-bottom">
         <div class="menu-left-buttons">
-          <h5>RD RESTAURANT</h5>
+          <h5>RESTAURANT</h5>
         </div>
         <div class="menu-right-buttons">
           <ul>
@@ -235,7 +235,7 @@
       </div>
       <div class="menu-bottom">
         <div class="menu-left-buttons">
-          <h5>RD RESTAURANT</h5>
+          <h5>RESTAURANT</h5>
         </div>
         <div class="menu-right-buttons">
           <ul>
@@ -257,7 +257,7 @@
       </div>
       <div class="menu-bottom">
         <div class="menu-left-buttons">
-          <h5>RD RESTAURANT</h5>
+          <h5>RESTAURANT</h5>
         </div>
         <div class="menu-right-buttons">
           <ul>
