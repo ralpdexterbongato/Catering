@@ -48,11 +48,12 @@
               <ul class="nav-drop">
                 @if (Auth::check())
                   <a href="#"><li><i class="material-icons">restaurant</i> Schedule</li></a>
-                  <a href="/comp-settings"><li><i class="material-icons">settings</i> Company</li></a>
                   @if (Auth::user()->role==0)
                     <a href="/register"><li><i class="material-icons">add</i> Company</li></a>
                   @elseif(Auth::user()->role==1)
+                    <a href="/comp-settings"><li><i class="material-icons">settings</i> Company</li></a>
                     <a href="/company-show-own"><li><i class="material-icons">business</i> My Company</li></a>
+                    <a href="/show-cater-request"><li><i class="material-icons">notifications</i>Catering request</li></a>
                   @endif
                   <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><li><i class="material-icons">exit_to_app</i> Logout</li></a>
                   <form action="/user" id="logout-form" method="post">

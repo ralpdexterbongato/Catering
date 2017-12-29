@@ -41,9 +41,9 @@
               <label :for="'categ'+category.id">{{category.name}}</label>
             </p>
           </div>
-          <a class="btn food-image-finder" @click="toggleShow" v-on:click="FoodImageActive=true">food image</a>
-          <div class="preview" v-if="imgDataUrl!=''">
-            <img :src="imgDataUrl" alt="preview">
+          <a class="btn food-image-finder" @click="toggleShowForFood">food image</a>
+          <div class="preview" v-if="imgDataUrlForFood!=''">
+            <img :src="imgDataUrlForFood" alt="preview">
           </div>
         </div>
        </div>
@@ -55,24 +55,24 @@
     <div class="company-cover-hero" v-if="AboutCompany.heroPicture!=null" :style="'background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(/storage/images/'+AboutCompany.heroPicture+')'">
       <div id="company-logo">
         <img v-if="AboutCompany.logo!=null" :src="'/storage/images/'+AboutCompany.logo" alt="logo">
-        <div v-if="((user!=null)&&(AboutCompany.user_id==user.id))" class="edit-profile-btn" @click="toggleShow" v-on:click="smallPic=true">
+        <div v-if="((user!=null)&&(AboutCompany.user_id==user.id))" class="edit-profile-btn" @click="toggleShowForLogo">
           <i class="material-icons">camera_alt</i>
         </div>
       </div>
       <h2 class="company-name">{{AboutCompany.name}}</h2>
-      <div v-if="((user!=null)&&(AboutCompany.user_id==user.id))" class="company-cover-edit" v-on:click="smallPic=false" @click="toggleShow">
+      <div v-if="((user!=null)&&(AboutCompany.user_id==user.id))" class="company-cover-edit" @click="toggleShowForCover">
         <i class="material-icons">camera_alt</i>
       </div>
     </div>
     <div class="company-cover-hero" v-else>
       <div id="company-logo">
         <img v-if="AboutCompany.logo!=null" :src="'/storage/images/'+AboutCompany.logo" alt="logo">
-        <div v-if="((user!=null)&&(AboutCompany.user_id==user.id))" class="edit-profile-btn" @click="toggleShow" v-on:click="smallPic=true">
+        <div v-if="((user!=null)&&(AboutCompany.user_id==user.id))" class="edit-profile-btn" @click="toggleShowForLogo">
           <i class="material-icons">camera_alt</i>
         </div>
       </div>
       <h2 class="company-name">{{AboutCompany.name}}</h2>
-      <div v-if="((user!=null)&&(AboutCompany.user_id==user.id))" class="company-cover-edit" v-on:click="smallPic=false" @click="toggleShow">
+      <div v-if="((user!=null)&&(AboutCompany.user_id==user.id))" class="company-cover-edit" @click="toggleShowForCover">
         <i class="material-icons">camera_alt</i>
       </div>
     </div>
@@ -168,11 +168,12 @@
       <div class="right-bottom-company">
       </div>
     </div>
-    <my-upload v-if="smallPic==true || FoodImageActive == true" field="img"
-        @crop-success="cropSuccess"
-        @crop-upload-success="cropUploadSuccess"
-        @crop-upload-fail="cropUploadFail"
-        v-model="show"
+    <!-- profile -->
+    <my-upload field="img"
+        @crop-success="cropSuccessForLogo"
+        @crop-upload-success="cropUploadSuccessForLogo"
+        @crop-upload-fail="cropUploadFailForLogo"
+        v-model="showForLogo"
         langType="En"
         :width="300"
         :height="300"
@@ -180,18 +181,33 @@
         :headers="headers"
         img-format="png">
       </my-upload>
-      <my-upload v-else field="img"
-          @crop-success="cropSuccess"
-          @crop-upload-success="cropUploadSuccess"
-          @crop-upload-fail="cropUploadFail"
-          v-model="show"
+      <!-- cover -->
+      <my-upload field="img"
+          @crop-success="cropSuccessForCover"
+          @crop-upload-success="cropUploadSuccessForCover"
+          @crop-upload-fail="cropUploadFailForCover"
+          v-model="showForCover"
           langType="En"
-          :width="900"
-          :height="900"
+          :width="700"
+          :height="300"
           :params="params"
           :headers="headers"
+          :noCircle="true"
           img-format="png">
         </my-upload>
+        <!-- newfood -->
+        <my-upload field="img"
+            @crop-success="cropSuccessForFood"
+            @crop-upload-success="cropUploadSuccessForFood"
+            @crop-upload-fail="cropUploadFailForFood"
+            v-model="showForFood"
+            langType="En"
+            :width="300"
+            :height="300"
+            :params="params"
+            :headers="headers"
+            img-format="png">
+          </my-upload>
         <h5 class="titles"><i class="material-icons">location_on</i> Our location</h5>
         <div class="map-container">
           <div id="company-profile-map">
@@ -206,8 +222,9 @@ import myUpload from 'vue-image-crop-upload';
   export default {
     data () {
        return {
-         smallPic:true,
-         show: false,
+         showForLogo: false,
+         showForCover: false,
+         showForFood: false,
          params: {
              token: '123456798',
              name: 'avatar'
@@ -215,11 +232,12 @@ import myUpload from 'vue-image-crop-upload';
          headers: {
              smail: '*_~'
          },
-         imgDataUrl: '',
+         imgDataUrlForLogo: '',
+         imgDataUrlForCover: '',
+         imgDataUrlForFood: '',
          AboutCompany:[],
          FoodName:'',
          FoodDescription:'',
-         FoodImageActive:false,
          CompanyProduct:[],
          SelectedSize:[],
          CompanySession:[],
@@ -294,7 +312,7 @@ import myUpload from 'vue-image-crop-upload';
       {
         var vm=this;
         axios.post('/store-food',{
-          FoodImage:this.imgDataUrl,
+          FoodImage:this.imgDataUrlForFood,
           name:this.FoodName,
           description:this.FoodDescription,
           companyid:this.AboutCompany.id,
@@ -312,7 +330,7 @@ import myUpload from 'vue-image-crop-upload';
               });
           }else
           {
-            vm.imgDataUrl = '';
+            vm.imgDataUrlForFood = '';
             vm.FoodName = '';
             vm.FoodDescription = '';
             vm.selectedCategory =[];
@@ -350,15 +368,21 @@ import myUpload from 'vue-image-crop-upload';
             });
         });
       },
-      toggleShow() {
-                this.show = !this.show;
+      toggleShowForLogo() {
+                this.showForLogo = !this.show;
+            },
+      toggleShowForCover() {
+                this.showForCover = !this.show;
+            },
+      toggleShowForFood() {
+                this.showForFood = !this.show;
             },
             changeLogo()
             {
               var vm=this;
               axios.put('/company-profile-image/'+this.company.id,
             {
-              Logo:this.imgDataUrl
+              Logo:this.imgDataUrlForLogo
             }).then(function(response)
               {
                 console.log(response);
@@ -369,7 +393,7 @@ import myUpload from 'vue-image-crop-upload';
                     title: 'Your Logo has been changed',
                     showConfirmButton: true
                   });
-                vm.imgDataUrl='';
+                vm.imgDataUrlForLogo='';
               });
             },
             changeCover()
@@ -377,7 +401,7 @@ import myUpload from 'vue-image-crop-upload';
               var vm=this;
               axios.put('/company-cover-image/'+this.company.id,
             {
-              Cover:this.imgDataUrl
+              Cover:this.imgDataUrlForCover
             }).then(function(response)
               {
                 vm.GetCompanyDetail();
@@ -388,7 +412,7 @@ import myUpload from 'vue-image-crop-upload';
                     showConfirmButton: true
 
                   });
-                  vm.imgDataUrl='';
+                  vm.imgDataUrlForCover='';
               });
             },
             fetchCategories()
@@ -415,17 +439,10 @@ import myUpload from 'vue-image-crop-upload';
              * [param] imgDataUrl
              * [param] field
              */
-            cropSuccess(imgDataUrl, field){
+            cropSuccessForLogo(imgDataUrl, field){
                 console.log('-------- crop success --------');
-                this.imgDataUrl = imgDataUrl;
-                if (this.smallPic==true && this.FoodImageActive==false)
-                {
-                  this.changeLogo();
-                }else if(this.smallPic==false && this.FoodImageActive==false)
-                {
-                  this.changeCover();
-                }
-
+                this.imgDataUrlForLogo = imgDataUrl;
+                this.changeLogo();
             },
             /**
              * upload success
@@ -433,7 +450,7 @@ import myUpload from 'vue-image-crop-upload';
              * [param] jsonData  server api return data, already json encode
              * [param] field
              */
-            cropUploadSuccess(jsonData, field){
+            cropUploadSuccessForLogo(jsonData, field){
                 console.log('-------- upload success --------');
                 console.log(jsonData);
                 console.log('field: ' + field);
@@ -444,11 +461,83 @@ import myUpload from 'vue-image-crop-upload';
              * [param] status    server api return error status, like 500
              * [param] field
              */
-            cropUploadFail(status, field){
+            cropUploadFailForLogo(status, field){
                 console.log('-------- upload fail --------');
                 console.log(status);
                 console.log('field: ' + field);
-            }
+            },
+
+            // cover
+
+            /**
+             * crop success
+             *
+             * [param] imgDataUrl
+             * [param] field
+             */
+            cropSuccessForCover(imgDataUrl, field){
+                console.log('-------- crop success --------');
+                this.imgDataUrlForCover = imgDataUrl;
+                this.changeCover();
+            },
+            /**
+             * upload success
+             *
+             * [param] jsonData  server api return data, already json encode
+             * [param] field
+             */
+            cropUploadSuccessForCover(jsonData, field){
+                console.log('-------- upload success --------');
+                console.log(jsonData);
+                console.log('field: ' + field);
+            },
+            /**
+             * upload fail
+             *
+             * [param] status    server api return error status, like 500
+             * [param] field
+             */
+            cropUploadFailForCover(status, field){
+                console.log('-------- upload fail --------');
+                console.log(status);
+                console.log('field: ' + field);
+            },
+
+            //food
+
+            /**
+             * crop success
+             *
+             * [param] imgDataUrl
+             * [param] field
+             */
+            cropSuccessForFood(imgDataUrl, field){
+                console.log('-------- crop success --------');
+                this.imgDataUrlForFood = imgDataUrl;
+            },
+            /**
+             * upload success
+             *
+             * [param] jsonData  server api return data, already json encode
+             * [param] field
+             */
+            cropUploadSuccessForFood(jsonData, field){
+                console.log('-------- upload success --------');
+                console.log(jsonData);
+                console.log('field: ' + field);
+            },
+            /**
+             * upload fail
+             *
+             * [param] status    server api return error status, like 500
+             * [param] field
+             */
+            cropUploadFailForFood(status, field){
+                console.log('-------- upload fail --------');
+                console.log(status);
+                console.log('field: ' + field);
+            },
+
     },
   }
 </script>

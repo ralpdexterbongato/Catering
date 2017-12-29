@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class orderdetail extends Model
+class OrderColor extends Model
 {
-    protected $table='food_orders';
+    //
 }

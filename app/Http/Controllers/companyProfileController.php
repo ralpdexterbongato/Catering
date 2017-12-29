@@ -17,6 +17,6 @@ class companyProfileController extends Controller
         Image::make($request->get('Logo'))->save(public_path('/storage/images/').$fileName);
       }
       company::where('id',$companyid)->update(['logo'=>$fileName]);
-      return;
+      return ['response'=>'response'];
     }
 }

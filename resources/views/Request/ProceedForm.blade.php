@@ -3,7 +3,7 @@
   Request form
 @endsection
 @section('content')
-  <proceed :customfoods="{{$customFoods}}"></proceed>
+  <proceed :customfoods="{{$customFoods}}" :colors="{{$colorChoices}}" :company="{{$company}}"></proceed>
 @endsection
 @section('javascripts')
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>
@@ -17,6 +17,7 @@
       today: 'Today',
       clear: 'Clear',
       close: 'Ok',
+      format: 'mm/dd/yyyy',
       closeOnSelect: false // Close upon selecting a date,
       });
 

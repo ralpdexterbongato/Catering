@@ -15,13 +15,15 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('customer_id');
+            $table->integer('user_id');
             $table->integer('company_id');
             $table->integer('package_id')->nullable();
+            $table->string('event_name');
+            $table->string('message')->nullable();
             $table->integer('expectedVisitors');
-            $table->date('date');
-            $table->string('timestart');
-            $table->integer('status');
+            $table->date('date_start');
+            $table->string('time_start');
+            $table->integer('status')->nullable();
             $table->char('client_contact');
             $table->string('address_lat')->nullable();
             $table->string('address_lng')->nullable();
