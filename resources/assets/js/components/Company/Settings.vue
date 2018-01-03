@@ -43,7 +43,7 @@
             <td>
               <a class="btn food-image-finder" @click="toggleShow">change</a>
             </td>
-            <td><img class="z-depth-3" v-if="currentLogo != ''" :src="'/storage/images/'+currentLogo.logo" alt=""></td>
+            <td><img class="z-depth-3 logo-prev" v-if="currentLogo != ''" :src="'/storage/images/'+currentLogo.logo" alt=""></td>
             <td>
               <a href="#" class="btn btn-floating white" v-on:click.prevent="updateLogo()"><i class="material-icons red-text darken-1">loop</i></a>
             </td>
@@ -53,7 +53,7 @@
             <td>
               <a class="btn food-image-finder" @click="CovertoggleShow">change</a>
             </td>
-            <td><img class="z-depth-3" v-if="currentCover!=''" :src="'/storage/images/'+currentCover.heroPicture" alt=""></td>
+            <td><img class="z-depth-3 cover-prev" v-if="currentCover!=''" :src="'/storage/images/'+currentCover.heroPicture" alt=""></td>
             <td>
               <a href="#" class="btn btn-floating white" v-on:click.prevent="updateCover()"><i class="material-icons red-text darken-1">loop</i></a>
             </td>

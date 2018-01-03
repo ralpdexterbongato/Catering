@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Session;
-use App\food;
 class OrderSessionController extends Controller
 {
     public function store(Request $request,$companyid)

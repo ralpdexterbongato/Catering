@@ -4,26 +4,15 @@
       <table class="responsive-table">
         <thead>
           <tr>
-            <th>Selected foods</th>
+            <th>Selected products</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="food in customfoods">
+          <tr v-for="food in custompack">
             <td><img :src="'/storage/images/'+food.foodImage" alt="foodimage"></td>
             <td>{{food.foodName}}</td>
           </tr>
         </tbody>
-        <thead>
-          <tr>
-            <th>Selected drinks</th>
-          </tr>
-        </thead>
-          <tbody>
-            <tr v-for="drink in customdrinks">
-              <td><img :src="'/storage/images/'+drink.drinkImage" alt="drinkimage"></td>
-              <td>{{drink.drinkName}}</td>
-            </tr>
-          </tbody>
       </table>
     </div>
     <div class="proceed-forms">
@@ -103,7 +92,7 @@ import axios from 'axios';
       confirm:false,
       }
     },
-    props: ['customfoods','colors','company','minimum','customdrinks'],
+    props: ['custompack','colors','company','minimum'],
     methods: {
       sendRequest()
       {

@@ -50,21 +50,12 @@
                   </div>
                 </td>
               </tr>
-              <tr v-if="foodsDetail[0]!=null">
+              <tr v-if="ProductDetail[0]!=null">
                 <th>Foods</th>
                 <td class="submited-preview-container">
-                  <div class="request-preview-box z-depth-1" v-for="food in foodsDetail">
+                  <div class="request-preview-box z-depth-1" v-for="food in ProductDetail">
                     <img :src="'/storage/images/'+food.image" alt="food">
                     <p>{{food.name}}</p>
-                  </div>
-                </td>
-              </tr>
-              <tr v-if="DrinksDetail[0]!=null">
-                <th>Drinks</th>
-                <td class="submited-preview-container">
-                  <div class="request-preview-box z-depth-1" v-for="drink in DrinksDetail">
-                    <img :src="'/storage/images/'+drink.image" alt="drink">
-                    <p>{{drink.name}}</p>
                   </div>
                 </td>
               </tr>
@@ -140,8 +131,7 @@ import axios from 'axios';
         requestMasters:[],
         requestDetail:[],
         colorDetail:[],
-        foodsDetail:[],
-        DrinksDetail:[],
+        ProductDetail:[],
         CurrentIndex:0,
         SameDayOrders:[]
       }
@@ -174,8 +164,7 @@ import axios from 'axios';
           console.log(response);
           vm.requestDetail=response.data.OrderData[0];
           vm.colorDetail= response.data.OrderData[0].colors;
-          vm.foodsDetail= response.data.OrderData[0].foods;
-          vm.DrinksDetail= response.data.OrderData[0].drinks;
+          vm.ProductDetail= response.data.OrderData[0].products;
           vm.SameDayOrders= response.data.existing;
           var mymap = new GMaps({
              el: '#location-show',

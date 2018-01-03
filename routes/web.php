@@ -16,7 +16,7 @@ Route::get('/about', function () {
 });
 Route::get('/company','companycontroller@index')->name('company-index');
 Route::get('/company-index-data','companycontroller@indexData');
-Route::get('/','foodcontroller@Index');
+Route::get('/','ProductController@Index');
 Route::get('/register','registercontroller@create');
 Route::post('/register-store','registercontroller@store');
 Route::post('/user','usercontroller@logout');
@@ -32,9 +32,9 @@ Route::get('/company-show-own','companycontroller@showOwnCompany');
 Route::put('/company-profile-image/{companyid}','companyProfileController@update');
 Route::put('/company-cover-image/{companyid}','companyCoverController@update');
 
-Route::post('/store-food','foodcontroller@store');
-Route::get('/show-company-products/{companyid}','foodcontroller@displaycompanyfood');
-Route::get('/fetch-categories','foodcontroller@fetchCategories');
+Route::post('/store-product','ProductController@store');
+Route::get('/show-company-products/{companyid}','ProductController@displaycompanyproduct');
+Route::get('/fetch-categories','ProductController@fetchCategories');
 
 Route::post('/mylist-session/{companyid}','OrderSessionController@store');
 Route::get('/mylist-session-show/{companyid}','OrderSessionController@show');
@@ -69,13 +69,6 @@ Route::get('/show-cater-request','RequestController@showRequestList');
 Route::get('/show-cater-request-users','RequestController@fetchRequest');
 Route::get('/show-cater-request-data/{orderId}','RequestController@fetchRequestData');
 
-Route::post('/store-drink','DrinkController@store');
-Route::get('/show-company-drinks/{companyid}','DrinkController@displayCompanyDrinks');
-
-Route::post('/drink-session/{companyid}','OrderDrinkSessionController@store');
-Route::get('/drink-session-show/{companyid}','OrderDrinkSessionController@show');
-Route::delete('/drink-session-delete/{companyid}/{drinkid}','OrderDrinkSessionController@delete');
-
 Route::post('/accept-request/{orderid}','RequestController@acceptRequest');
 Route::post('/decline-request/{orderid}','RequestController@declineRequest');
 
@@ -85,3 +78,5 @@ Route::get('/calendar-show-monthly-changed','ScheduleController@showMonthSelecte
 
 Route::get('/notification','NotificationController@show');
 Route::get('/notification-count','NotificationController@countNotif');
+
+Route::get('/package-create','PackageController@create');

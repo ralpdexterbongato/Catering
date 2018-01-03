@@ -14,13 +14,9 @@ class order extends Model
   {
     return $this->belongsToMany('App\CompanyColor','order_colors','order_id','color_id');
   }
-  public function foods()
+  public function products()
   {
-    return $this->belongsToMany('App\food','food_orders','order_id','food_id');
-  }
-  public function drinks()
-  {
-    return $this->belongsToMany('App\Drink','drink_orders','order_id','drink_id');
+    return $this->belongsToMany('App\Product','product_orders','order_id','product_id');
   }
   public function getCreatedAtAttribute($date)
   {

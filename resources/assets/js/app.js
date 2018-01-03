@@ -28,6 +28,7 @@ Vue.component('proceed', require('./components/Request/proceed.vue'));
 Vue.component('requestlist', require('./components/Request/AcceptOrDecline.vue'));
 Vue.component('companysettings', require('./components/Company/Settings.vue'));
 Vue.component('calendarschedule', require('./components/Request/Calendar.vue'));
+Vue.component('packagecreate', require('./components/Package/Create.vue'));
 
 const app = new Vue({
     el: '#app',

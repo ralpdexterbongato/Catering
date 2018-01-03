@@ -9,7 +9,7 @@
            <table>
              <thead>
                <tr>
-                 <th>Foods selected</th>
+                 <th>Products selected</th>
                </tr>
              </thead>
              <tbody>
@@ -17,18 +17,6 @@
                  <td><img :src="'/storage/images/'+session.foodImage"></td>
                  <td>{{session.foodName}}</td>
                  <td v-on:click="RemoveFromList(session.foodId)"><i class="material-icons grey-text">close</i></td>
-               </tr>
-             </tbody>
-             <thead>
-               <tr>
-                 <th>Drinks selected</th>
-               </tr>
-             </thead>
-             <tbody>
-               <tr v-for="drink in CompanyDrinksSession">
-                 <td><img :src="'/storage/images/'+drink.drinkImage" alt="drinkpic"></td>
-                 <td>{{drink.drinkName}}</td>
-                 <td v-on:click="RemoveDrink(drink.drinkId)"><i class="material-icons grey-text">close</i></td>
                </tr>
              </tbody>
            </table>
@@ -44,7 +32,7 @@
      </div>
       <div id="addproductmodal" class="modal modal-fixed-footer">
        <div class="modal-content">
-         <h5>Add food menu</h5>
+         <h5>Add product menu</h5>
         <div class="food-form-container">
           <div class="input-field col s6">
             <input id="foodname" v-model="FoodName" type="text" data-length="20">
@@ -54,45 +42,31 @@
             <textarea id="fdescription" v-model="FoodDescription" class="materialize-textarea" data-length="100"></textarea>
             <label for="fdescription">Description</label>
           </div>
+          <div class="input-field col s12">
+            <select id="typeSelect">
+              <option value="" disabled selected></option>
+              <option value="0">Food</option>
+              <option value="1">Drink</option>
+              <option value="2">Sweet</option>
+            </select>
+            <label>Select type</label>
+          </div>
           <div class="category-boxes-container">
             <p v-for="category in fetchedCategories">
               <input type="checkbox" v-model="selectedCategory" :value="category.id" :id="'categ'+category.id"/>
               <label :for="'categ'+category.id">{{category.name}}</label>
             </p>
           </div>
-          <a class="btn food-image-finder" @click="toggleShowForFood">food image</a>
+          <a class="btn food-image-finder" @click="toggleShowForProduct">Image</a>
           <div class="preview" v-if="imgDataUrlForFood!=''">
             <img :src="imgDataUrlForFood" alt="preview">
           </div>
         </div>
        </div>
-       <div class="modal-footer">
-         <a href="#!" class="modal-action modal-close waves-effect waves-indigo btn-flat ">Cancel</a>
-         <a href="#!" class="modal-action modal-close waves-effect waves-indigo btn-flat " v-on:click="AddNewFood()">Save</a>
-       </div>
-      </div>
-      <div id="AddDrinksModal" class="modal modal-fixed-footer">
-       <div class="modal-content">
-         <h5>Add Drink menu</h5>
-        <div class="food-form-container">
-          <div class="input-field col s6">
-            <input id="DrinkName" v-model="DrinkName" type="text" data-length="20">
-            <label for="DrinkName" >Name</label>
-          </div>
-          <div class="input-field col s12">
-            <textarea id="DrinkDescription" v-model="DrinkDesc"  class="materialize-textarea" data-length="100"></textarea>
-            <label for="DrinkDescription">Description</label>
-          </div>
-          <a class="btn food-image-finder" @click="toggleShowForDrinks">Image</a>
-          <div class="preview" v-if="imgDataUrlForDrinks!=''">
-            <img :src="imgDataUrlForDrinks" alt="preview">
-          </div>
-        </div>
-       </div>
-       <div class="modal-footer">
-         <a href="#!" class="modal-action modal-close waves-effect waves-indigo btn-flat ">Cancel</a>
-         <a href="#!" class="modal-action modal-close waves-effect waves-indigo btn-flat" v-on:click="AddNewDrink()">Save</a>
-       </div>
+    <div class="modal-footer">
+     <a href="#!" class="modal-action modal-close waves-effect waves-indigo btn-flat ">Cancel</a>
+     <a href="#!" class="modal-action modal-close waves-effect waves-indigo btn-flat " v-on:click="AddNewProduct()">Save</a>
+    </div>
     </div>
     <div class="company-cover-hero" v-if="AboutCompany.heroPicture!=null" :style="'background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(/storage/images/'+AboutCompany.heroPicture+')'">
       <div id="company-logo">
@@ -141,7 +115,7 @@
       <div class="card">
         <div class="card-image">
           <img src="/DesignPic/1.jpg">
-          <a :href="'/request-proceed/'+company.id" class="btn-floating halfway-fab waves-effect waves-light redirect indigo"><i class="material-icons">add</i></a>
+          <a :href="'/request-proceed/'+company.id" class="btn-floating halfway-fab waves-effect waves-light redirect indigo"><i class="material-icons">remove_red_eye</i></a>
         </div>
         <div class="card-content">
           <span class="card-title">P120 per head</span>
@@ -151,7 +125,7 @@
       <div class="card">
         <div class="card-image">
           <img src="/DesignPic/1.jpg">
-          <a :href="'/request-proceed/'+company.id" class="btn-floating halfway-fab waves-effect waves-light redirect indigo"><i class="material-icons">add</i></a>
+          <a :href="'/request-proceed/'+company.id" class="btn-floating halfway-fab waves-effect waves-light redirect indigo"><i class="material-icons">remove_red_eye</i></a>
         </div>
         <div class="card-content">
           <span class="card-title">P120 per head</span>
@@ -161,7 +135,7 @@
       <div class="card">
         <div class="card-image">
           <img src="/DesignPic/1.jpg">
-          <a :href="'/request-proceed/'+company.id" class="btn-floating halfway-fab waves-effect waves-light redirect indigo"><i class="material-icons">add</i></a>
+          <a :href="'/request-proceed/'+company.id" class="btn-floating halfway-fab waves-effect waves-light redirect indigo"><i class="material-icons">remove_red_eye</i></a>
         </div>
         <div class="card-content">
           <span class="card-title">P120 per head</span>
@@ -170,9 +144,27 @@
       </div>
     </div>
     <h5 class="custom-package-title"><i class="material-icons">touch_app</i>Customize your package</h5>
-    <div class="divider">
-    </div>
-    <h5 class="custom-package-foodmenu"><i class="material-icons">local_dining</i> Food menu</h5>
+    <h5 class="custom-package-foodmenu"><i class="material-icons">local_dining</i> Product menu</h5>
+    <div class="sorting-container">
+      <form action="#" class="radio-sort-container">
+         <p>
+           <input class="with-gap"  v-model="SortType" name="SortType" value="0" type="radio" id="sort1"  />
+           <label for="sort1">Foods</label>
+         </p>
+         <p>
+           <input class="with-gap" v-model="SortType" name="SortType" value="1" type="radio" id="sort2"  />
+           <label for="sort2">Drinks</label>
+         </p>
+         <p>
+           <input class="with-gap" v-model="SortType" name="SortType" value="2" type="radio" id="sort3"  />
+           <label for="sort3">Sweets</label>
+         </p>
+      </form>
+      <div class="search-container">
+        <input type="text" placeholder="Product" v-on:keypress.enter="getCompanyProducts()" v-model="productSearch">
+        <a href="#" class="btn btn-floating" v-on:click.prevent="getCompanyProducts()">GO</a>
+      </div>
+      </div>
     <div class="menu-showcase">
       <div class="showcase-box" v-for="(product,productKey) in CompanyProduct">
         <div class="card">
@@ -184,7 +176,6 @@
              <div class="menu-options">
                <div class="menu-option-btn">
                  <i class="material-icons add-btn" v-if="(((user!=null) && (AboutCompany.user_id!=user.id))||(user==null))" v-on:click="addToSessionList(product)">add</i>
-                 <i class="material-icons view-btn">remove_red_eye</i>
                </div>
              </div>
            </div>
@@ -200,41 +191,12 @@
         <li v-for="page in pagesNumberFood" v-bind:class="[ page == isActiveFood ? 'active indigo':'']"><a href="#!" @click.prevent="changepage(page)">{{page}}</a></li>
         <li class="waves-effect" v-if="paginationFood.current_page < paginationFood.last_page"><a href="#!" @click.prevent="changepage(paginationFood.current_page + 1)"><i class="material-icons">chevron_right</i></a></li>
     </ul>
-    <div class="divider">
-    </div>
-      <h5 class="titles"><i class="material-icons">local_drink</i> Drinks</h5>
-      <div class="profile-drinks-container">
-       <div class="card" v-for="drink in CompanyDrinks">
-          <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" :src="'/storage/images/'+ drink.image">
-          </div>
-          <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">{{drink.name}}<i class="material-icons right">more_vert</i></span>
-            <div class="menu-options">
-              <div class="menu-option-btn">
-                <i class="material-icons add-btn" v-if="(((user!=null) && (AboutCompany.user_id!=user.id))||(user==null))" v-on:click="addToSessionDrinks(drink)">add</i>
-                <i class="material-icons view-btn">remove_red_eye</i>
-              </div>
-            </div>
-          </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
-            <p>{{drink.description}}</p>
-          </div>
-        </div>
-      </div>
-      <ul class="pagination">
-          <li class="waves-effect" v-if="paginationDrinks.current_page > 1"><a href="#" @click.prevent="changepageDrink(paginationDrinks.current_page - 1)"><i class="material-icons">chevron_left</i></a></li>
-          <li v-for="page in pagesNumberDrink" v-bind:class="[ page == isActiveDrink ? 'active indigo':'']"><a href="#!" @click.prevent="changepageDrink(page)">{{page}}</a></li>
-          <li class="waves-effect" v-if="paginationDrinks.current_page < paginationDrinks.last_page"><a href="#!" @click.prevent="changepageDrink(paginationDrinks.current_page + 1)"><i class="material-icons">chevron_right</i></a></li>
-      </ul>
     <div class="fixed-action-btn click-to-toggle" v-if="((user!=null)&&(user.id==AboutCompany.user_id))">
        <a class="btn-floating btn-large indigo">
          <i class="material-icons">add</i>
        </a>
        <ul>
          <li onclick="$('#addproductmodal').modal('open');" v-on:click="[user.id==AboutCompany.user_id && fetchedCategories[0]==null?fetchCategories():'']"><a class="btn-floating indigo darken-1"><i class="material-icons">restaurant</i></a></li>
-         <li onclick="$('#AddDrinksModal').modal('open');"><a class="btn-floating indigo darken-1"><i class="material-icons">local_drink</i></a></li>
        </ul>
     </div>
     <div class="fixed-action-btn" v-else>
@@ -272,7 +234,7 @@
         @crop-success="cropSuccessForFood"
         @crop-upload-success="cropUploadSuccessForFood"
         @crop-upload-fail="cropUploadFailForFood"
-        v-model="showForFood"
+        v-model="showForProduct"
         langType="En"
         :width="300"
         :height="300"
@@ -303,7 +265,7 @@ import myUpload from 'vue-image-crop-upload';
        return {
          showForLogo: false,
          showForCover: false,
-         showForFood: false,
+         showForProduct: false,
          showForDrinks: false,
          params: {
              token: '123456798',
@@ -315,23 +277,19 @@ import myUpload from 'vue-image-crop-upload';
          imgDataUrlForLogo: '',
          imgDataUrlForCover: '',
          imgDataUrlForFood: '',
-         imgDataUrlForDrinks: '',
          AboutCompany:[],
          FoodName:'',
          FoodDescription:'',
-         DrinkName:'',
-         DrinkDesc:'',
          CompanyProduct:[],
          SelectedSize:[],
          CompanySession:[],
          fetchedCategories:[],
          selectedCategory:[],
-         CompanyDrinks:[],
          CompanyDrinksSession:[],
          paginationFood:[],
-         paginationDrinks:[],
          offsetFood:4,
-         offsetDrink:4,
+         SortType:0,
+         productSearch:''
       }
     },
     components: {
@@ -340,20 +298,14 @@ import myUpload from 'vue-image-crop-upload';
     created()
     {
       this.GetCompanyDetail();
-      this.getCompanyProducts();
-      this.getCompanyDrinks();
+      this.getCompanyProducts(1);
       this.showAddedSession();
-      this.showAddedDrinkSession();
     },
     props: ['company','user'],
     methods: {
       changepage(next){
         this.paginationFood.current_page = next;
         this.getCompanyProducts(next);
-      },
-      changepageDrink(next){
-        this.paginationDrinks.current_page = next;
-        this.getCompanyDrinks(next);
       },
       addToSessionList(FoodData)
       {
@@ -387,38 +339,6 @@ import myUpload from 'vue-image-crop-upload';
           console.log(error);
         });
       },
-      addToSessionDrinks(DrinkData)
-      {
-        var vm=this;
-        axios.post('/drink-session/'+this.company.id,{
-          DrinkId:DrinkData.id,
-          DrinkName:DrinkData.name,
-          DrinkImage:DrinkData.image,
-        }).then(function(response)
-        {
-          console.log(response);
-          if (response.data.error!=null) {
-            swal({
-                position: 'top-right',
-                type: 'error',
-                title: response.data.error,
-                showConfirmButton:true
-              });
-          }else
-          {
-            vm.showAddedDrinkSession();
-            swal({
-                position: 'top-right',
-                type: 'success',
-                title: '1 item added to your list',
-                showConfirmButton:true
-              });
-          }
-        },function(error)
-        {
-          console.log(error);
-        });
-      },
       showAddedSession()
       {
         var vm=this;
@@ -426,15 +346,6 @@ import myUpload from 'vue-image-crop-upload';
         {
           console.log(response);
           vm.CompanySession=response.data.foodsaved;
-        })
-      },
-      showAddedDrinkSession()
-      {
-        var vm=this;
-        axios.get('/drink-session-show/'+this.company.id).then(function(response)
-        {
-          console.log(response);
-          vm.CompanyDrinksSession=response.data;
         })
       },
       GetCompanyDetail()
@@ -446,15 +357,16 @@ import myUpload from 'vue-image-crop-upload';
           vm.AboutCompany=response.data;
         })
       },
-      AddNewFood()
+      AddNewProduct()
       {
         var vm=this;
-        axios.post('/store-food',{
+        axios.post('/store-product',{
           FoodImage:this.imgDataUrlForFood,
           name:this.FoodName,
           description:this.FoodDescription,
           companyid:this.AboutCompany.id,
-          categories:this.selectedCategory
+          categories:this.selectedCategory,
+          type:$('#typeSelect').val()
         }).then(function(response)
         {
           console.log(response);
@@ -491,49 +403,6 @@ import myUpload from 'vue-image-crop-upload';
             });
         });
       },
-      AddNewDrink()
-      {
-        var vm=this;
-        axios.post('/store-drink',{
-          DrinkImage:this.imgDataUrlForDrinks,
-          name:this.DrinkName,
-          description:this.DrinkDesc,
-          companyid:this.AboutCompany.id
-        }).then(function(response)
-        {
-          console.log(response);
-          if (response.data.error!=null)
-          {
-            swal({
-                position: 'top-right',
-                type: 'error',
-                title: response.data.error,
-                showConfirmButton:true
-              });
-          }else
-          {
-            vm.imgDataUrlForDrinks ='';
-            vm.DrinkName ='';
-            vm.DrinkDesc ='';
-            swal({
-                position: 'top-right',
-                type: 'success',
-                title: 'Drink saved!',
-                showConfirmButton:true
-              });
-            vm.getCompanyDrinks();
-          }
-        },function(error)
-        {
-          console.log(error);
-          swal({
-              position: 'top-right',
-              type: 'error',
-              title: error.response.data.message,
-              showConfirmButton:true
-            });
-        });
-      },
       RemoveFromList(foodid)
       {
         var vm=this;
@@ -549,35 +418,14 @@ import myUpload from 'vue-image-crop-upload';
             });
         });
       },
-      RemoveDrink(drinkid)
-      {
-        var vm=this;
-        axios.delete(`/drink-session-delete/`+this.company.id+`/`+drinkid).then(function(response)
-        {
-          console.log(response);
-          vm.showAddedDrinkSession();
-          swal({
-              position: 'top-right',
-              type: 'success',
-              title: '1 drink removed from your list',
-              showConfirmButton:true
-            });
-        }).catch(function(error)
-        {
-          console.log(error);
-        });
-      },
       toggleShowForLogo() {
                 this.showForLogo = !this.show;
             },
       toggleShowForCover() {
                 this.showForCover = !this.show;
             },
-      toggleShowForFood() {
-                this.showForFood = !this.show;
-            },
-      toggleShowForDrinks() {
-                this.showForDrinks = !this.show;
+      toggleShowForProduct() {
+                this.showForProduct = !this.show;
             },
             changeLogo()
             {
@@ -633,7 +481,7 @@ import myUpload from 'vue-image-crop-upload';
                   text: "Please wait.",
                   showConfirmButton: false
               });
-              axios.get(`/show-company-products/`+this.company.id+`?page=`+page).then(function(response)
+              axios.get(`/show-company-products/`+this.company.id+`?page=`+page+`&type=`+this.SortType+`&search=`+this.productSearch).then(function(response)
               {
                 console.log(response);
                 vm.CompanyProduct=response.data.data;

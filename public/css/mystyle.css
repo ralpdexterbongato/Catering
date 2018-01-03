@@ -261,11 +261,12 @@ nav
 }
 .right-header li.active
 {
-	background-color: #7F8BCD!important;
+	background-color:rgba(255, 255, 255, 0.1);
+	border-bottom: 3px solid #fff;
 }
 .right-header > ul >li:hover
 {
-		background: #7F8BCD;
+	border-bottom: 3px solid #fff;
 }
 .right-header ul li
 {
@@ -282,7 +283,8 @@ nav
 }
 .nav-parent:hover
 {
-	background: transparent!important
+	background: transparent!important;
+	border-bottom: 0px!important;
 }
 .nav-parent:hover .nav-drop
 {
@@ -303,7 +305,7 @@ nav
 	position: absolute;
 	top:-6000px;
 	left:-60px;
-	width: 180px;
+	width: 200px;
 	display: flex;
 	flex-direction: column;
 	z-index: 5;
@@ -767,6 +769,21 @@ font-family: 'Pompiere', cursive;
 	text-align: center;
 	font-family: 'Pompiere', cursive;
 }
+.radio-sort-container
+{
+	display: flex;
+	justify-content:flex-start;
+}
+.radio-sort-container p
+{
+	margin-right: 20px;
+}
+.sorting-container
+{
+	border-radius: 3px;
+	border:1px solid #e0e0e0;
+	padding:10px;
+}
 .custom-package-foodmenu
 {
 	font-family: 'Pompiere', cursive;
@@ -775,11 +792,26 @@ font-family: 'Pompiere', cursive;
 	font-size: 25px;
 	color: rgba(0, 0, 0, 0.7);
 }
+.card .card-content
+{
+	padding:10px!important;
+}
 .menu-showcase
 {
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+.search-container
+{
+	display: flex;
+	justify-content: flex-start;
+}
+.search-container input
+{
+	max-width: 250px;
 }
 .showcase-box
 {
@@ -794,7 +826,6 @@ font-family: 'Pompiere', cursive;
 {
 	display: flex;
 	justify-content: space-between;
-	margin-top: 40px;
 }
 .menu-option-btn
 {
@@ -805,7 +836,8 @@ font-family: 'Pompiere', cursive;
 }
 .menu-option-btn i
 {
-	margin:10px;
+	margin-right:10px;
+	font-size: 23px!important;
 }
 .view-btn:hover,.add-btn:hover
 {
@@ -982,10 +1014,15 @@ display: inline-block;
 	cursor: pointer;
 }
 
-.company-settings-table-container table td img
+.company-settings-table-container .logo-prev
 {
 	border:4px solid #fff;
-	max-width: 100px;
+	max-width: 150px;
+}
+.company-settings-table-container .cover-prev
+{
+	border:4px solid #fff;
+	max-width: 400px;
 }
 .company-settings-table-container td p
 {

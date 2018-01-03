@@ -7,13 +7,12 @@ use Session;
 use App\CompanyMap;
 use App\CompanyColor;
 use App\order;
-use App\orderdetail;
+use App\product_order;
 use App\OrderColor;
 use Auth;
 use App\company;
-use App\DrinkOrder;
 use Carbon\Carbon;
-use App\food;
+use App\Product;
 class RequestController extends Controller
 {
     public function show($companyid)
@@ -21,13 +20,11 @@ class RequestController extends Controller
       $company = array('id' =>$companyid);
       $company= json_encode($company);
       $location=CompanyMap::where('company_id', $companyid)->get();
-      $customFoods=Session::get('company'.$companyid);
-      $customDrinks=Session::get('CompanyDrink'.$companyid);
-      $customFoods = json_encode($customFoods);
-      $customDrinks=json_encode($customDrinks);
+      $customPack=Session::get('company'.$companyid);
+      $customPack = json_encode($customPack);
       $colorChoices=CompanyColor::where('company_id',$companyid)->get(['id','hex']);
       $companyMinimum=company::where('id', $companyid)->get(['minimum']);
-      return view('Request.ProceedForm',compact('customFoods','customDrinks','companyMinimum','company','location','colorChoices'));
+      return view('Request.ProceedForm',compact('customPack','companyMinimum','company','location','colorChoices'));
     }
     public function sendRequest(Request $request,$companyId)
     {
@@ -58,14 +55,9 @@ class RequestController extends Controller
       $orderDB->save();
 
       $forOrderDetail = array();
-      foreach (Session::get('company'.$companyId) as $key => $food)
+      foreach (Session::get('company'.$companyId) as $key => $product)
       {
-        $forOrderDetail[] = array('food_id' => $food->foodId,'order_id'=>$orderDB->id);
-      }
-      $forDrink = array();
-      foreach (Session::get('CompanyDrink'.$companyId) as $key => $drink)
-      {
-        $forDrink[] = array('drink_id' =>$drink->drinkId,'order_id'=>$orderDB->id);
+        $forOrderDetail[] = array('product_id' => $product->foodId,'order_id'=>$orderDB->id);
       }
       if (isset($request->colors))
       {
@@ -76,10 +68,8 @@ class RequestController extends Controller
         }
         OrderColor::insert($forOrderColor);
       }
-      DrinkOrder::insert($forDrink);
-      orderdetail::insert($forOrderDetail);
+      product_order::insert($forOrderDetail);
       Session::forget('company'.$companyId);
-      Session::forget('CompanyDrink'.$companyId);
       return ['redirect'=>'/company-show/'.$companyId];
     }
     public function showRequestList()
@@ -93,7 +83,7 @@ class RequestController extends Controller
     }
     public function fetchRequestData($orderId)
     {
-       $OneOrderData=order::where('id', $orderId)->with('colors')->with('foods')->with('drinks')->get();
+       $OneOrderData=order::where('id', $orderId)->with('colors')->with('products')->get();
        $ExistingOrderSameDate=order::where('status','0')->with('user')->where('date_start',$OneOrderData[0]->date_start)->get(['id','user_id','event_name','address_lat','message','address_lng','time_start']);
        $response = array('OrderData' =>$OneOrderData, 'existing'=>$ExistingOrderSameDate);
        return response()->json($response);
@@ -101,11 +91,11 @@ class RequestController extends Controller
     public function acceptRequest($orderId)
     {
       order::where('id', $orderId)->update(['status'=>'0','notification_time'=>Carbon::now()]);
-      $foodrequested=order::where('id', $orderId)->with('foods')->get(['id']);
-      foreach ($foodrequested as $key => $foods)
+      $ProductRequested=order::where('id', $orderId)->with('products')->get(['id']);
+      foreach ($ProductRequested as $key => $requested)
       {
-        foreach ($foods->foods as $food) {
-          food::where('id', $food->id)->increment('RequestCount');
+        foreach ($requested->products as $product) {
+          Product::where('id', $product->id)->increment('RequestCount');
         }
       }
       return ['success'=>'success'];

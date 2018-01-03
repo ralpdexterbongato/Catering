@@ -81,20 +81,9 @@
                <th><i class="material-icons">restaurant</i></th>
                <td>
                  <div class="small-product-previewer">
-                   <div class="small-product-box z-depth-2" v-for="food in DataPreview.foods">
-                     <img :src="'/storage/images/'+food.image" alt="productpic">
-                     <p class="bold">{{food.name}}</p>
-                   </div>
-                 </div>
-               </td>
-             </tr>
-             <tr>
-               <th><i class="material-icons">local_drink</i></th>
-               <td>
-                 <div class="small-product-previewer">
-                   <div class="small-product-box z-depth-2" v-for="drink in DataPreview.drinks">
-                     <img :src="'/storage/images/'+drink.image" alt="productpic">
-                     <p class="bold">{{drink.name}}</p>
+                   <div class="small-product-box z-depth-2" v-for="product in DataPreview.products">
+                     <img :src="'/storage/images/'+product.image" alt="productpic">
+                     <p class="bold">{{product.name}}</p>
                    </div>
                  </div>
                </td>

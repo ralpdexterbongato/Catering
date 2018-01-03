@@ -16,7 +16,7 @@ class usercontroller extends Controller
     $credentials =['username'=>$request->username,'password'=>$request->password];
     if (Auth::attempt($credentials))
     {
-      return;
+      return ['success'=>'success'];
     }else
     {
       return ['error'=>'Incorrect username or password'];
@@ -29,6 +29,6 @@ class usercontroller extends Controller
   }
   public function accountConfirmation()
   {
-    
+
   }
 }

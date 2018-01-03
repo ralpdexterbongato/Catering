@@ -52,14 +52,20 @@
               </a>
               <ul class="nav-drop">
                 @if (Auth::check())
-                  <a href="/calendar-show"><li><i class="material-icons">date_range</i> Schedule</li></a>
                   @if (Auth::user()->role==0)
                     <a href="/register"><li><i class="material-icons">add</i> Company</li></a>
                   @elseif(Auth::user()->role==1)
+                    <a href="/package-create"><li><i class="material-icons">settings</i> Package</li></a>
+                    <a href="/comp-settings"><li><i class="material-icons">settings</i> Product</li></a>
                     <a href="/comp-settings"><li><i class="material-icons">settings</i> Company</li></a>
+                    <div class="divider">
+                    </div>
                     <a href="/company-show-own"><li><i class="material-icons">business</i> My Company</li></a>
                     <a href="/show-cater-request"><li><i class="material-icons">room_service</i>Catering request</li></a>
                   @endif
+                  <a href="/calendar-show"><li><i class="material-icons">date_range</i> Schedule</li></a>
+                  <div class="divider">
+                  </div>
                   <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><li><i class="material-icons">exit_to_app</i> Logout</li></a>
                   <form action="/user" id="logout-form" method="post">
                     {{ csrf_field() }}
