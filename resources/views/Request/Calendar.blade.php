@@ -1,9 +1,9 @@
 @extends('layouts.layout')
 @section('title')
- Request list
+  Schedule Calendar
 @endsection
 @section('content')
-  <requestlist></requestlist>
+  <calendarschedule></calendarschedule>
 @endsection
 @section('javascripts')
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>

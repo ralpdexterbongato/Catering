@@ -36,7 +36,7 @@ class OrderSessionController extends Controller
          return response()->json($response);
        }
     }
-    public function delete($companyid,$foodid,$size)
+    public function delete($companyid,$foodid)
     {
       $foodsaved=Session::get('company'.$companyid);
       foreach ($foodsaved as $key => $food)

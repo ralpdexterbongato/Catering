@@ -2,24 +2,43 @@
   <div class="CompanyProfileContainer">
     <div id="MyList" class="modal modal-fixed-footer">
        <div class="modal-content">
-         <h4 class="modal-titles">Customized package foods</h4>
-         <p v-if="user!=null"><i class="material-icons blue-text">info</i> Please click proceed when you are done. Thank you!</p>
-         <p v-else><i class="material-icons blue-text">info</i> Please Login or Register to proceed.</p>
+         <h4 class="modal-titles">Customized package</h4>
+         <p v-if="user!=null"><i class="material-icons indigo-text">info</i> Please click proceed when you are done. Thank you!</p>
+         <p v-else><i class="material-icons indigo-text">info</i> Please Login or Register to proceed.</p>
          <div class="added-session-table">
            <table>
-             <tr v-for="(session,loopkey) in CompanySession">
-               <td><img :src="'/storage/images/'+session.foodImage"></td>
-               <td>{{session.foodName}}</td>
-               <td v-on:click="RemoveFromList(session.foodId,session.Size)"><i class="material-icons grey-text">close</i></td>
-             </tr>
+             <thead>
+               <tr>
+                 <th>Foods selected</th>
+               </tr>
+             </thead>
+             <tbody>
+               <tr v-for="(session,loopkey) in CompanySession">
+                 <td><img :src="'/storage/images/'+session.foodImage"></td>
+                 <td>{{session.foodName}}</td>
+                 <td v-on:click="RemoveFromList(session.foodId)"><i class="material-icons grey-text">close</i></td>
+               </tr>
+             </tbody>
+             <thead>
+               <tr>
+                 <th>Drinks selected</th>
+               </tr>
+             </thead>
+             <tbody>
+               <tr v-for="drink in CompanyDrinksSession">
+                 <td><img :src="'/storage/images/'+drink.drinkImage" alt="drinkpic"></td>
+                 <td>{{drink.drinkName}}</td>
+                 <td v-on:click="RemoveDrink(drink.drinkId)"><i class="material-icons grey-text">close</i></td>
+               </tr>
+             </tbody>
            </table>
          </div>
        </div>
        <div class="modal-footer">
-         <a :href="'/request-proceed/'+company.id" v-if="user!=null" class="modal-action modal-close waves-effect waves-light btn-flat blue-text">Proceed</a>
+         <a :href="'/request-proceed/'+company.id" v-if="user!=null" class="modal-action modal-close waves-effect waves-light btn-flat indigo-text">Proceed</a>
         <span v-else>
-          <a href="#" id="login-opener-2" class="modal-action modal-close waves-effect waves-light btn-flat blue-text">Login</a>
-          <a href="/register" class="modal-action modal-close waves-effect waves-light btn-flat blue-text">Register</a>
+          <a href="#" id="login-opener-2" class="modal-action modal-close waves-effect waves-light btn-flat indigo-text">Login</a>
+          <a href="/register" class="modal-action modal-close waves-effect waves-light btn-flat indigo-text">Register</a>
         </span>
        </div>
      </div>
@@ -48,20 +67,45 @@
         </div>
        </div>
        <div class="modal-footer">
-         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancel</a>
-         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat " v-on:click="AddNewFood()">Save</a>
+         <a href="#!" class="modal-action modal-close waves-effect waves-indigo btn-flat ">Cancel</a>
+         <a href="#!" class="modal-action modal-close waves-effect waves-indigo btn-flat " v-on:click="AddNewFood()">Save</a>
        </div>
       </div>
+      <div id="AddDrinksModal" class="modal modal-fixed-footer">
+       <div class="modal-content">
+         <h5>Add Drink menu</h5>
+        <div class="food-form-container">
+          <div class="input-field col s6">
+            <input id="DrinkName" v-model="DrinkName" type="text" data-length="20">
+            <label for="DrinkName" >Name</label>
+          </div>
+          <div class="input-field col s12">
+            <textarea id="DrinkDescription" v-model="DrinkDesc"  class="materialize-textarea" data-length="100"></textarea>
+            <label for="DrinkDescription">Description</label>
+          </div>
+          <a class="btn food-image-finder" @click="toggleShowForDrinks">Image</a>
+          <div class="preview" v-if="imgDataUrlForDrinks!=''">
+            <img :src="imgDataUrlForDrinks" alt="preview">
+          </div>
+        </div>
+       </div>
+       <div class="modal-footer">
+         <a href="#!" class="modal-action modal-close waves-effect waves-indigo btn-flat ">Cancel</a>
+         <a href="#!" class="modal-action modal-close waves-effect waves-indigo btn-flat" v-on:click="AddNewDrink()">Save</a>
+       </div>
+    </div>
     <div class="company-cover-hero" v-if="AboutCompany.heroPicture!=null" :style="'background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(/storage/images/'+AboutCompany.heroPicture+')'">
       <div id="company-logo">
         <img v-if="AboutCompany.logo!=null" :src="'/storage/images/'+AboutCompany.logo" alt="logo">
         <div v-if="((user!=null)&&(AboutCompany.user_id==user.id))" class="edit-profile-btn" @click="toggleShowForLogo">
           <i class="material-icons">camera_alt</i>
+          <p>change logo</p>
         </div>
       </div>
       <h2 class="company-name">{{AboutCompany.name}}</h2>
       <div v-if="((user!=null)&&(AboutCompany.user_id==user.id))" class="company-cover-edit" @click="toggleShowForCover">
         <i class="material-icons">camera_alt</i>
+        <p>Change cover</p>
       </div>
     </div>
     <div class="company-cover-hero" v-else>
@@ -74,6 +118,7 @@
       <h2 class="company-name">{{AboutCompany.name}}</h2>
       <div v-if="((user!=null)&&(AboutCompany.user_id==user.id))" class="company-cover-edit" @click="toggleShowForCover">
         <i class="material-icons">camera_alt</i>
+        <p>Change cover</p>
       </div>
     </div>
     <div class="about-company-data">
@@ -82,15 +127,21 @@
         <p>{{AboutCompany.description}}</p>
       </div>
       <div class="right-about-company">
-
+        <h5 class="location-title"><i class="material-icons">location_on</i> Our location</h5>
+        <div class="map-container">
+          <div id="company-profile-map">
+          </div>
+        </div>
       </div>
+    </div>
+    <div class="divider">
     </div>
     <h5 class="titles"><i class="material-icons">local_offer</i> Our packages</h5>
     <div class="packages-list">
       <div class="card">
         <div class="card-image">
           <img src="/DesignPic/1.jpg">
-          <a :href="'/request-proceed/'+company.id" class="btn-floating halfway-fab waves-effect waves-light redirect red"><i class="material-icons">add</i></a>
+          <a :href="'/request-proceed/'+company.id" class="btn-floating halfway-fab waves-effect waves-light redirect indigo"><i class="material-icons">add</i></a>
         </div>
         <div class="card-content">
           <span class="card-title">P120 per head</span>
@@ -100,7 +151,7 @@
       <div class="card">
         <div class="card-image">
           <img src="/DesignPic/1.jpg">
-          <a :href="'/request-proceed/'+company.id" class="btn-floating halfway-fab waves-effect waves-light redirect red"><i class="material-icons">add</i></a>
+          <a :href="'/request-proceed/'+company.id" class="btn-floating halfway-fab waves-effect waves-light redirect indigo"><i class="material-icons">add</i></a>
         </div>
         <div class="card-content">
           <span class="card-title">P120 per head</span>
@@ -110,7 +161,7 @@
       <div class="card">
         <div class="card-image">
           <img src="/DesignPic/1.jpg">
-          <a :href="'/request-proceed/'+company.id" class="btn-floating halfway-fab waves-effect waves-light redirect red"><i class="material-icons">add</i></a>
+          <a :href="'/request-proceed/'+company.id" class="btn-floating halfway-fab waves-effect waves-light redirect indigo"><i class="material-icons">add</i></a>
         </div>
         <div class="card-content">
           <span class="card-title">P120 per head</span>
@@ -118,7 +169,10 @@
         </div>
       </div>
     </div>
-    <h5 class="titles"><i class="material-icons">touch_app</i> Custom package</h5>
+    <h5 class="custom-package-title"><i class="material-icons">touch_app</i>Customize your package</h5>
+    <div class="divider">
+    </div>
+    <h5 class="custom-package-foodmenu"><i class="material-icons">local_dining</i> Food menu</h5>
     <div class="menu-showcase">
       <div class="showcase-box" v-for="(product,productKey) in CompanyProduct">
         <div class="card">
@@ -141,78 +195,103 @@
          </div>
       </div>
     </div>
-    <div class="fixed-action-btn" v-if="((user!=null)&&(user.id==AboutCompany.user_id))">
-       <a class="btn-floating btn-large waves-effect waves-light red" v-on:click="[user.id==AboutCompany.user_id?fetchCategories():'']"><i class="material-icons" onclick="$('#addproductmodal').modal('open');">add</i></a>
+    <ul class="pagination">
+        <li class="waves-effect" v-if="paginationFood.current_page > 1"><a href="#" @click.prevent="changepage(paginationFood.current_page - 1)"><i class="material-icons">chevron_left</i></a></li>
+        <li v-for="page in pagesNumberFood" v-bind:class="[ page == isActiveFood ? 'active indigo':'']"><a href="#!" @click.prevent="changepage(page)">{{page}}</a></li>
+        <li class="waves-effect" v-if="paginationFood.current_page < paginationFood.last_page"><a href="#!" @click.prevent="changepage(paginationFood.current_page + 1)"><i class="material-icons">chevron_right</i></a></li>
+    </ul>
+    <div class="divider">
     </div>
-    <div class="fixed-action-btn" v-else>
-      <a  onclick="$('#MyList').modal('open');" class="btn-floating btn-large waves-effect waves-light red" :class="[CompanySession!=null?'pulse':'']"><i class="material-icons">format_list_numbered</i></a>
-    </div>
-    <div class="bottom-company-details">
-      <div class="left-bottom-company">
-        <div class="card">
+      <h5 class="titles"><i class="material-icons">local_drink</i> Drinks</h5>
+      <div class="profile-drinks-container">
+       <div class="card" v-for="drink in CompanyDrinks">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" :src="'/storage/images/'+ drink.image">
+          </div>
           <div class="card-content">
-            <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+            <span class="card-title activator grey-text text-darken-4">{{drink.name}}<i class="material-icons right">more_vert</i></span>
+            <div class="menu-options">
+              <div class="menu-option-btn">
+                <i class="material-icons add-btn" v-if="(((user!=null) && (AboutCompany.user_id!=user.id))||(user==null))" v-on:click="addToSessionDrinks(drink)">add</i>
+                <i class="material-icons view-btn">remove_red_eye</i>
+              </div>
+            </div>
           </div>
-          <div class="card-tabs">
-            <ul class="tabs tabs-fixed-width">
-              <li class="tab"><a href="#test4">Email</a></li>
-              <li class="tab"><a href="#test6">Social media</a></li>
-            </ul>
-          </div>
-          <div class="card-content grey lighten-4">
-            <div id="test4">Mycompany@gmail.com</div>
-            <div id="test6">www.facebook.com</div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
+            <p>{{drink.description}}</p>
           </div>
         </div>
       </div>
-      <div class="right-bottom-company">
-      </div>
+      <ul class="pagination">
+          <li class="waves-effect" v-if="paginationDrinks.current_page > 1"><a href="#" @click.prevent="changepageDrink(paginationDrinks.current_page - 1)"><i class="material-icons">chevron_left</i></a></li>
+          <li v-for="page in pagesNumberDrink" v-bind:class="[ page == isActiveDrink ? 'active indigo':'']"><a href="#!" @click.prevent="changepageDrink(page)">{{page}}</a></li>
+          <li class="waves-effect" v-if="paginationDrinks.current_page < paginationDrinks.last_page"><a href="#!" @click.prevent="changepageDrink(paginationDrinks.current_page + 1)"><i class="material-icons">chevron_right</i></a></li>
+      </ul>
+    <div class="fixed-action-btn click-to-toggle" v-if="((user!=null)&&(user.id==AboutCompany.user_id))">
+       <a class="btn-floating btn-large indigo">
+         <i class="material-icons">add</i>
+       </a>
+       <ul>
+         <li onclick="$('#addproductmodal').modal('open');" v-on:click="[user.id==AboutCompany.user_id && fetchedCategories[0]==null?fetchCategories():'']"><a class="btn-floating indigo darken-1"><i class="material-icons">restaurant</i></a></li>
+         <li onclick="$('#AddDrinksModal').modal('open');"><a class="btn-floating indigo darken-1"><i class="material-icons">local_drink</i></a></li>
+       </ul>
+    </div>
+    <div class="fixed-action-btn" v-else>
+      <a  onclick="$('#MyList').modal('open');" class="btn-floating btn-large waves-effect waves-light indigo" :class="[CompanySession!=null?'pulse':'']"><i class="material-icons">format_list_numbered</i></a>
     </div>
     <!-- profile -->
+<my-upload field="img"
+    @crop-success="cropSuccessForLogo"
+    @crop-upload-success="cropUploadSuccessForLogo"
+    @crop-upload-fail="cropUploadFailForLogo"
+    v-model="showForLogo"
+    langType="En"
+    :width="300"
+    :height="300"
+    :params="params"
+    :headers="headers"
+    img-format="png">
+  </my-upload>
+  <!-- cover -->
+  <my-upload field="img"
+      @crop-success="cropSuccessForCover"
+      @crop-upload-success="cropUploadSuccessForCover"
+      @crop-upload-fail="cropUploadFailForCover"
+      v-model="showForCover"
+      langType="En"
+      :width="700"
+      :height="300"
+      :params="params"
+      :headers="headers"
+      :noCircle="true"
+      img-format="png">
+    </my-upload>
+    <!-- newfood -->
     <my-upload field="img"
-        @crop-success="cropSuccessForLogo"
-        @crop-upload-success="cropUploadSuccessForLogo"
-        @crop-upload-fail="cropUploadFailForLogo"
-        v-model="showForLogo"
+        @crop-success="cropSuccessForFood"
+        @crop-upload-success="cropUploadSuccessForFood"
+        @crop-upload-fail="cropUploadFailForFood"
+        v-model="showForFood"
         langType="En"
         :width="300"
         :height="300"
         :params="params"
         :headers="headers"
         img-format="png">
-      </my-upload>
-      <!-- cover -->
-      <my-upload field="img"
-          @crop-success="cropSuccessForCover"
-          @crop-upload-success="cropUploadSuccessForCover"
-          @crop-upload-fail="cropUploadFailForCover"
-          v-model="showForCover"
-          langType="En"
-          :width="700"
-          :height="300"
-          :params="params"
-          :headers="headers"
-          :noCircle="true"
-          img-format="png">
-        </my-upload>
-        <!-- newfood -->
-        <my-upload field="img"
-            @crop-success="cropSuccessForFood"
-            @crop-upload-success="cropUploadSuccessForFood"
-            @crop-upload-fail="cropUploadFailForFood"
-            v-model="showForFood"
-            langType="En"
-            :width="300"
-            :height="300"
-            :params="params"
-            :headers="headers"
-            img-format="png">
-          </my-upload>
-        <h5 class="titles"><i class="material-icons">location_on</i> Our location</h5>
-        <div class="map-container">
-          <div id="company-profile-map">
-          </div>
-        </div>
+    </my-upload>
+    <my-upload field="img"
+        @crop-success="cropSuccessForDrinks"
+        @crop-upload-success="cropUploadSuccessForDrinks"
+        @crop-upload-fail="cropUploadFailForDrinks"
+        v-model="showForDrinks"
+        langType="En"
+        :width="200"
+        :height="200"
+        :params="params"
+        :headers="headers"
+        img-format="png">
+    </my-upload>
   </div>
 </template>
 
@@ -225,6 +304,7 @@ import myUpload from 'vue-image-crop-upload';
          showForLogo: false,
          showForCover: false,
          showForFood: false,
+         showForDrinks: false,
          params: {
              token: '123456798',
              name: 'avatar'
@@ -235,15 +315,23 @@ import myUpload from 'vue-image-crop-upload';
          imgDataUrlForLogo: '',
          imgDataUrlForCover: '',
          imgDataUrlForFood: '',
+         imgDataUrlForDrinks: '',
          AboutCompany:[],
          FoodName:'',
          FoodDescription:'',
+         DrinkName:'',
+         DrinkDesc:'',
          CompanyProduct:[],
          SelectedSize:[],
          CompanySession:[],
-         ListTotal:'0',
          fetchedCategories:[],
-         selectedCategory:[]
+         selectedCategory:[],
+         CompanyDrinks:[],
+         CompanyDrinksSession:[],
+         paginationFood:[],
+         paginationDrinks:[],
+         offsetFood:4,
+         offsetDrink:4,
       }
     },
     components: {
@@ -253,10 +341,20 @@ import myUpload from 'vue-image-crop-upload';
     {
       this.GetCompanyDetail();
       this.getCompanyProducts();
+      this.getCompanyDrinks();
       this.showAddedSession();
+      this.showAddedDrinkSession();
     },
     props: ['company','user'],
     methods: {
+      changepage(next){
+        this.paginationFood.current_page = next;
+        this.getCompanyProducts(next);
+      },
+      changepageDrink(next){
+        this.paginationDrinks.current_page = next;
+        this.getCompanyDrinks(next);
+      },
       addToSessionList(FoodData)
       {
         var vm=this;
@@ -271,12 +369,44 @@ import myUpload from 'vue-image-crop-upload';
             swal({
                 position: 'top-right',
                 type: 'error',
-                title: 'This item is already added',
+                title: 'This food is already added',
                 showConfirmButton:true
               });
           }else
           {
             vm.showAddedSession();
+            swal({
+                position: 'top-right',
+                type: 'success',
+                title: '1 item added to your list',
+                showConfirmButton:true
+              });
+          }
+        },function(error)
+        {
+          console.log(error);
+        });
+      },
+      addToSessionDrinks(DrinkData)
+      {
+        var vm=this;
+        axios.post('/drink-session/'+this.company.id,{
+          DrinkId:DrinkData.id,
+          DrinkName:DrinkData.name,
+          DrinkImage:DrinkData.image,
+        }).then(function(response)
+        {
+          console.log(response);
+          if (response.data.error!=null) {
+            swal({
+                position: 'top-right',
+                type: 'error',
+                title: response.data.error,
+                showConfirmButton:true
+              });
+          }else
+          {
+            vm.showAddedDrinkSession();
             swal({
                 position: 'top-right',
                 type: 'success',
@@ -296,7 +426,15 @@ import myUpload from 'vue-image-crop-upload';
         {
           console.log(response);
           vm.CompanySession=response.data.foodsaved;
-          vm.ListTotal = response.data.total;
+        })
+      },
+      showAddedDrinkSession()
+      {
+        var vm=this;
+        axios.get('/drink-session-show/'+this.company.id).then(function(response)
+        {
+          console.log(response);
+          vm.CompanyDrinksSession=response.data;
         })
       },
       GetCompanyDetail()
@@ -341,7 +479,7 @@ import myUpload from 'vue-image-crop-upload';
                 showConfirmButton:true
               });
           }
-          vm.getCompanyProducts();
+          vm.getCompanyProducts(1);
         },function(error)
         {
           console.log(error);
@@ -353,10 +491,53 @@ import myUpload from 'vue-image-crop-upload';
             });
         });
       },
-      RemoveFromList(foodid,size)
+      AddNewDrink()
       {
         var vm=this;
-        axios.delete(`/mylist-session-delete/`+this.company.id+`/`+foodid+`/`+size).then(function(response)
+        axios.post('/store-drink',{
+          DrinkImage:this.imgDataUrlForDrinks,
+          name:this.DrinkName,
+          description:this.DrinkDesc,
+          companyid:this.AboutCompany.id
+        }).then(function(response)
+        {
+          console.log(response);
+          if (response.data.error!=null)
+          {
+            swal({
+                position: 'top-right',
+                type: 'error',
+                title: response.data.error,
+                showConfirmButton:true
+              });
+          }else
+          {
+            vm.imgDataUrlForDrinks ='';
+            vm.DrinkName ='';
+            vm.DrinkDesc ='';
+            swal({
+                position: 'top-right',
+                type: 'success',
+                title: 'Drink saved!',
+                showConfirmButton:true
+              });
+            vm.getCompanyDrinks();
+          }
+        },function(error)
+        {
+          console.log(error);
+          swal({
+              position: 'top-right',
+              type: 'error',
+              title: error.response.data.message,
+              showConfirmButton:true
+            });
+        });
+      },
+      RemoveFromList(foodid)
+      {
+        var vm=this;
+        axios.delete(`/mylist-session-delete/`+this.company.id+`/`+foodid).then(function(response)
         {
           console.log(response);
           vm.showAddedSession();
@@ -368,6 +549,24 @@ import myUpload from 'vue-image-crop-upload';
             });
         });
       },
+      RemoveDrink(drinkid)
+      {
+        var vm=this;
+        axios.delete(`/drink-session-delete/`+this.company.id+`/`+drinkid).then(function(response)
+        {
+          console.log(response);
+          vm.showAddedDrinkSession();
+          swal({
+              position: 'top-right',
+              type: 'success',
+              title: '1 drink removed from your list',
+              showConfirmButton:true
+            });
+        }).catch(function(error)
+        {
+          console.log(error);
+        });
+      },
       toggleShowForLogo() {
                 this.showForLogo = !this.show;
             },
@@ -376,6 +575,9 @@ import myUpload from 'vue-image-crop-upload';
             },
       toggleShowForFood() {
                 this.showForFood = !this.show;
+            },
+      toggleShowForDrinks() {
+                this.showForDrinks = !this.show;
             },
             changeLogo()
             {
@@ -424,13 +626,34 @@ import myUpload from 'vue-image-crop-upload';
                 vm.fetchedCategories=response.data;
               });
             },
-            getCompanyProducts()
+            getCompanyProducts(page)
             {
               var vm=this;
-              axios.get(`/show-company-products/`+this.company.id).then(function(response)
+              swal({
+                  text: "Please wait.",
+                  showConfirmButton: false
+              });
+              axios.get(`/show-company-products/`+this.company.id+`?page=`+page).then(function(response)
               {
                 console.log(response);
                 vm.CompanyProduct=response.data.data;
+                vm.paginationFood=response.data;
+                swal.close();
+              });
+            },
+            getCompanyDrinks(page)
+            {
+              var vm=this;
+              swal({
+                  text: "Please wait.",
+                  showConfirmButton: false
+              });
+              axios.get(`/show-company-drinks/`+this.company.id+`?page=`+page).then(function(response)
+              {
+                console.log(response);
+                vm.CompanyDrinks=response.data.data;
+                vm.paginationDrinks=response.data;
+                swal.close();
               });
             },
             /**
@@ -538,9 +761,85 @@ import myUpload from 'vue-image-crop-upload';
                 console.log('field: ' + field);
             },
 
+            //DRINKS
+            /**
+             * crop success
+             *
+             * [param] imgDataUrl
+             * [param] field
+             */
+            cropSuccessForDrinks(imgDataUrl, field){
+                console.log('-------- crop success --------');
+                this.imgDataUrlForDrinks = imgDataUrl;
+            },
+            /**
+             * upload success
+             *
+             * [param] jsonData  server api return data, already json encode
+             * [param] field
+             */
+            cropUploadSuccessForDrinks(jsonData, field){
+                console.log('-------- upload success --------');
+                console.log(jsonData);
+                console.log('field: ' + field);
+            },
+            /**
+             * upload fail
+             *
+             * [param] status    server api return error status, like 500
+             * [param] field
+             */
+            cropUploadFailForDrinks(status, field){
+                console.log('-------- upload fail --------');
+                console.log(status);
+                console.log('field: ' + field);
+            },
+    },
+    computed:{
+      isActiveFood:function(){
+        return this.paginationFood.current_page;
+      },
+      pagesNumberFood:function(){
+        if (!this.paginationFood.to) {
+           return [];
+        }
+        var from = this.paginationFood.current_page - this.offsetFood;
+        if (from < 1) {
+            from = 1;
+        }
+        var to = from + (this.offsetFood * 2);
+        if (to >= this.paginationFood.last_page) {
+            to = this.paginationFood.last_page;
+        }
+        var pagesArray = [];
+        while (from <= to) {
+            pagesArray.push(from);
+            from++;
+        }
+        return pagesArray;
+      },
+      isActiveDrink:function(){
+        return this.paginationDrinks.current_page;
+      },
+      pagesNumberDrink:function(){
+        if (!this.paginationDrinks.to) {
+           return [];
+        }
+        var from = this.paginationDrinks.current_page - this.offsetDrink;
+        if (from < 1) {
+            from = 1;
+        }
+        var to = from + (this.offsetDrink * 2);
+        if (to >= this.paginationDrinks.last_page) {
+            to = this.paginationDrinks.last_page;
+        }
+        var pagesArray = [];
+        while (from <= to) {
+            pagesArray.push(from);
+            from++;
+        }
+        return pagesArray;
+      }
     },
   }
 </script>
-
-<style lang="css">
-</style>

@@ -10,6 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="/css/mystyle.css">
     <link rel="stylesheet" href="/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Pompiere" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Kaushan+Script|Handlee" rel="stylesheet">
   <body>
     @php
@@ -19,7 +20,7 @@
       }
     @endphp
     <header>
-      <div class="header-container">
+      <div class="header-container" id="notifyapp">
         <div class="left-header">
           <div class="head-modal-burger">
             @if (Auth::check())
@@ -32,10 +33,14 @@
         </div>
         <div class="right-header">
           <ul>
-            <li class="{{current_page('/') && current_page('company-show')==false?'active':''}}"><a href="/">About us</a></li>
-            <li class="{{current_page('food')?'active':''}}"><a href="/food">Most popular</a></li>
+            <li class="{{current_page('/')?'active':''}}"><a href="/">Most popular</a></li>
             <li class="{{current_page('company') && current_page('company-show')==false?'active':''}}"><a href="/company">Companies</a></li>
-            <li><i class="material-icons">notifications</i></li>
+            <li class="{{current_page('about') && current_page('company-show')==false?'active':''}}"><a href="/about">About us</a></li>
+            @if (Auth::check())
+            <div class="notif-icon-container">
+              <notification :user="{{Auth::user()}}"></notification>
+            </div>
+            @endif
             <li class="nav-parent">
               <a href="#">
                 @if (Auth::check())
@@ -47,13 +52,13 @@
               </a>
               <ul class="nav-drop">
                 @if (Auth::check())
-                  <a href="#"><li><i class="material-icons">restaurant</i> Schedule</li></a>
+                  <a href="/calendar-show"><li><i class="material-icons">date_range</i> Schedule</li></a>
                   @if (Auth::user()->role==0)
                     <a href="/register"><li><i class="material-icons">add</i> Company</li></a>
                   @elseif(Auth::user()->role==1)
                     <a href="/comp-settings"><li><i class="material-icons">settings</i> Company</li></a>
                     <a href="/company-show-own"><li><i class="material-icons">business</i> My Company</li></a>
-                    <a href="/show-cater-request"><li><i class="material-icons">notifications</i>Catering request</li></a>
+                    <a href="/show-cater-request"><li><i class="material-icons">room_service</i>Catering request</li></a>
                   @endif
                   <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><li><i class="material-icons">exit_to_app</i> Logout</li></a>
                   <form action="/user" id="logout-form" method="post">
@@ -167,10 +172,12 @@
   </div>
 </footer>
     <script src="/js/jquery.js"></script>
+    </script>
     <script src="https://unpkg.com/sweetalert2@7.1.2/dist/sweetalert2.all.js">
-
     </script>
     <script type="text/javascript" src="/js/app.js">
+    </script>
+    <script type="text/javascript" src="/notif/notif.js">
     </script>
     <script type="text/javascript" src="/js/materialize.min.js">
     </script>
@@ -203,14 +210,11 @@
         event.preventDefault();
         return false;
       });
-      // Initialize collapse button
       $(".button-collapse").sideNav();
-      // Initialize collapsible (uncomment the line below if you use the dropdown variation)
-      $('.collapsible').collapsible();
       $('.carousel.carousel-slider').carousel({fullWidth: true});
-
       $('.modal').modal();
       $('select').material_select();
+      $('.collapsible').collapsible();
     });
     </script>
     @yield('javascripts')

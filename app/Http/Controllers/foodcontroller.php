@@ -12,7 +12,8 @@ class foodcontroller extends Controller
 {
     public function Index()
     {
-      return view('Food.FoodIndex');
+      $popularFoods=food::whereNull('disabled')->orderBy('RequestCount','DESC')->paginate(12);
+      return view('Food.FoodIndex',compact('popularFoods'));
     }
     public function store(Request $request)
     {
@@ -47,7 +48,7 @@ class foodcontroller extends Controller
     }
     public function displaycompanyfood($companyId)
     {
-      return food::orderBy('id','DESC')->where('company_id', $companyId)->paginate(6);
+      return food::orderBy('id','DESC')->where('company_id', $companyId)->paginate(3);
     }
     public function fetchCategories()
     {

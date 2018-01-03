@@ -8,7 +8,7 @@
          </div>
          <div class="card-content">
            <span class="card-title activator grey-text text-darken-4">{{company.name}}<i class="material-icons right">more_vert</i></span>
-           <p><a :href="'/company-show/'+company.id">View page</a></p>
+           <p><a  class="indigo-text":href="'/company-show/'+company.id"><i class="material-icons">radio_button_unchecked</i> Menu</a></p>
          </div>
          <div class="card-reveal">
            <span class="card-title grey-text text-darken-4">{{company.name}}<i class="material-icons right">close</i></span>
@@ -19,7 +19,7 @@
     </div>
     <ul class="pagination">
         <li class="waves-effect" v-if="pagination.current_page > 1"><a href="#" @click.prevent="changepage(pagination.current_page - 1)"><i class="material-icons">chevron_left</i></a></li>
-        <li v-for="page in pagesNumber" v-bind:class="[ page == isActive ? 'active blue':'']"><a href="#!" @click.prevent="changepage(page)">{{page}}</a></li>
+        <li v-for="page in pagesNumber" v-bind:class="[ page == isActive ? 'active indigo':'']"><a href="#!" @click.prevent="changepage(page)">{{page}}</a></li>
         <li class="waves-effect" v-if="pagination.current_page < pagination.last_page"><a href="#!" @click.prevent="changepage(pagination.current_page + 1)"><i class="material-icons">chevron_right</i></a></li>
     </ul>
   </div>
@@ -34,7 +34,6 @@
         offset:4
       }
     },
-    computed: {},
     created()
     {
       this.getIndexData();

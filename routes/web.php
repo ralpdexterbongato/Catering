@@ -11,12 +11,12 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/about', function () {
     return view('welcome');
 });
 Route::get('/company','companycontroller@index')->name('company-index');
 Route::get('/company-index-data','companycontroller@indexData');
-Route::get('/food','foodcontroller@Index');
+Route::get('/','foodcontroller@Index');
 Route::get('/register','registercontroller@create');
 Route::post('/register-store','registercontroller@store');
 Route::post('/user','usercontroller@logout');
@@ -38,7 +38,7 @@ Route::get('/fetch-categories','foodcontroller@fetchCategories');
 
 Route::post('/mylist-session/{companyid}','OrderSessionController@store');
 Route::get('/mylist-session-show/{companyid}','OrderSessionController@show');
-Route::delete('/mylist-session-delete/{companyid}/{foodid}/{size}','OrderSessionController@delete');
+Route::delete('/mylist-session-delete/{companyid}/{foodid}','OrderSessionController@delete');
 
 Route::get('/category-setting','CategoryController@index');
 Route::get('/category-setting-data','CategoryController@indexData');
@@ -68,3 +68,20 @@ Route::post('/request-proceed-send/{companyid}','RequestController@sendRequest')
 Route::get('/show-cater-request','RequestController@showRequestList');
 Route::get('/show-cater-request-users','RequestController@fetchRequest');
 Route::get('/show-cater-request-data/{orderId}','RequestController@fetchRequestData');
+
+Route::post('/store-drink','DrinkController@store');
+Route::get('/show-company-drinks/{companyid}','DrinkController@displayCompanyDrinks');
+
+Route::post('/drink-session/{companyid}','OrderDrinkSessionController@store');
+Route::get('/drink-session-show/{companyid}','OrderDrinkSessionController@show');
+Route::delete('/drink-session-delete/{companyid}/{drinkid}','OrderDrinkSessionController@delete');
+
+Route::post('/accept-request/{orderid}','RequestController@acceptRequest');
+Route::post('/decline-request/{orderid}','RequestController@declineRequest');
+
+Route::get('/calendar-show','ScheduleController@show');
+Route::get('/calendar-show-monthly','ScheduleController@showCurrentMonthEvents');
+Route::get('/calendar-show-monthly-changed','ScheduleController@showMonthSelectedEvents');
+
+Route::get('/notification','NotificationController@show');
+Route::get('/notification-count','NotificationController@countNotif');

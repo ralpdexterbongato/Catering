@@ -1,23 +1,36 @@
 <template lang="html">
   <div class="request-form-container">
     <div class="session-food-table">
-      <table class="striped responsive-table">
+      <table class="responsive-table">
         <thead>
-          <th>Selected foods</th>
+          <tr>
+            <th>Selected foods</th>
+          </tr>
         </thead>
         <tbody>
           <tr v-for="food in customfoods">
-            <td><img :src="'/storage/images/'+food.foodImage" alt="image"></td>
+            <td><img :src="'/storage/images/'+food.foodImage" alt="foodimage"></td>
             <td>{{food.foodName}}</td>
           </tr>
         </tbody>
+        <thead>
+          <tr>
+            <th>Selected drinks</th>
+          </tr>
+        </thead>
+          <tbody>
+            <tr v-for="drink in customdrinks">
+              <td><img :src="'/storage/images/'+drink.drinkImage" alt="drinkimage"></td>
+              <td>{{drink.drinkName}}</td>
+            </tr>
+          </tbody>
       </table>
     </div>
     <div class="proceed-forms">
       <div class="proceed-form-left">
         <div class="input-field col s6">
             <i class="material-icons prefix">people</i>
-            <input id="icon_prefix" placeholder="visitor" v-model="VisitorForm" type="number" step="1" min="1" class="validate">
+            <input id="icon_prefix" placeholder="visitor" v-model="VisitorForm" type="number" step="1" :min="minimum[0].minimum" class="validate">
             <label for="icon_prefix">Expected number of visitors</label>
         </div>
         <div class="input-field col s6">
@@ -57,6 +70,11 @@
             <h6 :style="'background-color:'+color.hex"></h6>
           </div>
         </form>
+        <form action="#" class="confirm-submit-container">
+          <input id="confirm-submit" v-model="confirm" type="checkbox"/>
+          <label for="confirm-submit"></label>
+          <p> I have reviewed already my inputs before submition & it looks good.</p>
+        </form>
       </div>
       <div class="proceed-form-right">
         <div class="held-place-note">
@@ -68,7 +86,7 @@
       </div>
     </div>
     <div class="submit-btn-container">
-      <a href="#" class="btn red" v-on:click.prevent="sendRequest()">Send request <i class="material-icons">send</i></a>
+      <a href="#" class="btn red" :class="[confirm?'':'disabled']" v-on:click.prevent="sendRequest()">Send request <i class="material-icons">send</i></a>
     </div>
   </div>
 </template>
@@ -77,22 +95,28 @@
 import axios from 'axios';
   export default {
     data () { return {
-      VisitorForm:1,
+      VisitorForm:0,
       EventForm:'',
       ContactForm:'',
       colorSelected:[],
-      messageForm:''
+      messageForm:'',
+      confirm:false,
       }
     },
-    props: ['customfoods','colors','company'],
+    props: ['customfoods','colors','company','minimum','customdrinks'],
     methods: {
       sendRequest()
       {
+        swal({
+            text: "Please wait.",
+            showConfirmButton: false
+        });
         var vm=this;
         axios.post(`/request-proceed-send/`+this.company.id,{
           visitor:this.VisitorForm,
           eventName:this.EventForm,
           contact:this.ContactForm,
+          minimum:this.minimum[0].minimum,
           lat:$('#addressHeldLat').val(),
           lng:$('#addressHeldLng').val(),
           colors:this.colorSelected,
@@ -111,6 +135,7 @@ import axios from 'axios';
           window.location.href = response.data.redirect;
         }).catch(function(error)
         {
+          swal.close();
           swal({
               position: 'top-right',
               type: 'error',

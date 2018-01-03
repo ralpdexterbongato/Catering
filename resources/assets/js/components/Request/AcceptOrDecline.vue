@@ -2,57 +2,132 @@
   <div class="accept-decline-container">
     <div class="request-container">
       <div class="request-left">
-        <ul class="collection">
-          <li class="collection-item avatar" v-for="masterdata in requestMasters" v-on:click.prevent="fetchDataofRequest(masterdata.id)">
+        <ul class="collection" v-if="requestMasters[0]!=null">
+          <li class="collection-item avatar" :class="[masterdata.id == requestDetail.id?'active':'']" v-for="(masterdata,index) in requestMasters" v-on:click.prevent="fetchDataofRequest(masterdata.id),CurrentIndex=index">
             <img class="circle" :src="'/storage/images/'+masterdata.user.avatar" alt="avatar">
             <span class="title">{{masterdata.user.name}}</span>
-            <p>{{masterdata.client_contact}} <br>{{masterdata.created_at}}</p>
-            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+            <p>{{masterdata.client_contact}}<br>{{masterdata.created_at}}</p>
+            <a href="#!" class="secondary-content"><i class="material-icons indigo-text">grade</i></a>
           </li>
         </ul>
+        <div v-else class="no-request-note">
+          <p class="grey-text">No request found</p>
+        </div>
       </div>
       <div class="req-data-container" v-if="requestDetail!=null">
-        <table class="responsive-table">
-          <thead>
-            <tr>
-              <th>Request data</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Event</td>
-              <td>{{requestDetail.event_name}}</td>
-            </tr>
-            <tr>
-              <td>Expected visitors</td>
-              <td>{{requestDetail.expectedVisitors}}</td>
-            </tr>
-            <tr>
-              <td>Message</td>
-              <td><p>{{requestDetail.message}}</p></td>
-            </tr>
-            <tr>
-              <td>Date Start</td>
-              <td>{{requestDetail.date_start}}</td>
-            </tr>
-            <tr>
-              <td>Time Start</td>
-              <td>{{requestDetail.time_start}}</td>
-            </tr>
-            <tr>
-              <td>Location</td>
-              <td>map here</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="request-buttons">
-          <a href="#" class="btn blue">Accept</a>
-          <a href="#" class="btn white red-text">Decline</a>
+        <div class="req-data-table" v-if="requestMasters[0]!=null" >
+          <table class="responsive-table">
+            <thead>
+              <tr>
+                <th>Request data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Event</th>
+                <td>{{requestDetail.event_name}}</td>
+              </tr>
+              <tr>
+                <th>Expected visitors</th>
+                <td>{{requestDetail.expectedVisitors}}</td>
+              </tr>
+              <tr>
+                <th>Message</th>
+                <td><p>{{requestDetail.message}}</p></td>
+              </tr>
+              <tr>
+                <th>Date Start</th>
+                <td>{{requestDetail.date_start}}</td>
+              </tr>
+              <tr>
+                <th>Time Start</th>
+                <td>{{requestDetail.time_start}}</td>
+              </tr>
+              <tr>
+                <th>Color theme</th>
+                <td>
+                  <div class="color-preview" v-for="color in colorDetail" :style="'background-color:'+color.hex">
+                  </div>
+                </td>
+              </tr>
+              <tr v-if="foodsDetail[0]!=null">
+                <th>Foods</th>
+                <td class="submited-preview-container">
+                  <div class="request-preview-box z-depth-1" v-for="food in foodsDetail">
+                    <img :src="'/storage/images/'+food.image" alt="food">
+                    <p>{{food.name}}</p>
+                  </div>
+                </td>
+              </tr>
+              <tr v-if="DrinksDetail[0]!=null">
+                <th>Drinks</th>
+                <td class="submited-preview-container">
+                  <div class="request-preview-box z-depth-1" v-for="drink in DrinksDetail">
+                    <img :src="'/storage/images/'+drink.image" alt="drink">
+                    <p>{{drink.name}}</p>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th>Location</th>
+                <td>
+                  <div id="location-show">
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="no-request-table" v-else>
+          <p class="grey-text"><i class="material-icons">info</i> Dont worry! we will notify you once someone sent a request through email</p>
+        </div>
+        <div class="divider">
+        </div>
+        <p class="ExistingSchedTitle">Scheduled cater on the same date</p>
+        <ul class="collapsible" data-collapsible="accordion">
+          <li v-for="order in  SameDayOrders">
+            <div class="collapsible-header event-and-time" v-on:click="displayExistingMap(order.address_lat,order.address_lng)">
+              <p class="grey-text text-darken-2">
+                <i class="material-icons grey-text text-darken-2">restaurant</i>
+                {{order.event_name}}
+              </p>
+              <p class="grey-text text-darken-2">
+                <i class="material-icons grey-text text-darken-2">access_time</i>
+                {{order.time_start}}
+              </p>
+              <p class="grey-text text-darken-2">
+                <i class="material-icons grey-text text-darken-2">person</i>
+                {{order.user.name}}
+              </p>
+              <p class="grey-text text-darken-2">
+                <i class="material-icons grey-text text-darken-2">location_on</i>
+                <span onclick="$('#MapModal').modal('open');" v-on:click="displayExistingMap(order.address_lat,order.address_lng)">Location</span>
+              </p>
+            </div>
+            <div class="collapsible-body">
+              <p class="grey-text text-darken-2 message-prev-exist">{{order.message}}</p>
+            </div>
+            <li v-if="SameDayOrders[0]==null" class="no-existing-cater-info grey-text text-darken-2">No catering request on thesame date</li>
+          </li>
+        </ul>
+        <div class="request-buttons" v-if="requestMasters[0]!=null">
+          <a href="#" class="btn indigo" v-on:click.prevent="accept()">Accept</a>
+          <a href="#" class="btn white red-text" v-on:click.prevent="decline()">Decline</a>
         </div>
       </div>
     </div>
     <div class="scheduled-calendar-container">
+    </div>
+    <div id="MapModal" class="modal modal-fixed-footer">
+      <div class="modal-content">
+        <h4>Map location</h4>
+        <div id="existing-order-location">
 
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+      </div>
     </div>
   </div>
 </template>
@@ -65,7 +140,10 @@ import axios from 'axios';
         requestMasters:[],
         requestDetail:[],
         colorDetail:[],
-        foodsDetail:[]
+        foodsDetail:[],
+        DrinksDetail:[],
+        CurrentIndex:0,
+        SameDayOrders:[]
       }
     },
     // props: [],
@@ -82,6 +160,7 @@ import axios from 'axios';
         {
           console.log(response);
           vm.requestMasters=response.data.data;
+          vm.fetchDataofRequest(vm.requestMasters[0].id);
         }).catch(function(error)
         {
           console.log(error);
@@ -93,13 +172,102 @@ import axios from 'axios';
         axios.get(`/show-cater-request-data/`+id).then(function(response)
         {
           console.log(response);
-          vm.requestDetail=response.data[0];
-          vm.colorDetail= response.data.colors;
-          vm.foodsDetail= response.data.foods;
+          vm.requestDetail=response.data.OrderData[0];
+          vm.colorDetail= response.data.OrderData[0].colors;
+          vm.foodsDetail= response.data.OrderData[0].foods;
+          vm.DrinksDetail= response.data.OrderData[0].drinks;
+          vm.SameDayOrders= response.data.existing;
+          var mymap = new GMaps({
+             el: '#location-show',
+             lat: vm.requestDetail.address_lat,
+             lng: vm.requestDetail.address_lng,
+             zoom:15
+           });
+           mymap.addMarker({
+             lat: vm.requestDetail.address_lat,
+             lng: vm.requestDetail.address_lng,
+             title: 'I want it here'
+            });
         }).catch(function(error)
         {
           console.log(error);
-        })
+        });
+      },
+      displayExistingMap(adlat,adlng)
+      {
+        var mymap = new GMaps({
+           el: '#existing-order-location',
+           lat: adlat,
+           lng: adlng,
+           zoom:15
+         });
+         mymap.addMarker({
+           lat:adlat,
+           lng:adlng,
+           title: 'Will be held here'
+          });
+      },
+      accept()
+      {
+        var vm=this;
+        axios.post(`/accept-request/`+this.requestDetail.id).then(function(response)
+        {
+          console.log(response);
+          swal({
+              position: 'top-right',
+              type: 'success',
+              title: 'Request accepted!',
+              showConfirmButton:true
+            });
+          vm.requestMasters.splice(vm.CurrentIndex, 1);
+          if (vm.requestMasters[0]!=null)
+          {
+            vm.fetchDataofRequest(vm.requestMasters[0].id);
+          }else
+          {
+            vm.SameDayOrders=[];
+          }
+        }).catch(function(error)
+        {
+          console.log(error);
+          swal({
+              position: 'top-right',
+              type: 'error',
+              title: error.response.data.message,
+              showConfirmButton:true
+            });
+        });
+      },
+      decline()
+      {
+        var vm=this;
+        axios.post(`/decline-request/`+this.requestDetail.id).then(function(response)
+        {
+          console.log(response);
+          swal({
+              position: 'top-right',
+              type: 'success',
+              title: 'Request declined',
+              showConfirmButton:true
+            });
+          vm.requestMasters.splice(vm.CurrentIndex,1);
+          if (vm.requestMasters[0]!=null)
+          {
+            vm.fetchDataofRequest(vm.requestMasters[0].id);
+          }else
+          {
+            vm.SameDayOrders=[];
+          }
+        }).catch(function(error)
+        {
+          console.log(error);
+          swal({
+              position: 'top-right',
+              type: 'error',
+              title:error.response.data.message,
+              showConfirmButton:true
+            });
+        });
       }
     },
   }
