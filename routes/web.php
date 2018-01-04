@@ -80,3 +80,8 @@ Route::get('/notification','NotificationController@show');
 Route::get('/notification-count','NotificationController@countNotif');
 
 Route::get('/package-create','PackageController@create');
+Route::post('/package-store','PackageController@store');
+Route::get('/package-show/{packageid}','PackageController@show');
+Route::get('/package-show-data/{packageid}','PackageController@showData');
+Route::get('/package-all-product','PackageController@showallproduct');
+Route::get('/package-all/{companyid}','PackageController@showAllPackageOnProfile');

@@ -53,9 +53,27 @@
               <tr v-if="ProductDetail[0]!=null">
                 <th>Foods</th>
                 <td class="submited-preview-container">
-                  <div class="request-preview-box z-depth-1" v-for="food in ProductDetail">
-                    <img :src="'/storage/images/'+food.image" alt="food">
-                    <p>{{food.name}}</p>
+                  <div class="request-preview-box z-depth-1"v-if="product.Type==0" v-for="product in ProductDetail">
+                    <img :src="'/storage/images/'+product.image" alt="product">
+                    <p>{{product.name}}</p>
+                  </div>
+                </td>
+              </tr>
+              <tr v-if="ProductDetail[0]!=null">
+                <th>Drinks</th>
+                <td class="submited-preview-container">
+                  <div class="request-preview-box z-depth-1"v-if="product.Type==1" v-for="product in ProductDetail">
+                    <img :src="'/storage/images/'+product.image" alt="product">
+                    <p>{{product.name}}</p>
+                  </div>
+                </td>
+              </tr>
+              <tr v-if="ProductDetail[0]!=null">
+                <th>Sweets</th>
+                <td class="submited-preview-container">
+                  <div class="request-preview-box z-depth-1"v-if="product.Type==2" v-for="product in ProductDetail">
+                    <img :src="'/storage/images/'+product.image" alt="product">
+                    <p>{{product.name}}</p>
                   </div>
                 </td>
               </tr>

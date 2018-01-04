@@ -110,40 +110,27 @@
     </div>
     <div class="divider">
     </div>
+    <span v-if="Packages[0]!=null">
     <h5 class="titles"><i class="material-icons">local_offer</i> Our packages</h5>
     <div class="packages-list">
-      <div class="card">
+      <div class="card" v-for="Profilepackage in Packages">
         <div class="card-image">
           <img src="/DesignPic/1.jpg">
-          <a :href="'/request-proceed/'+company.id" class="btn-floating halfway-fab waves-effect waves-light redirect indigo"><i class="material-icons">remove_red_eye</i></a>
+          <a :href="'/package-show/'+Profilepackage.id" class="btn-floating halfway-fab waves-effect waves-light redirect indigo"><i class="material-icons">remove_red_eye</i></a>
         </div>
         <div class="card-content">
-          <span class="card-title">P120 per head</span>
-          <p><span class="bold">Terms & Conditions:</span><br><br> 3 delicious menu with 3 types of drinks, can be held in your house or at our own restaurant minimum of 100 people only</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-image">
-          <img src="/DesignPic/1.jpg">
-          <a :href="'/request-proceed/'+company.id" class="btn-floating halfway-fab waves-effect waves-light redirect indigo"><i class="material-icons">remove_red_eye</i></a>
-        </div>
-        <div class="card-content">
-          <span class="card-title">P120 per head</span>
-          <p><span class="bold">Terms & Conditions:</span><br><br> 3 delicious menu with 3 types of drinks, can be held in your house or at our own restaurant minimum of 100 people only</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-image">
-          <img src="/DesignPic/1.jpg">
-          <a :href="'/request-proceed/'+company.id" class="btn-floating halfway-fab waves-effect waves-light redirect indigo"><i class="material-icons">remove_red_eye</i></a>
-        </div>
-        <div class="card-content">
-          <span class="card-title">P120 per head</span>
-          <p><span class="bold">Terms & Conditions:</span><br><br> 3 delicious menu with 3 types of drinks, can be held in your house or at our own restaurant minimum of 100 people only</p>
+          <span class="card-title">P{{Profilepackage.price}} per head</span>
+          <p><span class="bold">{{Profilepackage.name}}</span><br><br> {{Profilepackage.description}}</p>
         </div>
       </div>
     </div>
-    <h5 class="custom-package-title"><i class="material-icons">touch_app</i>Customize your package</h5>
+    <ul class="pagination">
+        <li class="waves-effect" v-if="paginationPackage.current_page > 1"><a href="#" @click.prevent="changepagePackage(paginationPackage.current_page - 1)"><i class="material-icons">chevron_left</i></a></li>
+        <li v-for="page in pagesNumberPackage" v-bind:class="[ page == isActivePackage ? 'active indigo':'']"><a href="#!" @click.prevent="changepagePackage(page)">{{page}}</a></li>
+        <li class="waves-effect" v-if="paginationPackage.current_page < paginationPackage.last_page"><a href="#!" @click.prevent="changepagePackage(paginationPackage.current_page + 1)"><i class="material-icons">chevron_right</i></a></li>
+    </ul>
+    </span>
+    <!-- <h5 class="custom-package-title"><i class="material-icons">touch_app</i>Pick and send</h5> -->
     <h5 class="custom-package-foodmenu"><i class="material-icons">local_dining</i> Product menu</h5>
     <div class="sorting-container">
       <form action="#" class="radio-sort-container">
@@ -242,18 +229,6 @@
         :headers="headers"
         img-format="png">
     </my-upload>
-    <my-upload field="img"
-        @crop-success="cropSuccessForDrinks"
-        @crop-upload-success="cropUploadSuccessForDrinks"
-        @crop-upload-fail="cropUploadFailForDrinks"
-        v-model="showForDrinks"
-        langType="En"
-        :width="200"
-        :height="200"
-        :params="params"
-        :headers="headers"
-        img-format="png">
-    </my-upload>
   </div>
 </template>
 
@@ -266,7 +241,6 @@ import myUpload from 'vue-image-crop-upload';
          showForLogo: false,
          showForCover: false,
          showForProduct: false,
-         showForDrinks: false,
          params: {
              token: '123456798',
              name: 'avatar'
@@ -285,11 +259,13 @@ import myUpload from 'vue-image-crop-upload';
          CompanySession:[],
          fetchedCategories:[],
          selectedCategory:[],
-         CompanyDrinksSession:[],
          paginationFood:[],
          offsetFood:4,
+         offsetPackage:4,
          SortType:0,
-         productSearch:''
+         productSearch:'',
+         Packages:[],
+         paginationPackage:[]
       }
     },
     components: {
@@ -300,12 +276,17 @@ import myUpload from 'vue-image-crop-upload';
       this.GetCompanyDetail();
       this.getCompanyProducts(1);
       this.showAddedSession();
+      this.showpackages(1);
     },
     props: ['company','user'],
     methods: {
       changepage(next){
         this.paginationFood.current_page = next;
         this.getCompanyProducts(next);
+      },
+      changepagePackage(next){
+        this.paginationFood.current_page = next;
+        this.showpackages(next);
       },
       addToSessionList(FoodData)
       {
@@ -489,21 +470,20 @@ import myUpload from 'vue-image-crop-upload';
                 swal.close();
               });
             },
-            getCompanyDrinks(page)
+            showpackages(page)
             {
               var vm=this;
-              swal({
-                  text: "Please wait.",
-                  showConfirmButton: false
-              });
-              axios.get(`/show-company-drinks/`+this.company.id+`?page=`+page).then(function(response)
+              axios.get(`/package-all/`+this.company.id+`?page=`+page).then(function(response)
               {
                 console.log(response);
-                vm.CompanyDrinks=response.data.data;
-                vm.paginationDrinks=response.data;
-                swal.close();
+                vm.Packages = response.data.data;
+                vm.paginationPackage=response.data;
+              }).catch(function(error)
+              {
+                console.log(error);
               });
             },
+
             /**
              * crop success
              *
@@ -608,40 +588,6 @@ import myUpload from 'vue-image-crop-upload';
                 console.log(status);
                 console.log('field: ' + field);
             },
-
-            //DRINKS
-            /**
-             * crop success
-             *
-             * [param] imgDataUrl
-             * [param] field
-             */
-            cropSuccessForDrinks(imgDataUrl, field){
-                console.log('-------- crop success --------');
-                this.imgDataUrlForDrinks = imgDataUrl;
-            },
-            /**
-             * upload success
-             *
-             * [param] jsonData  server api return data, already json encode
-             * [param] field
-             */
-            cropUploadSuccessForDrinks(jsonData, field){
-                console.log('-------- upload success --------');
-                console.log(jsonData);
-                console.log('field: ' + field);
-            },
-            /**
-             * upload fail
-             *
-             * [param] status    server api return error status, like 500
-             * [param] field
-             */
-            cropUploadFailForDrinks(status, field){
-                console.log('-------- upload fail --------');
-                console.log(status);
-                console.log('field: ' + field);
-            },
     },
     computed:{
       isActiveFood:function(){
@@ -666,20 +612,20 @@ import myUpload from 'vue-image-crop-upload';
         }
         return pagesArray;
       },
-      isActiveDrink:function(){
-        return this.paginationDrinks.current_page;
+      isActivePackage:function(){
+        return this.paginationPackage.current_page;
       },
-      pagesNumberDrink:function(){
-        if (!this.paginationDrinks.to) {
+      pagesNumberPackage:function(){
+        if (!this.paginationPackage.to) {
            return [];
         }
-        var from = this.paginationDrinks.current_page - this.offsetDrink;
+        var from = this.paginationPackage.current_page - this.offsetPackage;
         if (from < 1) {
             from = 1;
         }
-        var to = from + (this.offsetDrink * 2);
-        if (to >= this.paginationDrinks.last_page) {
-            to = this.paginationDrinks.last_page;
+        var to = from + (this.offsetPackage * 2);
+        if (to >= this.paginationPackage.last_page) {
+            to = this.paginationPackage.last_page;
         }
         var pagesArray = [];
         while (from <= to) {
@@ -689,5 +635,6 @@ import myUpload from 'vue-image-crop-upload';
         return pagesArray;
       }
     },
+
   }
 </script>

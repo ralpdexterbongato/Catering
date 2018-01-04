@@ -55,6 +55,10 @@
                   @if (Auth::user()->role==0)
                     <a href="/register"><li><i class="material-icons">add</i> Company</li></a>
                   @elseif(Auth::user()->role==1)
+                    <a href="/package-create"><li><i class="material-icons">add</i> Package</li></a>
+                    <a href="/company-show-own"><li><i class="material-icons">add</i> Product</li></a>
+                    <div class="divider">
+                    </div>
                     <a href="/package-create"><li><i class="material-icons">settings</i> Package</li></a>
                     <a href="/comp-settings"><li><i class="material-icons">settings</i> Product</li></a>
                     <a href="/comp-settings"><li><i class="material-icons">settings</i> Company</li></a>
