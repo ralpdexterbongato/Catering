@@ -81,7 +81,17 @@ Route::get('/notification-count','NotificationController@countNotif');
 
 Route::get('/package-create','PackageController@create');
 Route::post('/package-store','PackageController@store');
+Route::post('/package-proceed','PackageController@proceed');
 Route::get('/package-show/{packageid}','PackageController@show');
-Route::get('/package-show-data/{packageid}','PackageController@showData');
+Route::get('/package-show-data-name/{packageid}','PackageController@showName');
+Route::get('/package-show-data-description/{packageid}','PackageController@showDescription');
 Route::get('/package-all-product','PackageController@showallproduct');
 Route::get('/package-all/{companyid}','PackageController@showAllPackageOnProfile');
+Route::get('/package-show-data-price/{packageId}','PackageController@showPrice');
+Route::get('/package-show-data-products/{packageId}','PackageController@showPackageProducts');
+
+Route::put('/package-update-name/{packageId}','PackageController@updateName');
+Route::put('/package-update-desc/{packageId}','PackageController@updateDescription');
+Route::put('/package-update-price/{packageId}','PackageController@updatePrice');
+
+Route::delete('/remove-package-product/{packageId}/{productId}','PackageController@removePackageProduct');

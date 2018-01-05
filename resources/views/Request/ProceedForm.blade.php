@@ -3,7 +3,7 @@
   Request form
 @endsection
 @section('content')
-  <proceed :custompack="{{$customPack}}" :minimum="{{$companyMinimum}}" :colors="{{$colorChoices}}" :company="{{$company}}"></proceed>
+  <proceed :custompack="{{$customPack}}" :packagedata="{{$mypack}}" :minimum="{{$companyMinimum}}" :colors="{{$colorChoices}}" :company="{{$company}}"></proceed>
 @endsection
 @section('javascripts')
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>

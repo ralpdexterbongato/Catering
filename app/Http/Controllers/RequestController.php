@@ -13,18 +13,25 @@ use Auth;
 use App\company;
 use Carbon\Carbon;
 use App\Product;
+use App\package;
 class RequestController extends Controller
 {
     public function show($companyid)
     {
+      if (Session::has('company'.$companyid))
+      {
+        Session::forget('CompanyPackage'.$companyid);
+      }
       $company = array('id' =>$companyid);
       $company= json_encode($company);
       $location=CompanyMap::where('company_id', $companyid)->get();
+      $mypack=Session::get('CompanyPackage'.$companyid);
+      $mypack=json_encode($mypack);
       $customPack=Session::get('company'.$companyid);
       $customPack = json_encode($customPack);
       $colorChoices=CompanyColor::where('company_id',$companyid)->get(['id','hex']);
       $companyMinimum=company::where('id', $companyid)->get(['minimum']);
-      return view('Request.ProceedForm',compact('customPack','companyMinimum','company','location','colorChoices'));
+      return view('Request.ProceedForm',compact('customPack','companyMinimum','company','location','mypack','colorChoices'));
     }
     public function sendRequest(Request $request,$companyId)
     {
@@ -41,6 +48,7 @@ class RequestController extends Controller
 
       $dbdate=date( 'Y-m-d', strtotime( $request->dateStart ) );
 
+      $packageSession=Session::get('CompanyPackage'.$companyId);
       $orderDB = new order;
       $orderDB->user_id= Auth::user()->id;
       $orderDB->company_id=$companyId;
@@ -48,16 +56,24 @@ class RequestController extends Controller
       $orderDB->event_name=$request->eventName;
       $orderDB->expectedVisitors=$request->visitor;
       $orderDB->date_start=$dbdate;
+      if (isset($packageSession))
+      {
+        $orderDB->package_id=$packageSession->id;
+      }
       $orderDB->time_start = $request->timeStart;
       $orderDB->client_contact = $request->contact;
       $orderDB->address_lat = $request->lat;
       $orderDB->address_lng = $request->lng;
       $orderDB->save();
 
-      $forOrderDetail = array();
-      foreach (Session::get('company'.$companyId) as $key => $product)
+      if (Session::has('company'.$companyId))
       {
-        $forOrderDetail[] = array('product_id' => $product->foodId,'order_id'=>$orderDB->id);
+        $forOrderDetail = array();
+        foreach (Session::get('company'.$companyId) as $key => $product)
+        {
+          $forOrderDetail[] = array('product_id' => $product->foodId,'order_id'=>$orderDB->id);
+        }
+        product_order::insert($forOrderDetail);
       }
       if (isset($request->colors))
       {
@@ -68,8 +84,8 @@ class RequestController extends Controller
         }
         OrderColor::insert($forOrderColor);
       }
-      product_order::insert($forOrderDetail);
       Session::forget('company'.$companyId);
+      Session::forget('CompanyPackage'.$companyId);
       return ['redirect'=>'/company-show/'.$companyId];
     }
     public function showRequestList()
@@ -84,8 +100,13 @@ class RequestController extends Controller
     public function fetchRequestData($orderId)
     {
        $OneOrderData=order::where('id', $orderId)->with('colors')->with('products')->get();
+       $packageData;
+       if ($OneOrderData[0]->package_id)
+       {
+         $packageData= package::where('id', $OneOrderData[0]->package_id)->with('products')->get();
+       }
        $ExistingOrderSameDate=order::where('status','0')->with('user')->where('date_start',$OneOrderData[0]->date_start)->get(['id','user_id','event_name','address_lat','message','address_lng','time_start']);
-       $response = array('OrderData' =>$OneOrderData, 'existing'=>$ExistingOrderSameDate);
+       $response = array('OrderData' =>$OneOrderData, 'existing'=>$ExistingOrderSameDate ,'PackageData'=>$packageData);
        return response()->json($response);
     }
     public function acceptRequest($orderId)

@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="request-form-container">
-    <div class="session-food-table">
-      <table class="responsive-table">
+    <div class="session-product-table">
+      <table class="responsive-table" v-if="custompack!=null">
         <thead>
           <tr>
             <th>Selected products</th>
@@ -11,6 +11,26 @@
           <tr v-for="food in custompack">
             <td><img :src="'/storage/images/'+food.foodImage" alt="foodimage"></td>
             <td>{{food.foodName}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="package-table-proceed" v-if="packagedata!=null">
+      <table>
+        <thead>
+          <tr>
+            <th>PACKAGE SELECTED</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{packagedata.name}}</td>
+          </tr>
+          <tr>
+            <td>{{packagedata.description}}</td>
+          </tr>
+          <tr>
+            <td>{{packagedata.price}} per head</td>
           </tr>
         </tbody>
       </table>
@@ -61,8 +81,7 @@
         </form>
         <form action="#" class="confirm-submit-container">
           <input id="confirm-submit" v-model="confirm" type="checkbox"/>
-          <label for="confirm-submit"></label>
-          <p> I have reviewed already my inputs before submition & it looks good.</p>
+          <label for="confirm-submit"><p> I have reviewed already my inputs before submition & it looks good.</p></label>
         </form>
       </div>
       <div class="proceed-form-right">
@@ -92,7 +111,7 @@ import axios from 'axios';
       confirm:false,
       }
     },
-    props: ['custompack','colors','company','minimum'],
+    props: ['custompack','packagedata','colors','company','minimum'],
     methods: {
       sendRequest()
       {

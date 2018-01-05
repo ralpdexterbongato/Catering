@@ -3,5 +3,5 @@
   Package Details
 @endsection
 @section('content')
-  <packageshow :packageid="{{$package}}"></packageshow>
+  <packageshow :packageid="{{$package}}" :ownerid="{{$ownerid}}" :user="{{Auth::user()}}"></packageshow>
 @endsection

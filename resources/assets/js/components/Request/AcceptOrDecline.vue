@@ -50,6 +50,37 @@
                   </div>
                 </td>
               </tr>
+              <tr>
+                <th>Package</th>
+                <td>{{PackagePrev.name}}</td>
+              </tr>
+              <tr v-if="PackagePrev!=null">
+                <th>Package foods</th>
+                <td class="submited-preview-container">
+                  <div class="request-preview-box z-depth-1"v-if="product.Type==0" v-for="product in PackageProduct">
+                    <img :src="'/storage/images/'+product.image" alt="product">
+                    <p>{{product.name}}</p>
+                  </div>
+                </td>
+              </tr>
+              <tr v-if="PackagePrev!=null">
+                <th>Package drinks</th>
+                <td class="submited-preview-container">
+                  <div class="request-preview-box z-depth-1"v-if="product.Type==1" v-for="product in PackageProduct">
+                    <img :src="'/storage/images/'+product.image" alt="product">
+                    <p>{{product.name}}</p>
+                  </div>
+                </td>
+              </tr>
+              <tr v-if="PackagePrev!=null">
+                <th>Package sweets</th>
+                <td class="submited-preview-container">
+                  <div class="request-preview-box z-depth-1"v-if="product.Type==2" v-for="product in PackageProduct">
+                    <img :src="'/storage/images/'+product.image" alt="product">
+                    <p>{{product.name}}</p>
+                  </div>
+                </td>
+              </tr>
               <tr v-if="ProductDetail[0]!=null">
                 <th>Foods</th>
                 <td class="submited-preview-container">
@@ -151,7 +182,9 @@ import axios from 'axios';
         colorDetail:[],
         ProductDetail:[],
         CurrentIndex:0,
-        SameDayOrders:[]
+        SameDayOrders:[],
+        PackagePrev:[],
+        PackageProduct:[]
       }
     },
     // props: [],
@@ -184,6 +217,8 @@ import axios from 'axios';
           vm.colorDetail= response.data.OrderData[0].colors;
           vm.ProductDetail= response.data.OrderData[0].products;
           vm.SameDayOrders= response.data.existing;
+          vm.PackagePrev=response.data.PackageData[0];
+          vm.PackageProduct=response.data.PackageData[0].products;
           var mymap = new GMaps({
              el: '#location-show',
              lat: vm.requestDetail.address_lat,
