@@ -59884,8 +59884,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  // data () { return {} },
+  props: ['user']
+  // methods: {},
+});
 
 /***/ }),
 /* 122 */
@@ -59895,30 +59920,102 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0, false, false)
+  return _c("div", { staticClass: "account-settings-container" }, [
+    _c("h5", [_vm._v("Your account info")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "account-box-current z-depth-1" }, [
+      _c("div", { staticClass: "account-data-box white" }, [
+        _c("div", { staticClass: "account-header" }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grey-text text-darken-1 account-content" }, [
+          _vm._v(_vm._s(_vm.user.name))
+        ]),
+        _vm._v(" "),
+        _vm._m(0, false, false)
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "divider" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "account-data-box white" }, [
+        _c("div", { staticClass: "account-header" }, [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grey-text text-darken-1 account-content" }, [
+          _vm._v(_vm._s(_vm.user.email))
+        ]),
+        _vm._v(" "),
+        _vm._m(1, false, false)
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "divider" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "account-data-box white" }, [
+        _c("div", { staticClass: "account-header" }, [_vm._v("Username")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grey-text text-darken-1 account-content" }, [
+          _vm._v(_vm._s(_vm.user.username))
+        ]),
+        _vm._v(" "),
+        _vm._m(2, false, false)
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "divider" }),
+      _vm._v(" "),
+      _vm._m(3, false, false)
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "account-settings-container" }, [
-      _c("div", { staticClass: "input-field col s6" }, [
-        _c("input", {
-          staticClass: "validate",
-          attrs: { id: "name", placeholder: " ", type: "text" }
-        }),
-        _vm._v(" "),
-        _c("label", { attrs: { for: "name" } }, [_vm._v("Full name")])
+    return _c("div", [
+      _c("i", { staticClass: "material-icons grey-text text-darken-1" }, [
+        _vm._v("edit")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("i", { staticClass: "material-icons grey-text text-darken-1" }, [
+        _vm._v("edit")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("i", { staticClass: "material-icons grey-text text-darken-1" }, [
+        _vm._v("edit")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "account-data-box white" }, [
+      _c("div", { staticClass: "account-header" }, [_vm._v("Password")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "grey-text text-darken-1 account-content" }, [
+        _c("i", { staticClass: "material-icons" }, [_vm._v("lens")]),
+        _c("i", { staticClass: "material-icons" }, [_vm._v("lens")]),
+        _c("i", { staticClass: "material-icons" }, [_vm._v("lens")]),
+        _c("i", { staticClass: "material-icons" }, [_vm._v("lens")]),
+        _c("i", { staticClass: "material-icons" }, [_vm._v("lens")]),
+        _c("i", { staticClass: "material-icons" }, [_vm._v("lens")]),
+        _c("i", { staticClass: "material-icons" }, [_vm._v("lens")])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "input-field col s6" }, [
-        _c("input", {
-          staticClass: "validate",
-          attrs: { id: "icon_prefix", placeholder: " ", type: "text" }
-        }),
-        _vm._v(" "),
-        _c("label", { attrs: { for: "icon_prefix" } }, [_vm._v("Username")])
+      _c("div", [
+        _c("i", { staticClass: "material-icons grey-text text-darken-1" }, [
+          _vm._v("edit")
+        ])
       ])
     ])
   }

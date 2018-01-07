@@ -3,6 +3,6 @@
   Account settings
 @endsection
 @section('content')
-<accountsettings>
+<accountsettings :user="{{Auth::user()}}">
 </accountsettings>
 @endsection

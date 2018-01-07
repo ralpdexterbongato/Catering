@@ -95,7 +95,7 @@ a
 }
 html
 {
-  background: #fff;
+  background: #FAFAFA;
 }
 *{
 	box-sizing: border-box;
@@ -1582,4 +1582,40 @@ font-family: 'Pompiere', cursive;
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
+}
+
+/*account settings*/
+.account-box-current
+{
+	margin:0 auto;
+	max-width: 650px;
+}
+.account-data-box
+{
+	display: flex;
+	justify-content: space-between;
+	padding:5px 20px;
+}
+.account-data-box i
+{
+	font-size: 26px;
+	cursor: pointer;
+}
+.account-data-box div
+{
+	font-size: 15px;
+	text-align: left;
+	padding:16px 26px;
+}
+.account-content
+{
+	flex:1;
+}
+.account-content i
+{
+	font-size: 11px;
+}
+.account-header
+{
+	min-width: 160px;
 }
