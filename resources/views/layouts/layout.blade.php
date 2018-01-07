@@ -59,11 +59,12 @@
                     <a href="/company-show-own"><li><i class="material-icons">add</i> Product</li></a>
                     <div class="divider">
                     </div>
-                    <a href="/package-create"><li><i class="material-icons">settings</i> Package</li></a>
-                    <a href="/comp-settings"><li><i class="material-icons">settings</i> Product</li></a>
                     <a href="/comp-settings"><li><i class="material-icons">settings</i> Company</li></a>
+                  @endif
+                    <a href="/my-account-settings"><li><i class="material-icons">settings</i> Account</li></a>
                     <div class="divider">
                     </div>
+                  @if(Auth::user()->role==1)
                     <a href="/company-show-own"><li><i class="material-icons">business</i> My Company</li></a>
                     <a href="/show-cater-request"><li><i class="material-icons">room_service</i>Catering request</li></a>
                   @endif
@@ -155,7 +156,6 @@
             <li><div class="divider"></div></li>
             @if (Auth::user()->role==2)
             <li><a class="subheader">Settings</a></li>
-            <li><a class="waves-effect" href="/category-setting">Categories</a></li>
             @endif
           </ul>
             @endif
@@ -202,6 +202,11 @@
         }
       });
       $('#login-opener-2').on('click',function(event)
+      {
+        event.preventDefault();
+        $('#login-modal').addClass('active');
+      });
+      $('#login-opener-3').on('click',function(event)
       {
         event.preventDefault();
         $('#login-modal').addClass('active');

@@ -802,6 +802,7 @@ font-family: 'Pompiere', cursive;
 	flex-wrap: wrap;
 	margin-top: 30px;
 	margin-bottom: 20px;
+	max-height: 100vh;
 }
 .search-container
 {
@@ -816,6 +817,41 @@ font-family: 'Pompiere', cursive;
 {
 	width:300px;
 	margin:0px 0px 40px 0px;
+	position:relative;
+}
+.menu-action-btns:hover
+{
+	background: rgba(0, 0, 0, 0.7);
+}
+.menu-action-btns
+{
+	transition: background .5s;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	display: flex;
+	background: rgba(0, 0, 0, 0.4);
+	justify-content: space-between;
+	padding:10px 5px;
+}
+.menu-action-btns .right-option i:hover
+{
+	background: rgba(255, 255, 255, 0.9);
+	color: rgba(0, 0, 0, 0.8);
+}
+.menu-action-btns i
+{
+	border-radius: 3px;
+	margin-left: 5px;
+	color:#fff;
+}
+.product-switch
+{
+	font-weight: bold;
+	border:1px solid #fff;
+	padding:3px 10px 3px 0px;
+	border-radius: 5px;
 }
 .card-content a.btn
 {
@@ -903,38 +939,6 @@ font-family: 'Pompiere', cursive;
 {
 	cursor: pointer;
 	color: #E34F34!important;
-}
-
-/*category setting css*/
-.category-chip
-{
-display: inline-block;
-}
-.category-chip i
-{
-	font-size: 16px;
-	cursor: pointer;
-}
-.categories-list
-{
-	margin-top: 30px;
-}
-.categ-input
-{
-	margin: 40px 0px!important;
-}
-.category-boxes-container
-{
-	display: flex;
-	flex-wrap: wrap;
-	margin:20px 0px;
-}
-.category-boxes-container p
-{
-	background: #f3f3f3;
-	border-radius: 5px;
-	padding:5px 10px;
-	margin:5px;
 }
 /*packgages*/
 .packages-list .card
@@ -1508,17 +1512,14 @@ display: inline-block;
 {
 	max-width: 500px;
 }
-.package-show-container th
-{
-	font-weight: bold;
-}
 .package-show-container td i
 {
 	cursor: pointer;
 }
 .package-show-container th
 {
-	width: 200px;
+	min-width: 300px;
+	font-weight: bold;
 }
 .product-box-bigger
 {
@@ -1564,4 +1565,21 @@ display: inline-block;
 {
 	display: flex;
 	justify-content: flex-end;
+}
+.i-want-container p
+{
+	font-size: 19px;
+	margin-top: 40px;
+	color: rgba(0, 0, 0, 0.8);
+}
+
+#login-opener-3
+{
+	cursor: pointer;
+}
+.all-products-choices
+{
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
 }

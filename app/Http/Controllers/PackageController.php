@@ -18,7 +18,7 @@ class PackageController extends Controller
     public function showallproduct(Request $request)
     {
       $companyid=company::where('user_id', Auth::user()->id)->value('id');
-      return Product::where('company_id', $companyid)->where('name','LIKE','%'.$request->search.'%')->paginate(10);
+      return Product::where('Available', '0')->where('company_id', $companyid)->where('name','LIKE','%'.$request->search.'%')->paginate(10);
     }
     public function store(Request $request)
     {
@@ -113,5 +113,27 @@ class PackageController extends Controller
     {
       ProductPackage::where('package_id', $packageId)->where('product_id', $productId)->delete();
       return ['success'=>'success'];
+    }
+    public function storePackageProduct(Request $request,$packageId)
+    {
+      $this->validate($request,[
+        'productId'=>'required'
+      ]);
+      $ErrorIfNotNull=ProductPackage::where('product_id',$request->productId)->where('package_id', $packageId)->get(['id']);
+      if (!empty($ErrorIfNotNull[0]))
+      {
+        return ['error'=>'Sorry this package already have this product'];
+      }
+      $ProdPackageDB=new ProductPackage;
+      $ProdPackageDB->product_id = $request->productId;
+      $ProdPackageDB->package_id= $packageId;
+      $ProdPackageDB->save();
+      return ['success'=>'success'];
+    }
+    public function delete($packageId)
+    {
+      ProductPackage::where('package_id',$packageId)->delete();
+      package::where('id', $packageId)->delete();
+      return ['redirect'=>'/company-show'];
     }
 }

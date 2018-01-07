@@ -21,6 +21,7 @@ Route::get('/register','registercontroller@create');
 Route::post('/register-store','registercontroller@store');
 Route::post('/user','usercontroller@logout');
 Route::post('/user-login','usercontroller@loginSubmit');
+Route::get('/my-account-settings','usercontroller@settingsShow');
 // Route::get('/display','registercontroller@emailview');
 
 Route::get('/verify/{email}/{verificationCode}','registercontroller@verfiyDone')->name('sendEmailDone');
@@ -33,17 +34,15 @@ Route::put('/company-profile-image/{companyid}','companyProfileController@update
 Route::put('/company-cover-image/{companyid}','companyCoverController@update');
 
 Route::post('/store-product','ProductController@store');
+Route::put('/update-product/{productId}','ProductController@update');
 Route::get('/show-company-products/{companyid}','ProductController@displaycompanyproduct');
-Route::get('/fetch-categories','ProductController@fetchCategories');
+Route::delete('/delete-product/{productId}','ProductController@delete');
+Route::get('/fetch-edit-detail/{productId}','ProductController@fetchEditDetail');
+Route::put('/toggle-availability/{productId}','ProductController@toggleAvailable');
 
 Route::post('/mylist-session/{companyid}','OrderSessionController@store');
 Route::get('/mylist-session-show/{companyid}','OrderSessionController@show');
 Route::delete('/mylist-session-delete/{companyid}/{foodid}','OrderSessionController@delete');
-
-Route::get('/category-setting','CategoryController@index');
-Route::get('/category-setting-data','CategoryController@indexData');
-Route::post('/category-store','CategoryController@store');
-Route::delete('/category-delete/{id}','CategoryController@delete');
 
 Route::get('/comp-settings','CompanySettingController@show');
 Route::get('/comp-settings-profile','CompanySettingController@showProfile');
@@ -95,3 +94,5 @@ Route::put('/package-update-desc/{packageId}','PackageController@updateDescripti
 Route::put('/package-update-price/{packageId}','PackageController@updatePrice');
 
 Route::delete('/remove-package-product/{packageId}/{productId}','PackageController@removePackageProduct');
+Route::post('/add-package-product/{packageId}','PackageController@storePackageProduct');
+Route::delete('/package-delete/{packageId}','PackageController@delete');

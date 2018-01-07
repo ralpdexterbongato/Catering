@@ -6,13 +6,13 @@ use App\price;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Image;
-use App\Category;
-use App\category_product;
+use App\company;
+use Auth;
 class ProductController extends Controller
 {
     public function Index()
     {
-      $popularFoods=Product::whereNull('disabled')->orderBy('RequestCount','DESC')->paginate(12);
+      $popularFoods=Product::where('Available', '0')->orderBy('RequestCount','DESC')->paginate(12);
       return view('Product.FoodIndex',compact('popularFoods'));
     }
     public function store(Request $request)
@@ -20,8 +20,7 @@ class ProductController extends Controller
       $this->validate($request,[
         'name'=>'required|max:25',
         'FoodImage'=>'required',
-        'description'=>'required',
-        'categories.*'=>'required',
+        'description'=>'required|max:190',
         'type'=>'required'
       ]);
       if ($request->FoodImage!=null)
@@ -37,14 +36,6 @@ class ProductController extends Controller
           $productTbl->company_id = $request->companyid;
           $productTbl->Type = $request->type;
           $productTbl->save();
-
-          $date=Carbon::now();
-          $forFoodCatTable = array();
-          foreach ($request->categories as $key => $category)
-          {
-            $forFoodCatTable[] = array('food_id' =>$productTbl->id ,'category_id'=>$category,'created_at'=>$date);
-          }
-          category_product::insert($forFoodCatTable);
       }
       return ['success'=>'success'];
     }
@@ -57,10 +48,55 @@ class ProductController extends Controller
       {
         $type=0;
       }
-      return Product::orderBy('id','DESC')->where('company_id', $companyId)->where('Type',$type)->where('name','LIKE','%'.$request->search.'%')->paginate(6);
+      $ownerId=company::where('id', $companyId)->value('user_id');
+      if (Auth::check() && $ownerId==Auth::user()->id)
+      {
+        return Product::orderBy('id','DESC')->where('company_id', $companyId)->where('Type',$type)->where('name','LIKE','%'.$request->search.'%')->paginate(6);
+      }else
+      {
+        return Product::orderBy('id','DESC')->where('Available','0')->where('company_id', $companyId)->where('Type',$type)->where('name','LIKE','%'.$request->search.'%')->paginate(6);
+      }
+
     }
-    public function fetchCategories()
+    public function delete($productId)
     {
-      return Category::all();
+      Product::where('id',$productId)->delete();
+      return ['success'=>'success'];
+    }
+    public function fetchEditDetail($productId)
+    {
+      return Product::where('id', $productId)->get();
+    }
+    public function update(Request $request,$productId)
+    {
+      $this->validate($request,[
+        'name'=>'required|max:25',
+        'description'=>'required|max:190',
+        'type'=>'required'
+      ]);
+
+      if ($request->image!=null)
+      {
+        $imageData = $request->get('image');
+        $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+        Image::make($request->get('image'))->save(public_path('/storage/images/').$fileName);
+        Product::where('id',$productId)->update(['name'=>$request->name,'image'=>$fileName,'description'=>$request->description,'Type'=>$request->type]);
+      }else
+      {
+        Product::where('id',$productId)->update(['name'=>$request->name,'description'=>$request->description,'Type'=>$request->type]);
+      }
+      return ['success'=>'success'];
+    }
+    public function toggleAvailable($productId)
+    {
+      $available=Product::where('id', $productId)->value('available');
+      if ($available==0)
+      {
+        Product::where('id', $productId)->update(['available'=>1]);
+      }
+      if ($available==1)
+      {
+        Product::where('id', $productId)->update(['available'=>0]);
+      }
     }
 }

@@ -1,7 +1,8 @@
 @extends('layouts.layout')
 @section('title')
-  Category Settings
+  Account settings
 @endsection
 @section('content')
-<category></category>
+<accountsettings>
+</accountsettings>
 @endsection

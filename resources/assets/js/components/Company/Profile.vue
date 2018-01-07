@@ -30,6 +30,7 @@
         </span>
        </div>
      </div>
+     <!-- product modal -->
       <div id="addproductmodal" class="modal modal-fixed-footer">
        <div class="modal-content">
          <h5>Add product menu</h5>
@@ -39,7 +40,7 @@
             <label for="foodname" >Name</label>
           </div>
           <div class="input-field col s12">
-            <textarea id="fdescription" v-model="FoodDescription" class="materialize-textarea" data-length="100"></textarea>
+            <textarea id="fdescription" v-model="FoodDescription" class="materialize-textarea" data-length="190"></textarea>
             <label for="fdescription">Description</label>
           </div>
           <div class="input-field col s12">
@@ -50,12 +51,6 @@
               <option value="2">Sweet</option>
             </select>
             <label>Select type</label>
-          </div>
-          <div class="category-boxes-container">
-            <p v-for="category in fetchedCategories">
-              <input type="checkbox" v-model="selectedCategory" :value="category.id" :id="'categ'+category.id"/>
-              <label :for="'categ'+category.id">{{category.name}}</label>
-            </p>
           </div>
           <a class="btn food-image-finder" @click="toggleShowForProduct">Image</a>
           <div class="preview" v-if="imgDataUrlForFood!=''">
@@ -116,7 +111,10 @@
       <div class="card" v-for="Profilepackage in Packages">
         <div class="card-image">
           <img src="/DesignPic/1.jpg">
-          <a :href="'/package-show/'+Profilepackage.id" class="btn-floating halfway-fab waves-effect waves-light redirect indigo"><i class="material-icons">remove_red_eye</i></a>
+          <a :href="'/package-show/'+Profilepackage.id" class="btn-floating halfway-fab waves-effect waves-light redirect indigo">
+            <i  v-if="((user!=null)&&(user.id==AboutCompany.user_id))" class="material-icons">edit</i>
+            <i v-else class="material-icons">remove_red_eye</i>
+          </a>
         </div>
         <div class="card-content">
           <span class="card-title">P{{Profilepackage.price}} per head</span>
@@ -157,6 +155,16 @@
         <div class="card">
            <div class="card-image waves-effect waves-block waves-light">
              <img class="activator" :src="'/storage/images/'+product.image">
+             <div class="menu-action-btns"v-if="((user!=null)&&(AboutCompany.user_id==user.id))">
+               <div class="product-switch" v-on:click="toggleProduct(product.id)">
+                 <p v-if="product.Available=='0'" class="white-text"><i class="material-icons">check</i> Available</p>
+                 <p v-else class="white-text"><i class="material-icons">close</i>Unavailable</p>
+               </div>
+               <div class="right-option">
+                 <i class="material-icons" onclick="$('#updateProduct').modal('open');" v-on:click="fetchEditProduct(product.id)">edit</i>
+                 <i class="material-icons" v-on:click="deleteProduct(product.id)">close</i>
+               </div>
+             </div>
            </div>
            <div class="card-content">
              <span class="card-title activator grey-text text-darken-4">{{product.name}}<i class="material-icons right">more_vert</i></span>
@@ -174,21 +182,54 @@
       </div>
     </div>
     <ul class="pagination">
-        <li class="waves-effect" v-if="paginationFood.current_page > 1"><a href="#" @click.prevent="changepage(paginationFood.current_page - 1)"><i class="material-icons">chevron_left</i></a></li>
+        <li class="waves-effect" v-if="paginationProduct.current_page > 1"><a href="#" @click.prevent="changepage(paginationProduct.current_page - 1)"><i class="material-icons">chevron_left</i></a></li>
         <li v-for="page in pagesNumberFood" v-bind:class="[ page == isActiveFood ? 'active indigo':'']"><a href="#!" @click.prevent="changepage(page)">{{page}}</a></li>
-        <li class="waves-effect" v-if="paginationFood.current_page < paginationFood.last_page"><a href="#!" @click.prevent="changepage(paginationFood.current_page + 1)"><i class="material-icons">chevron_right</i></a></li>
+        <li class="waves-effect" v-if="paginationProduct.current_page < paginationProduct.last_page"><a href="#!" @click.prevent="changepage(paginationProduct.current_page + 1)"><i class="material-icons">chevron_right</i></a></li>
     </ul>
     <div class="fixed-action-btn click-to-toggle" v-if="((user!=null)&&(user.id==AboutCompany.user_id))">
        <a class="btn-floating btn-large indigo">
          <i class="material-icons">add</i>
        </a>
        <ul>
-         <li onclick="$('#addproductmodal').modal('open');" v-on:click="[user.id==AboutCompany.user_id && fetchedCategories[0]==null?fetchCategories():'']"><a class="btn-floating indigo darken-1"><i class="material-icons">restaurant</i></a></li>
+         <li onclick="$('#addproductmodal').modal('open');"><a class="btn-floating indigo darken-1"><i class="material-icons">restaurant</i></a></li>
        </ul>
     </div>
     <div class="fixed-action-btn" v-else>
       <a  onclick="$('#MyList').modal('open');" class="btn-floating btn-large waves-effect waves-light indigo" :class="[CompanySession!=null?'pulse':'']"><i class="material-icons">format_list_numbered</i></a>
     </div>
+    <div id="updateProduct" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h5>Edit product</h5>
+      <div class="food-form-container">
+        <div class="input-field col s6">
+          <input id="editName" placeholder="Product name" v-model="editName =EditProductData.name" type="text" data-length="20">
+          <label for="editName" >Name</label>
+        </div>
+        <div class="input-field col s12">
+          <textarea id="editDescription" placeholder="Product description" v-model="editDesc =EditProductData.description" class="materialize-textarea" data-length="190"></textarea>
+          <label for="editDescription">Description</label>
+        </div>
+        <div class="input-field col s12">
+          <select id="EdittypeSelect">
+            <option value="0">Food</option>
+            <option value="1">Drink</option>
+            <option value="2">Sweet</option>
+          </select>
+          <label for="EdittypeSelect">Select type</label>
+        </div>
+        <a class="btn food-image-finder" @click="toggleShowForUpdate()">Image</a>
+        <div class="preview" v-if="imgDataUrlProductUpdate">
+          <img :src="imgDataUrlProductUpdate" alt="preview">
+        </div>
+        <div class="preview" v-else-if="EditProductData.image!=null">
+          <img :src="'/storage/images/'+EditProductData.image" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" v-on:click.prevent="submitUpdate()" class="modal-action modal-close waves-effect waves-light btn-flat ">Update</a>
+    </div>
+  </div>
     <!-- profile -->
 <my-upload field="img"
     @crop-success="cropSuccessForLogo"
@@ -229,6 +270,18 @@
         :headers="headers"
         img-format="png">
     </my-upload>
+    <my-upload field="img"
+        @crop-success="cropSuccessProductUpdate"
+        @crop-upload-success="cropUploadSuccessProductUpdate"
+        @crop-upload-fail="cropUploadFailProductUpdate"
+        v-model="showForUpdate"
+        langType="En"
+        :width="300"
+        :height="300"
+        :params="params"
+        :headers="headers"
+        img-format="png">
+    </my-upload>
   </div>
 </template>
 
@@ -241,6 +294,7 @@ import myUpload from 'vue-image-crop-upload';
          showForLogo: false,
          showForCover: false,
          showForProduct: false,
+         showForUpdate:false,
          params: {
              token: '123456798',
              name: 'avatar'
@@ -251,21 +305,23 @@ import myUpload from 'vue-image-crop-upload';
          imgDataUrlForLogo: '',
          imgDataUrlForCover: '',
          imgDataUrlForFood: '',
+         imgDataUrlProductUpdate:'',
          AboutCompany:[],
          FoodName:'',
          FoodDescription:'',
          CompanyProduct:[],
          SelectedSize:[],
          CompanySession:[],
-         fetchedCategories:[],
-         selectedCategory:[],
-         paginationFood:[],
+         paginationProduct:[],
          offsetFood:4,
          offsetPackage:4,
          SortType:0,
          productSearch:'',
          Packages:[],
-         paginationPackage:[]
+         paginationPackage:[],
+         EditProductData:[],
+         editName:'',
+         editDesc:''
       }
     },
     components: {
@@ -281,11 +337,11 @@ import myUpload from 'vue-image-crop-upload';
     props: ['company','user'],
     methods: {
       changepage(next){
-        this.paginationFood.current_page = next;
+        this.paginationProduct.current_page = next;
         this.getCompanyProducts(next);
       },
       changepagePackage(next){
-        this.paginationFood.current_page = next;
+        this.paginationProduct.current_page = next;
         this.showpackages(next);
       },
       addToSessionList(FoodData)
@@ -346,7 +402,6 @@ import myUpload from 'vue-image-crop-upload';
           name:this.FoodName,
           description:this.FoodDescription,
           companyid:this.AboutCompany.id,
-          categories:this.selectedCategory,
           type:$('#typeSelect').val()
         }).then(function(response)
         {
@@ -364,7 +419,6 @@ import myUpload from 'vue-image-crop-upload';
             vm.imgDataUrlForFood = '';
             vm.FoodName = '';
             vm.FoodDescription = '';
-            vm.selectedCategory =[];
             swal({
                 position: 'top-right',
                 type: 'success',
@@ -408,6 +462,9 @@ import myUpload from 'vue-image-crop-upload';
       toggleShowForProduct() {
                 this.showForProduct = !this.show;
             },
+      toggleShowForUpdate() {
+                this.showForUpdate = !this.show;
+            },
             changeLogo()
             {
               var vm=this;
@@ -446,15 +503,6 @@ import myUpload from 'vue-image-crop-upload';
                   vm.imgDataUrlForCover='';
               });
             },
-            fetchCategories()
-            {
-              var vm=this;
-              axios.get(`/fetch-categories`).then(function(response)
-              {
-                console.log(response);
-                vm.fetchedCategories=response.data;
-              });
-            },
             getCompanyProducts(page)
             {
               var vm=this;
@@ -466,9 +514,24 @@ import myUpload from 'vue-image-crop-upload';
               {
                 console.log(response);
                 vm.CompanyProduct=response.data.data;
-                vm.paginationFood=response.data;
+                vm.paginationProduct=response.data;
                 swal.close();
               });
+            },
+            deleteProduct(productId)
+            {
+              var vm=this;
+              if (confirm('Are you sure to delete this product?'))
+              {
+                axios.delete(`/delete-product/`+productId).then(function(response)
+                {
+                  console.log(response);
+                  vm.getCompanyProducts(vm.paginationProduct.current_page);
+                }).catch(function(error)
+                {
+                  console.log(error);
+                })
+              }
             },
             showpackages(page)
             {
@@ -482,6 +545,76 @@ import myUpload from 'vue-image-crop-upload';
               {
                 console.log(error);
               });
+            },
+            fetchEditProduct(id)
+            {
+              var vm=this;
+              axios.get(`/fetch-edit-detail/`+id).then(function(response)
+              {
+                console.log(response);
+                vm.EditProductData=response.data[0];
+                $('#EdittypeSelect').val(response.data[0].Type);
+                $("#EdittypeSelect").material_select();
+              })
+            },
+            submitUpdate()
+            {
+              var vm=this;
+              if (confirm('Confirm update?'))
+              {
+                axios.put(`/update-product/`+this.EditProductData.id,{
+                  name:this.editName,
+                  description:this.editDesc,
+                  type:$('#EdittypeSelect').val(),
+                  image:this.imgDataUrlProductUpdate
+                }).then(function(response)
+                {
+                  console.log(response);
+                  swal({
+                      position: 'top-right',
+                      type: 'success',
+                      title: 'Success',
+                      text:'Updated successfully',
+                      showConfirmButton: false,
+                      timer: 1500
+                    });
+                  vm.imgDataUrlProductUpdate='';
+                  vm.editName='';
+                  vm.editDesc='';
+                  vm.getCompanyProducts(vm.paginationProduct.current_page);
+                }).catch(function(error)
+                {
+                  console.log(error);
+                  swal({
+                      position: 'top-right',
+                      type: 'error',
+                      title: 'Ooops',
+                      text:error.response.data.message,
+                      showConfirmButton: false,
+                      timer: 1500
+                    });
+                })
+              }
+            },
+            toggleProduct(id)
+            {
+              var vm=this;
+              axios.put(`/toggle-availability/`+id).then(function(response)
+              {
+                console.log(response);
+                swal({
+                    position: 'center',
+                    type: 'success',
+                    title: 'Success',
+                    text:'Updated successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                vm.getCompanyProducts(vm.paginationProduct.current_page);
+              }).then(function(error)
+              {
+                console.log(error);
+              })
             },
 
             /**
@@ -554,7 +687,7 @@ import myUpload from 'vue-image-crop-upload';
                 console.log('field: ' + field);
             },
 
-            //food
+            //product
 
             /**
              * crop success
@@ -588,22 +721,55 @@ import myUpload from 'vue-image-crop-upload';
                 console.log(status);
                 console.log('field: ' + field);
             },
+
+            /**
+             * crop success
+             *
+             * [param] imgDataUrl
+             * [param] field
+             */
+            cropSuccessProductUpdate(imgDataUrl, field){
+                console.log('-------- crop success --------');
+                this.imgDataUrlProductUpdate = imgDataUrl;
+            },
+            /**
+             * upload success
+             *
+             * [param] jsonData  server api return data, already json encode
+             * [param] field
+             */
+            cropUploadSuccessProductUpdate(jsonData, field){
+                console.log('-------- upload success --------');
+                console.log(jsonData);
+                console.log('field: ' + field);
+            },
+            /**
+             * upload fail
+             *
+             * [param] status    server api return error status, like 500
+             * [param] field
+             */
+            cropUploadFailProductUpdate(status, field){
+                console.log('-------- upload fail --------');
+                console.log(status);
+                console.log('field: ' + field);
+            },
     },
     computed:{
       isActiveFood:function(){
-        return this.paginationFood.current_page;
+        return this.paginationProduct.current_page;
       },
       pagesNumberFood:function(){
-        if (!this.paginationFood.to) {
+        if (!this.paginationProduct.to) {
            return [];
         }
-        var from = this.paginationFood.current_page - this.offsetFood;
+        var from = this.paginationProduct.current_page - this.offsetFood;
         if (from < 1) {
             from = 1;
         }
         var to = from + (this.offsetFood * 2);
-        if (to >= this.paginationFood.last_page) {
-            to = this.paginationFood.last_page;
+        if (to >= this.paginationProduct.last_page) {
+            to = this.paginationProduct.last_page;
         }
         var pagesArray = [];
         while (from <= to) {

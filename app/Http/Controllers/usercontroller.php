@@ -27,8 +27,8 @@ class usercontroller extends Controller
     Auth::logout();
     return redirect('/');
   }
-  public function accountConfirmation()
+  public function settingsShow()
   {
-
+    return view('Account.Settings');
   }
 }

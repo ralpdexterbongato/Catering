@@ -23,13 +23,13 @@ Vue.component('register', require('./components/Register/RegisterCreate.vue'));
 Vue.component('login', require('./components/Login/UserLogin.vue'));
 Vue.component('companyprofile', require('./components/Company/Profile.vue'));
 Vue.component('companyindex', require('./components/Company/Index.vue'));
-Vue.component('category', require('./components/Category/CategorySettings.vue'));
 Vue.component('proceed', require('./components/Request/proceed.vue'));
 Vue.component('requestlist', require('./components/Request/AcceptOrDecline.vue'));
 Vue.component('companysettings', require('./components/Company/Settings.vue'));
 Vue.component('calendarschedule', require('./components/Request/Calendar.vue'));
 Vue.component('packagecreate', require('./components/Package/Create.vue'));
 Vue.component('packageshow', require('./components/Package/Show.vue'));
+Vue.component('accountsettings', require('./components/Account/Settings.vue'));
 
 const app = new Vue({
     el: '#app',
