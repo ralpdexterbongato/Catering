@@ -17,7 +17,7 @@
       <label for="icon_telephone">Password</label>
     </div>
     <div class="login-btn-container">
-      <a href="#"><p>Forgot password?</p></a>
+      <a href="/forgot-password">Forgot your password?</a>
       <button class="btn waves-effect waves-light" v-on:click="sendLogin()" type="submit" name="action">Submit
         <i class="material-icons right">send</i>
       </button>
@@ -69,24 +69,3 @@ import axios from 'axios';
     },
   }
 </script>
-
-<style lang="css">
-.login-container
-{
-  height: 100vh;
-  width:600px;
-  padding:30px 100px;
-  margin: 0 auto;
-  background: #F5F5F5;
-}
-.login-btn-container
-{
-  display: flex;
-  margin-top: 30px;
-  justify-content:space-between;
-}
-.login-title-head
-{
-  margin-bottom: 100px;
-}
-</style>

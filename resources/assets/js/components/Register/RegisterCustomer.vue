@@ -136,29 +136,3 @@ import myUpload from 'vue-image-crop-upload';
 
   }
 </script>
-
-<style lang="css">
-.customer-reg-container
-{
-  padding:25px 80px 55px 80px;
-  min-height: 100vh;
-}
-.submit-btn
-{
-  display: flex;
-  justify-content: center;
-}
-.submit-btn a
-{
-  margin-right: 10px;
-}
-.preview
-{
-  display: flex;
-  margin-top: 20px;
-}
-.preview img
-{
-  margin:auto;
-}
-</style>

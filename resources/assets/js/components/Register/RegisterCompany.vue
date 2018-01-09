@@ -127,32 +127,3 @@ export default {
   },
 }
 </script>
-
-<style lang="css">
-.register-company-container
-{
-  min-height: 100vh;
-  padding:25px 80px 55px 80px;
-}
-.register-company-submit
-{
-  display: flex;
-  justify-content:center;
-  margin-bottom: 25px!important;
-  margin-top: 25px;
-}
-.register-company-submit a
-{
-  margin-right: 20px;
-}
-.preview
-{
-  margin-top: 20px;
-  margin:0 auto;
-  display: flex;
-}
-.preview img
-{
-  margin: auto;
-}
-</style>

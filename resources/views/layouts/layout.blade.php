@@ -23,9 +23,12 @@
       <div class="header-container" id="notifyapp">
         <div class="left-header">
           <div class="head-modal-burger">
-            @if (Auth::check())
-              <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-            @endif
+            <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+            <div class="notif-icon-container">
+              @if (Auth::check())
+              <notification :user="{{Auth::user()}}"></notification>
+              @endif
+            </div>
           </div>
           <div class="logo" id="modal-opener">
             <p>PACLIPAN</p>
@@ -78,7 +81,6 @@
                 @else
                   <a href="#" id="login-opener"><li><i class="material-icons">person</i> Login</li></a>
                   <a href="/register"><li><i class="material-icons">person_add</i> Register</li></a>
-                  <a href="#"><li><i class="material-icons">favorite</i> Favorites</li></a>
                 @endif
               </ul>
             </li>
@@ -91,74 +93,53 @@
       <div class="content-container" id="app">
         @if(Auth::check() && Auth::user()->verified=='1')
         <div class="verification-input">
-          <p><i class="material-icons">mail_outline</i> Please verify your email <span class="bold">{{Auth::user()->email}}</span> , Thank you.</p>
+          <p><i class="material-icons">mail_outline</i> Please verify your email <span class="bold">{{Auth::user()->email}}</span> , Thank you. <a href="/resend-email">resend</a></p>
         </div>
         @endif
-        @if (Auth::check())
+
         <ul id="slide-out" class="side-nav">
           <li>
             <div class="user-view">
-            <div class="background">
-              <img src="/DesignPic/teal.png">
+            <div class="background indigo">
             </div>
+            @Auth
             <a href="#!user"><img class="circle" src="/storage/images/{{Auth::user()->avatar}}"></a>
             <a href="#!name"><span class="white-text name">{{Auth::user()->name}}</span></a>
             <a href="#!email"><span class="white-text email">{{Auth::user()->email}}</span></a>
+            @endAuth
             </div>
           </li>
-            <li><a href="#!"><i class="material-icons">account_circle</i>First Link With Icon</a></li>
-            <li><div class="divider"></div></li>
-            <li class="no-padding">
-              <ul class="collapsible collapsible-accordion">
-                <li>
-                  <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
-                  <div class="collapsible-body">
-                    <ul>
-                      <li><a href="#!">First</a></li>
-                      <li><a href="#!">Second</a></li>
-                      <li><a href="#!">Third</a></li>
-                      <li><a href="#!">Fourth</a></li>
-                    </ul>
-                  </div>
-                </li>
-              </ul>
-            </li>
-            <li class="no-padding">
-              <ul class="collapsible collapsible-accordion">
-                <li>
-                  <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
-                  <div class="collapsible-body">
-                    <ul>
-                      <li><a href="#!">First</a></li>
-                      <li><a href="#!">Second</a></li>
-                      <li><a href="#!">Third</a></li>
-                      <li><a href="#!">Fourth</a></li>
-                    </ul>
-                  </div>
-                </li>
-              </ul>
-            </li>
-            <li class="no-padding">
-              <ul class="collapsible collapsible-accordion">
-                <li>
-                  <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
-                  <div class="collapsible-body">
-                    <ul>
-                      <li><a href="#!">First</a></li>
-                      <li><a href="#!">Second</a></li>
-                      <li><a href="#!">Third</a></li>
-                      <li><a href="#!">Fourth</a></li>
-                    </ul>
-                  </div>
-                </li>
-              </ul>
-            </li>
-            <li><div class="divider"></div></li>
-            @if (Auth::user()->role==2)
-            <li><a class="subheader">Settings</a></li>
+            <li><a href="/"><i class="material-icons">star_border</i>Popular</a></li>
+            <div class="divider"></div>
+            <li><a href="/company"><i class="material-icons">store</i>Companies</a></li>
+            <div class="divider"></div>
+            <li><a href="/about"><i class="material-icons">info</i>About us</a></li>
+            <div class="divider"></div>
+            <li><a class="subheader">Account</a></li>
+            @if (Auth::check()==false)
+              <li><a href="" id="login-opener4"><i class="material-icons">person</i>Login</a></li>
+              <li><a href="/register"><i class="material-icons">person_add</i>Register</a></li>
+            @else
+              <li><a href="/my-account-settings"><i class="material-icons">settings</i>Settings</a></li>
+              <div class="divider"></div>
+            @endif
+            @if (Auth::check() && Auth::user()->role==0)
+              <li><a class="subheader">Company</a></li>
+              <li><a href="#!"><i class="material-icons">add</i>Register</a></li>
+            @endif
+            @if (Auth::check() && Auth::user()->role==1)
+              <li><a class="subheader">Company</a></li>
+              <li><a href="/comp-settings"><i class="material-icons">settings</i>Settings</a></li>
+              <li><a href="/package-create"><i class="material-icons">add</i>Package</a></li>
+              <li><a href="/company-show-own"><i class="material-icons">add</i>Product</a></li>
+              <li><a href="/show-cater-request"><i class="material-icons">room_service</i>Catering request</a></li>
+            @endif
+            @if (Auth::check())
+              <li><a href="/calendar-show"><i class="material-icons">date_range</i>Schedule</a></li>
+              <li><div class="divider"></div></li>
+              <li><a href="#!" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons">exit_to_app</i>Logout</a></li>
             @endif
           </ul>
-            @endif
     <div class="main-content-container">
       @section('content')
       @show
@@ -166,6 +147,9 @@
     <div id="login-modal">
       <login></login>
     </div>
+  </div>
+  <div id="dark-modal-closer">
+
   </div>
 </section>
 <footer>
@@ -205,25 +189,34 @@
       {
         event.preventDefault();
         $('#login-modal').addClass('active');
+        $('#dark-modal-closer').addClass('active');
       });
       $('#login-opener-3').on('click',function(event)
       {
         event.preventDefault();
         $('#login-modal').addClass('active');
+        $('#dark-modal-closer').addClass('active');
       });
       $('#login-opener').on('click',function(event)
       {
         event.preventDefault();
         $('#login-modal').addClass('active');
+        $('#dark-modal-closer').addClass('active');
       });
-      $('#login-modal').on('click',function(event)
+      $('#login-opener4').on('click',function(event)
       {
         event.preventDefault();
+        $('#login-modal').addClass('active');
+        $('#dark-modal-closer').addClass('active');
+      });
+      $('#dark-modal-closer').click(function(event)
+      {
         $('#login-modal').removeClass('active');
-      }).children().on('click',function(event)
+        $('#dark-modal-closer').removeClass('active');
+      });
+      $('.main-content-container > #login-modal').on('click',function(event)
       {
-        event.preventDefault();
-        return false;
+        $('#login-modal').removeClass('active');
       });
       $(".button-collapse").sideNav();
       $('.carousel.carousel-slider').carousel({fullWidth: true});

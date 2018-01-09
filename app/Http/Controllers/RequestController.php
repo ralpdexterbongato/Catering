@@ -100,8 +100,8 @@ class RequestController extends Controller
     public function fetchRequestData($orderId)
     {
        $OneOrderData=order::where('id', $orderId)->with('colors')->with('products')->get();
-       $packageData;
-       if ($OneOrderData[0]->package_id)
+       $packageData=[];
+       if ($OneOrderData[0]->package_id!=null)
        {
          $packageData= package::where('id', $OneOrderData[0]->package_id)->with('products')->get();
        }

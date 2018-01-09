@@ -1,19 +1,18 @@
 <template lang="html">
   <div class="company-settings-container">
     <div class="company-settings-table-container">
-      <table class="responsive-table">
+      <table>
         <thead>
-          <th><i class="material-icons">settings</i> Company settings</th>
+          <th>Company settings</th>
         </thead>
         <tbody>
           <tr>
             <th>Name</th>
             <td>
               <div class="input-field col s6">
-                <input id="company_name" type="text" v-model="NewName" class="validate">
+                <input id="company_name" type="text" v-model="NewName =currentName.name">
               </div>
             </td>
-            <td>{{currentName.name}}</td>
             <td>
               <a href="#" v-on:click.prevent="updateName()" class="btn btn-floating white"><i class="material-icons red-text darken-1">loop</i></a>
             </td>
@@ -21,10 +20,7 @@
           <tr>
             <th>Description</th>
             <td>
-              <textarea id="textarea1" v-model="NewDescription" class="materialize-textarea"></textarea>
-            </td>
-            <td>
-              <p>{{currentDescription.description}}</p>
+              <textarea id="textarea1" v-model="NewDescription=currentDescription.description" class="materialize-textarea"></textarea>
             </td>
             <td>
               <a href="#" class="btn btn-floating white" v-on:click.prevent="updateDescription()"><i class="material-icons red-text darken-1">loop</i></a>
@@ -32,8 +28,7 @@
           </tr>
           <tr>
             <th>Minimum visitors</th>
-            <td><input type="number" min="1" v-model="NewMinimum"></td>
-            <td>{{currentMinimum.minimum}} people</td>
+            <td><input type="number" min="1" v-model="NewMinimum =currentMinimum.minimum"></td>
             <td>
               <a href="#" class="btn btn-floating white" v-on:click.prevent="updateMinimum()"><i class="material-icons red-text darken-1">loop</i></a>
             </td>
@@ -41,9 +36,9 @@
           <tr>
             <th>Logo</th>
             <td>
-              <a class="btn food-image-finder" @click="toggleShow">change</a>
+              <a class="btn food-image-finder btn-floating" @click="toggleShow"><i class="material-icons">search</i></a>
+              <img class="z-depth-3 logo-prev" v-if="currentLogo != ''" :src="'/storage/images/'+currentLogo.logo" alt="">
             </td>
-            <td><img class="z-depth-3 logo-prev" v-if="currentLogo != ''" :src="'/storage/images/'+currentLogo.logo" alt=""></td>
             <td>
               <a href="#" class="btn btn-floating white" v-on:click.prevent="updateLogo()"><i class="material-icons red-text darken-1">loop</i></a>
             </td>
@@ -51,9 +46,9 @@
           <tr>
             <th>Cover photo</th>
             <td>
-              <a class="btn food-image-finder" @click="CovertoggleShow">change</a>
+              <a class="btn food-image-finder btn-floating" @click="CovertoggleShow"><i class="material-icons">search</i></a>
+              <img class="z-depth-3 cover-prev" v-if="currentCover!=''" :src="'/storage/images/'+currentCover.heroPicture" alt="">
             </td>
-            <td><img class="z-depth-3 cover-prev" v-if="currentCover!=''" :src="'/storage/images/'+currentCover.heroPicture" alt=""></td>
             <td>
               <a href="#" class="btn btn-floating white" v-on:click.prevent="updateCover()"><i class="material-icons red-text darken-1">loop</i></a>
             </td>
@@ -236,6 +231,7 @@ import myUpload from 'vue-image-crop-upload';
               title: error.response.data.message,
               showConfirmButton:true
             });
+          vm.fetchName();
         })
       },
       updateDescription()
@@ -263,6 +259,7 @@ import myUpload from 'vue-image-crop-upload';
               title: error.response.data.message,
               showConfirmButton:true
             });
+          vm.fetchDescription();
         });
       },
       updateMinimum()
@@ -290,6 +287,7 @@ import myUpload from 'vue-image-crop-upload';
               title: error.response.data.message,
               showConfirmButton:true
             });
+            vm.fetchMinimumVisitor();
         });
       },
       updateLogo()

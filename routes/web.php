@@ -12,16 +12,25 @@
 */
 
 Route::get('/about', function () {
-    return view('welcome');
+    return view('about');
 });
 Route::get('/company','companycontroller@index')->name('company-index');
 Route::get('/company-index-data','companycontroller@indexData');
 Route::get('/','ProductController@Index');
-Route::get('/register','registercontroller@create');
-Route::post('/register-store','registercontroller@store');
+Route::get('/register','registercontroller@create')->middleware('companyowner');
+Route::post('/register-store','registercontroller@store')->middleware('companyowner');
 Route::post('/user','usercontroller@logout');
 Route::post('/user-login','usercontroller@loginSubmit');
 Route::get('/my-account-settings','usercontroller@settingsShow');
+Route::get('/current-user','usercontroller@getCurrentUser');
+Route::put('/update-name','usercontroller@updateName');
+Route::put('/update-user-name','usercontroller@updateUserName');
+Route::put('/update-user-pass','usercontroller@updatePassword');
+Route::put('/update-email','usercontroller@updateEmail');
+Route::put('/update-password-recovered/{userId}','usercontroller@updateNewRecoveredPassword');
+Route::get('/resend-email','usercontroller@resendEmailVerification');
+Route::post('/forgot-password-send-mail','usercontroller@sendForgetPassToEmail')->middleware('guest');
+Route::get('/forgot-password-recovered','usercontroller@checkifValidChange')->name('PasswordRecovery')->middleware('guest');
 // Route::get('/display','registercontroller@emailview');
 
 Route::get('/verify/{email}/{verificationCode}','registercontroller@verfiyDone')->name('sendEmailDone');
@@ -96,3 +105,7 @@ Route::put('/package-update-price/{packageId}','PackageController@updatePrice');
 Route::delete('/remove-package-product/{packageId}/{productId}','PackageController@removePackageProduct');
 Route::post('/add-package-product/{packageId}','PackageController@storePackageProduct');
 Route::delete('/package-delete/{packageId}','PackageController@delete');
+
+Route::get('/forgot-password','usercontroller@forgotPass')->middleware('guest');
+Route::get('/send-password-code','usercontroller@sendForgetPassToEmail');
+Route::get('/search-my-forgotten-account','usercontroller@searchByMailUsername');

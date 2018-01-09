@@ -7,7 +7,9 @@
             <img class="circle" :src="'/storage/images/'+masterdata.user.avatar" alt="avatar">
             <span class="title">{{masterdata.user.name}}</span>
             <p>{{masterdata.client_contact}}<br>{{masterdata.created_at}}</p>
-            <a href="#!" class="secondary-content"><i class="material-icons indigo-text">grade</i></a>
+          </li>
+          <li class="collection-item avatar" v-on:click="fetchRequest()" v-if="Pagination.current_page!=Pagination.last_page">
+            <p><i class="material-icons">arrow_downward</i> Load more...</p>
           </li>
         </ul>
         <div v-else class="no-request-note">
@@ -16,7 +18,7 @@
       </div>
       <div class="req-data-container" v-if="requestDetail!=null">
         <div class="req-data-table" v-if="requestMasters[0]!=null" >
-          <table class="responsive-table">
+          <table>
             <thead>
               <tr>
                 <th>Request data</th>
@@ -50,7 +52,7 @@
                   </div>
                 </td>
               </tr>
-              <tr>
+              <tr v-if="PackagePrev!=null">
                 <th>Package</th>
                 <td>{{PackagePrev.name}}</td>
               </tr>
@@ -184,7 +186,9 @@ import axios from 'axios';
         CurrentIndex:0,
         SameDayOrders:[],
         PackagePrev:[],
-        PackageProduct:[]
+        PackageProduct:[],
+        currentPage:1,
+        Pagination:[]
       }
     },
     // props: [],
@@ -196,12 +200,28 @@ import axios from 'axios';
     {
       fetchRequest()
       {
+        if (this.requestMasters[0]!=null)
+        {
+          this.currentPage =this.currentPage+1;
+        }
         var vm=this;
-        axios.get(`/show-cater-request-users`).then(function(response)
+        axios.get(`/show-cater-request-users?page=`+this.currentPage).then(function(response)
         {
           console.log(response);
-          vm.requestMasters=response.data.data;
-          vm.fetchDataofRequest(vm.requestMasters[0].id);
+          vm.Pagination = response.data;
+          if (vm.requestMasters[0]==null)
+          {
+            vm.requestMasters=response.data.data;
+            vm.fetchDataofRequest(vm.requestMasters[0].id);
+          }else
+          {
+            var total=response.data.data.length;
+            for (var x = 0; x < total; x++)
+            {
+              vm.requestMasters.push(response.data.data[x]);
+            }
+
+          }
         }).catch(function(error)
         {
           console.log(error);

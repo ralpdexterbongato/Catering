@@ -40,7 +40,6 @@ class registercontroller extends Controller
       $userTbl->avatar = $fileName;
       $userTbl->save();
 
-
       $userData=User::find($userTbl->id);
 
       $job=(new SendVerificationJob($userData))
@@ -72,7 +71,7 @@ class registercontroller extends Controller
     }
     public function emailview()
     {
-      return view('Email.sendView');
+      return view('Email.PasswordForgot');
     }
 
 }

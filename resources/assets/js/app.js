@@ -30,6 +30,8 @@ Vue.component('calendarschedule', require('./components/Request/Calendar.vue'));
 Vue.component('packagecreate', require('./components/Package/Create.vue'));
 Vue.component('packageshow', require('./components/Package/Show.vue'));
 Vue.component('accountsettings', require('./components/Account/Settings.vue'));
+Vue.component('forgotpassview', require('./components/Account/Forgot.vue'));
+Vue.component('passwordrecover', require('./components/Account/NewPasswordRecovered.vue'));
 
 const app = new Vue({
     el: '#app',
