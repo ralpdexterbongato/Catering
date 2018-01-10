@@ -869,6 +869,20 @@ transform: scale(1.0);
 		left: 70px;
 	}
 }
+@media (max-width:416px)
+{
+	#company-logo
+	{
+		left: 60px;
+	}
+}
+@media (max-width:356px)
+{
+	#company-logo
+	{
+		left: 48px;
+	}
+}
 .company-name
 {
 	margin:auto;
@@ -929,6 +943,14 @@ font-family: 'Pompiere', cursive;
 {
 	margin-right: 20px;
 }
+@media (max-width:600px)
+{
+	.radio-sort-container
+	{
+		display: flex;
+		justify-content: center;
+	}
+}
 .sorting-container
 {
 	border-radius: 3px;
@@ -966,6 +988,14 @@ font-family: 'Pompiere', cursive;
 {
 	display: flex;
 	justify-content: flex-start;
+}
+@media (max-width:600px)
+{
+	.search-container
+	{
+		display: flex;
+		justify-content: center;
+	}
 }
 .search-container input
 {
@@ -1059,20 +1089,28 @@ font-family: 'Pompiere', cursive;
 /*aboutcompany*/
 .about-company-data
 {
-	padding:20px 0px 0px 0px;
+	padding:20px;
 	display: flex;
-}
-@media (max-width:940px)
-{
-	.about-company-data
-	{
-		flex-direction: column;
-	}
 }
 .left-about-company
 {
 	padding:20px 50px 20px 0px;
 	width: 300px;
+}
+.CompanyProfileContainer
+{
+	padding:20px;
+}
+@media (max-width:540px)
+{
+	.about-company-data
+	{
+		flex-direction: column;
+	}
+	.left-about-company
+	{
+		width: auto;
+	}
 }
 .right-about-company
 {
@@ -1813,10 +1851,19 @@ font-family: 'Pompiere', cursive;
 	justify-content: flex-end;
 	margin-top:40px;
 }
+@media (max-width:600px)
+{
+	.i-want-container
+	{
+		justify-content: center;
+	}
+}
+
 .i-want-container p
 {
 	font-size: 19px;
 	margin-top: 40px;
+	margin-bottom: 40px;
 	color: rgba(0, 0, 0, 0.8);
 }
 

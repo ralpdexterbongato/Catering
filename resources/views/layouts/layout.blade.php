@@ -103,9 +103,9 @@
             <div class="background indigo">
             </div>
             @Auth
-            <a href="#!user"><img class="circle" src="/storage/images/{{Auth::user()->avatar}}"></a>
-            <a href="#!name"><span class="white-text name">{{Auth::user()->name}}</span></a>
-            <a href="#!email"><span class="white-text email">{{Auth::user()->email}}</span></a>
+            <a href=""><img class="circle" src="/storage/images/{{Auth::user()->avatar}}"></a>
+            <a href=""><span class="white-text name">{{Auth::user()->name}}</span></a>
+            <a href=""><span class="white-text email">{{Auth::user()->email}}</span></a>
             @endAuth
             </div>
           </li>
@@ -125,7 +125,7 @@
             @endif
             @if (Auth::check() && Auth::user()->role==0)
               <li><a class="subheader">Company</a></li>
-              <li><a href="#!"><i class="material-icons">add</i>Register</a></li>
+              <li><a href="/register"><i class="material-icons">add</i>Register</a></li>
             @endif
             @if (Auth::check() && Auth::user()->role==1)
               <li><a class="subheader">Company</a></li>
@@ -137,7 +137,7 @@
             @if (Auth::check())
               <li><a href="/calendar-show"><i class="material-icons">date_range</i>Schedule</a></li>
               <li><div class="divider"></div></li>
-              <li><a href="#!" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons">exit_to_app</i>Logout</a></li>
+              <li><a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons">exit_to_app</i>Logout</a></li>
             @endif
           </ul>
     <div class="main-content-container">

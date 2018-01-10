@@ -69,10 +69,10 @@
     </div>
      </div>
      <div class="modal-footer">
-       <a v-if="NameIsActive==true" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat " v-on:click.prevent="updateName()">Update</a>
-       <a v-if="UserNameIsActive==true" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat " v-on:click.prevent="updateUserName()">Update</a>
-       <a v-if="PasswordIsActive==true" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat " v-on:click.prevent="updateUserPass()">Update</a>
-       <a v-if="EmailIsActive==true" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat " v-on:click.prevent="updateEmail()">Update</a>
+       <a v-if="NameIsActive==true" href="" class="modal-action modal-close waves-effect waves-green btn-flat " v-on:click.prevent="updateName()">Update</a>
+       <a v-if="UserNameIsActive==true" href="" class="modal-action modal-close waves-effect waves-green btn-flat " v-on:click.prevent="updateUserName()">Update</a>
+       <a v-if="PasswordIsActive==true" href="" class="modal-action modal-close waves-effect waves-green btn-flat " v-on:click.prevent="updateUserPass()">Update</a>
+       <a v-if="EmailIsActive==true" href="" class="modal-action modal-close waves-effect waves-green btn-flat " v-on:click.prevent="updateEmail()">Update</a>
      </div>
    </div>
   </div>

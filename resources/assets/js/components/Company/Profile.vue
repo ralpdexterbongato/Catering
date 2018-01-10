@@ -59,8 +59,8 @@
         </div>
        </div>
     <div class="modal-footer">
-     <a href="#!" class="modal-action modal-close waves-effect waves-indigo btn-flat ">Cancel</a>
-     <a href="#!" class="modal-action modal-close waves-effect waves-indigo btn-flat " v-on:click="AddNewProduct()">Save</a>
+     <a href="" class="modal-action modal-close waves-effect waves-indigo btn-flat ">Cancel</a>
+     <a href="" class="modal-action modal-close waves-effect waves-indigo btn-flat " v-on:click="AddNewProduct()">Save</a>
     </div>
     </div>
     <div class="company-cover-hero" v-if="AboutCompany.heroPicture!=null" :style="'background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(/storage/images/'+AboutCompany.heroPicture+')'">
@@ -105,7 +105,7 @@
     </div>
     <div class="divider">
     </div>
-    <span v-if="Packages[0]!=null">
+    <div v-if="Packages[0]!=null">
     <h5 class="titles"><i class="material-icons">local_offer</i> Our packages</h5>
     <div class="packages-list">
       <div class="card" v-for="Profilepackage in Packages">
@@ -124,11 +124,10 @@
     </div>
     <ul class="pagination">
         <li class="waves-effect" v-if="paginationPackage.current_page > 1"><a href="#" @click.prevent="changepagePackage(paginationPackage.current_page - 1)"><i class="material-icons">chevron_left</i></a></li>
-        <li v-for="page in pagesNumberPackage" v-bind:class="[ page == isActivePackage ? 'active indigo':'']"><a href="#!" @click.prevent="changepagePackage(page)">{{page}}</a></li>
-        <li class="waves-effect" v-if="paginationPackage.current_page < paginationPackage.last_page"><a href="#!" @click.prevent="changepagePackage(paginationPackage.current_page + 1)"><i class="material-icons">chevron_right</i></a></li>
+        <li v-for="page in pagesNumberPackage" v-bind:class="[ page == isActivePackage ? 'active indigo':'']"><a href="" @click.prevent="changepagePackage(page)">{{page}}</a></li>
+        <li class="waves-effect" v-if="paginationPackage.current_page < paginationPackage.last_page"><a href="" @click.prevent="changepagePackage(paginationPackage.current_page + 1)"><i class="material-icons">chevron_right</i></a></li>
     </ul>
-    </span>
-    <!-- <h5 class="custom-package-title"><i class="material-icons">touch_app</i>Pick and send</h5> -->
+    </div>
     <h5 class="custom-package-foodmenu"><i class="material-icons">local_dining</i> Product menu</h5>
     <div class="sorting-container">
       <form action="#" class="radio-sort-container">
@@ -183,8 +182,8 @@
     </div>
     <ul class="pagination">
         <li class="waves-effect" v-if="paginationProduct.current_page > 1"><a href="#" @click.prevent="changepage(paginationProduct.current_page - 1)"><i class="material-icons">chevron_left</i></a></li>
-        <li v-for="page in pagesNumberFood" v-bind:class="[ page == isActiveFood ? 'active indigo':'']"><a href="#!" @click.prevent="changepage(page)">{{page}}</a></li>
-        <li class="waves-effect" v-if="paginationProduct.current_page < paginationProduct.last_page"><a href="#!" @click.prevent="changepage(paginationProduct.current_page + 1)"><i class="material-icons">chevron_right</i></a></li>
+        <li v-for="page in pagesNumberFood" v-bind:class="[ page == isActiveFood ? 'active indigo':'']"><a href="" @click.prevent="changepage(page)">{{page}}</a></li>
+        <li class="waves-effect" v-if="paginationProduct.current_page < paginationProduct.last_page"><a href="" @click.prevent="changepage(paginationProduct.current_page + 1)"><i class="material-icons">chevron_right</i></a></li>
     </ul>
     <div class="fixed-action-btn click-to-toggle" v-if="((user!=null)&&(user.id==AboutCompany.user_id))">
        <a class="btn-floating btn-large indigo">
@@ -227,7 +226,7 @@
       </div>
     </div>
     <div class="modal-footer">
-      <a href="#!" v-on:click.prevent="submitUpdate()" class="modal-action modal-close waves-effect waves-light btn-flat ">Update</a>
+      <a href="" v-on:click.prevent="submitUpdate()" class="modal-action modal-close waves-effect waves-light btn-flat ">Update</a>
     </div>
   </div>
     <!-- profile -->

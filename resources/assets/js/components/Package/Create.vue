@@ -22,12 +22,12 @@
         </div>
         <ul class="pagination modal-pagination">
             <li class="waves-effect" v-if="pagination.current_page > 1"><a href="#" @click.prevent="changepage(pagination.current_page - 1)"><i class="material-icons">chevron_left</i></a></li>
-            <li v-for="page in pagesNumber" v-bind:class="[ page == isActive ? 'active indigo':'']"><a href="#!" @click.prevent="changepage(page)">{{page}}</a></li>
-            <li class="waves-effect" v-if="pagination.current_page < pagination.last_page"><a href="#!" @click.prevent="changepage(pagination.current_page + 1)"><i class="material-icons">chevron_right</i></a></li>
+            <li v-for="page in pagesNumber" v-bind:class="[ page == isActive ? 'active indigo':'']"><a href="" @click.prevent="changepage(page)">{{page}}</a></li>
+            <li class="waves-effect" v-if="pagination.current_page < pagination.last_page"><a href="" @click.prevent="changepage(pagination.current_page + 1)"><i class="material-icons">chevron_right</i></a></li>
         </ul>
       </div>
       <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+        <a href="" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
       </div>
     </div>
     <div class="pack-form-container">
