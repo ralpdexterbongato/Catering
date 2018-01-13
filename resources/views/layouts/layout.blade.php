@@ -103,9 +103,9 @@
             <div class="background indigo">
             </div>
             @Auth
-            <a href=""><img class="circle" src="/storage/images/{{Auth::user()->avatar}}"></a>
-            <a href=""><span class="white-text name">{{Auth::user()->name}}</span></a>
-            <a href=""><span class="white-text email">{{Auth::user()->email}}</span></a>
+            <a><img class="circle" src="/storage/images/{{Auth::user()->avatar}}"></a>
+            <a><span class="white-text name">{{Auth::user()->name}}</span></a>
+            <a><span class="white-text email">{{Auth::user()->email}}</span></a>
             @endAuth
             </div>
           </li>
@@ -117,7 +117,7 @@
             <div class="divider"></div>
             <li><a class="subheader">Account</a></li>
             @if (Auth::check()==false)
-              <li><a href="" id="login-opener4"><i class="material-icons">person</i>Login</a></li>
+              <li><a href="#" v-on:click.prevent id="login-opener4"><i class="material-icons">person</i>Login</a></li>
               <li><a href="/register"><i class="material-icons">person_add</i>Register</a></li>
             @else
               <li><a href="/my-account-settings"><i class="material-icons">settings</i>Settings</a></li>
@@ -137,7 +137,7 @@
             @if (Auth::check())
               <li><a href="/calendar-show"><i class="material-icons">date_range</i>Schedule</a></li>
               <li><div class="divider"></div></li>
-              <li><a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons">exit_to_app</i>Logout</a></li>
+              <li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons">exit_to_app</i>Logout</a></li>
             @endif
           </ul>
     <div class="main-content-container">

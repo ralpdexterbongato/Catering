@@ -12,11 +12,11 @@
          <span class="title">{{Result[0].name}}</span>
          <p>{{Result[0].email}}<br>
          </p>
-         <a href="" v-on:click.prevent="sendMail()" class="secondary-content"><i class="material-icons">send</i></a>
+         <a href="#" v-on:click.prevent="sendMail()" class="secondary-content"><i class="material-icons">send</i></a>
        </li>
      </ul>
     </div>
-    <a href="#" class="btn seach-my-email" v-on:click="searchAcc()"><i class="material-icons">search</i> Search</a>
+    <a  class="btn seach-my-email" v-on:click="searchAcc()"><i class="material-icons">search</i> Search</a>
     <div class="progress forgot-preload" v-if="Loading==true">
       <div class="indeterminate" style="width: 70%"></div>
     </div>

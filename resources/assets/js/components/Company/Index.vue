@@ -19,8 +19,8 @@
     </div>
     <ul class="pagination">
         <li class="waves-effect" v-if="pagination.current_page > 1"><a href="#" @click.prevent="changepage(pagination.current_page - 1)"><i class="material-icons">chevron_left</i></a></li>
-        <li v-for="page in pagesNumber" v-bind:class="[ page == isActive ? 'active indigo':'']"><a href="" @click.prevent="changepage(page)">{{page}}</a></li>
-        <li class="waves-effect" v-if="pagination.current_page < pagination.last_page"><a href="" @click.prevent="changepage(pagination.current_page + 1)"><i class="material-icons">chevron_right</i></a></li>
+        <li v-for="page in pagesNumber" v-bind:class="[ page == isActive ? 'active indigo':'']"><a href="#" @click.prevent="changepage(page)">{{page}}</a></li>
+        <li class="waves-effect" v-if="pagination.current_page < pagination.last_page"><a href="#" @click.prevent="changepage(pagination.current_page + 1)"><i class="material-icons">chevron_right</i></a></li>
     </ul>
   </div>
 </template>

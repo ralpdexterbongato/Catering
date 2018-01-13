@@ -19,7 +19,7 @@
                 <i class="material-icons indigo-text">cake</i><p class="bold grey-text text-darken-2"> {{event.title}}</p>
               </div>
               <div class="bot-event-right">
-                <a href="#" class="grey-text" v-on:click="fetchDataOfSelected(event)" onclick="$('#detail-event-modal').modal('open');"><i class="material-icons">remove_red_eye</i></a>
+                <a  class="grey-text" v-on:click="fetchDataOfSelected(event)" onclick="$('#detail-event-modal').modal('open');"><i class="material-icons">remove_red_eye</i></a>
               </div>
             </div>
           </div>
@@ -122,7 +122,7 @@
          </table>
        </div>
        <div class="modal-footer">
-         <a href="" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+         <a href="#" v-on:click.prevent class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
        </div>
      </div>
   </div>

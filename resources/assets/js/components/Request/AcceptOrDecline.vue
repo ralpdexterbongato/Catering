@@ -168,7 +168,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <a href="" class="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+        <a href="#" v-on:click.prevent class="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
       </div>
     </div>
   </div>

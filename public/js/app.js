@@ -52058,7 +52058,12 @@ var render = function() {
               {
                 staticClass:
                   "modal-action modal-close waves-effect waves-indigo btn-flat ",
-                attrs: { href: "" }
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                  }
+                }
               },
               [_vm._v("Cancel")]
             ),
@@ -52068,11 +52073,16 @@ var render = function() {
               {
                 staticClass:
                   "modal-action modal-close waves-effect waves-indigo btn-flat ",
-                attrs: { href: "" },
+                attrs: { href: "#" },
                 on: {
-                  click: function($event) {
-                    _vm.AddNewProduct()
-                  }
+                  click: [
+                    function($event) {
+                      $event.preventDefault()
+                    },
+                    function($event) {
+                      _vm.AddNewProduct()
+                    }
+                  ]
                 }
               },
               [_vm._v("Save")]
@@ -52297,7 +52307,7 @@ var render = function() {
                       _c(
                         "a",
                         {
-                          attrs: { href: "" },
+                          attrs: { href: "#" },
                           on: {
                             click: function($event) {
                               $event.preventDefault()
@@ -52317,7 +52327,7 @@ var render = function() {
                       _c(
                         "a",
                         {
-                          attrs: { href: "" },
+                          attrs: { href: "#" },
                           on: {
                             click: function($event) {
                               $event.preventDefault()
@@ -52643,7 +52653,7 @@ var render = function() {
                 _c(
                   "a",
                   {
-                    attrs: { href: "" },
+                    attrs: { href: "#" },
                     on: {
                       click: function($event) {
                         $event.preventDefault()
@@ -52662,7 +52672,7 @@ var render = function() {
                 _c(
                   "a",
                   {
-                    attrs: { href: "" },
+                    attrs: { href: "#" },
                     on: {
                       click: function($event) {
                         $event.preventDefault()
@@ -52833,7 +52843,7 @@ var render = function() {
               {
                 staticClass:
                   "modal-action modal-close waves-effect waves-light btn-flat ",
-                attrs: { href: "" },
+                attrs: { href: "#" },
                 on: {
                   click: function($event) {
                     $event.preventDefault()
@@ -53310,7 +53320,7 @@ var render = function() {
               _c(
                 "a",
                 {
-                  attrs: { href: "" },
+                  attrs: { href: "#" },
                   on: {
                     click: function($event) {
                       $event.preventDefault()
@@ -53329,7 +53339,7 @@ var render = function() {
               _c(
                 "a",
                 {
-                  attrs: { href: "" },
+                  attrs: { href: "#" },
                   on: {
                     click: function($event) {
                       $event.preventDefault()
@@ -54879,7 +54889,30 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "scheduled-calendar-container" }),
     _vm._v(" "),
-    _vm._m(4, false, false)
+    _c(
+      "div",
+      { staticClass: "modal modal-fixed-footer", attrs: { id: "MapModal" } },
+      [
+        _vm._m(4, false, false),
+        _vm._v(" "),
+        _c("div", { staticClass: "modal-footer" }, [
+          _c(
+            "a",
+            {
+              staticClass:
+                "modal-action modal-close waves-effect waves-green btn-flat",
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                }
+              }
+            },
+            [_vm._v("OK")]
+          )
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -54923,29 +54956,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "modal modal-fixed-footer", attrs: { id: "MapModal" } },
-      [
-        _c("div", { staticClass: "modal-content" }, [
-          _c("h4", [_vm._v("Map location")]),
-          _vm._v(" "),
-          _c("div", { attrs: { id: "existing-order-location" } })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "modal-footer" }, [
-          _c(
-            "a",
-            {
-              staticClass:
-                "modal-action modal-close waves-effect waves-green btn-flat",
-              attrs: { href: "" }
-            },
-            [_vm._v("OK")]
-          )
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "modal-content" }, [
+      _c("h4", [_vm._v("Map location")]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "existing-order-location" } })
+    ])
   }
 ]
 render._withStripped = true
@@ -57406,7 +57421,6 @@ var render = function() {
                               {
                                 staticClass: "grey-text",
                                 attrs: {
-                                  href: "#",
                                   onclick:
                                     "$('#detail-event-modal').modal('open');"
                                 },
@@ -57653,7 +57667,22 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(8, false, false)
+          _c("div", { staticClass: "modal-footer" }, [
+            _c(
+              "a",
+              {
+                staticClass:
+                  "modal-action modal-close waves-effect waves-green btn-flat ",
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                  }
+                }
+              },
+              [_vm._v("Close")]
+            )
+          ])
         ]
       )
     ],
@@ -57727,22 +57756,6 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("td", [_c("div", { attrs: { id: "location-small-prev" } })])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "a",
-        {
-          staticClass:
-            "modal-action modal-close waves-effect waves-green btn-flat ",
-          attrs: { href: "" }
-        },
-        [_vm._v("Close")]
-      )
     ])
   }
 ]
@@ -58161,7 +58174,7 @@ var render = function() {
                     _c(
                       "a",
                       {
-                        attrs: { href: "" },
+                        attrs: { href: "#" },
                         on: {
                           click: function($event) {
                             $event.preventDefault()
@@ -58180,7 +58193,7 @@ var render = function() {
                     _c(
                       "a",
                       {
-                        attrs: { href: "" },
+                        attrs: { href: "#" },
                         on: {
                           click: function($event) {
                             $event.preventDefault()
@@ -58201,7 +58214,22 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _vm._m(1, false, false)
+        _c("div", { staticClass: "modal-footer" }, [
+          _c(
+            "a",
+            {
+              staticClass:
+                "modal-action modal-close waves-effect waves-green btn-flat ",
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                }
+              }
+            },
+            [_vm._v("Close")]
+          )
+        ])
       ]
     ),
     _vm._v(" "),
@@ -58307,7 +58335,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "pack-form-right" }, [
         _c("table", [
-          _vm._m(2, false, false),
+          _vm._m(1, false, false),
           _vm._v(" "),
           _c("tr", [
             _c(
@@ -58343,7 +58371,7 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm._m(3, false, false),
+          _vm._m(2, false, false),
           _vm._v(" "),
           _c("tr", [
             _c(
@@ -58379,7 +58407,7 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm._m(4, false, false),
+          _vm._m(3, false, false),
           _vm._v(" "),
           _c("tr", [
             _c(
@@ -58432,22 +58460,6 @@ var staticRenderFns = [
           attrs: { onclick: "$('#product-modal').modal('open')" }
         },
         [_c("i", { staticClass: "large material-icons" }, [_vm._v("add")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "a",
-        {
-          staticClass:
-            "modal-action modal-close waves-effect waves-green btn-flat ",
-          attrs: { href: "" }
-        },
-        [_vm._v("Close")]
       )
     ])
   },
@@ -59064,7 +59076,7 @@ var render = function() {
                     _c(
                       "a",
                       {
-                        attrs: { href: "" },
+                        attrs: { href: "#" },
                         on: {
                           click: function($event) {
                             $event.preventDefault()
@@ -59083,7 +59095,7 @@ var render = function() {
                     _c(
                       "a",
                       {
-                        attrs: { href: "" },
+                        attrs: { href: "#" },
                         on: {
                           click: function($event) {
                             $event.preventDefault()
@@ -59104,7 +59116,22 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _vm._m(0, false, false)
+        _c("div", { staticClass: "modal-footer" }, [
+          _c(
+            "a",
+            {
+              staticClass:
+                "modal-action modal-close waves-effect waves-green btn-flat ",
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                }
+              }
+            },
+            [_vm._v("Close")]
+          )
+        ])
       ]
     ),
     _vm._v(" "),
@@ -59601,28 +59628,12 @@ var render = function() {
         ])
       : _vm.user == null
         ? _c("div", { staticClass: "i-want-container" }, [
-            _vm._m(1, false, false)
+            _vm._m(0, false, false)
           ])
         : _vm._e()
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "a",
-        {
-          staticClass:
-            "modal-action modal-close waves-effect waves-green btn-flat ",
-          attrs: { href: "" }
-        },
-        [_vm._v("Close")]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -60305,7 +60316,7 @@ var render = function() {
                 {
                   staticClass:
                     "modal-action modal-close waves-effect waves-green btn-flat ",
-                  attrs: { href: "" },
+                  attrs: { href: "#" },
                   on: {
                     click: function($event) {
                       $event.preventDefault()
@@ -60323,7 +60334,7 @@ var render = function() {
                 {
                   staticClass:
                     "modal-action modal-close waves-effect waves-green btn-flat ",
-                  attrs: { href: "" },
+                  attrs: { href: "#" },
                   on: {
                     click: function($event) {
                       $event.preventDefault()
@@ -60341,7 +60352,7 @@ var render = function() {
                 {
                   staticClass:
                     "modal-action modal-close waves-effect waves-green btn-flat ",
-                  attrs: { href: "" },
+                  attrs: { href: "#" },
                   on: {
                     click: function($event) {
                       $event.preventDefault()
@@ -60359,7 +60370,7 @@ var render = function() {
                 {
                   staticClass:
                     "modal-action modal-close waves-effect waves-green btn-flat ",
-                  attrs: { href: "" },
+                  attrs: { href: "#" },
                   on: {
                     click: function($event) {
                       $event.preventDefault()
@@ -60594,7 +60605,7 @@ var render = function() {
                   "a",
                   {
                     staticClass: "secondary-content",
-                    attrs: { href: "" },
+                    attrs: { href: "#" },
                     on: {
                       click: function($event) {
                         $event.preventDefault()
@@ -60613,7 +60624,6 @@ var render = function() {
         "a",
         {
           staticClass: "btn seach-my-email",
-          attrs: { href: "#" },
           on: {
             click: function($event) {
               _vm.searchAcc()
