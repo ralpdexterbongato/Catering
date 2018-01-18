@@ -43084,21 +43084,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       NotifData: [],
       NotifPaginate: [],
       notifsNumber: null,
-      currentPage: 1
+      currentPage: 1,
+      Loaded: false
     };
   },
 
   props: ['user'],
   methods: {
     fetchNotif: function fetchNotif() {
-      if (this.NotifData[0] != null) {
+      if (this.Loaded == true) {
         this.currentPage = this.currentPage + 1;
       }
       var vm = this;
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/notification?page=' + this.currentPage).then(function (response) {
         console.log(response);
         vm.NotifPaginate = response.data;
-        if (vm.NotifData[0] == null) {
+        vm.Loaded = true;
+        if (vm.NotifData == null) {
           vm.NotifData = response.data.data;
         } else {
           var total = response.data.data.length;
@@ -43142,7 +43144,7 @@ var render = function() {
         click: function($event) {
           ;(_vm.notifsNumber = null),
             (_vm.isActive = !_vm.isActive),
-            [_vm.NotifData[0] == null ? _vm.fetchNotif() : ""]
+            [_vm.Loaded == false ? _vm.fetchNotif() : ""]
         }
       }
     },

@@ -421,12 +421,13 @@ box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px
 }
 .logo
 {
-  font-size:20px;
+  font-size:23px;
   padding:5px;
   margin:0 auto;
   color:inherit;
 	text-align: center;
 	letter-spacing:5px;
+	font-family: 'Julius Sans One', sans-serif;
 }
 
 .parallax-container

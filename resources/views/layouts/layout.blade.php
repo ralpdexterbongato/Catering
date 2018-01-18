@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/css?family=Pompiere" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Kaushan+Script|Handlee" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
   <body>
     @php
       function current_page($uri)
@@ -31,7 +32,7 @@
             </div>
           </div>
           <div class="logo" id="modal-opener">
-            <p>PACLIPAN</p>
+            <p>Catering Services</p>
           </div>
         </div>
         <div class="right-header">

@@ -1,5 +1,5 @@
 <template lang="html">
-  <li class="notif-parent noselect" :class="{'clicked':isActive}" v-on:click="notifsNumber=null,isActive=!isActive,[NotifData[0]==null?fetchNotif():'']">
+  <li class="notif-parent noselect" :class="{'clicked':isActive}" v-on:click="notifsNumber=null,isActive=!isActive,[Loaded==false?fetchNotif():'']">
     <i class="material-icons">notifications</i>
     <div class="notif-count-circle" v-if="notifsNumber!=null && notifsNumber!=0">
       {{notifsNumber}}
@@ -74,13 +74,14 @@ import axios from 'axios';
         NotifPaginate:[],
         notifsNumber:null,
         currentPage:1,
+        Loaded:false
       }
     },
     props: ['user'],
     methods: {
       fetchNotif()
       {
-        if (this.NotifData[0]!=null)
+        if (this.Loaded==true)
         {
           this.currentPage =this.currentPage+1;
         }
@@ -89,7 +90,8 @@ import axios from 'axios';
         {
           console.log(response);
           vm.NotifPaginate=response.data;
-          if (vm.NotifData[0]==null)
+          vm.Loaded = true;
+          if (vm.NotifData==null)
           {
             vm.NotifData=response.data.data;
           }else
