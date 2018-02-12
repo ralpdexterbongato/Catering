@@ -19,7 +19,7 @@ class OrderSessionController extends Controller
           }
         }
       }
-      $newfoodtoadd = array('foodId' =>$request->FoodId,'foodImage'=>$request->FoodImage,'foodName'=>$request->FoodName);
+      $newfoodtoadd = array('foodId' =>$request->FoodId,'foodImage'=>$request->FoodImage,'foodPrice'=>$request->FoodPrice,'foodName'=>$request->FoodName);
       $newfoodtoadd = (object)$newfoodtoadd;
       Session::push('company'.$companyid,$newfoodtoadd);
 
@@ -29,8 +29,13 @@ class OrderSessionController extends Controller
        $foodsaved = Session::get('company'.$companyid);
        if ($foodsaved!=null)
        {
+         $total=0;
+         foreach ($foodsaved as $key => $food)
+         {
+             $total = $total + $food->foodPrice;
+         }
          $foodsaved=array_reverse($foodsaved);
-         $response = array('foodsaved'=>$foodsaved);
+         $response = array('foodsaved'=>$foodsaved,'total'=>$total);
 
          return response()->json($response);
        }

@@ -34,10 +34,35 @@
             </td>
           </tr>
           <tr>
+            <th>Maximum visitors</th>
+            <td><input type="number" min="1" v-model="currentMaximum"></td>
+            <td>
+              <a href="#" class="btn btn-floating white" v-on:click.prevent="updateMaximum()"><i class="material-icons red-text darken-1">loop</i></a>
+            </td>
+          </tr>
+          <tr>
+            <th>Individual prices</th>
+            <td>
+              <form>
+                 <p>
+                   <input name="pricePrivacy" v-model="pricePrivacy " value="0" type="radio" id="public" />
+                   <label for="public">Show</label>
+                 </p>
+                 <p>
+                   <input name="pricePrivacy" v-model="pricePrivacy " value="1" type="radio" id="private" />
+                   <label for="private">Hide</label>
+                 </p>
+              </form>
+            </td>
+            <td>
+              <a href="#" class="btn btn-floating white" v-on:click.prevent="updatePricePrivacy()"><i class="material-icons red-text darken-1">loop</i></a>
+            </td>
+          </tr>
+          <tr>
             <th>Logo</th>
             <td>
-              <a class="btn food-image-finder btn-floating" @click="toggleShow"><i class="material-icons">search</i></a>
               <img class="z-depth-3 logo-prev" v-if="currentLogo != ''" :src="'/storage/images/'+currentLogo.logo" alt="">
+              <a class="btn food-image-finder btn-floating" @click="toggleShow"><i class="material-icons">search</i></a>
             </td>
             <td>
               <a href="#" class="btn btn-floating white" v-on:click.prevent="updateLogo()"><i class="material-icons red-text darken-1">loop</i></a>
@@ -46,8 +71,8 @@
           <tr>
             <th>Cover photo</th>
             <td>
-              <a class="btn food-image-finder btn-floating" @click="CovertoggleShow"><i class="material-icons">search</i></a>
               <img class="z-depth-3 cover-prev" v-if="currentCover!=''" :src="'/storage/images/'+currentCover.heroPicture" alt="">
+              <a class="btn food-image-finder btn-floating" @click="CovertoggleShow"><i class="material-icons">search</i></a>
             </td>
             <td>
               <a href="#" class="btn btn-floating white" v-on:click.prevent="updateCover()"><i class="material-icons red-text darken-1">loop</i></a>
@@ -116,12 +141,15 @@ import myUpload from 'vue-image-crop-upload';
       currentCover:'',
       selectedColor:'#F44336',
       currentMinimum:'',
+      currentMaximum:'',
       currentColors:[],
       currentName:'',
       currentDescription:'',
       NewName:'',
       NewDescription:'',
       NewMinimum:'',
+      pricePrivacy:'',
+
       params: {
           token: '123456798',
           name: 'avatar'
@@ -139,13 +167,96 @@ import myUpload from 'vue-image-crop-upload';
     created()
     {
       this.fetchName();
+      this.fetchDescription();
+      this.fetchMinimumVisitor();
+      this.fetchMaximum();
       this.fetchLogo();
       this.fetchCover();
-      this.fetchMinimumVisitor();
       this.fetchColors();
-      this.fetchDescription();
+      this.fetchPricePrivacy();
     },
     methods: {
+      fetchMaximum()
+      {
+        var vm=this;
+        axios.get(`/comp-settings-show-maximum`).then(function(response)
+        {
+          console.log(response);
+          vm.currentMaximum = response.data[0].maximum;
+        }).catch(function(error)
+        {
+          console.log(error);
+        });
+      },
+      updateMaximum()
+      {
+        var vm = this;
+        axios.put(`/comp-settings-maximum-update`,{
+          newMax:this.currentMaximum,
+          minimum:this.currentMinimum.minimum,
+        }).then(function(response)
+        {
+          swal({
+              position: 'top-right',
+              type: 'success',
+              title: 'Successfully updated!',
+              showConfirmButton:true
+            });
+            vm.fetchMaximum();
+          console.log(response);
+        }).catch(function(error)
+        {
+          console.log(error);
+          swal({
+              position: 'top-right',
+              type: 'error',
+              title: 'Oops',
+              text:error.response.data.message,
+              showConfirmButton:true
+            });
+            vm.fetchMaximum();
+        })
+      },
+      fetchPricePrivacy()
+      {
+        var vm=this;
+        axios.get(`/comp-settings-show-price-privacy`).then(function(response)
+      {
+        console.log(response);
+        vm.pricePrivacy = response.data[0].show_prices;
+      }).catch(function(error)
+      {
+        console.log(error);
+      });
+      },
+      updatePricePrivacy()
+      {
+        var vm=this;
+        axios.put(`/comp-settings-price-privacy-update`,{
+          newPricePrivacy: this.pricePrivacy
+        }).then(function(response)
+        {
+          console.log(response);
+          vm.fetchPricePrivacy();
+          swal({
+              position: 'top-right',
+              type: 'success',
+              title: 'Successfully updated!',
+              showConfirmButton:true
+            });
+        }).catch(function(error)
+        {
+          console.log(error);
+          swal({
+              position: 'top-right',
+              type: 'error',
+              title: 'oopps!',
+              text:error.response.data.message,
+              showConfirmButton:true
+            });
+            vm.fetchPricePrivacy();
+        });
+      },
       fetchLogo()
       {
         var vm=this;

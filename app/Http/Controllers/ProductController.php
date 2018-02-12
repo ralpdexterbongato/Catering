@@ -21,7 +21,8 @@ class ProductController extends Controller
         'name'=>'required|max:25',
         'FoodImage'=>'required',
         'description'=>'required|max:190',
-        'type'=>'required'
+        'type'=>'required',
+        'price'=> 'required|min:1',
       ]);
       if ($request->FoodImage!=null)
       {
@@ -32,6 +33,7 @@ class ProductController extends Controller
           $productTbl= new Product;
           $productTbl->name = $request->name;
           $productTbl->image= $fileName;
+          $productTbl->price = $request->price;
           $productTbl->description= $request->description;
           $productTbl->company_id = $request->companyid;
           $productTbl->Type = $request->type;
@@ -72,7 +74,8 @@ class ProductController extends Controller
       $this->validate($request,[
         'name'=>'required|max:25',
         'description'=>'required|max:190',
-        'type'=>'required'
+        'type'=>'required',
+        'price'=>'required|min:1'
       ]);
 
       if ($request->image!=null)
@@ -83,7 +86,7 @@ class ProductController extends Controller
         Product::where('id',$productId)->update(['name'=>$request->name,'image'=>$fileName,'description'=>$request->description,'Type'=>$request->type]);
       }else
       {
-        Product::where('id',$productId)->update(['name'=>$request->name,'description'=>$request->description,'Type'=>$request->type]);
+        Product::where('id',$productId)->update(['name'=>$request->name,'description'=>$request->description,'Type'=>$request->type,'price'=>$request->price]);
       }
       return ['success'=>'success'];
     }

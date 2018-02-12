@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="CompanyProfileContainer">
-    <div id="MyList" class="modal modal-fixed-footer">
+    <div id="MyList" class="modal modal-fixed-footer" v-if="(((user==null))||((user!=null) &&(user.role==0)))">
        <div class="modal-content">
          <h4 class="modal-titles">Customized package</h4>
          <p v-if="user!=null"><i class="material-icons indigo-text">info</i> Please click proceed when you are done. Thank you!</p>
@@ -16,6 +16,8 @@
                <tr v-for="(session,loopkey) in CompanySession">
                  <td><img :src="'/storage/images/'+session.foodImage"></td>
                  <td>{{session.foodName}}</td>
+                 <td v-if="AboutCompany.show_prices==0">₱{{session.foodPrice}}</td>
+                 <td v-else><i class="material-icons">visibility_off</i></td>
                  <td v-on:click="RemoveFromList(session.foodId)"><i class="material-icons grey-text">close</i></td>
                </tr>
              </tbody>
@@ -23,8 +25,10 @@
          </div>
        </div>
        <div class="modal-footer">
-         <a :href="'/request-proceed/'+company.id" v-if="user!=null" class="modal-action modal-close waves-effect waves-light btn-flat indigo-text">Proceed</a>
-        <span v-else>
+
+        <a href="#" v-on:click.prevent class="grey-text text-darken-2" v-if="foodsavedTotalPrice!=null">Total: ₱{{foodsavedTotalPrice}} perhead</a>
+        <a :href="'/request-proceed/'+company.id" v-if="(foodsavedTotalPrice!=null)&&(user!=null)" class="modal-action modal-close waves-effect waves-light btn-flat indigo-text">Proceed</a>
+        <span v-else-if="user==null">
           <a href="#" id="login-opener-2" class="modal-action modal-close waves-effect waves-light btn-flat indigo-text">Login</a>
           <a href="/register" class="modal-action modal-close waves-effect waves-light btn-flat indigo-text">Register</a>
         </span>
@@ -42,6 +46,10 @@
           <div class="input-field col s12">
             <textarea id="fdescription" v-model="FoodDescription" class="materialize-textarea" data-length="190"></textarea>
             <label for="fdescription">Description</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="priceperhead" v-model="price"  type="text" data-length="20">
+            <label for="priceperhead">Price</label>
           </div>
           <div class="input-field col s12">
             <select id="typeSelect">
@@ -117,7 +125,7 @@
           </a>
         </div>
         <div class="card-content">
-          <span class="card-title">P{{Profilepackage.price}} per head</span>
+          <span class="card-title">₱{{Profilepackage.price}} per head</span>
           <p><span class="bold">{{Profilepackage.name}}</span><br><br> {{Profilepackage.description}}</p>
         </div>
       </div>
@@ -167,9 +175,10 @@
            </div>
            <div class="card-content">
              <span class="card-title activator grey-text text-darken-4">{{product.name}}<i class="material-icons right">more_vert</i></span>
+             <p v-if="AboutCompany.show_prices==0">₱ {{product.price}}</p>
              <div class="menu-options">
                <div class="menu-option-btn">
-                 <i class="material-icons add-btn" v-if="(((user!=null) && (AboutCompany.user_id!=user.id))||(user==null))" v-on:click="addToSessionList(product)">add</i>
+                 <i class="material-icons add-btn" v-if="(((user==null))||((user!=null) &&(user.role==0)))" v-on:click="addToSessionList(product)">add</i>
                </div>
              </div>
            </div>
@@ -186,14 +195,14 @@
         <li class="waves-effect" v-if="paginationProduct.current_page < paginationProduct.last_page"><a href="#" @click.prevent="changepage(paginationProduct.current_page + 1)"><i class="material-icons">chevron_right</i></a></li>
     </ul>
     <div class="fixed-action-btn click-to-toggle" v-if="((user!=null)&&(user.id==AboutCompany.user_id))">
-       <a class="btn-floating btn-large indigo">
+       <a href="#" v-on:click.prevent class="btn-floating btn-large indigo">
          <i class="material-icons">add</i>
        </a>
        <ul>
          <li onclick="$('#addproductmodal').modal('open');"><a class="btn-floating indigo darken-1"><i class="material-icons">restaurant</i></a></li>
        </ul>
     </div>
-    <div class="fixed-action-btn" v-else>
+    <div class="fixed-action-btn" v-else-if="(((user==null))||((user!=null) &&(user.role==0)))">
       <a  onclick="$('#MyList').modal('open');" class="btn-floating btn-large waves-effect waves-light indigo" :class="[CompanySession!=null?'pulse':'']"><i class="material-icons">format_list_numbered</i></a>
     </div>
     <div id="updateProduct" class="modal modal-fixed-footer">
@@ -207,6 +216,10 @@
         <div class="input-field col s12">
           <textarea id="editDescription" placeholder="Product description" v-model="editDesc =EditProductData.description" class="materialize-textarea" data-length="190"></textarea>
           <label for="editDescription">Description</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="priceupdate" placeholder="Product name" v-model="editPrice = EditProductData.price" type="text" data-length="20">
+          <label for="priceupdate" >Price</label>
         </div>
         <div class="input-field col s12">
           <select id="EdittypeSelect">
@@ -320,7 +333,10 @@ import myUpload from 'vue-image-crop-upload';
          paginationPackage:[],
          EditProductData:[],
          editName:'',
-         editDesc:''
+         editDesc:'',
+         price:'',
+         editPrice:'',
+         foodsavedTotalPrice:0,
       }
     },
     components: {
@@ -350,6 +366,7 @@ import myUpload from 'vue-image-crop-upload';
           FoodId:FoodData.id,
           FoodName:FoodData.name,
           FoodImage:FoodData.image,
+          FoodPrice:FoodData.price
         }).then(function(response)
         {
           console.log(response);
@@ -382,6 +399,7 @@ import myUpload from 'vue-image-crop-upload';
         {
           console.log(response);
           vm.CompanySession=response.data.foodsaved;
+          vm.foodsavedTotalPrice = response.data.total;
         })
       },
       GetCompanyDetail()
@@ -399,6 +417,7 @@ import myUpload from 'vue-image-crop-upload';
         axios.post('/store-product',{
           FoodImage:this.imgDataUrlForFood,
           name:this.FoodName,
+          price:this.price,
           description:this.FoodDescription,
           companyid:this.AboutCompany.id,
           type:$('#typeSelect').val()
@@ -418,6 +437,7 @@ import myUpload from 'vue-image-crop-upload';
             vm.imgDataUrlForFood = '';
             vm.FoodName = '';
             vm.FoodDescription = '';
+            vm.price = '';
             swal({
                 position: 'top-right',
                 type: 'success',
@@ -565,6 +585,7 @@ import myUpload from 'vue-image-crop-upload';
                   name:this.editName,
                   description:this.editDesc,
                   type:$('#EdittypeSelect').val(),
+                  price:this.editPrice,
                   image:this.imgDataUrlProductUpdate
                 }).then(function(response)
                 {

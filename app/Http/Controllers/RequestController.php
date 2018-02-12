@@ -28,26 +28,38 @@ class RequestController extends Controller
       $mypack=Session::get('CompanyPackage'.$companyid);
       $mypack=json_encode($mypack);
       $customPack=Session::get('company'.$companyid);
+      $total=0;
+      foreach ($customPack as $custom)
+      {
+        $total = $total + $custom->foodPrice;
+      }
       $customPack = json_encode($customPack);
+      $totalPrice = array('total' =>$total);
+      $totalPrice = json_encode($totalPrice);
       $colorChoices=CompanyColor::where('company_id',$companyid)->get(['id','hex']);
-      $companyMinimum=company::where('id', $companyid)->get(['minimum']);
-      return view('Request.ProceedForm',compact('customPack','companyMinimum','company','location','mypack','colorChoices'));
+      $companyRules=company::where('id', $companyid)->get(['minimum','maximum','show_prices']);
+
+      return view('Request.ProceedForm',compact('customPack','companyRules','company','totalPrice','location','mypack','colorChoices'));
     }
     public function sendRequest(Request $request,$companyId)
     {
       $this->validate($request,[
         'message'=>'max:191',
         'eventName'=>'required|max:30',
-        'visitor'=>'required|numeric|max:9999|min:'.$request->minimum,
+        'visitor'=>'required|numeric|min:'.$request->minimum.'|max:'.$request->maximum,
         'dateStart'=>'required',
         'timeStart'=>'required',
         'contact'=>'required',
         'lat'=>'required',
-        'lng'=>'required'
+        'lng'=>'required',
+        'dine'=>'required'
       ]);
 
       $dbdate=date( 'Y-m-d', strtotime( $request->dateStart ) );
-
+      if ($request->dine!=1)
+      {
+        $companyMap = CompanyMap::where('company_id',$companyId)->get(['lat','lng']);
+      }
       $packageSession=Session::get('CompanyPackage'.$companyId);
       $orderDB = new order;
       $orderDB->user_id= Auth::user()->id;
@@ -56,14 +68,22 @@ class RequestController extends Controller
       $orderDB->event_name=$request->eventName;
       $orderDB->expectedVisitors=$request->visitor;
       $orderDB->date_start=$dbdate;
+      $orderDB->dine_in = $request->dine;
       if (isset($packageSession))
       {
         $orderDB->package_id=$packageSession->id;
       }
       $orderDB->time_start = $request->timeStart;
       $orderDB->client_contact = $request->contact;
-      $orderDB->address_lat = $request->lat;
-      $orderDB->address_lng = $request->lng;
+      if ($request->dine==1)
+      {
+        $orderDB->address_lat = $request->lat;
+        $orderDB->address_lng = $request->lng;
+      }else
+      {
+        $orderDB->address_lat = $companyMap[0]->lat;
+        $orderDB->address_lng = $companyMap[0]->lng;
+      }
       $orderDB->save();
 
       if (Session::has('company'.$companyId))

@@ -11,6 +11,10 @@
           <tr v-for="food in custompack">
             <td><img :src="'/storage/images/'+food.foodImage" alt="foodimage"></td>
             <td>{{food.foodName}}</td>
+            <td>₱{{food.foodPrice}}</td>
+          </tr>
+          <tr>
+            <td><span class="bold">Total perhead: ₱{{total.total}}</span> </td>
           </tr>
         </tbody>
       </table>
@@ -37,9 +41,20 @@
     </div>
     <div class="proceed-forms">
       <div class="proceed-form-left">
+        <i class="material-icons" style="font-size:30px;">transfer_within_a_station</i>
+          <form action="#" class="dine-options">
+            <p>
+              <input name="group1" type="radio" v-model="dineSelected" value="0" checked id="test1" />
+              <label for="test1">Dine in</label>
+            </p>
+            <p>
+              <input name="group1" type="radio" v-model="dineSelected" value="1" id="test2" />
+              <label for="test2">Outside</label>
+            </p>
+          </form>
         <div class="input-field col s6">
             <i class="material-icons prefix">people</i>
-            <input id="icon_prefix" placeholder="visitor" v-model="VisitorForm" type="number" step="1" :min="minimum[0].minimum" class="validate">
+            <input id="icon_prefix" placeholder="visitor" v-model="VisitorForm" type="number" step="1" :max="rules[0].maximum" :min="rules[0].minimum" class="validate">
             <label for="icon_prefix">Expected number of visitors</label>
         </div>
         <div class="input-field col s6">
@@ -55,7 +70,7 @@
         <div class="input-field col s6">
             <i class="material-icons prefix">event</i>
             <input type="text" v-model="EventForm" placeholder="event">
-            <label>What?</label>
+            <label>Event</label>
         </div>
         <div class="input-field col s6">
             <i class="material-icons prefix">contact_phone</i>
@@ -84,7 +99,7 @@
           <label for="confirm-submit"><p> I have reviewed already my inputs before submition & it looks good.</p></label>
         </form>
       </div>
-      <div class="proceed-form-right">
+      <div class="proceed-form-right" :class="[dineSelected==1?'active':'']">
         <div class="held-place-note">
           <i class="material-icons blue-text">info</i>
           <p>Please drag the marker where do you want the catering to be held. it was marked on our restaurant by default</p>
@@ -109,9 +124,10 @@ import axios from 'axios';
       colorSelected:[],
       messageForm:'',
       confirm:false,
+      dineSelected:0,
       }
     },
-    props: ['custompack','packagedata','colors','company','minimum'],
+    props: ['total','custompack','packagedata','colors','company','rules'],
     methods: {
       sendRequest()
       {
@@ -124,13 +140,15 @@ import axios from 'axios';
           visitor:this.VisitorForm,
           eventName:this.EventForm,
           contact:this.ContactForm,
-          minimum:this.minimum[0].minimum,
+          minimum:this.rules[0].minimum,
+          maximum:this.rules[0].maximum,
           lat:$('#addressHeldLat').val(),
           lng:$('#addressHeldLng').val(),
           colors:this.colorSelected,
           message:this.messageForm,
           dateStart:$('#dateStart').val(),
-          timeStart:$('#timeStart').val()
+          timeStart:$('#timeStart').val(),
+          dine:this.dineSelected
         }).then(function(response)
         {
           console.log(response);

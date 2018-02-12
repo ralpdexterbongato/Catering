@@ -60,7 +60,11 @@ Route::get('/comp-settings-minimum','CompanySettingController@showMinimumVisitor
 Route::get('/comp-settings-colors','CompanySettingController@showColors');
 Route::get('/comp-settings-name','CompanySettingController@showName');
 Route::get('/comp-settings-description','CompanySettingController@showDescription');
+Route::get('/comp-settings-show-price-privacy','CompanySettingController@showPricePrivacy');
+Route::get('/comp-settings-show-maximum','CompanySettingController@showMaximum');
 
+Route::put('/comp-settings-maximum-update','CompanySettingController@updateMax');
+Route::put('/comp-settings-price-privacy-update','CompanySettingController@updatePricePrivacy');
 Route::put('/comp-settings-name-update','CompanySettingController@updateName');
 Route::put('/comp-settings-description-update','CompanySettingController@updateDescription');
 Route::put('/comp-settings-minimum-update','CompanySettingController@updateMinimum');
@@ -83,6 +87,7 @@ Route::post('/decline-request/{orderid}','RequestController@declineRequest');
 Route::get('/calendar-show','ScheduleController@show');
 Route::get('/calendar-show-monthly','ScheduleController@showCurrentMonthEvents');
 Route::get('/calendar-show-monthly-changed','ScheduleController@showMonthSelectedEvents');
+Route::get('/calendar-fetch-package/{id}','ScheduleController@fetchPackage');
 
 Route::get('/notification','NotificationController@show');
 Route::get('/notification-count','NotificationController@countNotif');

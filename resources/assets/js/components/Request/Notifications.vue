@@ -11,29 +11,31 @@
         </div>
         <div class="notification-content-container">
           <span v-for="data in NotifData" v-if="user.role==0">
-            <div class="notification-box" :class="[data.Notification_Read==null?'unread':'']">
-              <img :src="'/storage/images/'+data.company.logo" class="circle" alt="">
-              <div class="notfication-box-data">
-                <p class="grey-text text-darken-2"><span class="bold">{{data.company.name}}</span>
-                  <span v-if="data.status == 0">
-                    Accepted
-                  </span>
-                  <span v-else-if="data.status == 1">
-                    Declined
-                  </span>
-                  your catering request</p>
-                <p class="grey-text text-darken-1">
-                  <span v-if="data.status == 0">
-                  <i class="material-icons green-text">check_circle</i>
-                  </span>
-                  <span v-else-if="data.status == 1">
-                  <i class="material-icons red-text">cancel</i>
-                  </span>
-                  {{data.notification_time}}</p>
+            <a href="/calendar-show">
+              <div class="notification-box" :class="[data.Notification_Read==null?'unread':'']">
+                <img :src="'/storage/images/'+data.company.logo" class="circle" alt="">
+                <div class="notfication-box-data">
+                  <p class="grey-text text-darken-2"><span class="bold">{{data.company.name}}</span>
+                    <span v-if="data.status == 0">
+                      Accepted
+                    </span>
+                    <span v-else-if="data.status == 1">
+                      Declined
+                    </span>
+                    your catering request</p>
+                  <p class="grey-text text-darken-1">
+                    <span v-if="data.status == 0">
+                    <i class="material-icons green-text">check_circle</i>
+                    </span>
+                    <span v-else-if="data.status == 1">
+                    <i class="material-icons red-text">cancel</i>
+                    </span>
+                    {{data.notification_time}}</p>
+                </div>
               </div>
-            </div>
-            <div class="divider">
-            </div>
+              <div class="divider">
+              </div>
+            </a>
           </span>
           <span v-for="data in NotifData" v-if="user.role==1">
             <a href="/show-cater-request">

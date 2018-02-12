@@ -38,9 +38,33 @@ class CompanySettingController extends Controller
     {
       return company::where('user_id', Auth::user()->id)->get(['name']);
     }
+    public function showMaximum()
+    {
+      return company::where('user_id', Auth::user()->id)->get(['maximum']);
+    }
+    public function updateMax(Request $request)
+    {
+      $this->validate($request,[
+        'newMax'=>'required|numeric|min:'.$request->minimum
+      ]);
+      company::where('user_id', Auth::user()->id)->update(['maximum'=>$request->newMax]);
+      return ['success'=>'success'];
+    }
     public function showDescription()
     {
       return company::where('user_id', Auth::user()->id)->get(['description']);
+    }
+    public function showPricePrivacy()
+    {
+      return company::where('user_id', Auth::user()->id)->get(['show_prices']);
+    }
+    public function updatePricePrivacy(Request $request)
+    {
+      $this->validate($request,[
+        'newPricePrivacy'=>'required|numeric|max:1|min:0'
+      ]);
+      company::where('user_id', Auth::user()->id)->update(['show_prices'=>$request->newPricePrivacy]);
+      return ['success'=>'success'];
     }
     public function updateName(Request $request)
     {

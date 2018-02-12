@@ -77,11 +77,35 @@
                  </p>
                </td>
              </tr>
+             <tr v-if="DataPreview.package_id!=null">
+               <th><i class="material-icons">assignment</i></th>
+               <td>
+                 {{PackageData.name}}
+               </td>
+             </tr>
+             <tr v-if="DataPreview.package_id!=null">
+               <th><i class="material-icons">line_weight</i></th>
+               <td>
+                 {{PackageData.description}}
+               </td>
+             </tr>
+             <tr v-if="DataPreview.package_id!=null">
+               <th><i class="material-icons">credit_card</i></th>
+               <td>
+                 P {{PackageData.price}} perhead
+               </td>
+             </tr>
              <tr>
                <th><i class="material-icons">restaurant</i></th>
                <td>
-                 <div class="small-product-previewer">
+                 <div class="small-product-previewer" v-if="DataPreview.package_id==null">
                    <div class="small-product-box z-depth-2" v-if="product.Type==0" v-for="product in DataPreview.products">
+                     <img :src="'/storage/images/'+product.image" alt="productpic">
+                     <p class="bold">{{product.name}}</p>
+                   </div>
+                 </div>
+                 <div class="small-product-previewer" v-else>
+                   <div class="small-product-box z-depth-2" v-if="product.Type==0" v-for="product in PackageData.products">
                      <img :src="'/storage/images/'+product.image" alt="productpic">
                      <p class="bold">{{product.name}}</p>
                    </div>
@@ -91,8 +115,14 @@
              <tr>
                <th><i class="material-icons">local_drink</i></th>
                <td>
-                 <div class="small-product-previewer">
+                 <div class="small-product-previewer" v-if="DataPreview.package_id==null">
                    <div class="small-product-box z-depth-2" v-if="product.Type==1" v-for="product in DataPreview.products">
+                     <img :src="'/storage/images/'+product.image" alt="productpic">
+                     <p class="bold">{{product.name}}</p>
+                   </div>
+                 </div>
+                 <div class="small-product-previewer" v-else>
+                   <div class="small-product-box z-depth-2" v-if="product.Type==1" v-for="product in PackageData.products">
                      <img :src="'/storage/images/'+product.image" alt="productpic">
                      <p class="bold">{{product.name}}</p>
                    </div>
@@ -102,8 +132,14 @@
              <tr>
                <th><i class="material-icons">cake</i></th>
                <td>
-                 <div class="small-product-previewer">
+                 <div class="small-product-previewer" v-if="DataPreview.package_id==''">
                    <div class="small-product-box z-depth-2" v-if="product.Type==2" v-for="product in DataPreview.products">
+                     <img :src="'/storage/images/'+product.image" alt="productpic">
+                     <p class="bold">{{product.name}}</p>
+                   </div>
+                 </div>
+                 <div class="small-product-previewer" v-else>
+                   <div class="small-product-box z-depth-2" v-if="product.Type==2" v-for="product in PackageData.products">
                      <img :src="'/storage/images/'+product.image" alt="productpic">
                      <p class="bold">{{product.name}}</p>
                    </div>
@@ -137,7 +173,8 @@ Vue.use(vueEventCalendar, {locale: 'en',color: '#3f51b5'})
     data () { return {
       MonthEvents:[],
       DayClicked:'',
-      DataPreview:[]
+      DataPreview:[],
+      PackageData:[],
       }
     },
     created()
@@ -173,6 +210,8 @@ Vue.use(vueEventCalendar, {locale: 'en',color: '#3f51b5'})
       },
       fetchDataOfSelected(data)
       {
+        this.PackageData=[];
+        console.log(data);
         this.DataPreview = data;
         var mymap = new GMaps({
            el: '#location-small-prev',
@@ -185,6 +224,19 @@ Vue.use(vueEventCalendar, {locale: 'en',color: '#3f51b5'})
            lng: data.address_lng,
            title: 'Will be held here'
           });
+
+        if (data.package_id!=null)
+        {
+          var vm=this;
+          axios.get(`/calendar-fetch-package/`+data.package_id).then(function(response)
+          {
+            console.log(response);
+            vm.PackageData = response.data[0];
+          }).catch(function(error)
+          {
+            console.log(error);
+          })
+        }
       }
 
     },

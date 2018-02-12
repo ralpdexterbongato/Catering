@@ -163,8 +163,8 @@ table.highlight>tbody>tr:hover
 }
 .head-modal-burger .notif-count-circle
 {
-	top:0px;
-	left: 20px;
+	top:-4px;
+	left: 15px;
 }
 .head-modal-burger li
 {
@@ -185,7 +185,7 @@ table.highlight>tbody>tr:hover
 }
 .head-modal-burger i
 {
-	font-size: 35px;
+	font-size: 25px;
 }
 .login-title-head
 {
@@ -271,7 +271,7 @@ table.highlight>tbody>tr:hover
 	-webkit-box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
   box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
 }
-@media (max-width:600px)
+@media (max-width:1200px)
 {
 	.header-container
 	{
@@ -302,13 +302,7 @@ nav
 		padding:0 20px;
 	}
 }
-@media (max-width:505px)
-{
-	.header-container
-	{
-		padding:20px;
-	}
-}
+
 .left-header
 {
   font-weight: 600;
@@ -421,13 +415,20 @@ box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px
 }
 .logo
 {
-  font-size:23px;
+  font-size:18px;
   padding:5px;
   margin:0 auto;
   color:inherit;
 	text-align: center;
 	letter-spacing:5px;
 	font-family: 'Julius Sans One', sans-serif;
+}
+@media (max-width:700px)
+{
+	.logo
+	{
+		font-size: 15px;
+	}
 }
 
 .parallax-container
@@ -970,6 +971,7 @@ font-family: 'Pompiere', cursive;
 {
 	padding:10px!important;
 }
+
 .menu-showcase
 {
 	display: flex;
@@ -1057,6 +1059,7 @@ font-family: 'Pompiere', cursive;
 	margin:auto;
 	display: flex;
 	justify-content: flex-start;
+	margin-top:20px;
 }
 .menu-option-btn i
 {
@@ -1181,9 +1184,13 @@ font-family: 'Pompiere', cursive;
 {
 	width: 50px;
 }
+.dine-options
+{
+	margin: 0px 0px 30px 30px;
+}
 .proceed-forms
 {
-	margin-top: 50px;
+	margin-top: 30px;
 	display: flex;
 }
 .proceed-form-left,.proceed-form-right

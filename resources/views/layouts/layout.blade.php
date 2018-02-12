@@ -46,7 +46,7 @@
             </div>
             @endif
             <li class="nav-parent">
-              <a href="#">
+              <a href="#" v-on:click.prevent>
                 @if (Auth::check())
                   <img src="/storage/images/{{Auth::user()->avatar}}" alt="">
                 @else

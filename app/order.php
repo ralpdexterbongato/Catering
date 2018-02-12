@@ -42,4 +42,5 @@ class order extends Model
   {
     return $this->belongsTo('App\company');
   }
+
 }

@@ -239,21 +239,21 @@ import axios from 'axios';
           vm.SameDayOrders= response.data.existing;
           vm.PackagePrev=response.data.PackageData[0];
           vm.PackageProduct=response.data.PackageData[0].products;
-          var mymap = new GMaps({
-             el: '#location-show',
-             lat: vm.requestDetail.address_lat,
-             lng: vm.requestDetail.address_lng,
-             zoom:15
-           });
-           mymap.addMarker({
-             lat: vm.requestDetail.address_lat,
-             lng: vm.requestDetail.address_lng,
-             title: 'I want it here'
-            });
         }).catch(function(error)
         {
           console.log(error);
         });
+        var mymap = new GMaps({
+           el: '#location-show',
+           lat: vm.requestDetail.address_lat,
+           lng: vm.requestDetail.address_lng,
+           zoom:15
+         });
+         mymap.addMarker({
+           lat: vm.requestDetail.address_lat,
+           lng: vm.requestDetail.address_lng,
+           title: 'I want it here'
+          });
       },
       displayExistingMap(adlat,adlng)
       {

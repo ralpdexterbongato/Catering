@@ -43075,6 +43075,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -43183,89 +43185,95 @@ var render = function() {
                 _vm._l(_vm.NotifData, function(data) {
                   return _vm.user.role == 0
                     ? _c("span", [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "notification-box",
-                            class: [
-                              data.Notification_Read == null ? "unread" : ""
-                            ]
-                          },
-                          [
-                            _c("img", {
-                              staticClass: "circle",
-                              attrs: {
-                                src: "/storage/images/" + data.company.logo,
-                                alt: ""
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "notfication-box-data" }, [
-                              _c(
-                                "p",
-                                { staticClass: "grey-text text-darken-2" },
-                                [
-                                  _c("span", { staticClass: "bold" }, [
-                                    _vm._v(_vm._s(data.company.name))
-                                  ]),
-                                  _vm._v(" "),
-                                  data.status == 0
-                                    ? _c("span", [
-                                        _vm._v(
-                                          "\n                  Accepted\n                "
-                                        )
-                                      ])
-                                    : data.status == 1
-                                      ? _c("span", [
-                                          _vm._v(
-                                            "\n                  Declined\n                "
-                                          )
-                                        ])
-                                      : _vm._e(),
-                                  _vm._v(
-                                    "\n                your catering request"
-                                  )
-                                ]
-                              ),
+                        _c("a", { attrs: { href: "/calendar-show" } }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "notification-box",
+                              class: [
+                                data.Notification_Read == null ? "unread" : ""
+                              ]
+                            },
+                            [
+                              _c("img", {
+                                staticClass: "circle",
+                                attrs: {
+                                  src: "/storage/images/" + data.company.logo,
+                                  alt: ""
+                                }
+                              }),
                               _vm._v(" "),
                               _c(
-                                "p",
-                                { staticClass: "grey-text text-darken-1" },
+                                "div",
+                                { staticClass: "notfication-box-data" },
                                 [
-                                  data.status == 0
-                                    ? _c("span", [
-                                        _c(
-                                          "i",
-                                          {
-                                            staticClass:
-                                              "material-icons green-text"
-                                          },
-                                          [_vm._v("check_circle")]
-                                        )
-                                      ])
-                                    : data.status == 1
-                                      ? _c("span", [
-                                          _c(
-                                            "i",
-                                            {
-                                              staticClass:
-                                                "material-icons red-text"
-                                            },
-                                            [_vm._v("cancel")]
-                                          )
-                                        ])
-                                      : _vm._e(),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(data.notification_time)
+                                  _c(
+                                    "p",
+                                    { staticClass: "grey-text text-darken-2" },
+                                    [
+                                      _c("span", { staticClass: "bold" }, [
+                                        _vm._v(_vm._s(data.company.name))
+                                      ]),
+                                      _vm._v(" "),
+                                      data.status == 0
+                                        ? _c("span", [
+                                            _vm._v(
+                                              "\n                    Accepted\n                  "
+                                            )
+                                          ])
+                                        : data.status == 1
+                                          ? _c("span", [
+                                              _vm._v(
+                                                "\n                    Declined\n                  "
+                                              )
+                                            ])
+                                          : _vm._e(),
+                                      _vm._v(
+                                        "\n                  your catering request"
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "p",
+                                    { staticClass: "grey-text text-darken-1" },
+                                    [
+                                      data.status == 0
+                                        ? _c("span", [
+                                            _c(
+                                              "i",
+                                              {
+                                                staticClass:
+                                                  "material-icons green-text"
+                                              },
+                                              [_vm._v("check_circle")]
+                                            )
+                                          ])
+                                        : data.status == 1
+                                          ? _c("span", [
+                                              _c(
+                                                "i",
+                                                {
+                                                  staticClass:
+                                                    "material-icons red-text"
+                                                },
+                                                [_vm._v("cancel")]
+                                              )
+                                            ])
+                                          : _vm._e(),
+                                      _vm._v(
+                                        "\n                  " +
+                                          _vm._s(data.notification_time)
+                                      )
+                                    ]
                                   )
                                 ]
                               )
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "divider" })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "divider" })
+                        ])
                       ])
                     : _vm._e()
                 }),
