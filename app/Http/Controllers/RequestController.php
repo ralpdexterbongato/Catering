@@ -14,6 +14,7 @@ use App\company;
 use Carbon\Carbon;
 use App\Product;
 use App\package;
+use PDF;
 class RequestController extends Controller
 {
     public function show($companyid)
@@ -29,9 +30,12 @@ class RequestController extends Controller
       $mypack=json_encode($mypack);
       $customPack=Session::get('company'.$companyid);
       $total=0;
-      foreach ($customPack as $custom)
+      if (isset($customPack))
       {
-        $total = $total + $custom->foodPrice;
+        foreach ($customPack as $custom)
+        {
+          $total = $total + $custom->foodPrice;
+        }
       }
       $customPack = json_encode($customPack);
       $totalPrice = array('total' =>$total);
@@ -72,6 +76,7 @@ class RequestController extends Controller
       if (isset($packageSession))
       {
         $orderDB->package_id=$packageSession->id;
+        $orderDB->package_current_price = $packageSession->price;
       }
       $orderDB->time_start = $request->timeStart;
       $orderDB->client_contact = $request->contact;
@@ -91,7 +96,7 @@ class RequestController extends Controller
         $forOrderDetail = array();
         foreach (Session::get('company'.$companyId) as $key => $product)
         {
-          $forOrderDetail[] = array('product_id' => $product->foodId,'order_id'=>$orderDB->id);
+          $forOrderDetail[] = array('product_id' => $product->foodId,'order_id'=>$orderDB->id,'current_price'=>$product->foodPrice);
         }
         product_order::insert($forOrderDetail);
       }
@@ -110,7 +115,8 @@ class RequestController extends Controller
     }
     public function showRequestList()
     {
-      return view('Request.AcceptOrDeclinePage');
+      $privacyPrice=company::where('user_id', Auth::user()->id)->get(['show_prices']);
+      return view('Request.AcceptOrDeclinePage',compact('privacyPrice'));
     }
     public function fetchRequest()
     {
@@ -145,5 +151,25 @@ class RequestController extends Controller
     {
       order::where('id', $orderId)->update(['status'=>'1','notification_time'=>Carbon::now()]);
       return ['success'=>'success'];
+    }
+    public function toPDF($id)
+    {
+      $data=order::where('id', $id)->with('user')->with('products')->with('colors')->with('company')->where('status', '0')->get(['user_id','id','event_name as title','date_start as date','time_start','client_contact','expectedVisitors','address_lat','address_lng'
+      ,'message','package_id','dine_in','company_id','package_current_price']);
+      $packageData = [];
+      $total = 0;
+
+      if (empty($data[0]->package_id))
+      {
+        foreach ($data[0]->products as $key => $product)
+        {
+          $total = $total + $product->pivot->current_price;
+        }
+      }else
+      {
+       $packageData = package::where('id', $data[0]->package_id)->with('products')->get(['id','name','description']);
+      }
+      $pdf = PDF::loadView('Request.RequestPDF',compact('data','total','packageData'));
+		  return $pdf->stream('invoice.pdf');
     }
 }

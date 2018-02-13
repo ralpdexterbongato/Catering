@@ -45,7 +45,7 @@
                   <p class="grey-text text-darken-2"><span class="bold">{{data.user.name}}</span>
                     Sent you a catering request</p>
                   <p class="grey-text text-darken-1">
-                  <i class="material-icons indigo-text">message</i>
+                  <i class="material-icons red-text">message</i>
                     {{data.created_at}}</p>
                 </div>
               </div>

@@ -6,38 +6,56 @@
           <!-- In here do whatever you want, make you owner event template -->
           <div v-if="DayClicked == event.date" class="event-item">
             <div class="event-top-container">
-              <p class="chip">
-                <img :src="'/storage/images/'+event.user.avatar" alt="Contact Person">
-                {{event.user.name}}
-              </p>
+              <a href="#" v-if="user.role==1">
+                <p class="chip">
+                  <img :src="'/storage/images/'+event.user.avatar" alt="Contact Person">
+                  {{event.user.name}}
+                </p>
+              </a>
+              <a :href="'/company-show/'+event.company.id" v-if="user.role==0">
+                <p class="chip" >
+                  <img :src="'/storage/images/'+event.company.logo" alt="Contact Person">
+                  {{event.company.name}}
+                </p>
+              </a>
               <p class="grey-text text-darken-2">{{event.time_start}}</p>
             </div>
             <div class="divider">
             </div>
             <div class="event-bot-container">
               <div class="bot-event-left">
-                <i class="material-icons indigo-text">cake</i><p class="bold grey-text text-darken-2"> {{event.title}}</p>
+                <i class="material-icons red-text">cake</i><p class="bold grey-text text-darken-2"> {{event.title}}</p>
               </div>
               <div class="bot-event-right">
+                <a :href="'/pdf-order-information/'+event.id"><i class="material-icons grey-text">print</i></a>
                 <a  class="grey-text" v-on:click="fetchDataOfSelected(event)" onclick="$('#detail-event-modal').modal('open');"><i class="material-icons">remove_red_eye</i></a>
               </div>
             </div>
           </div>
           <div v-if="DayClicked==''" class="event-item">
             <div class="event-top-container">
-              <p class="chip">
-                <img :src="'/storage/images/'+event.user.avatar" alt="Contact Person">
-                {{event.user.name}}
-              </p>
+              <a href="#" v-on:click.prevent v-if="user.role==1">
+                <p class="chip">
+                  <img :src="'/storage/images/'+event.user.avatar" alt="Contact Person">
+                  {{event.user.name}}
+                </p>
+              </a>
+              <a :href="'/company-show/'+event.company.id" v-if="user.role==0">
+                <p class="chip" >
+                  <img :src="'/storage/images/'+event.company.logo" alt="Contact Person">
+                  {{event.company.name}}
+                </p>
+              </a>
               <p class="grey-text text-darken-2">{{event.time_start}}</p>
             </div>
             <div class="divider">
             </div>
             <div class="event-bot-container">
               <div class="bot-event-left">
-                <i class="material-icons indigo-text">cake</i><p class="bold grey-text text-darken-2"> {{event.title}}</p>
+                <i class="material-icons red-text">cake</i><p class="bold grey-text text-darken-2"> {{event.title}}</p>
               </div>
               <div class="bot-event-right">
+                <a :href="'/pdf-order-information/'+event.id"><i class="material-icons grey-text">print</i></a>
                 <a class="grey-text" v-on:click="fetchDataOfSelected(event)" onclick="$('#detail-event-modal').modal('open');"><i class="material-icons">remove_red_eye</i></a>
               </div>
             </div>
@@ -59,6 +77,13 @@
              <tr>
                <th><i class="material-icons">person</i></th>
                <td>{{DataPreview.expectedVisitors}}</td>
+             </tr>
+             <tr>
+               <th><i class="material-icons">transfer_within_a_station</i></th>
+               <td>
+                 <span v-if="DataPreview.dine_in == 0">DINE-IN</span>
+                 <span v-else>DINE-OUT</span>
+               </td>
              </tr>
              <tr>
                <th><i class="material-icons">phone</i></th>
@@ -92,7 +117,13 @@
              <tr v-if="DataPreview.package_id!=null">
                <th><i class="material-icons">credit_card</i></th>
                <td>
-                 P {{PackageData.price}} perhead
+                 P {{DataPreview.package_current_price}} perhead
+               </td>
+             </tr>
+             <tr v-else>
+               <th><i class="material-icons">credit_card</i></th>
+               <td>
+                 P {{customTotalPrice}} perhead
                </td>
              </tr>
              <tr>
@@ -102,6 +133,7 @@
                    <div class="small-product-box z-depth-2" v-if="product.Type==0" v-for="product in DataPreview.products">
                      <img :src="'/storage/images/'+product.image" alt="productpic">
                      <p class="bold">{{product.name}}</p>
+                     <p>P {{product.pivot.current_price}}</p>
                    </div>
                  </div>
                  <div class="small-product-previewer" v-else>
@@ -119,6 +151,7 @@
                    <div class="small-product-box z-depth-2" v-if="product.Type==1" v-for="product in DataPreview.products">
                      <img :src="'/storage/images/'+product.image" alt="productpic">
                      <p class="bold">{{product.name}}</p>
+                     <p>P {{product.pivot.current_price}}</p>
                    </div>
                  </div>
                  <div class="small-product-previewer" v-else>
@@ -136,6 +169,7 @@
                    <div class="small-product-box z-depth-2" v-if="product.Type==2" v-for="product in DataPreview.products">
                      <img :src="'/storage/images/'+product.image" alt="productpic">
                      <p class="bold">{{product.name}}</p>
+                     <p>P {{product.pivot.current_price}}</p>
                    </div>
                  </div>
                  <div class="small-product-previewer" v-else>
@@ -175,13 +209,14 @@ Vue.use(vueEventCalendar, {locale: 'en',color: '#3f51b5'})
       DayClicked:'',
       DataPreview:[],
       PackageData:[],
+      customTotalPrice:0
       }
     },
     created()
     {
       this.getEventByMonth();
     },
-    props: [],
+    props: ['user'],
     methods: {
       handleDayChanged (data) {
       console.log('date-changed', data)
@@ -224,6 +259,12 @@ Vue.use(vueEventCalendar, {locale: 'en',color: '#3f51b5'})
            lng: data.address_lng,
            title: 'Will be held here'
           });
+          var total=0;
+          for (var i = 0; i < data.products.length; i++)
+          {
+            total = total + data.products[i].pivot.current_price;
+          }
+          this.customTotalPrice = total;
 
         if (data.package_id!=null)
         {

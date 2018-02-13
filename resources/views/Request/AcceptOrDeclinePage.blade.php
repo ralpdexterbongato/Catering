@@ -3,7 +3,7 @@
  Request list
 @endsection
 @section('content')
-  <requestlist></requestlist>
+  <requestlist :privacy="{{$privacyPrice}}"></requestlist>
 @endsection
 @section('javascripts')
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>

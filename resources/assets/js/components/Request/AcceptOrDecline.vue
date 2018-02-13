@@ -34,6 +34,13 @@
                 <td>{{requestDetail.expectedVisitors}}</td>
               </tr>
               <tr>
+                <th>Dine</th>
+                <td>
+                  <span v-if="requestDetail.dine_in==0">IN</span>
+                  <span v-else>OUT</span>
+                </td>
+              </tr>
+              <tr>
                 <th>Message</th>
                 <td><p>{{requestDetail.message}}</p></td>
               </tr>
@@ -55,6 +62,10 @@
               <tr v-if="PackagePrev!=null">
                 <th>Package</th>
                 <td>{{PackagePrev.name}}</td>
+              </tr>
+              <tr v-if="PackagePrev!=null">
+                <th>Per head</th>
+                <td>P {{requestDetail.package_current_price}}</td>
               </tr>
               <tr v-if="PackagePrev!=null">
                 <th>Package foods</th>
@@ -89,6 +100,7 @@
                   <div class="request-preview-box z-depth-1"v-if="product.Type==0" v-for="product in ProductDetail">
                     <img :src="'/storage/images/'+product.image" alt="product">
                     <p>{{product.name}}</p>
+                    <p v-if="privacy[0].show_prices==0">P{{product.pivot.current_price}}</p>
                   </div>
                 </td>
               </tr>
@@ -98,6 +110,7 @@
                   <div class="request-preview-box z-depth-1"v-if="product.Type==1" v-for="product in ProductDetail">
                     <img :src="'/storage/images/'+product.image" alt="product">
                     <p>{{product.name}}</p>
+                    <p v-if="privacy[0].show_prices==0">P{{product.price}}</p>
                   </div>
                 </td>
               </tr>
@@ -107,6 +120,7 @@
                   <div class="request-preview-box z-depth-1"v-if="product.Type==2" v-for="product in ProductDetail">
                     <img :src="'/storage/images/'+product.image" alt="product">
                     <p>{{product.name}}</p>
+                    <p v-if="privacy[0].show_prices==0">P{{product.price}}</p>
                   </div>
                 </td>
               </tr>
@@ -128,7 +142,7 @@
         <p class="ExistingSchedTitle">Scheduled cater on the same date</p>
         <ul class="collapsible" data-collapsible="accordion">
           <li v-for="order in  SameDayOrders">
-            <div class="collapsible-header event-and-time" v-on:click="displayExistingMap(order.address_lat,order.address_lng)">
+            <div class="collapsible-header event-and-time">
               <p class="grey-text text-darken-2">
                 <i class="material-icons grey-text text-darken-2">restaurant</i>
                 {{order.event_name}}
@@ -153,7 +167,7 @@
           </li>
         </ul>
         <div class="request-buttons" v-if="requestMasters[0]!=null">
-          <a href="#" class="btn indigo" v-on:click.prevent="accept()">Accept</a>
+          <a href="#" class="btn red" v-on:click.prevent="accept()">Accept</a>
           <a href="#" class="btn white red-text" v-on:click.prevent="decline()">Decline</a>
         </div>
       </div>
@@ -191,7 +205,7 @@ import axios from 'axios';
         Pagination:[]
       }
     },
-    // props: [],
+    props: ['privacy'],
     created()
     {
       this.fetchRequest();

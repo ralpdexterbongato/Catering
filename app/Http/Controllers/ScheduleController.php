@@ -20,10 +20,10 @@ class ScheduleController extends Controller
       if (Auth::user()->role==1)
       {
         $companyOwnedId=company::where('user_id', Auth::user()->id)->value('id');
-        return order::orderBy('time_start')->where('company_id',$companyOwnedId)->with('user')->with('products')->with('colors')->where('status', '0')->where('date_start','LIKE',$YMNow.'%')->get(['user_id','id','event_name as title','date_start as date','time_start','client_contact','expectedVisitors','address_lat','address_lng','message','package_id']);
+        return order::orderBy('time_start')->where('company_id',$companyOwnedId)->with('user')->with('products')->with('colors')->with('company')->where('status', '0')->where('date_start','LIKE',$YMNow.'%')->get(['user_id','id','event_name as title','date_start as date','time_start','client_contact','expectedVisitors','address_lat','address_lng','message','package_id','dine_in','company_id','package_current_price']);
       }
       if (Auth::user()->role==0) {
-        return order::orderBy('time_start')->where('user_id',Auth::user()->id)->with('user')->with('products')->with('colors')->where('status', '0')->where('date_start','LIKE',$YMNow.'%')->get(['user_id','id','event_name as title','date_start as date','time_start','client_contact','expectedVisitors','address_lat','address_lng','message','package_id']);
+        return order::orderBy('time_start')->where('user_id',Auth::user()->id)->with('user')->with('products')->with('colors')->with('company')->where('status', '0')->where('date_start','LIKE',$YMNow.'%')->get(['user_id','id','event_name as title','date_start as date','time_start','client_contact','expectedVisitors','address_lat','address_lng','message','package_id','dine_in','company_id','package_current_price']);
       }
     }
     public function showMonthSelectedEvents(Request $request)
@@ -34,10 +34,10 @@ class ScheduleController extends Controller
       if (Auth::user()->role==1)
       {
         $companyOwnedId=company::where('user_id', Auth::user()->id)->value('id');
-        return order::orderBy('time_start')->where('company_id',$companyOwnedId)->with('user')->with('products')->with('colors')->where('status', '0')->where('date_start','LIKE',$formatedDateMonth.'%')->get(['user_id','id','event_name as title','date_start as date','time_start','client_contact','expectedVisitors','address_lat','address_lng','message','package_id']);
+        return order::orderBy('time_start')->where('company_id','package_current_price',$companyOwnedId)->with('user')->with('products')->with('company')->with('colors')->where('status', '0')->where('date_start','LIKE',$formatedDateMonth.'%')->get(['user_id','id','event_name as title','date_start as date','time_start','client_contact','expectedVisitors','address_lat','address_lng','message','package_id','dine_in','company_id','package_current_price']);
       }
       if (Auth::user()->role==0) {
-        return order::orderBy('time_start')->where('user_id',Auth::user()->id)->with('user')->with('products')->with('colors')->where('status', '0')->where('date_start','LIKE',$formatedDateMonth.'%')->get(['user_id','id','event_name as title','date_start as date','time_start','client_contact','expectedVisitors','address_lat','address_lng','message','package_id']);
+        return order::orderBy('time_start')->where('user_id',Auth::user()->id)->with('user')->with('products')->with('colors')->with('company')->where('status', '0')->where('date_start','LIKE',$formatedDateMonth.'%')->get(['user_id','id','event_name as title','date_start as date','time_start','client_contact','expectedVisitors','address_lat','address_lng','message','package_id','dine_in','company_id','package_current_price']);
       }
     }
     public function fetchPackage($id)

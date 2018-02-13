@@ -43311,9 +43311,7 @@ var render = function() {
                                 [
                                   _c(
                                     "i",
-                                    {
-                                      staticClass: "material-icons indigo-text"
-                                    },
+                                    { staticClass: "material-icons red-text" },
                                     [_vm._v("message")]
                                   ),
                                   _vm._v(

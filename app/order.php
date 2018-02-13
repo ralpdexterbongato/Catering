@@ -16,7 +16,7 @@ class order extends Model
   }
   public function products()
   {
-    return $this->belongsToMany('App\Product','product_orders','order_id','product_id');
+    return $this->belongsToMany('App\Product','product_orders','order_id','product_id')->withPivot('current_price');
   }
   public function getCreatedAtAttribute($date)
   {
@@ -40,7 +40,7 @@ class order extends Model
   }
   public function company()
   {
-    return $this->belongsTo('App\company');
+    return $this->belongsTo('App\company','company_id','id');
   }
 
 }

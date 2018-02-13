@@ -114,3 +114,5 @@ Route::delete('/package-delete/{packageId}','PackageController@delete');
 Route::get('/forgot-password','usercontroller@forgotPass')->middleware('guest');
 Route::get('/send-password-code','usercontroller@sendForgetPassToEmail');
 Route::get('/search-my-forgotten-account','usercontroller@searchByMailUsername');
+
+Route::get('/pdf-order-information/{id}','RequestController@toPDF')->middleware('printrule');

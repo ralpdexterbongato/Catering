@@ -49,15 +49,7 @@ table {
 }
 .main-content-container
 {
-	padding:30px 80px;
-}
-@media (max-width:1200px)
-{
-	.main-content-container
-	{
-		padding:0px;
-	}
-
+	padding:30px 0px;
 }
 .valid
 {
@@ -139,7 +131,7 @@ html
 	padding-top: 8px;
 	font-weight: bold;
 	color: #fff;
-	background:#3f51b5!important;
+	background:#ef5350!important;
 }
 .pagination li.disabled
 {
@@ -151,7 +143,7 @@ table.highlight>tbody>tr:hover
 }
 .head-modal-burger
 {
-	margin:25px 25px 25px 0px;
+	margin:20px 20px 20px 0px;
 	display: none;
 	width: 100%;
 	justify-content: space-between;
@@ -205,15 +197,15 @@ table.highlight>tbody>tr:hover
   height: 100vh;
   max-width:600px;
   padding:30px 100px;
-  margin: 0 auto;;
+  margin: 0 auto;
 }
 @media (max-width:676px)
 {
 	.login-container
 	{
 		padding: 30px 40px!important;
-		margin-left: 30px;
-		margin-right: 30px;
+		margin-left: 20px;
+		margin-right: 20px;
 	}
 }
 .login-btn-container
@@ -261,13 +253,13 @@ table.highlight>tbody>tr:hover
 .header-container
 {
   display: flex;
-  padding:0px 80px;
+  padding:0px 20px;
   justify-content: space-between;
   top:0;
   left: 0;
   right: 0;
 	color: #f4f4f4!important;
-  background:#3f51b5;
+  background:#ef5350;
 	-webkit-box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
   box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
 }
@@ -281,6 +273,7 @@ table.highlight>tbody>tr:hover
 .content-container
 {
 	min-height: 100vh;
+	padding:20px;
 }
 nav
 {
@@ -310,7 +303,7 @@ nav
 }
 .left-header .logo
 {
-	margin:25px;
+	margin:18px;
 }
 .right-header
 {
@@ -347,7 +340,7 @@ nav
 }
 .right-header li.active
 {
-	background-color:rgba(255, 255, 255, 0.1);
+	background-color:rgba(0, 0, 0, 0.1);
 	border-bottom: 3px solid #fff;
 }
 .right-header > ul >li:hover
@@ -356,7 +349,7 @@ nav
 }
 .right-header ul li
 {
-  padding:30px 20px;
+  padding:20px;
 }
 .right-header > ul > li > i
 {
@@ -386,11 +379,25 @@ nav
 	width: 30px;
 	border-radius: 50%;
 }
+.nav-drop:after {
+	bottom: 100%;
+	right: 20px;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(136, 183, 213, 0);
+	border-bottom-color: #FFFFFF;
+	border-width: 9px;
+	margin-right: 0px;
+}
 .nav-drop
 {
 	position: absolute;
 	top:-6000px;
-	left:-60px;
+	left:-140px;
 	width: 200px;
 	display: flex;
 	flex-direction: column;
@@ -415,7 +422,7 @@ box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px
 }
 .logo
 {
-  font-size:18px;
+  font-size:16px;
   padding:5px;
   margin:0 auto;
   color:inherit;
@@ -553,21 +560,15 @@ box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px
 /*footer*/
 footer
 {
-	background: #3f51b5;
+	background: #ef5350;
 	color:#f4f4f4!important;
 }
 .footer-container-top
 {
-  padding:100px 110px;
+  padding:100px 20px;
 	border-top: 1px solid #ccc;
 }
-@media (max-width:600px)
-{
-	.footer-container-top
-	{
-		padding:40px;
-	}
-}
+
 .footer-container-bot
 {
   padding: 30px 110px;
@@ -594,7 +595,6 @@ footer
 .index-company-container
 {
 	min-height: 100vh;
-	padding:10px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
@@ -619,7 +619,7 @@ footer
 	padding:10px;
 	min-height: 100vh;
 	display: flex;
-	justify-content: space-between;
+	justify-content:space-between;
 	flex-wrap: wrap;
 }
 @media (max-width:905px)
@@ -641,10 +641,10 @@ footer
 	padding:10px 10px 0px 10px;
 	background: #fff;
 	border-radius: 4px;
-	width:300px;
-	min-width: 300px;
-	max-height: 300px;
-	margin:40px 0px;
+	width:250px;
+	height: 250px;
+	min-width: 200px;
+	margin:10px 20px;
 	display: flex;
 	flex-direction: column;
 		background: #f9f9f9;
@@ -750,7 +750,7 @@ transform: scale(1.0);
 .verification-input
 {
 	background:transparent;
-	padding:60px 80px 20px 80px;
+	padding:60px 80px 0px 0px;
 	width: 100%;
 	display: flex;
 }
@@ -764,7 +764,7 @@ transform: scale(1.0);
 }
 .verification-input i
 {
-	color:#3f51b5;
+	color:#ef5350;
 }
 
 /*company profile*/
@@ -1319,6 +1319,24 @@ font-family: 'Pompiere', cursive;
 	overflow-x: hidden;
 	overflow-y: auto;
 }
+.request-left .collection
+{
+	margin:0px;
+}
+.request-left::-webkit-scrollbar {
+    width:10px;
+}
+
+.request-left::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+		border-radius: 30px;
+}
+
+.request-left::-webkit-scrollbar-thumb {
+  background-color:#d2d2d2;
+  outline: 1px solid slategrey;
+	border-radius: 5px;
+}
 @media (max-width:800px)
 {
 	.request-container
@@ -1439,8 +1457,7 @@ font-family: 'Pompiere', cursive;
 	max-width:150px;
 	background: #ffff;
 	margin:10px;
-	padding:5px;
-	border-radius: 5px;
+	border-radius: 3px;
 }
 .request-preview-box p
 {
@@ -1461,7 +1478,7 @@ font-family: 'Pompiere', cursive;
 }
 .collection .collection-item.active
 {
-	background:#3f51b5!important;
+	background:#ef5350!important;
 }
 .collection .collection-item.active i
 {
@@ -1503,9 +1520,13 @@ font-family: 'Pompiere', cursive;
 {
 	flex:1;
 }
-.bot-event-right a:hover
+.bot-event-right a:hover i
 {
-	color:#3f51b5!important;
+	color:#ef5350!important;
+}
+.bot-event-right a
+{
+	cursor: pointer;
 }
 .bot-event-left i
 {
@@ -1519,6 +1540,7 @@ font-family: 'Pompiere', cursive;
 .events-wrapper
 {
 	border-radius: 4px!important;
+	background: #ef5350!important;
 }
 
 /*calendar detail preview*/
@@ -1687,10 +1709,11 @@ font-family: 'Pompiere', cursive;
 	font-size: 13px;
 	padding-top: 2px;
 	position: absolute;
-	top: 25px;
+	top: 15px;
 	left:35px;
 	text-align: center;
-	background:#f44336!important;
+	color: #ffebee!important;
+	background:#263238!important;
 }
 .empty-notifs
 {
@@ -2049,7 +2072,7 @@ font-family: 'Pompiere', cursive;
   flex:1;
   display: flex;
   flex-direction: column;
-  padding:30px;
+  padding:30px 0px;
 }
 @media (max-width:709px)
 {
@@ -2109,7 +2132,7 @@ font-family: 'Pompiere', cursive;
 .register-company-container
 {
   min-height: 100vh;
-  padding:25px 80px 55px 80px;
+  padding:25px 0px 55px 0px;
 }
 @media (max-width:600px) {
 	.register-company-container

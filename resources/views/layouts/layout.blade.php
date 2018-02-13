@@ -101,7 +101,7 @@
         <ul id="slide-out" class="side-nav">
           <li>
             <div class="user-view">
-            <div class="background indigo">
+            <div class="background red">
             </div>
             @Auth
             <a><img class="circle" src="/storage/images/{{Auth::user()->avatar}}"></a>

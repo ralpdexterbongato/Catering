@@ -3,7 +3,7 @@
   Schedule Calendar
 @endsection
 @section('content')
-  <calendarschedule></calendarschedule>
+  <calendarschedule :user="{{Auth::user()}}"></calendarschedule>
 @endsection
 @section('javascripts')
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>

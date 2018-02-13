@@ -3,8 +3,8 @@
     <div id="MyList" class="modal modal-fixed-footer" v-if="(((user==null))||((user!=null) &&(user.role==0)))">
        <div class="modal-content">
          <h4 class="modal-titles">Customized package</h4>
-         <p v-if="user!=null"><i class="material-icons indigo-text">info</i> Please click proceed when you are done. Thank you!</p>
-         <p v-else><i class="material-icons indigo-text">info</i> Please Login or Register to proceed.</p>
+         <p v-if="user!=null"><i class="material-icons red-text">info</i> Please click proceed when you are done. Thank you!</p>
+         <p v-else><i class="material-icons red-text">info</i> Please Login or Register to proceed.</p>
          <div class="added-session-table">
            <table>
              <thead>
@@ -27,10 +27,10 @@
        <div class="modal-footer">
 
         <a href="#" v-on:click.prevent class="grey-text text-darken-2" v-if="foodsavedTotalPrice!=null">Total: ₱{{foodsavedTotalPrice}} perhead</a>
-        <a :href="'/request-proceed/'+company.id" v-if="(foodsavedTotalPrice!=null)&&(user!=null)" class="modal-action modal-close waves-effect waves-light btn-flat indigo-text">Proceed</a>
+        <a :href="'/request-proceed/'+company.id" v-if="(foodsavedTotalPrice!=null)&&(user!=null)" class="modal-action modal-close waves-effect waves-light btn-flat red-text">Proceed</a>
         <span v-else-if="user==null">
-          <a href="#" id="login-opener-2" class="modal-action modal-close waves-effect waves-light btn-flat indigo-text">Login</a>
-          <a href="/register" class="modal-action modal-close waves-effect waves-light btn-flat indigo-text">Register</a>
+          <a href="#" id="login-opener-2" class="modal-action modal-close waves-effect waves-light btn-flat red-text">Login</a>
+          <a href="/register" class="modal-action modal-close waves-effect waves-light btn-flat red-text">Register</a>
         </span>
        </div>
      </div>
@@ -67,8 +67,8 @@
         </div>
        </div>
     <div class="modal-footer">
-     <a href="#" v-on:click.prevent class="modal-action modal-close waves-effect waves-indigo btn-flat ">Cancel</a>
-     <a href="#" v-on:click.prevent class="modal-action modal-close waves-effect waves-indigo btn-flat " v-on:click="AddNewProduct()">Save</a>
+     <a href="#" v-on:click.prevent class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
+     <a href="#" v-on:click.prevent class="modal-action modal-close waves-effect waves-red btn-flat " v-on:click="AddNewProduct()">Save</a>
     </div>
     </div>
     <div class="company-cover-hero" v-if="AboutCompany.heroPicture!=null" :style="'background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(/storage/images/'+AboutCompany.heroPicture+')'">
@@ -119,7 +119,7 @@
       <div class="card" v-for="Profilepackage in Packages">
         <div class="card-image">
           <img src="/DesignPic/1.jpg">
-          <a :href="'/package-show/'+Profilepackage.id" class="btn-floating halfway-fab waves-effect waves-light redirect indigo">
+          <a :href="'/package-show/'+Profilepackage.id" class="btn-floating halfway-fab waves-effect waves-light redirect red">
             <i  v-if="((user!=null)&&(user.id==AboutCompany.user_id))" class="material-icons">edit</i>
             <i v-else class="material-icons">remove_red_eye</i>
           </a>
@@ -132,7 +132,7 @@
     </div>
     <ul class="pagination">
         <li class="waves-effect" v-if="paginationPackage.current_page > 1"><a href="#" @click.prevent="changepagePackage(paginationPackage.current_page - 1)"><i class="material-icons">chevron_left</i></a></li>
-        <li v-for="page in pagesNumberPackage" v-bind:class="[ page == isActivePackage ? 'active indigo':'']"><a href="#" @click.prevent="changepagePackage(page)">{{page}}</a></li>
+        <li v-for="page in pagesNumberPackage" v-bind:class="[ page == isActivePackage ? 'active red':'']"><a href="#" @click.prevent="changepagePackage(page)">{{page}}</a></li>
         <li class="waves-effect" v-if="paginationPackage.current_page < paginationPackage.last_page"><a href="#" @click.prevent="changepagePackage(paginationPackage.current_page + 1)"><i class="material-icons">chevron_right</i></a></li>
     </ul>
     </div>
@@ -191,19 +191,19 @@
     </div>
     <ul class="pagination">
         <li class="waves-effect" v-if="paginationProduct.current_page > 1"><a href="#" @click.prevent="changepage(paginationProduct.current_page - 1)"><i class="material-icons">chevron_left</i></a></li>
-        <li v-for="page in pagesNumberFood" v-bind:class="[ page == isActiveFood ? 'active indigo':'']"><a href="#" @click.prevent="changepage(page)">{{page}}</a></li>
+        <li v-for="page in pagesNumberFood" v-bind:class="[ page == isActiveFood ? 'active red':'']"><a href="#" @click.prevent="changepage(page)">{{page}}</a></li>
         <li class="waves-effect" v-if="paginationProduct.current_page < paginationProduct.last_page"><a href="#" @click.prevent="changepage(paginationProduct.current_page + 1)"><i class="material-icons">chevron_right</i></a></li>
     </ul>
     <div class="fixed-action-btn click-to-toggle" v-if="((user!=null)&&(user.id==AboutCompany.user_id))">
-       <a href="#" v-on:click.prevent class="btn-floating btn-large indigo">
+       <a href="#" v-on:click.prevent class="btn-floating btn-large red">
          <i class="material-icons">add</i>
        </a>
        <ul>
-         <li onclick="$('#addproductmodal').modal('open');"><a class="btn-floating indigo darken-1"><i class="material-icons">restaurant</i></a></li>
+         <li onclick="$('#addproductmodal').modal('open');"><a class="btn-floating red darken-1"><i class="material-icons">restaurant</i></a></li>
        </ul>
     </div>
     <div class="fixed-action-btn" v-else-if="(((user==null))||((user!=null) &&(user.role==0)))">
-      <a  onclick="$('#MyList').modal('open');" class="btn-floating btn-large waves-effect waves-light indigo" :class="[CompanySession!=null?'pulse':'']"><i class="material-icons">format_list_numbered</i></a>
+      <a  onclick="$('#MyList').modal('open');" class="btn-floating btn-large waves-effect waves-light red" :class="[CompanySession!=null?'pulse':'']"><i class="material-icons">format_list_numbered</i></a>
     </div>
     <div id="updateProduct" class="modal modal-fixed-footer">
     <div class="modal-content">

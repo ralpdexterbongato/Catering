@@ -11,7 +11,7 @@
         </div>
         <ul class="pagination">
             <li class="waves-effect" v-if="pagination.current_page > 1"><a href="#" @click.prevent="changepage(pagination.current_page - 1)"><i class="material-icons">chevron_left</i></a></li>
-            <li v-for="page in pagesNumber" v-bind:class="[ page == isActive ? 'active indigo':'']"><a href="#" @click.prevent="changepage(page)">{{page}}</a></li>
+            <li v-for="page in pagesNumber" v-bind:class="[ page == isActive ? 'active red':'']"><a href="#" @click.prevent="changepage(page)">{{page}}</a></li>
             <li class="waves-effect" v-if="pagination.current_page < pagination.last_page"><a href="#" @click.prevent="changepage(pagination.current_page + 1)"><i class="material-icons">chevron_right</i></a></li>
         </ul>
       </div>
@@ -37,7 +37,7 @@
             <div v-else-if="user!=null && ownerid[0].user_id == user.id" class="edit-pack-container">
               <input type="text" v-model="NewName =PackageName" value="">
               <span>
-                <i class="material-icons indigo-text" v-on:click.prevent="updateName()">loop</i>
+                <i class="material-icons red-text" v-on:click.prevent="updateName()">loop</i>
                 <i class="material-icons red-text" v-on:click.prevent="packageNameIsActive=false,getDataName()">close</i>
               </span>
             </div>
@@ -53,7 +53,7 @@
             <div v-else-if="user!=null && ownerid[0].user_id == user.id" class="edit-pack-container">
               <input type="text" v-model="NewDesc = PackageDesc" value="">
               <span>
-                <i class="material-icons indigo-text" v-on:click.prevent="updateDesc()">loop</i>
+                <i class="material-icons red-text" v-on:click.prevent="updateDesc()">loop</i>
                 <i class="material-icons red-text" v-on:click.prevent="packageDescIsActive=false,getDataDesc()">close</i>
               </span>
             </div>
@@ -69,7 +69,7 @@
             <span v-else-if="user!=null && ownerid[0].user_id == user.id" class="edit-pack-container">
               <input type="text" v-model="NewPrice = PackagePrice">
               <span>
-                <i class="material-icons indigo-text" v-on:click.prevent="updatePrice()">loop</i>
+                <i class="material-icons red-text" v-on:click.prevent="updatePrice()">loop</i>
                 <i class="material-icons red-text" v-on:click.prevent="packagePriceIsActive=false,getDataPrice()">close</i>
               </span>
             </span>
@@ -114,7 +114,7 @@
       <a href="#" v-on:click.prevent="proceed()" class="btn">Proceed now <i class="material-icons">arrow_forward</i></a>
     </div>
     <div v-else-if="user==null" class="i-want-container">
-      <p>Please <span class="bold indigo-text" id="login-opener-3">Login</span> | <span><a href="/register" class="bold indigo-text">Register</a></span> to proceed.</p>
+      <p>Please <span class="bold red-text" id="login-opener-3">Login</span> | <span><a href="/register" class="bold red-text">Register</a></span> to proceed.</p>
     </div>
   </div>
 </template>
