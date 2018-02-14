@@ -46190,90 +46190,91 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            latCompany: '',
-            lngCompany: '',
-            loading: false,
-            name: '',
-            description: '',
-            show: false,
-            params: {
-                token: '123456798',
-                name: 'avatar'
-            },
-            headers: {
-                smail: '*_~'
-            },
-            imgDataUrl: ''
-        };
+  data: function data() {
+    return {
+      latCompany: '',
+      lngCompany: '',
+      loading: false,
+      name: '',
+      description: '',
+      show: false,
+      params: {
+        token: '123456798',
+        name: 'avatar'
+      },
+      headers: {
+        smail: '*_~'
+      },
+      imgDataUrl: '',
+      ValidationErrors: []
+    };
+  },
+
+  components: {
+    'my-upload': __WEBPACK_IMPORTED_MODULE_1_vue_image_crop_upload___default.a
+  },
+
+  methods: {
+    SaveCompany: function SaveCompany() {
+      var vm = this;
+      this.loading = true;
+
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/company-store', {
+        name: this.name,
+        description: this.description,
+        logo: this.imgDataUrl,
+        lat: $('#lat').val(),
+        lng: $('#lng').val()
+      }).then(function (response) {
+        console.log(response);
+        vm.loading = false;
+        window.location = response.data.redirect;
+      }).catch(function (error) {
+        console.log(error.response.data);
+        vm.loading = false;
+        vm.ValidationErrors = error.response.data.errors;
+        Materialize.toast(error.response.data.message, 4000);
+      });
+    },
+    toggleShow: function toggleShow() {
+      this.show = !this.show;
     },
 
-    components: {
-        'my-upload': __WEBPACK_IMPORTED_MODULE_1_vue_image_crop_upload___default.a
+    /**
+     * crop success
+     *
+     * [param] imgDataUrl
+     * [param] field
+     */
+    cropSuccess: function cropSuccess(imgDataUrl, field) {
+      console.log('-------- crop success --------');
+      this.imgDataUrl = imgDataUrl;
     },
-    methods: {
-        SaveCompany: function SaveCompany() {
-            var vm = this;
-            this.loading = true;
+    cropUploadSuccess: function cropUploadSuccess(jsonData, field) {
+      console.log('-------- upload success --------');
+      console.log(jsonData);
+      console.log('field: ' + field);
+    },
 
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/company-store', {
-                name: this.name,
-                description: this.description,
-                logo: this.imgDataUrl,
-                lat: $('#lat').val(),
-                lng: $('#lng').val()
-            }).then(function (response) {
-                console.log(response);
-                vm.loading = false;
-                window.location = response.data.redirect;
-            }).catch(function (error) {
-                console.log(error);
-                vm.loading = false;
-                swal({
-                    position: 'top-right',
-                    type: 'error',
-                    title: error.response.data.message,
-                    showConfirmButton: true
-                });
-            });
-        },
-        toggleShow: function toggleShow() {
-            this.show = !this.show;
-        },
-
-        /**
-         * crop success
-         *
-         * [param] imgDataUrl
-         * [param] field
-         */
-        cropSuccess: function cropSuccess(imgDataUrl, field) {
-            console.log('-------- crop success --------');
-            this.imgDataUrl = imgDataUrl;
-        },
-        cropUploadSuccess: function cropUploadSuccess(jsonData, field) {
-            console.log('-------- upload success --------');
-            console.log(jsonData);
-            console.log('field: ' + field);
-        },
-
-        /**
-         * upload fail
-         *
-         * [param] status    server api return error status, like 500
-         * [param] field
-         */
-        cropUploadFail: function cropUploadFail(status, field) {
-            console.log('-------- upload fail --------');
-            console.log(status);
-            console.log('field: ' + field);
-        }
+    /**
+     * upload fail
+     *
+     * [param] status    server api return error status, like 500
+     * [param] field
+     */
+    cropUploadFail: function cropUploadFail(status, field) {
+      console.log('-------- upload fail --------');
+      console.log(status);
+      console.log('field: ' + field);
     }
+  }
 });
 
 /***/ }),
@@ -48224,10 +48225,13 @@ var render = function() {
               expression: "name"
             }
           ],
-          staticClass: "validate",
-          attrs: { id: "companyname", type: "text" },
+          class: [_vm.ValidationErrors.name != null ? "invalid" : ""],
+          attrs: { id: "companyname", placeholder: "`", type: "text" },
           domProps: { value: _vm.name },
           on: {
+            keyup: function($event) {
+              _vm.ValidationErrors.name = null
+            },
             input: function($event) {
               if ($event.target.composing) {
                 return
@@ -48237,7 +48241,21 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _c("label", { attrs: { for: "companyname" } }, [_vm._v("Company name")])
+        _c(
+          "label",
+          {
+            staticStyle: { width: "100%" },
+            attrs: {
+              for: "companyname",
+              "data-error": [
+                _vm.ValidationErrors.name != null
+                  ? _vm.ValidationErrors.name[0]
+                  : ""
+              ]
+            }
+          },
+          [_vm._v("Company name")]
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "input-field col s12" }, [
@@ -48251,7 +48269,12 @@ var render = function() {
             }
           ],
           staticClass: "materialize-textarea",
-          attrs: { id: "companydescription", "data-length": "180" },
+          class: [_vm.ValidationErrors.description != null ? "invalid" : ""],
+          attrs: {
+            id: "companydescription",
+            placeholder: "`",
+            "data-length": "191"
+          },
           domProps: { value: _vm.description },
           on: {
             input: function($event) {
@@ -48263,12 +48286,50 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _c("label", { attrs: { for: "companydescription" } }, [
-          _vm._v("Description")
-        ])
+        _c(
+          "label",
+          {
+            staticStyle: { width: "100%" },
+            attrs: {
+              for: "companydescription",
+              "data-error": [
+                _vm.ValidationErrors.description != null
+                  ? _vm.ValidationErrors.description[0]
+                  : "Max is 191"
+              ]
+            }
+          },
+          [_vm._v("Description")]
+        )
       ]),
       _vm._v(" "),
-      _c("input", { attrs: { type: "text", id: "searchgmap" } }),
+      _c("div", { staticClass: "input-field col s12" }, [
+        _c("input", {
+          class: [_vm.ValidationErrors.lat != null ? "invalid" : ""],
+          attrs: { type: "text", placeholder: "`", id: "searchgmap" },
+          on: {
+            keyup: function($event) {
+              _vm.ValidationErrors.lat = null
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "label",
+          {
+            staticStyle: { width: "100%" },
+            attrs: {
+              for: "companyname",
+              "data-error": [
+                _vm.ValidationErrors.lat != null
+                  ? "Please search the location of your company"
+                  : ""
+              ]
+            }
+          },
+          [_vm._v("Search location")]
+        )
+      ]),
       _vm._v(" "),
       _c("div", { attrs: { id: "map-canvas" } }),
       _vm._v(" "),
@@ -50423,7 +50484,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       headers: {
         smail: '*_~'
       },
-      imgDataUrl: ''
+      imgDataUrl: '',
+      ValidationErrors: []
     };
   },
 
@@ -50449,7 +50511,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       }).catch(function (error) {
         console.log(error.response.data);
-        vm.$swal('Oops...', error.response.data.message, 'error');
+        Materialize.toast(error.response.data.message, 4000);
+        vm.ValidationErrors = error.response.data.errors;
       });
     },
     toggleShow: function toggleShow() {
@@ -50518,7 +50581,8 @@ var render = function() {
           }
         ],
         staticClass: "validate",
-        attrs: { id: "fullname", type: "text" },
+        class: [_vm.ValidationErrors.FullName != null ? "invalid" : ""],
+        attrs: { id: "fullname", placeholder: "`", type: "text" },
         domProps: { value: _vm.FullName },
         on: {
           input: function($event) {
@@ -50530,7 +50594,20 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("label", { attrs: { for: "fullname" } }, [_vm._v("Fullname")])
+      _c(
+        "label",
+        {
+          attrs: {
+            for: "fullname",
+            "data-error": [
+              _vm.ValidationErrors.FullName != null
+                ? _vm.ValidationErrors.FullName[0]
+                : ""
+            ]
+          }
+        },
+        [_vm._v("Fullname")]
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "input-field col s6" }, [
@@ -50545,8 +50622,8 @@ var render = function() {
             expression: "Email"
           }
         ],
-        staticClass: "validate",
-        attrs: { id: "email", type: "email" },
+        class: [_vm.ValidationErrors.Email != null ? "invalid" : ""],
+        attrs: { id: "email", placeholder: "`", type: "email" },
         domProps: { value: _vm.Email },
         on: {
           input: function($event) {
@@ -50558,7 +50635,20 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("label", { attrs: { for: "email" } }, [_vm._v("Email")])
+      _c(
+        "label",
+        {
+          attrs: {
+            for: "email",
+            "data-error": [
+              _vm.ValidationErrors.Email != null
+                ? _vm.ValidationErrors.Email[0]
+                : ""
+            ]
+          }
+        },
+        [_vm._v("Email")]
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "input-field col s6" }, [
@@ -50573,8 +50663,8 @@ var render = function() {
             expression: "UserName"
           }
         ],
-        staticClass: "validate",
-        attrs: { id: "username", type: "text" },
+        class: [_vm.ValidationErrors.UserName != null ? "invalid" : ""],
+        attrs: { id: "username", placeholder: "`", type: "text" },
         domProps: { value: _vm.UserName },
         on: {
           input: function($event) {
@@ -50586,7 +50676,20 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("label", { attrs: { for: "username" } }, [_vm._v("Username")])
+      _c(
+        "label",
+        {
+          attrs: {
+            for: "username",
+            "data-error": [
+              _vm.ValidationErrors.UserName != null
+                ? _vm.ValidationErrors.UserName[0]
+                : ""
+            ]
+          }
+        },
+        [_vm._v("Username")]
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "input-field col s6" }, [
@@ -50601,8 +50704,8 @@ var render = function() {
             expression: "Password"
           }
         ],
-        staticClass: "validate",
-        attrs: { id: "pword", type: "password" },
+        class: [_vm.ValidationErrors.password != null ? "invalid" : ""],
+        attrs: { id: "pword", placeholder: "`", type: "password" },
         domProps: { value: _vm.Password },
         on: {
           input: function($event) {
@@ -50614,7 +50717,20 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("label", { attrs: { for: "pword" } }, [_vm._v("Password")])
+      _c(
+        "label",
+        {
+          attrs: {
+            for: "pword",
+            "data-error": [
+              _vm.ValidationErrors.password != null
+                ? _vm.ValidationErrors.password[0]
+                : ""
+            ]
+          }
+        },
+        [_vm._v("Password")]
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "input-field col s6" }, [
@@ -50629,8 +50745,8 @@ var render = function() {
             expression: "PasswordConfirmation"
           }
         ],
-        staticClass: "validate",
-        attrs: { id: "pword-confirm", type: "password" },
+        class: [_vm.ValidationErrors.password != null ? "invalid" : ""],
+        attrs: { id: "pword-confirm", placeholder: "`", type: "password" },
         domProps: { value: _vm.PasswordConfirmation },
         on: {
           input: function($event) {
@@ -50642,9 +50758,20 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("label", { attrs: { for: "pword-confirm" } }, [
-        _vm._v("Confirm-Password")
-      ])
+      _c(
+        "label",
+        {
+          attrs: {
+            for: "pword-confirm",
+            "data-error": [
+              _vm.ValidationErrors.password != null
+                ? _vm.ValidationErrors.password[0]
+                : ""
+            ]
+          }
+        },
+        [_vm._v("Confirm-Password")]
+      )
     ]),
     _vm._v(" "),
     _c(
@@ -50774,7 +50901,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).then(function (response) {
         console.log(response);
         if (response.data.error != null) {
-          vm.sweetalert(response.data.error);
+          Materialize.toast(response.data.error, 4000);
         } else {
           window.location.href = window.location.href;
         }
@@ -51470,6 +51597,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log(error);
       });
     },
+    formatPrice: function formatPrice(value) {
+      var val = (value / 1).toFixed(2).replace('.', ',');
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    },
     showAddedSession: function showAddedSession() {
       var vm = this;
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/mylist-session-show/' + this.company.id).then(function (response) {
@@ -51988,7 +52119,7 @@ var render = function() {
                       [
                         _vm._v(
                           "Total: ₱" +
-                            _vm._s(_vm.foodsavedTotalPrice) +
+                            _vm._s(_vm.foodsavedTotalPrice.toLocaleString()) +
                             " perhead"
                         )
                       ]
@@ -53683,6 +53814,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -53694,7 +53829,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       colorSelected: [],
       messageForm: '',
       confirm: false,
-      dineSelected: 0
+      dineSelected: 0,
+      submitErrors: []
     };
   },
 
@@ -53720,23 +53856,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         timeStart: $('#timeStart').val(),
         dine: this.dineSelected
       }).then(function (response) {
+        swal.close();
         console.log(response);
-        swal({
-          position: 'top-right',
-          type: 'success',
-          title: 'Request sent!',
-          showConfirmButton: true
-        });
-        window.location.href = response.data.redirect;
+        if (response.data.error != null) {
+          Materialize.toast(response.data.error, 4000);
+        } else {
+          Materialize.toast('Request successfully sent!', 4000);
+          window.location.href = response.data.redirect;
+        }
       }).catch(function (error) {
         swal.close();
-        swal({
-          position: 'top-right',
-          type: 'error',
-          title: error.response.data.message,
-          showConfirmButton: true
-        });
-        console.log(error);
+        Materialize.toast(error.response.data.message, 4000);
+        console.log(error.response.data);
+        vm.submitErrors = error.response.data.errors;
       });
     }
   }
@@ -53772,14 +53904,17 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(food.foodName))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v("₱" + _vm._s(food.foodPrice))])
+                    _vm.rules[0].show_prices == 0
+                      ? _c("td", [_vm._v("₱" + _vm._s(food.foodPrice))])
+                      : _vm._e()
                   ])
                 }),
                 _vm._v(" "),
                 _c("tr", [
                   _c("td", [
+                    _vm._v("TOTAL PERHEAD "),
                     _c("span", { staticClass: "bold" }, [
-                      _vm._v("Total perhead: ₱" + _vm._s(_vm.total.total))
+                      _vm._v(" ₱ " + _vm._s(_vm.total.total.toLocaleString()))
                     ])
                   ])
                 ])
@@ -53812,6 +53947,234 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "proceed-forms" }, [
       _c("div", { staticClass: "proceed-form-left" }, [
+        _c("div", { staticClass: "input-field col s6" }, [
+          _c("i", { staticClass: "material-icons prefix" }, [_vm._v("people")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.VisitorForm,
+                expression: "VisitorForm"
+              }
+            ],
+            class: [_vm.submitErrors.visitor != null ? "invalid" : ""],
+            attrs: {
+              id: "icon_prefix",
+              placeholder: "visitor",
+              type: "number",
+              step: "1",
+              max: _vm.rules[0].maximum,
+              min: _vm.rules[0].minimum
+            },
+            domProps: { value: _vm.VisitorForm },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.VisitorForm = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              attrs: {
+                for: "icon_prefix",
+                "data-error": [
+                  _vm.submitErrors.visitor != null
+                    ? _vm.submitErrors.visitor[0]
+                    : ""
+                ]
+              }
+            },
+            [_vm._v("Expected number of visitors")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-field col s6" }, [
+          _c("i", { staticClass: "material-icons prefix" }, [
+            _vm._v("date_range")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "datepicker",
+            class: [_vm.submitErrors.dateStart != null ? "invalid" : ""],
+            attrs: { type: "text", placeholder: "date", id: "dateStart" }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              attrs: {
+                for: "dateStart",
+                "data-error": [
+                  _vm.submitErrors.dateStart != null
+                    ? _vm.submitErrors.dateStart[0]
+                    : ""
+                ]
+              }
+            },
+            [_vm._v("Eating date")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-field col s6" }, [
+          _c("i", { staticClass: "material-icons prefix" }, [
+            _vm._v("access_time")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "timepicker",
+            class: [_vm.submitErrors.timeStart != null ? "invalid" : ""],
+            attrs: { type: "text", placeholder: "time", id: "timeStart" }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              attrs: {
+                for: "timeStart",
+                "data-error": [
+                  _vm.submitErrors.timeStart != null
+                    ? _vm.submitErrors.timeStart[0]
+                    : ""
+                ]
+              }
+            },
+            [_vm._v("Eating time")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-field col s6" }, [
+          _c("i", { staticClass: "material-icons prefix" }, [_vm._v("event")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.EventForm,
+                expression: "EventForm"
+              }
+            ],
+            class: [_vm.submitErrors.eventName != null ? "invalid" : ""],
+            attrs: { type: "text", placeholder: "event" },
+            domProps: { value: _vm.EventForm },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.EventForm = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              attrs: {
+                "data-error": [
+                  _vm.submitErrors.eventName != null
+                    ? _vm.submitErrors.eventName[0]
+                    : ""
+                ]
+              }
+            },
+            [_vm._v("Event")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-field col s6" }, [
+          _c("i", { staticClass: "material-icons prefix" }, [
+            _vm._v("contact_phone")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.ContactForm,
+                expression: "ContactForm"
+              }
+            ],
+            class: [_vm.submitErrors.contact != null ? "invalid" : ""],
+            attrs: { type: "text", placeholder: "number" },
+            domProps: { value: _vm.ContactForm },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.ContactForm = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              attrs: {
+                "data-error": [
+                  _vm.submitErrors.contact != null
+                    ? _vm.submitErrors.contact[0]
+                    : ""
+                ]
+              }
+            },
+            [_vm._v("Contact")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-field col s6" }, [
+          _c("i", { staticClass: "material-icons prefix" }, [
+            _vm._v("mode_edit")
+          ]),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.messageForm,
+                expression: "messageForm"
+              }
+            ],
+            staticClass: "materialize-textarea",
+            class: [_vm.submitErrors.message != null ? "invalid" : ""],
+            attrs: { id: "textareamessage" },
+            domProps: { value: _vm.messageForm },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.messageForm = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              attrs: {
+                for: "textareamessage",
+                "data-error": [
+                  _vm.submitErrors.message != null
+                    ? _vm.submitErrors.message[0]
+                    : ""
+                ]
+              }
+            },
+            [_vm._v("message")]
+          )
+        ]),
+        _vm._v(" "),
         _c(
           "i",
           {
@@ -53873,136 +54236,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "input-field col s6" }, [
-          _c("i", { staticClass: "material-icons prefix" }, [_vm._v("people")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.VisitorForm,
-                expression: "VisitorForm"
-              }
-            ],
-            staticClass: "validate",
-            attrs: {
-              id: "icon_prefix",
-              placeholder: "visitor",
-              type: "number",
-              step: "1",
-              max: _vm.rules[0].maximum,
-              min: _vm.rules[0].minimum
-            },
-            domProps: { value: _vm.VisitorForm },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.VisitorForm = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c("label", { attrs: { for: "icon_prefix" } }, [
-            _vm._v("Expected number of visitors")
-          ])
-        ]),
-        _vm._v(" "),
         _vm._m(2, false, false),
-        _vm._v(" "),
-        _vm._m(3, false, false),
-        _vm._v(" "),
-        _c("div", { staticClass: "input-field col s6" }, [
-          _c("i", { staticClass: "material-icons prefix" }, [_vm._v("event")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.EventForm,
-                expression: "EventForm"
-              }
-            ],
-            attrs: { type: "text", placeholder: "event" },
-            domProps: { value: _vm.EventForm },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.EventForm = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c("label", [_vm._v("Event")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "input-field col s6" }, [
-          _c("i", { staticClass: "material-icons prefix" }, [
-            _vm._v("contact_phone")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.ContactForm,
-                expression: "ContactForm"
-              }
-            ],
-            attrs: { type: "text", placeholder: "number" },
-            domProps: { value: _vm.ContactForm },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.ContactForm = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c("label", [_vm._v("Contact")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "input-field col s6" }, [
-          _c("i", { staticClass: "material-icons prefix" }, [
-            _vm._v("mode_edit")
-          ]),
-          _vm._v(" "),
-          _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.messageForm,
-                expression: "messageForm"
-              }
-            ],
-            staticClass: "materialize-textarea",
-            attrs: { id: "icon_prefix2", "data-length": "191" },
-            domProps: { value: _vm.messageForm },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.messageForm = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c("label", { attrs: { for: "icon_prefix2" } }, [
-            _vm._v("Any message?")
-          ])
-        ]),
-        _vm._v(" "),
-        _vm._m(4, false, false),
         _vm._v(" "),
         _c("p", { staticClass: "theme-pick-label" }, [
           _vm._v("Please pick your theme color")
@@ -54057,52 +54291,6 @@ var render = function() {
               _c("h6", { style: "background-color:" + color.hex })
             ])
           })
-        ),
-        _vm._v(" "),
-        _c(
-          "form",
-          { staticClass: "confirm-submit-container", attrs: { action: "#" } },
-          [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.confirm,
-                  expression: "confirm"
-                }
-              ],
-              attrs: { id: "confirm-submit", type: "checkbox" },
-              domProps: {
-                checked: Array.isArray(_vm.confirm)
-                  ? _vm._i(_vm.confirm, null) > -1
-                  : _vm.confirm
-              },
-              on: {
-                change: function($event) {
-                  var $$a = _vm.confirm,
-                    $$el = $event.target,
-                    $$c = $$el.checked ? true : false
-                  if (Array.isArray($$a)) {
-                    var $$v = null,
-                      $$i = _vm._i($$a, $$v)
-                    if ($$el.checked) {
-                      $$i < 0 && (_vm.confirm = $$a.concat([$$v]))
-                    } else {
-                      $$i > -1 &&
-                        (_vm.confirm = $$a
-                          .slice(0, $$i)
-                          .concat($$a.slice($$i + 1)))
-                    }
-                  } else {
-                    _vm.confirm = $$c
-                  }
-                }
-              }
-            }),
-            _vm._v(" "),
-            _vm._m(5, false, false)
-          ]
         )
       ]),
       _vm._v(" "),
@@ -54113,12 +54301,79 @@ var render = function() {
           class: [_vm.dineSelected == 1 ? "active" : ""]
         },
         [
-          _vm._m(6, false, false),
+          _vm._m(3, false, false),
           _vm._v(" "),
-          _c("div", { attrs: { id: "customer-location" } })
+          _c("div", { attrs: { id: "customer-location" } }),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-field col s6" }, [
+            _c("input", {
+              class: [_vm.submitErrors.lat != null ? "invalid" : ""],
+              attrs: {
+                placeholder: "Location search",
+                type: "text",
+                id: "searchgmap"
+              }
+            }),
+            _vm._v(" "),
+            _c("label", {
+              staticStyle: { width: "100%" },
+              attrs: {
+                for: "searchgmap",
+                "data-error": [
+                  _vm.submitErrors.lat != null
+                    ? "Please mark the exact location"
+                    : ""
+                ]
+              }
+            })
+          ])
         ]
       )
     ]),
+    _vm._v(" "),
+    _c(
+      "form",
+      { staticClass: "confirm-submit-container", attrs: { action: "#" } },
+      [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.confirm,
+              expression: "confirm"
+            }
+          ],
+          attrs: { id: "confirm-submit", type: "checkbox" },
+          domProps: {
+            checked: Array.isArray(_vm.confirm)
+              ? _vm._i(_vm.confirm, null) > -1
+              : _vm.confirm
+          },
+          on: {
+            change: function($event) {
+              var $$a = _vm.confirm,
+                $$el = $event.target,
+                $$c = $$el.checked ? true : false
+              if (Array.isArray($$a)) {
+                var $$v = null,
+                  $$i = _vm._i($$a, $$v)
+                if ($$el.checked) {
+                  $$i < 0 && (_vm.confirm = $$a.concat([$$v]))
+                } else {
+                  $$i > -1 &&
+                    (_vm.confirm = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+                }
+              } else {
+                _vm.confirm = $$c
+              }
+            }
+          }
+        }),
+        _vm._v(" "),
+        _vm._m(4, false, false)
+      ]
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "submit-btn-container" }, [
       _c(
@@ -54147,45 +54402,17 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [_c("tr", [_c("th", [_vm._v("Selected products")])])])
+    return _c("thead", [
+      _c("tr", { staticClass: "selected-prod-text" }, [
+        _c("th", [_vm._v("Selected products")])
+      ])
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", [_c("tr", [_c("th", [_vm._v("PACKAGE SELECTED")])])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-field col s6" }, [
-      _c("i", { staticClass: "material-icons prefix" }, [_vm._v("date_range")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "datepicker",
-        attrs: { type: "text", placeholder: "date", id: "dateStart" }
-      }),
-      _vm._v(" "),
-      _c("label", [_vm._v("Eating date")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-field col s6" }, [
-      _c("i", { staticClass: "material-icons prefix" }, [
-        _vm._v("access_time")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "timepicker",
-        attrs: { type: "text", placeholder: "time", id: "timeStart" }
-      }),
-      _vm._v(" "),
-      _c("label", [_vm._v("Eating time")])
-    ])
   },
   function() {
     var _vm = this
@@ -54201,10 +54428,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "confirm-submit" } }, [
+    return _c("div", { staticClass: "held-place-note" }, [
+      _c("i", { staticClass: "material-icons blue-text" }, [_vm._v("info")]),
+      _vm._v(" "),
       _c("p", [
         _vm._v(
-          " I have reviewed already my inputs before submition & it looks good."
+          "Please drag the marker where do you want the catering to be held if you want it outside."
         )
       ])
     ])
@@ -54213,12 +54442,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "held-place-note" }, [
-      _c("i", { staticClass: "material-icons blue-text" }, [_vm._v("info")]),
-      _vm._v(" "),
+    return _c("label", { attrs: { for: "confirm-submit" } }, [
       _c("p", [
         _vm._v(
-          "Please drag the marker where do you want the catering to be held. it was marked on our restaurant by default"
+          " I have reviewed already my inputs before submition & it looks good."
         )
       ])
     ])
@@ -55522,23 +55749,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         newMax: this.currentMaximum,
         minimum: this.currentMinimum.minimum
       }).then(function (response) {
-        swal({
-          position: 'top-right',
-          type: 'success',
-          title: 'Successfully updated!',
-          showConfirmButton: true
-        });
+        Materialize.toast('Successfully updated', 4000);
         vm.fetchMaximum();
         console.log(response);
       }).catch(function (error) {
         console.log(error);
-        swal({
-          position: 'top-right',
-          type: 'error',
-          title: 'Oops',
-          text: error.response.data.message,
-          showConfirmButton: true
-        });
+        Materialize.toast(error.response.data.message, 4000);
         vm.fetchMaximum();
       });
     },
@@ -55558,21 +55774,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).then(function (response) {
         console.log(response);
         vm.fetchPricePrivacy();
-        swal({
-          position: 'top-right',
-          type: 'success',
-          title: 'Successfully updated!',
-          showConfirmButton: true
-        });
+        Materialize.toast('Successfully updated', 4000);
       }).catch(function (error) {
         console.log(error);
-        swal({
-          position: 'top-right',
-          type: 'error',
-          title: 'oopps!',
-          text: error.response.data.message,
-          showConfirmButton: true
-        });
+        Materialize.toast(error.response.data.message, 4000);
         vm.fetchPricePrivacy();
       });
     },
@@ -55630,20 +55835,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log(response);
         vm.fetchName();
         vm.NewName = '';
-        swal({
-          position: 'top-right',
-          type: 'success',
-          title: 'Successfully updated!',
-          showConfirmButton: true
-        });
+        Materialize.toast('Successfully updated', 4000);
       }).catch(function (error) {
         console.log(error);
-        swal({
-          position: 'top-right',
-          type: 'error',
-          title: error.response.data.message,
-          showConfirmButton: true
-        });
+        Materialize.toast(error.response.data.message, 4000);
         vm.fetchName();
       });
     },
@@ -55655,20 +55850,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log(response);
         vm.fetchDescription();
         vm.NewDescription = '';
-        swal({
-          position: 'top-right',
-          type: 'success',
-          title: 'Successfully updated!',
-          showConfirmButton: true
-        });
+        Materialize.toast('Successfully updated', 4000);
       }).catch(function (error) {
         console.log(error);
-        swal({
-          position: 'top-right',
-          type: 'error',
-          title: error.response.data.message,
-          showConfirmButton: true
-        });
+        Materialize.toast(error.response.data.message, 4000);
         vm.fetchDescription();
       });
     },
@@ -55680,20 +55865,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log(response);
         vm.fetchMinimumVisitor();
         vm.NewMinimum = '';
-        swal({
-          position: 'top-right',
-          type: 'success',
-          title: 'Successfully updated!',
-          showConfirmButton: true
-        });
+        Materialize.toast('Successfully updated', 4000);
       }).catch(function (error) {
         console.log(error);
-        swal({
-          position: 'top-right',
-          type: 'error',
-          title: error.response.data.message,
-          showConfirmButton: true
-        });
+        Materialize.toast(error.response.data.message, 4000);
         vm.fetchMinimumVisitor();
       });
     },
@@ -55705,20 +55880,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log(response);
         vm.fetchLogo();
         vm.imgDataUrl = '';
-        swal({
-          position: 'top-right',
-          type: 'success',
-          title: 'Successfully updated!',
-          showConfirmButton: true
-        });
+        Materialize.toast('Successfully updated', 4000);
       }).catch(function (error) {
         console.log(error);
-        swal({
-          position: 'top-right',
-          type: 'error',
-          title: error.response.data.message,
-          showConfirmButton: true
-        });
+        Materialize.toast(error.response.data.message, 4000);
       });
     },
     updateCover: function updateCover() {
@@ -55729,20 +55894,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log(response);
         vm.fetchCover();
         vm.imgDataUrlCover = '';
-        swal({
-          position: 'top-right',
-          type: 'success',
-          title: 'Successfully updated!',
-          showConfirmButton: true
-        });
+        Materialize.toast('Successfully updated', 4000);
       }).catch(function (error) {
         console.log(error);
-        swal({
-          position: 'top-right',
-          type: 'error',
-          title: error.response.data.message,
-          showConfirmButton: true
-        });
+        Materialize.toast(error.response.data.message, 4000);
       });
     },
     addColor: function addColor() {
@@ -55752,41 +55907,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).then(function (response) {
         console.log(response);
         vm.fetchColors();
-        swal({
-          position: 'top-right',
-          type: 'success',
-          title: 'Successfully added!',
-          showConfirmButton: true
-        });
+        Materialize.toast('Added successfully', 4000);
       }).catch(function (error) {
         console.log(error);
-        swal({
-          position: 'top-right',
-          type: 'error',
-          title: error.response.data.message,
-          showConfirmButton: true
-        });
+        Materialize.toast(error.response.data.message, 4000);
       });
     },
     DeleteColor: function DeleteColor(id) {
       var vm = this;
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete('/comp-settings-color-remove/' + id).then(function (response) {
         console.log(response);
-        swal({
-          position: 'top-right',
-          type: 'success',
-          title: 'Successfully removed!',
-          showConfirmButton: true
-        });
+        Materialize.toast('removed successfully', 4000);
         vm.fetchColors();
       }).catch(function (error) {
         console.log(error);
-        swal({
-          position: 'top-right',
-          type: 'error',
-          title: error.response.data.message,
-          showConfirmButton: true
-        });
+        Materialize.toast(error.response.data.message, 4000);
       });
     },
     updateMap: function updateMap() {
@@ -55796,20 +55931,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         lng: $('#LngUpdate').val()
       }).then(function (response) {
         console.log(response);
-        swal({
-          position: 'top-right',
-          type: 'success',
-          title: 'Location updated!',
-          showConfirmButton: true
-        });
+        Materialize.toast('Location updated', 4000);
       }).catch(function (error) {
         console.log(error);
-        swal({
-          position: 'top-right',
-          type: 'error',
-          title: error.response.data.message,
-          showConfirmButton: true
-        });
+        Materialize.toast(error.response.data.message, 4000);
       });
     },
     cropSuccess: function cropSuccess(imgDataUrl, field) {
@@ -58868,7 +58993,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       prodSelected: [],
       PackName: '',
       PackDesc: '',
-      PackPrice: ''
+      PackPrice: '',
+      ValidationErrors: []
     };
   },
 
@@ -58930,38 +59056,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         products: this.prodSelected
       }).then(function (response) {
         if (response.data.error != null) {
-          swal({
-            position: 'top-right',
-            type: 'error',
-            title: 'Opps!',
-            text: response.data.error,
-            showConfirmButton: false,
-            timer: 1500
-          });
+          Materialize.toast(response.data.error, 4000);
         } else {
-          swal({
-            position: 'top-right',
-            type: 'success',
-            title: 'Success',
-            text: response.data.success,
-            showConfirmButton: false,
-            timer: 1500
-          });
+          Materialize.toast(response.data.success, 4000);
           vm.PackName = '';
           vm.PackDesc = '';
           vm.PackPrice = '';
           vm.prodSelected = [];
         }
       }).catch(function (error) {
-        console.log(error);
-        swal({
-          position: 'top-right',
-          type: 'error',
-          title: 'Ooops',
-          text: error.response.data.message,
-          showConfirmButton: false,
-          timer: 1500
-        });
+        console.log(error.response.data.errors);
+        Materialize.toast(error.response.data.message, 4000);
+        vm.ValidationErrors = error.response.data.errors;
       });
     }
   },
@@ -59026,7 +59132,6 @@ var render = function() {
                     expression: "SearchProd"
                   }
                 ],
-                staticClass: "validate",
                 attrs: { id: "search", type: "text" },
                 domProps: { value: _vm.SearchProd },
                 on: {
@@ -59188,10 +59293,13 @@ var render = function() {
                   expression: "PackName"
                 }
               ],
-              staticClass: "validate",
-              attrs: { id: "Name", type: "text" },
+              class: [_vm.ValidationErrors.name != null ? "invalid" : ""],
+              attrs: { id: "Name", placeholder: "`", type: "text" },
               domProps: { value: _vm.PackName },
               on: {
+                keyup: function($event) {
+                  _vm.ValidationErrors.name = null
+                },
                 input: function($event) {
                   if ($event.target.composing) {
                     return
@@ -59201,7 +59309,20 @@ var render = function() {
               }
             }),
             _vm._v(" "),
-            _c("label", { attrs: { for: "Name" } }, [_vm._v("Package name")])
+            _c(
+              "label",
+              {
+                attrs: {
+                  for: "Name",
+                  "data-error": [
+                    _vm.ValidationErrors.name != null
+                      ? _vm.ValidationErrors.name[0]
+                      : ""
+                  ]
+                }
+              },
+              [_vm._v("Package name")]
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "input-field col s12" }, [
@@ -59214,10 +59335,13 @@ var render = function() {
                   expression: "PackPrice"
                 }
               ],
-              staticClass: "validate",
-              attrs: { id: "price", type: "number" },
+              class: [_vm.ValidationErrors.price != null ? "invalid" : ""],
+              attrs: { id: "price", placeholder: "`", type: "number" },
               domProps: { value: _vm.PackPrice },
               on: {
+                keyup: function($event) {
+                  _vm.ValidationErrors.price = null
+                },
                 input: function($event) {
                   if ($event.target.composing) {
                     return
@@ -59227,7 +59351,20 @@ var render = function() {
               }
             }),
             _vm._v(" "),
-            _c("label", { attrs: { for: "price" } }, [_vm._v("Price per head")])
+            _c(
+              "label",
+              {
+                attrs: {
+                  for: "price",
+                  "data-error": [
+                    _vm.ValidationErrors.price != null
+                      ? _vm.ValidationErrors.price[0]
+                      : ""
+                  ]
+                }
+              },
+              [_vm._v("Price per head")]
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "input-field col s12" }, [
@@ -59241,9 +59378,13 @@ var render = function() {
                 }
               ],
               staticClass: "materialize-textarea",
-              attrs: { id: "Description" },
+              class: [_vm.ValidationErrors.descript != null ? "invalid" : ""],
+              attrs: { id: "Description", placeholder: "`" },
               domProps: { value: _vm.PackDesc },
               on: {
+                keyup: function($event) {
+                  _vm.ValidationErrors.descript = null
+                },
                 input: function($event) {
                   if ($event.target.composing) {
                     return
@@ -59253,9 +59394,20 @@ var render = function() {
               }
             }),
             _vm._v(" "),
-            _c("label", { attrs: { for: "Description" } }, [
-              _vm._v("Description")
-            ])
+            _c(
+              "label",
+              {
+                attrs: {
+                  for: "Description",
+                  "data-error": [
+                    _vm.ValidationErrors.descript != null
+                      ? _vm.ValidationErrors.descript[0]
+                      : ""
+                  ]
+                }
+              },
+              [_vm._v("Description")]
+            )
           ]),
           _vm._v(" "),
           _c(
@@ -60776,28 +60928,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     updateName: function updateName() {
       var vm = this;
       axios.put('/update-name', {
-        newname: this.NewName
+        newName: this.NewName
       }).then(function (response) {
         console.log(response);
         vm.currentUser();
-        swal({
-          position: 'center',
-          type: 'success',
-          title: 'Success',
-          text: 'Updated successfully',
-          showConfirmButton: false,
-          timer: 1500
-        });
+        Materialize.toast('Updated successfully', 4000);
       }).catch(function (error) {
         console.log(error);
-        swal({
-          position: 'center',
-          type: 'error',
-          title: 'Oops!',
-          text: error.response.data.message,
-          showConfirmButton: false,
-          timer: 1500
-        });
+        Materialize.toast(error.response.data.errors.newName[0], 4000);
       });
     },
     updateUserName: function updateUserName() {
@@ -60806,25 +60944,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         username: this.NewUserName
       }).then(function (response) {
         console.log(response);
+        Materialize.toast('Username updated', 4000);
         vm.currentUser();
-        swal({
-          position: 'center',
-          type: 'success',
-          title: 'Success',
-          text: 'Updated successfully',
-          showConfirmButton: false,
-          timer: 1500
-        });
       }).catch(function (error) {
         console.log(error);
-        swal({
-          position: 'center',
-          type: 'error',
-          title: 'Oops!',
-          text: error.response.data.message,
-          showConfirmButton: false,
-          timer: 1500
-        });
+        Materialize.toast(error.response.data.errors.username[0], 4000);
       });
     },
     updateEmail: function updateEmail() {
@@ -60834,37 +60958,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         emailConfirm: this.NewEmailConfirm
       }).then(function (response) {
         if (response.data.error != null) {
-          swal({
-            position: 'center',
-            type: 'error',
-            title: 'Oops!',
-            text: response.data.error,
-            showConfirmButton: false,
-            timer: 1500
-          });
+          Materialize.toast(response.data.error, 4000);
         } else {
           console.log(response);
           vm.currentUser();
-          swal({
-            position: 'center',
-            type: 'success',
-            title: 'Success',
-            text: 'Updated successfully',
-            showConfirmButton: false,
-            timer: 1500
-          });
+          Materialize.toast('Email updated');
           window.location.href = window.location.href;
         }
       }).catch(function (error) {
         console.log(error);
-        swal({
-          position: 'center',
-          type: 'error',
-          title: 'Oops!',
-          text: error.response.data.message,
-          showConfirmButton: false,
-          timer: 1500
-        });
+        if (error.response.data.errors.email != null) {
+          Materialize.toast(error.response.data.errors.email[0], 4000);
+        }
+        if (error.response.data.errors.emailConfirm != null) {
+          Materialize.toast(error.response.data.errors.emailConfirm[0], 4000);
+        }
       });
     },
     updateUserPass: function updateUserPass() {
@@ -60876,35 +60984,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).then(function (response) {
         console.log(response);
         if (response.data.error != null) {
-          swal({
-            position: 'center',
-            type: 'error',
-            title: 'Oops',
-            text: response.data.error,
-            showConfirmButton: false,
-            timer: 1500
-          });
+          Materialize.toast(response.data.error, 4000);
         } else {
           vm.currentUser();
-          swal({
-            position: 'center',
-            type: 'success',
-            title: 'Success',
-            text: 'Updated successfully',
-            showConfirmButton: false,
-            timer: 1500
-          });
+          Materialize.toast("Password updated", 4000);
         }
       }).catch(function (error) {
         console.log(error);
-        swal({
-          position: 'center',
-          type: 'error',
-          title: 'Oops!',
-          text: error.response.data.message,
-          showConfirmButton: false,
-          timer: 1500
-        });
+        if (error.response.data.errors.password != null) {
+          Materialize.toast(error.response.data.errors.password[0], 4000);
+        }
+        if (error.response.data.errors.current != null) {
+          Materialize.toast(error.response.data.errors.password[0], 4000);
+        }
       });
     }
   }
@@ -61257,7 +61349,7 @@ var render = function() {
                 "a",
                 {
                   staticClass:
-                    "modal-action modal-close waves-effect waves-green btn-flat ",
+                    "modal-action  waves-effect waves-green btn-flat ",
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
@@ -61275,7 +61367,7 @@ var render = function() {
                 "a",
                 {
                   staticClass:
-                    "modal-action modal-close waves-effect waves-green btn-flat ",
+                    "modal-action  waves-effect waves-green btn-flat ",
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
@@ -61293,7 +61385,7 @@ var render = function() {
                 "a",
                 {
                   staticClass:
-                    "modal-action modal-close waves-effect waves-green btn-flat ",
+                    "modal-action  waves-effect waves-green btn-flat ",
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
@@ -61311,7 +61403,7 @@ var render = function() {
                 "a",
                 {
                   staticClass:
-                    "modal-action modal-close waves-effect waves-green btn-flat ",
+                    "modal-action  waves-effect waves-green btn-flat ",
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {

@@ -49,7 +49,11 @@ table {
 }
 .main-content-container
 {
-	padding:30px 0px;
+	padding:0px 0px 30px 0px;
+}
+body {
+	max-width: 1920px;
+	margin:0 auto!important;
 }
 .valid
 {
@@ -103,6 +107,10 @@ html
 .picker__date-display
 {
 	background: #F44336;
+}
+.input-field label
+{
+	width: 100%;
 }
 .modal-titles
 {
@@ -175,10 +183,6 @@ table.highlight>tbody>tr:hover
 {
 	color: #21252B!important
 }
-.head-modal-burger i
-{
-	font-size: 25px;
-}
 .login-title-head
 {
 	position: relative;
@@ -196,14 +200,14 @@ table.highlight>tbody>tr:hover
 {
   height: 100vh;
   max-width:600px;
-  padding:30px 100px;
+  padding:30px 80px;
   margin: 0 auto;
 }
-@media (max-width:676px)
+@media (max-width:800px)
 {
 	.login-container
 	{
-		padding: 30px 40px!important;
+		padding: 30px 0px!important;
 		margin-left: 20px;
 		margin-right: 20px;
 	}
@@ -214,9 +218,31 @@ table.highlight>tbody>tr:hover
   margin-top: 30px;
   justify-content:space-between;
 }
+@media (max-width:739px)
+{
+	.login-btn-container
+	{
+		flex-direction: column;
+	}
+	.login-btn-container button
+	{
+		margin-top: 20px;
+	}
+}
 .login-title-head
 {
   margin-bottom: 100px;
+}
+#login-modal .login-container
+{
+	padding:20px 80!important;
+}
+@media (max-width:800px)
+{
+	#login-modal .login-container
+	{
+		padding:20px 20px!important;
+	}
 }
 #login-modal
 {
@@ -263,17 +289,11 @@ table.highlight>tbody>tr:hover
 	-webkit-box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
   box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
 }
-@media (max-width:1200px)
-{
-	.header-container
-	{
-		padding:0px 20px;
-	}
-}
+
 .content-container
 {
 	min-height: 100vh;
-	padding:20px;
+	padding:20px 20px;
 }
 nav
 {
@@ -327,7 +347,7 @@ nav
 	.head-modal-burger
 	{
 		display: flex;
-		margin-top: 30px;
+		margin-top:10px;
 	}
 
 }
@@ -706,11 +726,6 @@ transform: scale(1.0);
 .menu-left-buttons
 {
 	display: flex;
-	padding:5px;
-}
-.menu-right-buttons
-{
-	padding:5px;
 }
 .menu-left-buttons h5
 {
@@ -750,23 +765,30 @@ transform: scale(1.0);
 .verification-input
 {
 	background:transparent;
-	padding:60px 80px 0px 0px;
+	padding:5px 0px;
 	width: 100%;
+	margin-bottom: 25px;
 	display: flex;
-}
-@media (max-width:800px)
-{
-	.verification-input
-	{
-		padding:60px 5px;
-
-	}
 }
 .verification-input i
 {
 	color:#ef5350;
 }
-
+@media (max-width:720px)
+{
+	.verification-input
+	{
+		font-size: 13px;
+		padding:5px 0;
+	}
+}
+@media (max-width:500px)
+{
+	.verification-input i
+	{
+		display: none;
+	}
+}
 /*company profile*/
 .company-cover-hero:hover >.company-cover-edit
 {
@@ -925,6 +947,10 @@ font-family: 'Pompiere', cursive;
 {
 	width:100%;
 	height:300px;
+}
+#map-canvas
+{
+	margin-top: 20px;
 }
 
 /*showcase profile*/
@@ -1093,17 +1119,12 @@ font-family: 'Pompiere', cursive;
 /*aboutcompany*/
 .about-company-data
 {
-	padding:20px;
 	display: flex;
 }
 .left-about-company
 {
 	padding:20px 50px 20px 0px;
 	width: 300px;
-}
-.CompanyProfileContainer
-{
-	padding:20px;
 }
 @media (max-width:540px)
 {
@@ -1174,7 +1195,14 @@ font-family: 'Pompiere', cursive;
 
 .session-product-table,.package-table-proceed
 {
-	padding:30px;
+	padding:20px;
+}
+@media (max-width:720px)
+{
+	.session-product-table,.package-table-proceed
+	{
+		padding:0px;
+	}
 }
 .package-table-proceed th
 {
@@ -1196,11 +1224,30 @@ font-family: 'Pompiere', cursive;
 .proceed-form-left,.proceed-form-right
 {
 	flex:1;
-	padding:30px;
+	padding:20px;
+}
+@media (max-width:720px)
+{
+	.proceed-form-left,.proceed-form-right
+	{
+		padding:10px 0px;
+	}
+	.proceed-forms
+	{
+		flex-direction: column;
+	}
+}
+@media (max-width:988px)
+{
+	.selected-prod-text
+	{
+		display: none!important;
+	}
 }
 #customer-location
 {
 	height: 330px;
+	margin-top: 5px;
 }
 .held-place-note
 {
@@ -1214,7 +1261,22 @@ font-family: 'Pompiere', cursive;
 }
 .submit-btn-container
 {
-	padding:20px 30px;
+	padding:20px 20px;
+	margin-top: 20px;
+}
+@media (max-width:720px)
+{
+	.submit-btn-container
+	{
+		padding:20px 0px;
+	}
+}
+@media (max-width:520px)
+{
+	.submit-btn-container a
+	{
+		width: 100%;
+	}
 }
 .color-added-chips
 {
@@ -1272,7 +1334,7 @@ font-family: 'Pompiere', cursive;
 .color-menu-container
 {
 	display: flex;
-	justify-content:flex-start;
+	justify-content:space-around;
 	flex-wrap: wrap;
 }
 .color-menu-container .color [type="checkbox"]+label
@@ -1281,7 +1343,7 @@ font-family: 'Pompiere', cursive;
 }
 .color-menu-container .color
 {
-	padding:5px 10px;
+	padding:0px 5px;
 	border-radius: 6px;
 	background: #f5f5f5;
 	display: flex;
@@ -1302,8 +1364,16 @@ font-family: 'Pompiere', cursive;
 
 .confirm-submit-container
 {
-	margin-top: 40px;
+	margin-top:10px;
+	padding:20px;
 	display: flex;
+}
+@media (max-width:720px)
+{
+	.confirm-submit-container
+	{
+		padding:0px;
+	}
 }
 /*request list*/
 .request-container
@@ -1571,10 +1641,7 @@ font-family: 'Pompiere', cursive;
 	width: 100%;
 }
 /*notification*/
-.notif-icon-container
-{
-	min-width: 80px;
-}
+
 .notif-parent:hover
 {
 	background: transparent!important;
@@ -1583,6 +1650,7 @@ font-family: 'Pompiere', cursive;
 {
 	color: rgba(0, 0, 0, 0.7);
 }
+
 .notif-parent
 {
 	position:relative;
@@ -1611,16 +1679,12 @@ font-family: 'Pompiere', cursive;
 		width: 300px!important;
 		left: -280px;
 	}
-	.head-modal-burger .notif-icon-container
-	{
-		min-width: 40px;
-	}
 }
 @media (max-width:370px)
 {
 	.head-modal-burger .dropdown-notif
 	{
-		left: -250px;
+		left: -260px;
 	}
 }
 .notification-content-container::-webkit-scrollbar {
@@ -1775,6 +1839,10 @@ font-family: 'Pompiere', cursive;
 {
 	flex:1;
 }
+.pack-form-left .btn
+{
+	margin-top: 20px;
+}
 .pack-form-right
 {
 	flex:1;
@@ -1910,6 +1978,13 @@ font-family: 'Pompiere', cursive;
 }
 
 /*account settings*/
+@media (max-width:700px)
+{
+	.account-settings-container h5
+	{
+		font-size: 15px;
+	}
+}
 .account-box-current
 {
 	margin:0 auto;
@@ -1935,15 +2010,16 @@ font-family: 'Pompiere', cursive;
 }
 .account-data-box div
 {
-	font-size: 15px;
+	font-size: 14px;
 	text-align: left;
-	padding:16px 26px;
+	padding:15px 10px;
 }
 @media (max-width:600px)
 {
 	.account-data-box div
 	{
 		padding:5px 0px;
+		font-size: 13px;
 	}
 }
 .account-content
@@ -1956,7 +2032,7 @@ font-family: 'Pompiere', cursive;
 }
 .account-header
 {
-	min-width: 100px;
+	min-width: 90px;
 }
 #editmodalform
 {
@@ -2025,7 +2101,7 @@ font-family: 'Pompiere', cursive;
 /*register customer*/
 .customer-reg-container
 {
-  padding:25px 80px 55px 80px;
+  padding:25px 0px 55px 80px;
   min-height: 100vh;
 }
 @media (max-width:800px)
@@ -2035,14 +2111,27 @@ font-family: 'Pompiere', cursive;
 		padding:25px 20px 20px 20px;
 	}
 }
+@media (max-width:720px)
+{
+	.customer-reg-container
+	{
+		padding:25px 0px 20px 0px;
+	}
+}
 .submit-btn
 {
   display: flex;
   justify-content: center;
+	margin-top: 20px;
 }
 .submit-btn a
 {
   margin-right: 10px;
+	width: 100%;
+}
+.submit-btn button
+{
+	width: 100%;
 }
 .preview
 {
@@ -2110,13 +2199,19 @@ font-family: 'Pompiere', cursive;
   padding:0px 80px;
   display: flex;
 }
+@media (max-width:800px)
+{
+	.choices
+	{
+		padding:0px 0px;
+	}
+}
 .choices a
 {
   margin-right: 10px;
 }
 .register-form h6
 {
-  padding:10px 80px;
   margin-top: 30px;
   font-size: 25px;
 }
@@ -2134,10 +2229,10 @@ font-family: 'Pompiere', cursive;
   min-height: 100vh;
   padding:25px 0px 55px 0px;
 }
-@media (max-width:600px) {
+@media (max-width:800px) {
 	.register-company-container
 	{
-		padding:25px;
+		padding:25px 0px;
 	}
 }
 .register-company-submit
@@ -2147,9 +2242,14 @@ font-family: 'Pompiere', cursive;
   margin-bottom: 25px!important;
   margin-top: 25px;
 }
+.register-company-submit button
+{
+	width: 100%;
+}
 .register-company-submit a
 {
   margin-right: 20px;
+	width: 100%;
 }
 .preview
 {
@@ -2171,4 +2271,12 @@ font-family: 'Pompiere', cursive;
 .preview
 {
 	margin-top: 50px;
+}
+#textareamessage
+{
+	padding-bottom: 10px;
+}
+.input-field label
+{
+	top:10px!important;
 }

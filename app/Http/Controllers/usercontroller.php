@@ -42,9 +42,9 @@ class usercontroller extends Controller
   public function updateName(Request $request)
   {
     $this->validate($request,[
-      'newname' => 'required|max:50'
+      'newName' => 'required|max:50|regex:/^[a-zA-Z]+$/u'
     ]);
-    User::where('id', Auth::user()->id)->update(['name'=>$request->newname]);
+    User::where('id', Auth::user()->id)->update(['name'=>$request->newName]);
     return['success'=>'success'];
   }
   public function updateUserName(Request $request)
@@ -80,6 +80,10 @@ class usercontroller extends Controller
   }
   public function updateEmail(Request $request)
   {
+    $this->validate($request,[
+      'email'=>'required|email',
+      'emailConfirm'=>'required|email',
+    ]);
     if ($request->email!=$request->emailConfirm)
     {
       return ['error'=>'Your new email did not match'];

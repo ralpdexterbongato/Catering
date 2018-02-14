@@ -18,8 +18,8 @@ class registercontroller extends Controller
     public function store(Request $request)
     {
       $this->validate($request,[
-        'FullName'=>'required',
-        'Email'=>'required|unique:users',
+        'FullName'=>'required|max:50|min:4',
+        'Email'=>'required|unique:users|email',
         'UserName'=>'required|unique:users',
         'password'=>'required|confirmed'
       ]);

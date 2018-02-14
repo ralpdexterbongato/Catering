@@ -69,10 +69,10 @@
     </div>
      </div>
      <div class="modal-footer">
-       <a v-if="NameIsActive==true" href="#" class="modal-action modal-close waves-effect waves-green btn-flat " v-on:click.prevent="updateName()">Update</a>
-       <a v-if="UserNameIsActive==true" href="#" class="modal-action modal-close waves-effect waves-green btn-flat " v-on:click.prevent="updateUserName()">Update</a>
-       <a v-if="PasswordIsActive==true" href="#" class="modal-action modal-close waves-effect waves-green btn-flat " v-on:click.prevent="updateUserPass()">Update</a>
-       <a v-if="EmailIsActive==true" href="#" class="modal-action modal-close waves-effect waves-green btn-flat " v-on:click.prevent="updateEmail()">Update</a>
+       <a v-if="NameIsActive==true" href="#" class="modal-action  waves-effect waves-green btn-flat " v-on:click.prevent="updateName()">Update</a>
+       <a v-if="UserNameIsActive==true" href="#" class="modal-action  waves-effect waves-green btn-flat " v-on:click.prevent="updateUserName()">Update</a>
+       <a v-if="PasswordIsActive==true" href="#" class="modal-action  waves-effect waves-green btn-flat " v-on:click.prevent="updateUserPass()">Update</a>
+       <a v-if="EmailIsActive==true" href="#" class="modal-action  waves-effect waves-green btn-flat " v-on:click.prevent="updateEmail()">Update</a>
      </div>
    </div>
   </div>
@@ -113,30 +113,16 @@
       {
         var vm=this;
         axios.put(`/update-name`,{
-          newname:this.NewName
+          newName:this.NewName
         }).then(function(response)
         {
           console.log(response);
           vm.currentUser();
-          swal({
-              position: 'center',
-              type: 'success',
-              title: 'Success',
-              text:'Updated successfully',
-              showConfirmButton: false,
-              timer: 1500
-            });
+          Materialize.toast('Updated successfully', 4000)
         }).catch(function(error)
         {
           console.log(error);
-          swal({
-              position: 'center',
-              type: 'error',
-              title: 'Oops!',
-              text:error.response.data.message,
-              showConfirmButton: false,
-              timer: 1500
-            });
+          Materialize.toast(error.response.data.errors.newName[0], 4000)
         })
       },
       updateUserName()
@@ -147,26 +133,12 @@
         }).then(function(response)
         {
           console.log(response);
-          vm.currentUser();
-          swal({
-              position: 'center',
-              type: 'success',
-              title: 'Success',
-              text:'Updated successfully',
-              showConfirmButton: false,
-              timer: 1500
-            });
+        Materialize.toast('Username updated', 4000)
+        vm.currentUser();
         }).catch(function(error)
         {
           console.log(error);
-          swal({
-              position: 'center',
-              type: 'error',
-              title: 'Oops!',
-              text:error.response.data.message,
-              showConfirmButton: false,
-              timer: 1500
-            });
+          Materialize.toast(error.response.data.errors.username[0], 4000)
         })
       },
       updateEmail()
@@ -179,39 +151,26 @@
         {
           if (response.data.error!=null)
           {
-            swal({
-                position: 'center',
-                type: 'error',
-                title: 'Oops!',
-                text:response.data.error,
-                showConfirmButton: false,
-                timer: 1500
-              });
+            Materialize.toast(response.data.error, 4000)
           }else
           {
             console.log(response);
             vm.currentUser();
-            swal({
-                position: 'center',
-                type: 'success',
-                title: 'Success',
-                text:'Updated successfully',
-                showConfirmButton: false,
-                timer: 1500
-              });
+            Materialize.toast('Email updated');
             window.location.href = window.location.href;
           }
         }).catch(function(error)
         {
           console.log(error);
-          swal({
-              position: 'center',
-              type: 'error',
-              title: 'Oops!',
-              text:error.response.data.message,
-              showConfirmButton: false,
-              timer: 1500
-            });
+          if (error.response.data.errors.email!=null)
+          {
+            Materialize.toast(error.response.data.errors.email[0], 4000);
+          }
+          if (error.response.data.errors.emailConfirm!=null)
+          {
+            Materialize.toast(error.response.data.errors.emailConfirm[0], 4000);
+          }
+
         })
       },
       updateUserPass()
@@ -226,37 +185,24 @@
           console.log(response);
           if (response.data.error!=null)
           {
-            swal({
-                position: 'center',
-                type: 'error',
-                title: 'Oops',
-                text:response.data.error,
-                showConfirmButton: false,
-                timer: 1500
-              });
+            Materialize.toast(response.data.error, 4000);
           }else
           {
             vm.currentUser();
-            swal({
-                position: 'center',
-                type: 'success',
-                title: 'Success',
-                text:'Updated successfully',
-                showConfirmButton: false,
-                timer: 1500
-              });
+            Materialize.toast("Password updated", 4000);
           }
         }).catch(function(error)
         {
           console.log(error);
-          swal({
-              position: 'center',
-              type: 'error',
-              title: 'Oops!',
-              text:error.response.data.message,
-              showConfirmButton: false,
-              timer: 1500
-            });
+          if (error.response.data.errors.password!=null)
+          {
+            Materialize.toast(error.response.data.errors.password[0], 4000);
+          }
+          if (error.response.data.errors.current!=null)
+          {
+            Materialize.toast(error.response.data.errors.password[0], 4000);
+          }
+
         });
       },
     },

@@ -4,14 +4,17 @@
       <div class="indeterminate"></div>
     </div>
     <div class="input-field col s6">
-      <input id="companyname" v-model="name" type="text" class="validate">
-      <label for="companyname">Company name</label>
+      <input id="companyname" placeholder="`" v-model="name" type="text" v-on:keyup="ValidationErrors.name=null" :class="[ValidationErrors.name!=null?'invalid':'']">
+      <label for="companyname" style="width:100%" :data-error="[ValidationErrors.name!=null?ValidationErrors.name[0]:'']">Company name</label>
     </div>
     <div class="input-field col s12">
-      <textarea id="companydescription" v-model="description" class="materialize-textarea" data-length="180"></textarea>
-      <label for="companydescription">Description</label>
+      <textarea id="companydescription" placeholder="`" v-model="description" class="materialize-textarea" :class="[ValidationErrors.description!=null?'invalid':'']" data-length="191"></textarea>
+      <label style="width:100%" for="companydescription" :data-error="[ValidationErrors.description!=null?ValidationErrors.description[0]:'Max is 191']">Description</label>
     </div>
-    <input type="text" id="searchgmap">
+    <div class="input-field col s12">
+      <input type="text" placeholder="`" v-on:keyup="ValidationErrors.lat=null" :class="[ValidationErrors.lat!=null?'invalid':'']" id="searchgmap">
+      <label for="companyname" style="width:100%" :data-error="[ValidationErrors.lat!=null?'Please search the location of your company':'']">Search location</label>
+    </div>
     <div id="map-canvas">
     </div>
     <span class="hide">
@@ -52,19 +55,22 @@ export default {
     name:'',
     description:'',
     show: false,
-          params: {
-              token: '123456798',
-              name: 'avatar'
-          },
-          headers: {
-              smail: '*_~'
-          },
-          imgDataUrl: ''
-      }
+    params: {
+        token: '123456798',
+        name: 'avatar'
+    },
+    headers: {
+        smail: '*_~'
+    },
+    imgDataUrl: '',
+    ValidationErrors:[]
+    }
+
   },
   components: {
             'my-upload': myUpload
     },
+
   methods: {
     SaveCompany()
     {
@@ -84,14 +90,10 @@ export default {
         window.location =response.data.redirect;
       }).catch(function(error)
       {
-        console.log(error);
+        console.log(error.response.data);
         vm.loading=false;
-        swal({
-            position: 'top-right',
-            type: 'error',
-            title: error.response.data.message,
-            showConfirmButton:true
-          });
+        vm.ValidationErrors = error.response.data.errors;
+        Materialize.toast(error.response.data.message, 4000)
       });
     },
     toggleShow() {

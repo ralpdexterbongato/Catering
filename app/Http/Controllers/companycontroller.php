@@ -22,8 +22,8 @@ class companycontroller extends Controller
     public function store(Request $request)
     {
       $this->validate($request,[
-        'name'=>'max:30|min:1',
-        'description'=>'required|max:180',
+        'name'=>'max:30|required|min:2',
+        'description'=>'required|max:191',
         'lat'=>'required',
         'lng'=>'required'
       ]);

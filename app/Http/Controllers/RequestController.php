@@ -47,19 +47,37 @@ class RequestController extends Controller
     }
     public function sendRequest(Request $request,$companyId)
     {
-      $this->validate($request,[
-        'message'=>'max:191',
-        'eventName'=>'required|max:30',
-        'visitor'=>'required|numeric|min:'.$request->minimum.'|max:'.$request->maximum,
-        'dateStart'=>'required',
-        'timeStart'=>'required',
-        'contact'=>'required',
-        'lat'=>'required',
-        'lng'=>'required',
-        'dine'=>'required'
-      ]);
-
+      if ($request->dine==0)
+      {
+        $this->validate($request,[
+          'message'=>'max:191',
+          'eventName'=>'required|max:30',
+          'visitor'=>'required|numeric|min:'.$request->minimum.'|max:'.$request->maximum,
+          'dateStart'=>'required',
+          'timeStart'=>'required',
+          'contact'=>'required|numeric|max:99999999999',
+          'dine'=>'required'
+        ]);
+      }else
+      {
+        $this->validate($request,[
+          'message'=>'max:191',
+          'eventName'=>'required|max:30',
+          'visitor'=>'required|numeric|min:'.$request->minimum.'|max:'.$request->maximum,
+          'dateStart'=>'required',
+          'timeStart'=>'required',
+          'contact'=>'required',
+          'lat'=>'required',
+          'lng'=>'required',
+          'dine'=>'required'
+        ]);
+      }
+      $date =Carbon::now()->format('Y-m-d');
       $dbdate=date( 'Y-m-d', strtotime( $request->dateStart ) );
+      if($date > $dbdate)
+      {
+        return ['error'=>'Sorry the date is invalid'];
+      }
       if ($request->dine!=1)
       {
         $companyMap = CompanyMap::where('company_id',$companyId)->get(['lat','lng']);

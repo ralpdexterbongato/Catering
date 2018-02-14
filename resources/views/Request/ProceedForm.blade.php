@@ -33,30 +33,41 @@
         aftershow: function(){} //Function for after opening timepicker
       });
       var location = <?php print_r(json_encode($location)) ?>;
-        $(document).ready(function() {
-          var mymap = new GMaps({
-             el: '#customer-location',
-             lat: location[0].lat,
-             lng: location[0].lng,
-             zoom:15
-           });
-           $('#addressHeldLat').val(location[0].lat);
-           $('#addressHeldLng').val(location[0].lng);
-
-         var marker = mymap.addMarker({
-            lat: location[0].lat,
-            lng: location[0].lng,
-            title: 'will be held',
-            draggable:true
-          });
-          google.maps.event.addListener(marker,'dragend',function(){
-            console.log(marker.getPosition().lat());
-            var lat = marker.getPosition().lat();
-            var lng = marker.getPosition().lng();
-            $('#addressHeldLat').val(lat);
-            $('#addressHeldLng').val(lng);
-          });
+      $(document).ready(function() {
+       var map= new google.maps.Map(document.getElementById('customer-location'),{
+         center:{
+           lat:27.72,
+           lng:85.36
+         },
+         zoom:15
        });
+       $("#searchgmap").geocomplete({
+         map:map,
+         markerOptions: {
+           draggable: true
+         }
+       }).bind('geocode:result',function(e, result){
+         var lat = marker.getPosition().lat();
+         var lng = marker.getPosition().lng();
+         $('#addressHeldLat').val(lat);
+         $('#addressHeldLng').val(lng);
+       });
+       var marker = $("#searchgmap").geocomplete("marker");
+       google.maps.event.addListener(marker,'dragend',function(){
+         console.log(marker.getPosition().lat());
+         var lat = marker.getPosition().lat();
+         var lng = marker.getPosition().lng();
+         $('#addressHeldLat').val(lat);
+         $('#addressHeldLng').val(lng);
+       });
+    });
+    });
+  </script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+
+
     });
   </script>
 @endsection

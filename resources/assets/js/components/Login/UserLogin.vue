@@ -54,7 +54,7 @@ import axios from 'axios';
           console.log(response);
           if (response.data.error!=null)
           {
-            vm.sweetalert(response.data.error);
+            Materialize.toast(response.data.error, 4000)
           }else
           {
             window.location.href=window.location.href;

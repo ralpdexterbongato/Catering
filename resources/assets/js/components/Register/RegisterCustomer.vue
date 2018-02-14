@@ -2,28 +2,28 @@
 <div class="customer-reg-container">
   <div class="input-field col s6">
     <i class="material-icons prefix">account_circle</i>
-    <input id="fullname" v-model="FullName" type="text" class="validate">
-    <label for="fullname">Fullname</label>
+    <input id="fullname" placeholder="`" :class="[ValidationErrors.FullName!=null?'invalid':'']" v-model="FullName" class="validate" type="text" >
+    <label for="fullname" :data-error="[ValidationErrors.FullName!=null?ValidationErrors.FullName[0]:'']">Fullname</label>
   </div>
   <div class="input-field col s6">
     <i class="material-icons prefix">mail</i>
-    <input id="email" v-model="Email" type="email" class="validate">
-    <label for="email">Email</label>
+    <input id="email" placeholder="`" :class="[ValidationErrors.Email!=null?'invalid':'']" v-model="Email" type="email" >
+    <label for="email" :data-error="[ValidationErrors.Email!=null?ValidationErrors.Email[0]:'']">Email</label>
   </div>
   <div class="input-field col s6">
     <i class="material-icons prefix">person</i>
-    <input id="username" type="text" v-model="UserName" class="validate">
-    <label for="username">Username</label>
+    <input id="username" placeholder="`" :class="[ValidationErrors.UserName!=null?'invalid':'']" type="text" v-model="UserName" >
+    <label for="username" :data-error="[ValidationErrors.UserName!=null?ValidationErrors.UserName[0]:'']">Username</label>
   </div>
   <div class="input-field col s6">
     <i class="material-icons prefix">lock</i>
-    <input id="pword" type="password" v-model="Password" class="validate">
-    <label for="pword">Password</label>
+    <input id="pword" placeholder="`" :class="[ValidationErrors.password!=null?'invalid':'']"  type="password" v-model="Password" >
+    <label for="pword" :data-error="[ValidationErrors.password!=null?ValidationErrors.password[0]:'']">Password</label>
   </div>
   <div class="input-field col s6">
     <i class="material-icons prefix">vpn_key</i>
-    <input id="pword-confirm" type="password" v-model="PasswordConfirmation" class="validate">
-    <label for="pword-confirm">Confirm-Password</label>
+    <input id="pword-confirm" placeholder="`" :class="[ValidationErrors.password!=null?'invalid':'']" type="password" v-model="PasswordConfirmation" >
+    <label for="pword-confirm" :data-error="[ValidationErrors.password!=null?ValidationErrors.password[0]:'']">Confirm-Password</label>
   </div>
   <div class="submit-btn">
     <a class="btn" @click="toggleShow">upload image</a>
@@ -65,7 +65,8 @@ import myUpload from 'vue-image-crop-upload';
             headers: {
                 smail: '*_~'
             },
-            imgDataUrl: ''
+            imgDataUrl: '',
+      ValidationErrors:[]
     }
   },
   components: {
@@ -94,8 +95,9 @@ import myUpload from 'vue-image-crop-upload';
         }).catch(function (error)
         {
           console.log(error.response.data);
-          vm.$swal('Oops...',error.response.data.message,'error');
-          });
+          Materialize.toast(error.response.data.message, 4000);
+          vm.ValidationErrors = error.response.data.errors;
+        });
       },
       toggleShow() {
                 this.show = !this.show;

@@ -26,7 +26,7 @@
        </div>
        <div class="modal-footer">
 
-        <a href="#" v-on:click.prevent class="grey-text text-darken-2" v-if="foodsavedTotalPrice!=null">Total: ₱{{foodsavedTotalPrice}} perhead</a>
+        <a href="#" v-on:click.prevent class="grey-text text-darken-2" v-if="foodsavedTotalPrice!=null">Total: ₱{{foodsavedTotalPrice.toLocaleString()}} perhead</a>
         <a :href="'/request-proceed/'+company.id" v-if="(foodsavedTotalPrice!=null)&&(user!=null)" class="modal-action modal-close waves-effect waves-light btn-flat red-text">Proceed</a>
         <span v-else-if="user==null">
           <a href="#" id="login-opener-2" class="modal-action modal-close waves-effect waves-light btn-flat red-text">Login</a>
@@ -391,6 +391,10 @@ import myUpload from 'vue-image-crop-upload';
         {
           console.log(error);
         });
+      },
+      formatPrice(value) {
+          let val = (value/1).toFixed(2).replace('.', ',')
+          return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
       },
       showAddedSession()
       {

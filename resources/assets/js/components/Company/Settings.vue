@@ -196,24 +196,13 @@ import myUpload from 'vue-image-crop-upload';
           minimum:this.currentMinimum.minimum,
         }).then(function(response)
         {
-          swal({
-              position: 'top-right',
-              type: 'success',
-              title: 'Successfully updated!',
-              showConfirmButton:true
-            });
+          Materialize.toast('Successfully updated', 4000)
             vm.fetchMaximum();
           console.log(response);
         }).catch(function(error)
         {
           console.log(error);
-          swal({
-              position: 'top-right',
-              type: 'error',
-              title: 'Oops',
-              text:error.response.data.message,
-              showConfirmButton:true
-            });
+           Materialize.toast(error.response.data.message, 4000)
             vm.fetchMaximum();
         })
       },
@@ -238,22 +227,11 @@ import myUpload from 'vue-image-crop-upload';
         {
           console.log(response);
           vm.fetchPricePrivacy();
-          swal({
-              position: 'top-right',
-              type: 'success',
-              title: 'Successfully updated!',
-              showConfirmButton:true
-            });
+          Materialize.toast('Successfully updated', 4000)
         }).catch(function(error)
         {
           console.log(error);
-          swal({
-              position: 'top-right',
-              type: 'error',
-              title: 'oopps!',
-              text:error.response.data.message,
-              showConfirmButton:true
-            });
+          Materialize.toast(error.response.data.message, 4000)
             vm.fetchPricePrivacy();
         });
       },
@@ -327,21 +305,11 @@ import myUpload from 'vue-image-crop-upload';
           console.log(response);
           vm.fetchName();
           vm.NewName= '';
-          swal({
-              position: 'top-right',
-              type: 'success',
-              title: 'Successfully updated!',
-              showConfirmButton:true
-            });
+          Materialize.toast('Successfully updated', 4000)
         }).catch(function(error)
         {
           console.log(error);
-          swal({
-              position: 'top-right',
-              type: 'error',
-              title: error.response.data.message,
-              showConfirmButton:true
-            });
+          Materialize.toast(error.response.data.message, 4000)
           vm.fetchName();
         })
       },
@@ -355,21 +323,11 @@ import myUpload from 'vue-image-crop-upload';
           console.log(response);
           vm.fetchDescription();
           vm.NewDescription= '';
-          swal({
-              position: 'top-right',
-              type: 'success',
-              title: 'Successfully updated!',
-              showConfirmButton:true
-            });
+          Materialize.toast('Successfully updated', 4000)
         }).catch(function(error)
         {
           console.log(error);
-          swal({
-              position: 'top-right',
-              type: 'error',
-              title: error.response.data.message,
-              showConfirmButton:true
-            });
+          Materialize.toast(error.response.data.message, 4000)
           vm.fetchDescription();
         });
       },
@@ -383,21 +341,11 @@ import myUpload from 'vue-image-crop-upload';
           console.log(response);
           vm.fetchMinimumVisitor();
           vm.NewMinimum= '';
-          swal({
-              position: 'top-right',
-              type: 'success',
-              title: 'Successfully updated!',
-              showConfirmButton:true
-            });
+          Materialize.toast('Successfully updated', 4000)
         }).catch(function(error)
         {
           console.log(error);
-          swal({
-              position: 'top-right',
-              type: 'error',
-              title: error.response.data.message,
-              showConfirmButton:true
-            });
+          Materialize.toast(error.response.data.message, 4000)
             vm.fetchMinimumVisitor();
         });
       },
@@ -411,21 +359,11 @@ import myUpload from 'vue-image-crop-upload';
           console.log(response);
           vm.fetchLogo();
           vm.imgDataUrl= '';
-          swal({
-              position: 'top-right',
-              type: 'success',
-              title: 'Successfully updated!',
-              showConfirmButton:true
-            });
+          Materialize.toast('Successfully updated', 4000)
         }).catch(function(error)
         {
           console.log(error);
-          swal({
-              position: 'top-right',
-              type: 'error',
-              title: error.response.data.message,
-              showConfirmButton:true
-            });
+          Materialize.toast(error.response.data.message, 4000)
         });
       },
       updateCover()
@@ -438,21 +376,11 @@ import myUpload from 'vue-image-crop-upload';
           console.log(response);
           vm.fetchCover();
           vm.imgDataUrlCover= '';
-          swal({
-              position: 'top-right',
-              type: 'success',
-              title: 'Successfully updated!',
-              showConfirmButton:true
-            });
+          Materialize.toast('Successfully updated', 4000)
         }).catch(function(error)
         {
           console.log(error);
-          swal({
-              position: 'top-right',
-              type: 'error',
-              title: error.response.data.message,
-              showConfirmButton:true
-            });
+          Materialize.toast(error.response.data.message, 4000)
         });
       },
       addColor()
@@ -464,21 +392,11 @@ import myUpload from 'vue-image-crop-upload';
         {
           console.log(response);
           vm.fetchColors();
-          swal({
-              position: 'top-right',
-              type: 'success',
-              title: 'Successfully added!',
-              showConfirmButton:true
-            });
+          Materialize.toast('Added successfully', 4000)
         }).catch(function(error)
         {
           console.log(error);
-          swal({
-              position: 'top-right',
-              type: 'error',
-              title: error.response.data.message,
-              showConfirmButton:true
-            });
+          Materialize.toast(error.response.data.message, 4000)
         });
       },
       DeleteColor(id)
@@ -487,22 +405,12 @@ import myUpload from 'vue-image-crop-upload';
         axios.delete(`/comp-settings-color-remove/`+id).then(function(response)
         {
           console.log(response);
-          swal({
-              position: 'top-right',
-              type: 'success',
-              title: 'Successfully removed!',
-              showConfirmButton:true
-            });
+          Materialize.toast('removed successfully', 4000)
             vm.fetchColors();
         }).catch(function(error)
         {
           console.log(error);
-          swal({
-              position: 'top-right',
-              type: 'error',
-              title: error.response.data.message,
-              showConfirmButton:true
-            });
+          Materialize.toast(error.response.data.message, 4000)
         })
       },
       updateMap()
@@ -514,21 +422,11 @@ import myUpload from 'vue-image-crop-upload';
         }).then(function(response)
         {
           console.log(response);
-          swal({
-              position: 'top-right',
-              type: 'success',
-              title: 'Location updated!',
-              showConfirmButton:true
-            });
+          Materialize.toast('Location updated', 4000)
         }).catch(function(error)
         {
           console.log(error);
-          swal({
-              position: 'top-right',
-              type: 'error',
-              title:error.response.data.message,
-              showConfirmButton:true
-            });
+          Materialize.toast(error.response.data.message, 4000)
         });
       },
       cropSuccess(imgDataUrl, field){

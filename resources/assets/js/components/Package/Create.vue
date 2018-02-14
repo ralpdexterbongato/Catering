@@ -10,7 +10,7 @@
         <h5>Product list</h5>
         <div class="search-modal-container">
           <div class="input-field col s12">
-          <input id="search" v-on:keyup.enter="getallProduct(1)" v-model="SearchProd" type="text" class="validate">
+          <input id="search" v-on:keyup.enter="getallProduct(1)" v-model="SearchProd" type="text" >
           <label for="search">Search</label>
         </div>
         </div>
@@ -34,16 +34,16 @@
       <div class="pack-form-left">
         <div class="package-forms z-depth-2">
           <div class="input-field col s12">
-             <input id="Name" v-model="PackName" type="text" class="validate">
-             <label for="Name">Package name</label>
+             <input id="Name" placeholder="`" v-on:keyup="ValidationErrors.name=null" v-model="PackName" :class="[ValidationErrors.name!=null?'invalid':'']" type="text" >
+             <label for="Name" :data-error="[ValidationErrors.name!=null?ValidationErrors.name[0]:'']">Package name</label>
           </div>
           <div class="input-field col s12">
-             <input id="price" v-model="PackPrice" type="number" class="validate">
-             <label for="price">Price per head</label>
+             <input id="price" placeholder="`" v-on:keyup="ValidationErrors.price=null" v-model="PackPrice" :class="[ValidationErrors.price!=null?'invalid':'']" type="number" >
+             <label for="price" :data-error="[ValidationErrors.price!=null?ValidationErrors.price[0]:'']">Price per head</label>
           </div>
           <div class="input-field col s12">
-            <textarea id="Description" v-model="PackDesc" class="materialize-textarea"></textarea>
-            <label for="Description">Description</label>
+            <textarea id="Description" placeholder="`" v-model="PackDesc" v-on:keyup="ValidationErrors.descript=null" :class="[ValidationErrors.descript!=null?'invalid':'']" class="materialize-textarea"></textarea>
+            <label for="Description" :data-error="[ValidationErrors.descript!=null?ValidationErrors.descript[0]:'']">Description</label>
           </div>
           <a href="#" v-on:click.prevent="submitall()" class="btn">save</a>
         </div>
@@ -101,6 +101,7 @@ import axios from 'axios';
         PackName:'',
         PackDesc:'',
         PackPrice:'',
+        ValidationErrors:[]
       }
     },
     props: [],
@@ -171,24 +172,10 @@ import axios from 'axios';
         {
           if (response.data.error!=null)
           {
-            swal({
-                position: 'top-right',
-                type: 'error',
-                title:'Opps!',
-                text:response.data.error,
-                showConfirmButton: false,
-                timer: 1500
-            });
+             Materialize.toast(response.data.error, 4000)
           }else
           {
-            swal({
-                position: 'top-right',
-                type: 'success',
-                title:'Success',
-                text:response.data.success,
-                showConfirmButton: false,
-                timer: 1500
-            });
+             Materialize.toast(response.data.success, 4000)
             vm.PackName = '';
             vm.PackDesc = '';
             vm.PackPrice = '';
@@ -196,16 +183,10 @@ import axios from 'axios';
           }
         }).catch(function(error)
         {
-          console.log(error);
-          swal({
-              position: 'top-right',
-              type: 'error',
-              title:'Ooops',
-              text:error.response.data.message,
-              showConfirmButton: false,
-              timer: 1500
-          });
-        })
+          console.log(error.response.data.errors);
+           Materialize.toast(error.response.data.message, 4000);
+           vm.ValidationErrors = error.response.data.errors;
+        });
       }
 
     },

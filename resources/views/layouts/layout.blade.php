@@ -94,7 +94,7 @@
       <div class="content-container" id="app">
         @if(Auth::check() && Auth::user()->verified=='1')
         <div class="verification-input">
-          <p><i class="material-icons">mail_outline</i> Please verify your email <span class="bold">{{Auth::user()->email}}</span> , Thank you. <a href="/resend-email">resend</a></p>
+          <p><i class="material-icons">mail_outline</i> Please verify <span class="bold">{{Auth::user()->email}}</span> , Thank you. <a href="/resend-email">resend</a></p>
         </div>
         @endif
 
