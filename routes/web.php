@@ -17,8 +17,8 @@ Route::get('/about', function () {
 Route::get('/company','companycontroller@index')->name('company-index');
 Route::get('/company-index-data','companycontroller@indexData');
 Route::get('/','ProductController@Index');
-Route::get('/register','registercontroller@create')->middleware('companyowner');
-Route::post('/register-store','registercontroller@store')->middleware('companyowner');
+Route::get('/register','registercontroller@create');
+Route::post('/register-store','registercontroller@store')->middleware('customeronly');
 Route::post('/user','usercontroller@logout');
 Route::post('/user-login','usercontroller@loginSubmit');
 Route::get('/my-account-settings','usercontroller@settingsShow');
@@ -92,8 +92,8 @@ Route::get('/calendar-fetch-package/{id}','ScheduleController@fetchPackage');
 Route::get('/notification','NotificationController@show');
 Route::get('/notification-count','NotificationController@countNotif');
 
-Route::get('/package-create','PackageController@create');
-Route::post('/package-store','PackageController@store');
+Route::get('/package-create','PackageController@create')->middleware('companyowneronly');
+Route::post('/package-store','PackageController@store')->middleware('companyowneronly');
 Route::post('/package-proceed','PackageController@proceed');
 Route::get('/package-show/{packageid}','PackageController@show');
 Route::get('/package-show-data-name/{packageid}','PackageController@showName');
@@ -103,13 +103,13 @@ Route::get('/package-all/{companyid}','PackageController@showAllPackageOnProfile
 Route::get('/package-show-data-price/{packageId}','PackageController@showPrice');
 Route::get('/package-show-data-products/{packageId}','PackageController@showPackageProducts');
 
-Route::put('/package-update-name/{packageId}','PackageController@updateName');
-Route::put('/package-update-desc/{packageId}','PackageController@updateDescription');
-Route::put('/package-update-price/{packageId}','PackageController@updatePrice');
+Route::put('/package-update-name/{packageId}','PackageController@updateName')->middleware('companyowneronly');
+Route::put('/package-update-desc/{packageId}','PackageController@updateDescription')->middleware('companyowneronly');
+Route::put('/package-update-price/{packageId}','PackageController@updatePrice')->middleware('companyowneronly');
 
-Route::delete('/remove-package-product/{packageId}/{productId}','PackageController@removePackageProduct');
-Route::post('/add-package-product/{packageId}','PackageController@storePackageProduct');
-Route::delete('/package-delete/{packageId}','PackageController@delete');
+Route::delete('/remove-package-product/{packageId}/{productId}','PackageController@removePackageProduct')->middleware('companyowneronly');
+Route::post('/add-package-product/{packageId}','PackageController@storePackageProduct')->middleware('companyowneronly');
+Route::delete('/package-delete/{packageId}','PackageController@delete')->middleware('companyowneronly');
 
 Route::get('/forgot-password','usercontroller@forgotPass')->middleware('guest');
 Route::get('/send-password-code','usercontroller@sendForgetPassToEmail');

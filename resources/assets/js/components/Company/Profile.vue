@@ -40,25 +40,25 @@
          <h5>Add product menu</h5>
         <div class="food-form-container">
           <div class="input-field col s6">
-            <input id="foodname" v-model="FoodName" type="text" data-length="20">
-            <label for="foodname" >Name</label>
+            <input id="foodname" :class="[ValidationErrors.name!=null?'invalid':'']" placeholder="`" v-model="FoodName" type="text" data-length="20">
+            <label class="active" for="foodname" :data-error="[ValidationErrors.name!=null?ValidationErrors.name[0]:'']" >Name</label>
           </div>
           <div class="input-field col s12">
-            <textarea id="fdescription" v-model="FoodDescription" class="materialize-textarea" data-length="190"></textarea>
-            <label for="fdescription">Description</label>
+            <textarea id="fdescription" placeholder="`" :class="[ValidationErrors.description!=null?'invalid':'']" v-model="FoodDescription" class="materialize-textarea" data-length="190"></textarea>
+            <label class="active" for="fdescription" :data-error="[ValidationErrors.description!=null?ValidationErrors.description[0]:'']">Description</label>
           </div>
           <div class="input-field col s12">
-            <input id="priceperhead" v-model="price"  type="text" data-length="20">
-            <label for="priceperhead">Price</label>
+            <input id="priceperhead" placeholder="`" :class="[ValidationErrors.price!=null?'invalid':'']" v-model="price"  type="text" data-length="20">
+            <label class="active" for="priceperhead" :data-error="[ValidationErrors.price!=null?ValidationErrors.price[0]:'']">Price</label>
           </div>
           <div class="input-field col s12">
-            <select id="typeSelect">
+            <select id="typeSelect"  :class="[ValidationErrors.type!=null?'invalid':'']">
               <option value="" disabled selected></option>
               <option value="0">Food</option>
               <option value="1">Drink</option>
               <option value="2">Sweet</option>
             </select>
-            <label>Select type</label>
+            <label class="active" :data-error="erroror">Select type</label>
           </div>
           <a class="btn food-image-finder" @click="toggleShowForProduct">Image</a>
           <div class="preview" v-if="imgDataUrlForFood!=''">
@@ -68,7 +68,7 @@
        </div>
     <div class="modal-footer">
      <a href="#" v-on:click.prevent class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
-     <a href="#" v-on:click.prevent class="modal-action modal-close waves-effect waves-red btn-flat " v-on:click="AddNewProduct()">Save</a>
+     <a href="#" v-on:click.prevent class="modal-action waves-effect waves-red btn-flat " v-on:click="AddNewProduct()">Save</a>
     </div>
     </div>
     <div class="company-cover-hero" v-if="AboutCompany.heroPicture!=null" :style="'background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(/storage/images/'+AboutCompany.heroPicture+')'">
@@ -337,6 +337,7 @@ import myUpload from 'vue-image-crop-upload';
          price:'',
          editPrice:'',
          foodsavedTotalPrice:0,
+         ValidationErrors:[]
       }
     },
     components: {
@@ -430,35 +431,29 @@ import myUpload from 'vue-image-crop-upload';
           console.log(response);
           if (response.data.error!=null)
           {
-            swal({
-                position: 'top-right',
-                type: 'error',
-                title: response.data.error,
-                showConfirmButton:true
-              });
+           Materialize.toast(response.data.error, 4000)
           }else
           {
             vm.imgDataUrlForFood = '';
             vm.FoodName = '';
             vm.FoodDescription = '';
             vm.price = '';
-            swal({
-                position: 'top-right',
-                type: 'success',
-                title: 'New product added',
-                showConfirmButton:true
-              });
+            Materialize.toast('Successfully added', 4000)
           }
           vm.getCompanyProducts(1);
         },function(error)
         {
-          console.log(error);
-          swal({
-              position: 'top-right',
-              type: 'error',
-              title: error.response.data.message,
-              showConfirmButton:true
-            });
+          console.log(error.response.data.errors);
+          Materialize.toast(error.response.data.message, 4000)
+          vm.ValidationErrors = error.response.data.errors;
+          if (error.response.data.errors.FoodImage!=null)
+          {
+            Materialize.toast(error.response.data.errors.FoodImage[0], 4000)
+          }
+          if (error.response.data.errors.type!=null)
+          {
+            Materialize.toast(error.response.data.errors.type[0], 4000)
+          }
         });
       },
       RemoveFromList(foodid)

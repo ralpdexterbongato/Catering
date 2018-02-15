@@ -24,7 +24,7 @@ class PackageController extends Controller
     {
       $this->validate($request,[
         'name'=>'required',
-        'descript'=>'required',
+        'description'=>'required',
         'price'=>'required',
       ]);
       if (empty($request->products[0]))
@@ -37,7 +37,7 @@ class PackageController extends Controller
       $packageTbl->company_id=$companyid;
       $packageTbl->price = $request->price;
       $packageTbl->name = $request->name;
-      $packageTbl->description = $request->descript;
+      $packageTbl->description = $request->description;
       $packageTbl->save();
 
       $forProdPackages = array();

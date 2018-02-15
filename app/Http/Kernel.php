@@ -59,5 +59,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'companyowner'=>\App\Http\Middleware\AlreadyHaveCompany::class,
         'printrule'=>\App\Http\Middleware\PrintRule::class,
+        'customeronly'=>\App\Http\Middleware\CustomerOnly::class,
+        'companyowneronly'=>\App\Http\Middleware\CompanyOwnerOnly::class,
     ];
 }

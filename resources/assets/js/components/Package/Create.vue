@@ -18,6 +18,7 @@
           <div class="product-box z-depth-2 white" v-on:click="selectProduct(product)" v-for="(product,count) in ProdData">
             <img :src="'/storage/images/'+product.image" alt="productpic">
             <p class="bold">{{product.name}}</p>
+            <p>P {{product.price}}</p>
           </div>
         </div>
         <ul class="pagination modal-pagination">
@@ -38,12 +39,12 @@
              <label for="Name" :data-error="[ValidationErrors.name!=null?ValidationErrors.name[0]:'']">Package name</label>
           </div>
           <div class="input-field col s12">
-             <input id="price" placeholder="`" v-on:keyup="ValidationErrors.price=null" v-model="PackPrice" :class="[ValidationErrors.price!=null?'invalid':'']" type="number" >
+             <input id="price" placeholder="`" v-on:keyup="ValidationErrors.price=null" v-model="PackPrice = recommendedPerHead" :class="[ValidationErrors.price!=null?'invalid':'']" type="number" >
              <label for="price" :data-error="[ValidationErrors.price!=null?ValidationErrors.price[0]:'']">Price per head</label>
           </div>
           <div class="input-field col s12">
-            <textarea id="Description" placeholder="`" v-model="PackDesc" v-on:keyup="ValidationErrors.descript=null" :class="[ValidationErrors.descript!=null?'invalid':'']" class="materialize-textarea"></textarea>
-            <label for="Description" :data-error="[ValidationErrors.descript!=null?ValidationErrors.descript[0]:'']">Description</label>
+            <textarea id="Description" placeholder="`" v-model="PackDesc" v-on:keyup="ValidationErrors.description=null" :class="[ValidationErrors.description!=null?'invalid':'']" class="materialize-textarea"></textarea>
+            <label for="Description" :data-error="[ValidationErrors.description!=null?ValidationErrors.description[0]:'']">Description</label>
           </div>
           <a href="#" v-on:click.prevent="submitall()" class="btn">save</a>
         </div>
@@ -58,6 +59,7 @@
               <div v-on:click="removeSelected(keycount)" v-if="selected.Type==0" v-for="(selected,keycount) in prodSelected" class="product-box z-depth-2 white">
                 <img :src="'/storage/images/'+selected.image" alt="">
                 <p class="bold">{{selected.name}}</p>
+                <p>P {{selected.price}}</p>
               </div>
             </td>
           </tr>
@@ -101,7 +103,8 @@ import axios from 'axios';
         PackName:'',
         PackDesc:'',
         PackPrice:'',
-        ValidationErrors:[]
+        ValidationErrors:[],
+        recommendedPerHead:0
       }
     },
     props: [],
@@ -139,6 +142,12 @@ import axios from 'axios';
           }
         }
         this.prodSelected.push(data);
+        var recommendedPrice= 0;
+        for (var i = 0; i < this.prodSelected.length; i++)
+        {
+          recommendedPrice = Number(this.prodSelected[i].price) + recommendedPrice;
+        }
+        this.recommendedPerHead = recommendedPrice.toLocaleString();
         swal({
             position: 'top-right',
             type: 'success',
@@ -159,13 +168,19 @@ import axios from 'axios';
             showConfirmButton: false,
             timer: 1500
         });
+        var recommendedPrice= 0;
+        for (var i = 0; i < this.prodSelected.length; i++)
+        {
+          recommendedPrice = Number(this.prodSelected[i].price) + recommendedPrice;
+        }
+        this.recommendedPerHead = recommendedPrice.toLocaleString();
       },
       submitall()
       {
         var vm=this;
         axios.post(`/package-store`,{
           name:this.PackName,
-          descript:this.PackDesc,
+          description:this.PackDesc,
           price:this.PackPrice,
           products:this.prodSelected
         }).then(function(response)

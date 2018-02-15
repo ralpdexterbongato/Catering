@@ -21,7 +21,7 @@ class ProductController extends Controller
         'name'=>'required|max:25',
         'FoodImage'=>'required',
         'description'=>'required|max:190',
-        'type'=>'required',
+        'type'=>'required|numeric',
         'price'=> 'required|min:1',
       ]);
       if ($request->FoodImage!=null)

@@ -51544,7 +51544,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       editDesc: '',
       price: '',
       editPrice: '',
-      foodsavedTotalPrice: 0
+      foodsavedTotalPrice: 0,
+      ValidationErrors: []
     };
   },
 
@@ -51628,33 +51629,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).then(function (response) {
         console.log(response);
         if (response.data.error != null) {
-          swal({
-            position: 'top-right',
-            type: 'error',
-            title: response.data.error,
-            showConfirmButton: true
-          });
+          Materialize.toast(response.data.error, 4000);
         } else {
           vm.imgDataUrlForFood = '';
           vm.FoodName = '';
           vm.FoodDescription = '';
           vm.price = '';
-          swal({
-            position: 'top-right',
-            type: 'success',
-            title: 'New product added',
-            showConfirmButton: true
-          });
+          Materialize.toast('Successfully added', 4000);
         }
         vm.getCompanyProducts(1);
       }, function (error) {
-        console.log(error);
-        swal({
-          position: 'top-right',
-          type: 'error',
-          title: error.response.data.message,
-          showConfirmButton: true
-        });
+        console.log(error.response.data.errors);
+        Materialize.toast(error.response.data.message, 4000);
+        vm.ValidationErrors = error.response.data.errors;
+        if (error.response.data.errors.FoodImage != null) {
+          Materialize.toast(error.response.data.errors.FoodImage[0], 4000);
+        }
+        if (error.response.data.errors.type != null) {
+          Materialize.toast(error.response.data.errors.type[0], 4000);
+        }
       });
     },
     RemoveFromList: function RemoveFromList(foodid) {
@@ -52185,7 +52178,13 @@ var render = function() {
                       expression: "FoodName"
                     }
                   ],
-                  attrs: { id: "foodname", type: "text", "data-length": "20" },
+                  class: [_vm.ValidationErrors.name != null ? "invalid" : ""],
+                  attrs: {
+                    id: "foodname",
+                    placeholder: "`",
+                    type: "text",
+                    "data-length": "20"
+                  },
                   domProps: { value: _vm.FoodName },
                   on: {
                     input: function($event) {
@@ -52197,7 +52196,21 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "foodname" } }, [_vm._v("Name")])
+                _c(
+                  "label",
+                  {
+                    staticClass: "active",
+                    attrs: {
+                      for: "foodname",
+                      "data-error": [
+                        _vm.ValidationErrors.name != null
+                          ? _vm.ValidationErrors.name[0]
+                          : ""
+                      ]
+                    }
+                  },
+                  [_vm._v("Name")]
+                )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "input-field col s12" }, [
@@ -52211,7 +52224,14 @@ var render = function() {
                     }
                   ],
                   staticClass: "materialize-textarea",
-                  attrs: { id: "fdescription", "data-length": "190" },
+                  class: [
+                    _vm.ValidationErrors.description != null ? "invalid" : ""
+                  ],
+                  attrs: {
+                    id: "fdescription",
+                    placeholder: "`",
+                    "data-length": "190"
+                  },
                   domProps: { value: _vm.FoodDescription },
                   on: {
                     input: function($event) {
@@ -52223,9 +52243,21 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "fdescription" } }, [
-                  _vm._v("Description")
-                ])
+                _c(
+                  "label",
+                  {
+                    staticClass: "active",
+                    attrs: {
+                      for: "fdescription",
+                      "data-error": [
+                        _vm.ValidationErrors.description != null
+                          ? _vm.ValidationErrors.description[0]
+                          : ""
+                      ]
+                    }
+                  },
+                  [_vm._v("Description")]
+                )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "input-field col s12" }, [
@@ -52238,8 +52270,10 @@ var render = function() {
                       expression: "price"
                     }
                   ],
+                  class: [_vm.ValidationErrors.price != null ? "invalid" : ""],
                   attrs: {
                     id: "priceperhead",
+                    placeholder: "`",
                     type: "text",
                     "data-length": "20"
                   },
@@ -52254,12 +52288,52 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "priceperhead" } }, [
-                  _vm._v("Price")
-                ])
+                _c(
+                  "label",
+                  {
+                    staticClass: "active",
+                    attrs: {
+                      for: "priceperhead",
+                      "data-error": [
+                        _vm.ValidationErrors.price != null
+                          ? _vm.ValidationErrors.price[0]
+                          : ""
+                      ]
+                    }
+                  },
+                  [_vm._v("Price")]
+                )
               ]),
               _vm._v(" "),
-              _vm._m(1, false, false),
+              _c("div", { staticClass: "input-field col s12" }, [
+                _c(
+                  "select",
+                  {
+                    class: [_vm.ValidationErrors.type != null ? "invalid" : ""],
+                    attrs: { id: "typeSelect" }
+                  },
+                  [
+                    _c("option", {
+                      attrs: { value: "", disabled: "", selected: "" }
+                    }),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "0" } }, [_vm._v("Food")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "1" } }, [_vm._v("Drink")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "2" } }, [_vm._v("Sweet")])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "active",
+                    attrs: { "data-error": _vm.erroror }
+                  },
+                  [_vm._v("Select type")]
+                )
+              ]),
               _vm._v(" "),
               _c(
                 "a",
@@ -52299,8 +52373,7 @@ var render = function() {
             _c(
               "a",
               {
-                staticClass:
-                  "modal-action modal-close waves-effect waves-red btn-flat ",
+                staticClass: "modal-action waves-effect waves-red btn-flat ",
                 attrs: { href: "#" },
                 on: {
                   click: [
@@ -52440,14 +52513,14 @@ var render = function() {
           _c("p", [_vm._v(_vm._s(_vm.AboutCompany.description))])
         ]),
         _vm._v(" "),
-        _vm._m(2, false, false)
+        _vm._m(1, false, false)
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "divider" }),
       _vm._v(" "),
       _vm.Packages[0] != null
         ? _c("div", [
-            _vm._m(3, false, false),
+            _vm._m(2, false, false),
             _vm._v(" "),
             _c(
               "div",
@@ -52577,7 +52650,7 @@ var render = function() {
           ])
         : _vm._e(),
       _vm._v(" "),
-      _vm._m(4, false, false),
+      _vm._m(3, false, false),
       _vm._v(" "),
       _c("div", { staticClass: "sorting-container" }, [
         _c(
@@ -52838,7 +52911,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "card-reveal" }, [
-                _vm._m(5, true, false),
+                _vm._m(4, true, false),
                 _vm._v(" "),
                 _c("p", [_vm._v(_vm._s(product.description))])
               ])
@@ -52936,7 +53009,7 @@ var render = function() {
               [_c("i", { staticClass: "material-icons" }, [_vm._v("add")])]
             ),
             _vm._v(" "),
-            _vm._m(6, false, false)
+            _vm._m(5, false, false)
           ])
         : _vm.user == null || (_vm.user != null && _vm.user.role == 0)
           ? _c("div", { staticClass: "fixed-action-btn" }, [
@@ -53080,7 +53153,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(7, false, false),
+              _vm._m(6, false, false),
               _vm._v(" "),
               _c(
                 "a",
@@ -53243,24 +53316,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", [_c("tr", [_c("th", [_vm._v("Products selected")])])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-field col s12" }, [
-      _c("select", { attrs: { id: "typeSelect" } }, [
-        _c("option", { attrs: { value: "", disabled: "", selected: "" } }),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "0" } }, [_vm._v("Food")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "1" } }, [_vm._v("Drink")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "2" } }, [_vm._v("Sweet")])
-      ]),
-      _vm._v(" "),
-      _c("label", [_vm._v("Select type")])
-    ])
   },
   function() {
     var _vm = this
@@ -58981,6 +59036,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -58994,7 +59051,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       PackName: '',
       PackDesc: '',
       PackPrice: '',
-      ValidationErrors: []
+      ValidationErrors: [],
+      recommendedPerHead: 0
     };
   },
 
@@ -59027,6 +59085,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       }
       this.prodSelected.push(data);
+      var recommendedPrice = 0;
+      for (var i = 0; i < this.prodSelected.length; i++) {
+        recommendedPrice = Number(this.prodSelected[i].price) + recommendedPrice;
+      }
+      this.recommendedPerHead = recommendedPrice.toLocaleString();
       swal({
         position: 'top-right',
         type: 'success',
@@ -59046,12 +59109,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         showConfirmButton: false,
         timer: 1500
       });
+      var recommendedPrice = 0;
+      for (var i = 0; i < this.prodSelected.length; i++) {
+        recommendedPrice = Number(this.prodSelected[i].price) + recommendedPrice;
+      }
+      this.recommendedPerHead = recommendedPrice.toLocaleString();
     },
     submitall: function submitall() {
       var vm = this;
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/package-store', {
         name: this.PackName,
-        descript: this.PackDesc,
+        description: this.PackDesc,
         price: this.PackPrice,
         products: this.prodSelected
       }).then(function (response) {
@@ -59181,7 +59249,9 @@ var render = function() {
                   _vm._v(" "),
                   _c("p", { staticClass: "bold" }, [
                     _vm._v(_vm._s(product.name))
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("P " + _vm._s(product.price))])
                 ]
               )
             })
@@ -59331,13 +59401,13 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.PackPrice,
-                  expression: "PackPrice"
+                  value: (_vm.PackPrice = _vm.recommendedPerHead),
+                  expression: "PackPrice = recommendedPerHead"
                 }
               ],
               class: [_vm.ValidationErrors.price != null ? "invalid" : ""],
               attrs: { id: "price", placeholder: "`", type: "number" },
-              domProps: { value: _vm.PackPrice },
+              domProps: { value: (_vm.PackPrice = _vm.recommendedPerHead) },
               on: {
                 keyup: function($event) {
                   _vm.ValidationErrors.price = null
@@ -59346,7 +59416,7 @@ var render = function() {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.PackPrice = $event.target.value
+                  _vm.PackPrice = _vm.recommendedPerHead = $event.target.value
                 }
               }
             }),
@@ -59378,12 +59448,14 @@ var render = function() {
                 }
               ],
               staticClass: "materialize-textarea",
-              class: [_vm.ValidationErrors.descript != null ? "invalid" : ""],
+              class: [
+                _vm.ValidationErrors.description != null ? "invalid" : ""
+              ],
               attrs: { id: "Description", placeholder: "`" },
               domProps: { value: _vm.PackDesc },
               on: {
                 keyup: function($event) {
-                  _vm.ValidationErrors.descript = null
+                  _vm.ValidationErrors.description = null
                 },
                 input: function($event) {
                   if ($event.target.composing) {
@@ -59400,8 +59472,8 @@ var render = function() {
                 attrs: {
                   for: "Description",
                   "data-error": [
-                    _vm.ValidationErrors.descript != null
-                      ? _vm.ValidationErrors.descript[0]
+                    _vm.ValidationErrors.description != null
+                      ? _vm.ValidationErrors.description[0]
                       : ""
                   ]
                 }
@@ -59457,7 +59529,9 @@ var render = function() {
                         _vm._v(" "),
                         _c("p", { staticClass: "bold" }, [
                           _vm._v(_vm._s(selected.name))
-                        ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [_vm._v("P " + _vm._s(selected.price))])
                       ]
                     )
                   : _vm._e()
