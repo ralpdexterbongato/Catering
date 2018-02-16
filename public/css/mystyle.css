@@ -1985,6 +1985,14 @@ font-family: 'Pompiere', cursive;
 		font-size: 15px;
 	}
 }
+.avatar-update-modal input
+{
+	width: 100%;
+}
+.avatar-update-modal img
+{
+	width: 100%;
+}
 .account-box-current
 {
 	margin:0 auto;
@@ -1995,6 +2003,12 @@ font-family: 'Pompiere', cursive;
 	display: flex;
 	justify-content: space-between;
 	padding:5px 20px;
+}
+.account-data-box img
+{
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
 }
 @media (max-with(600px))
 {
@@ -2261,13 +2275,45 @@ font-family: 'Pompiere', cursive;
 {
   margin: auto;
 }
-
+.vue-image-crop-upload .vicp-wrap .vicp-operate a
+{
+	width: 100%!important;
+}
 .vue-image-crop-upload .vicp-wrap .vicp-operate
 {
 	left: 0;
-	right: auto;
+	right: 0;
+	display: flex;
 }
-
+.vue-image-crop-upload .vicp-wrap
+{
+	width: auto!important;
+	height: auto!important;
+}
+.find-image-btn:focus
+{
+	background: transparent;
+}
+.find-image-btn
+{
+	width: 100%;
+	padding:5px;
+	border-style: none;
+	border-radius: 3px;
+}
+.vicp-crop-left
+{
+	margin:0 auto;
+	width: 100%;
+}
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range
+{
+	width: auto!important;
+}
+.vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container
+{
+	margin: 0 auto;
+}
 .preview
 {
 	margin-top: 50px;

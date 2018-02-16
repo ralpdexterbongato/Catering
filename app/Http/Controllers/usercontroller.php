@@ -9,6 +9,8 @@ use Hash;
 use Carbon\Carbon;
 use App\Jobs\SendVerificationJob;
 use App\Jobs\ForgetPasswordRecovery;
+use Storage;
+use Image;
 class usercontroller extends Controller
 {
   public function loginSubmit(Request $request)
@@ -54,6 +56,17 @@ class usercontroller extends Controller
     ]);
     User::where('id', Auth::user()->id)->update(['username'=>$request->username]);
     return['success'=>'success'];
+  }
+
+  public function updateAvatar(Request $request)
+  {
+    $this->validate($request,[
+      'avatar'=>'required'
+    ]);
+      $imageData = $request->get('avatar');
+      $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+      Image::make($request->get('avatar'))->save(public_path('/storage/images/').$fileName);
+      User::where('id', Auth::user()->id)->update(['avatar'=>$fileName]);
   }
   public function updatePassword(Request $request)
   {

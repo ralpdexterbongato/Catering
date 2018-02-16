@@ -60888,6 +60888,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_image_crop_upload__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_image_crop_upload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_image_crop_upload__);
 //
 //
 //
@@ -60968,6 +60970,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -60984,8 +61014,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       NameIsActive: false,
       UserNameIsActive: false,
       EmailIsActive: false,
-      PasswordIsActive: false
+      PasswordIsActive: false,
+      ImageIsActive: false,
+      show: false,
+      params: {
+        token: '123456798',
+        name: 'avatar'
+      },
+      headers: {
+        smail: '*_~'
+      },
+      imgDataUrl: ''
     };
+  },
+
+  components: {
+    'my-upload': __WEBPACK_IMPORTED_MODULE_0_vue_image_crop_upload___default.a
   },
   created: function created() {
     this.currentUser();
@@ -60997,6 +61041,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var vm = this;
       axios.get('/current-user').then(function (response) {
         vm.currentUserData = response.data;
+      });
+    },
+    updateImage: function updateImage() {
+      var vm = this;
+      axios.put('/update-avatar', {
+        avatar: this.imgDataUrl
+      }).then(function (response) {
+        console.log(response);
+        vm.currentUser();
+        Materialize.toast('Avatar updated', 4000);
+        vm.imgDataUrl = '';
+      }).catch(function (error) {
+        console.log(error);
+        Materialize.toast(error.response.data.errors.avatar[0], 4000);
       });
     },
     updateName: function updateName() {
@@ -61069,9 +61127,47 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           Materialize.toast(error.response.data.errors.password[0], 4000);
         }
         if (error.response.data.errors.current != null) {
-          Materialize.toast(error.response.data.errors.password[0], 4000);
+          Materialize.toast(error.response.data.errors.current[0], 4000);
         }
       });
+    },
+    toggleShow: function toggleShow() {
+      this.show = !this.show;
+    },
+
+    /**
+     * crop success
+     *
+     * [param] imgDataUrl
+     * [param] field
+     */
+    cropSuccess: function cropSuccess(imgDataUrl, field) {
+      console.log('-------- crop success --------');
+      this.imgDataUrl = imgDataUrl;
+    },
+
+    /**
+     * upload success
+     *
+     * [param] jsonData  server api return data, already json encode
+     * [param] field
+     */
+    cropUploadSuccess: function cropUploadSuccess(jsonData, field) {
+      console.log('-------- upload success --------');
+      console.log(jsonData);
+      console.log('field: ' + field);
+    },
+
+    /**
+     * upload fail
+     *
+     * [param] status    server api return error status, like 500
+     * [param] field
+     */
+    cropUploadFail: function cropUploadFail(status, field) {
+      console.log('-------- upload fail --------');
+      console.log(status);
+      console.log('field: ' + field);
     }
   }
 });
@@ -61089,6 +61185,45 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "account-box-current z-depth-1" }, [
       _c("div", { staticClass: "account-data-box white" }, [
+        _c("div", { staticClass: "account-header" }, [_vm._v("Picture")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grey-text text-darken-1 account-content" }, [
+          _vm.currentUserData.avatar != null
+            ? _c("img", {
+                attrs: {
+                  src: "/storage/images/" + _vm.currentUserData.avatar,
+                  alt: "avatar"
+                }
+              })
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            attrs: { onclick: "$('#editmodalform').modal('open')" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                ;(_vm.ImageIsActive = true),
+                  (_vm.EmailIsActive = false),
+                  (_vm.PasswordIsActive = false),
+                  (_vm.NameIsActive = false),
+                  (_vm.UserNameIsActive = false)
+              }
+            }
+          },
+          [
+            _c("i", { staticClass: "material-icons grey-text text-darken-1" }, [
+              _vm._v("edit")
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "divider" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "account-data-box white" }, [
         _c("div", { staticClass: "account-header" }, [_vm._v("Name")]),
         _vm._v(" "),
         _c("div", { staticClass: "grey-text text-darken-1 account-content" }, [
@@ -61102,7 +61237,8 @@ var render = function() {
             on: {
               click: function($event) {
                 $event.preventDefault()
-                ;(_vm.EmailIsActive = false),
+                ;(_vm.ImageIsActive = false),
+                  (_vm.EmailIsActive = false),
                   (_vm.PasswordIsActive = false),
                   (_vm.NameIsActive = true),
                   (_vm.UserNameIsActive = false)
@@ -61133,7 +61269,8 @@ var render = function() {
             on: {
               click: function($event) {
                 $event.preventDefault()
-                ;(_vm.EmailIsActive = true),
+                ;(_vm.ImageIsActive = false),
+                  (_vm.EmailIsActive = true),
                   (_vm.PasswordIsActive = false),
                   (_vm.UserNameIsActive = false),
                   (_vm.NameIsActive = false)
@@ -61164,7 +61301,8 @@ var render = function() {
             on: {
               click: function($event) {
                 $event.preventDefault()
-                ;(_vm.EmailIsActive = false),
+                ;(_vm.ImageIsActive = false),
+                  (_vm.EmailIsActive = false),
                   (_vm.PasswordIsActive = false),
                   (_vm.UserNameIsActive = true),
                   (_vm.NameIsActive = false)
@@ -61193,7 +61331,8 @@ var render = function() {
             on: {
               click: function($event) {
                 $event.preventDefault()
-                ;(_vm.EmailIsActive = false),
+                ;(_vm.ImageIsActive = false),
+                  (_vm.EmailIsActive = false),
                   (_vm.PasswordIsActive = true),
                   (_vm.UserNameIsActive = false),
                   (_vm.NameIsActive = false)
@@ -61414,6 +61553,59 @@ var render = function() {
                   ])
                 ])
               ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.ImageIsActive == true
+            ? _c(
+                "div",
+                { staticClass: "avatar-update-modal" },
+                [
+                  _vm.imgDataUrl == ""
+                    ? _c("img", {
+                        attrs: {
+                          src: "/storage/images/" + _vm.currentUserData.avatar
+                        }
+                      })
+                    : _c("img", { attrs: { src: _vm.imgDataUrl } }),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "find-image-btn",
+                      attrs: { type: "button", name: "button" },
+                      on: { click: _vm.toggleShow }
+                    },
+                    [_vm._v("choose")]
+                  ),
+                  _vm._v(" "),
+                  _c("my-upload", {
+                    attrs: {
+                      field: "img",
+                      langType: "En",
+                      width: 300,
+                      height: 300,
+                      params: _vm.params,
+                      headers: _vm.headers,
+                      noCircle: true,
+                      noSquare: true,
+                      "img-format": "png"
+                    },
+                    on: {
+                      "crop-success": _vm.cropSuccess,
+                      "crop-upload-success": _vm.cropUploadSuccess,
+                      "crop-upload-fail": _vm.cropUploadFail
+                    },
+                    model: {
+                      value: _vm.show,
+                      callback: function($$v) {
+                        _vm.show = $$v
+                      },
+                      expression: "show"
+                    }
+                  })
+                ],
+                1
+              )
             : _vm._e()
         ]),
         _vm._v(" "),
@@ -61483,6 +61675,24 @@ var render = function() {
                     click: function($event) {
                       $event.preventDefault()
                       _vm.updateEmail()
+                    }
+                  }
+                },
+                [_vm._v("Update")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.ImageIsActive == true
+            ? _c(
+                "a",
+                {
+                  staticClass:
+                    "modal-action  waves-effect waves-green btn-flat ",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.updateImage()
                     }
                   }
                 },

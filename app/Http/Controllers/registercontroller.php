@@ -21,7 +21,8 @@ class registercontroller extends Controller
         'FullName'=>'required|max:50|min:4',
         'Email'=>'required|unique:users|email',
         'UserName'=>'required|unique:users',
-        'password'=>'required|confirmed'
+        'password'=>'required|confirmed',
+        'Avatar'=>'required'
       ]);
 
       if ($request->Avatar!=null)
@@ -37,7 +38,10 @@ class registercontroller extends Controller
       $userTbl->username=$request->UserName;
       $userTbl->password=bcrypt($request->password);
       $userTbl->confirmation_code=$confirmation_code;
+      if ($request->Avatar!=null)
+      {
       $userTbl->avatar = $fileName;
+      }
       $userTbl->save();
 
       $userData=User::find($userTbl->id);
