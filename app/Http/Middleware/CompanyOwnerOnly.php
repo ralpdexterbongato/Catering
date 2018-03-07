@@ -15,7 +15,7 @@ class CompanyOwnerOnly
      */
     public function handle($request, Closure $next)
     {
-      if (Auth::check() && Auth::user()->role == 2)
+      if (Auth::check() && Auth::user()->role == 1)
       {
         return $next($request);
       }else {
