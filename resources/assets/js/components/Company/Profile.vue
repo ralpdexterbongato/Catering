@@ -58,7 +58,7 @@
               <option value="1">Drink</option>
               <option value="2">Sweet</option>
             </select>
-            <label class="active" :data-error="erroror">Select type</label>
+            <label class="active" :data-error="error">Select type</label>
           </div>
           <a class="btn food-image-finder" @click="toggleShowForProduct">Image</a>
           <div class="preview" v-if="imgDataUrlForFood!=''">
